@@ -35,8 +35,14 @@ for path in docs.glob("*.html"):
             assert len(cells) == n and all("data-label" in c.attrs for c in cells)
     print(f"{path.name}: OK")
 assert len(BeautifulSoup((docs / "index.html").read_text(encoding="utf-8"), "html.parser").select("article")) == 30
+catalog = BeautifulSoup((docs / "index.html").read_text(encoding="utf-8"), "html.parser")
+translation_buttons = catalog.select("button.translation-trigger")
+assert len(translation_buttons) == 30
+expected_pdfs = {str(p["id"]): p["pdf_urls"][0] for p in papers}
+assert all(button["data-pdf"] == expected_pdfs[button["data-paper-id"]] for button in translation_buttons)
+assert catalog.select_one("dialog#translation-dialog") is not None
 math_page = BeautifulSoup((docs / "tutorial.html").read_text(encoding="utf-8"), "html.parser")
 assert len(math_page.select("[data-tex]")) >= 40, "Mathematical expressions were not preserved"
 assert len(math_page.select(".math-display")) >= 10, "Missing display equations"
 assert "MATHPLACEHOLDER" not in str(math_page), "Unrestored equation placeholder"
-print("30 paper records, four pages, internal links and table labels: OK")
+print("30 paper records, five pages, translation entries, internal links and table labels: OK")

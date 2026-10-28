@@ -10,6 +10,7 @@
 - [前置知识完整教程](docs/tutorial.html) · [Markdown 源文](content/tutorial.md)
 - [论文阅读完整指南](docs/guide.html) · [Markdown 源文](content/guide.md)
 - [PyTorch 小实验网页](docs/lab.html) · [Python 源码](examples/vision_basics_lab.py)
+- [英文论文翻译阅读指南](docs/translation.html)：目录中每篇论文提供“翻译阅读”弹窗
 - [论文清单 CSV](docs/papers.csv) · [BibTeX](data/references.bib)
 
 HTML 已随仓库提供。下载仓库后可直接用浏览器打开 `docs/index.html`，也可以在项目根目录运行 `python -m http.server 8000 --directory docs`，再访问 http://localhost:8000 。GitHub 文件页会展示 HTML 源码，在线渲染请使用仓库的 GitHub Pages 地址。
@@ -47,6 +48,10 @@ python scripts/build.py --local-pdfs
 ```
 
 最后一条命令把已下载论文接入本地网页；未下载的仍指向原始来源。若某个来源失效，程序会报告题名和来源，可从原论文页面继续查找。论文 PDF 使用各自许可，详见 [第三方资料说明](THIRD_PARTY_NOTICES.md)。
+
+## 翻译阅读
+
+点击论文卡片的“翻译阅读”可打开当前论文的翻译助手，提供原始 PDF、链接复制、沉浸式翻译扩展和 BabelDOC 在线入口。扩展方式适合边读边看双语；在线文档方式需要由读者在第三方页面上传 PDF 并启动任务。当前静态网站提供工具入口和指引，实际翻译由工具方执行，不提供本站翻译后端。使用条件与额度见各工具当前页面。
 
 ## 项目结构
 

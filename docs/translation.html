@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>英文论文翻译阅读指南</title>
+<link rel="stylesheet" href="assets/katex/katex.min.css">
+<script defer src="assets/katex/katex.min.js"></script>
+<script defer src="assets/math.js"></script>
+<style>
+:root{--ink:#182536;--muted:#607185;--accent:#176e76;--paper:#fff;--bg:#f3f6f9;--line:#dce4eb}
+.math-inline{display:inline-block;max-width:100%;vertical-align:middle;overflow-x:auto;overflow-y:hidden;padding:2px 0}.math-display{max-width:100%;overflow-x:auto;overflow-y:hidden;padding:10px 0;margin:16px 0}.math-display .katex-display{margin:.5em 0}.math-error{color:#a32828;background:#fff0f0}.content .katex{font-size:1.08em}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.8 system-ui,"Microsoft YaHei",sans-serif}
+a{color:var(--accent);text-underline-offset:3px}a:hover{color:#0e4b53}
+.top{background:#14273d;color:#fff;padding:14px max(4vw,24px);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.top a{color:#e8f5f5;text-decoration:none}.top strong{letter-spacing:.02em}.top nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}
+.layout{max-width:1500px;margin:auto;display:grid;grid-template-columns:280px minmax(0,1fr);gap:26px;padding:28px 4vw 64px}
+.side{align-self:start;position:sticky;top:20px;max-height:calc(100vh - 40px);overflow:auto;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px 16px;box-shadow:0 4px 18px #17233708}
+.side label{display:block;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.12em;margin:0 0 10px}
+.side input{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:14px;margin-bottom:10px}
+.side ul{list-style:none;padding-left:0;margin:0}.side ul ul{padding-left:14px;border-left:1px solid var(--line);margin-left:5px}
+.side li{margin:3px 0}.side a{display:block;text-decoration:none;padding:3px 6px;border-radius:6px;color:#31475e;font-size:13px;line-height:1.45}
+.side li.level-3{padding-left:15px}
+.side a:hover,.side a.active{background:#e8f3f2;color:#0e6167}.side li[hidden]{display:none}
+.content{min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:clamp(22px,4vw,60px);box-shadow:0 8px 28px #17233708}
+.content h1{font-size:clamp(28px,3vw,40px);line-height:1.3;margin-top:0;color:#14273d}
+.content h2{font-size:26px;border-top:1px solid var(--line);padding-top:32px;margin-top:48px;color:#154f62}
+.content h3{font-size:20px;margin-top:28px;color:#1e6672}.content h1,.content h2,.content h3{scroll-margin-top:20px}
+.content p{margin:13px 0}.content li{margin:5px 0}.content blockquote{margin:20px 0;padding:10px 20px;border-left:4px solid #31868a;background:#eff7f7;color:#385b60}
+.content table{border-collapse:collapse;width:100%;min-width:0;font-size:14px;line-height:1.55;table-layout:auto}
+.content th,.content td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+.content th,.content td{overflow-wrap:anywhere}
+.content th{background:#edf3f6}.content tr:nth-child(even){background:#fafcfd}
+.content .resource-table th{background:#e7f1f0;color:#135d63}.content .resource-table td:nth-child(2){font-weight:600}
+.content .cols-5{table-layout:fixed}.content .cols-5 th:nth-child(1){width:6%}.content .cols-5 th:nth-child(2){width:41%}.content .cols-5 th:nth-child(3){width:19%}.content .cols-5 th:nth-child(4){width:9%}.content .cols-5 th:nth-child(5){width:25%}
+.content .cols-5 td:nth-child(4),.content .cols-5 th:nth-child(4){white-space:nowrap}
+.content .table-wrap{overflow:auto;margin:18px 0;border-radius:8px}
+code{font-family:Consolas,"Cascadia Code",monospace;font-size:.88em;background:#eef3f6;border-radius:4px;padding:2px 5px;overflow-wrap:anywhere}
+pre{background:#15283d;color:#e8f1f6;border-radius:9px;padding:16px 19px;overflow:auto;line-height:1.55}pre code{background:transparent;color:inherit;padding:0;white-space:pre;overflow-wrap:normal}
+.content input[type=checkbox]{margin-right:8px;accent-color:var(--accent)}
+.back{position:fixed;right:22px;bottom:22px;background:#176e76;color:white;padding:8px 14px;border-radius:999px;text-decoration:none;box-shadow:0 4px 15px #0002;font-size:13px}
+@media(max-width:1150px){.layout{display:block;padding:14px}.side{position:relative;max-height:260px;margin-bottom:14px}.content{padding:22px}}
+@media(min-width:761px) and (max-width:1300px){.content .wide-table,.content .wide-table tbody,.content .wide-table tr,.content .wide-table td{display:block;width:100%}.content .wide-table thead{display:none}.content .wide-table tr{border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:13px 0;background:#fff;box-shadow:0 2px 9px #1723370a}.content .wide-table td{border:0;border-bottom:1px solid var(--line);padding:9px 12px;white-space:normal}.content .wide-table td:last-child{border-bottom:0}.content .wide-table td::before{content:attr(data-label);display:inline-block;min-width:115px;font-size:12px;font-weight:700;color:#397a7e;margin-right:12px;vertical-align:top}}
+@media(max-width:760px){.content{padding:18px}.content h2{font-size:22px}.content h3{font-size:18px}.content .table-wrap{overflow:visible}.content table,.content tbody,.content tr,.content td{display:block;width:100%}.content thead{display:none}.content tr{border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:13px 0;background:#fff;box-shadow:0 2px 9px #1723370a}.content td{border:0;border-bottom:1px solid var(--line);padding:9px 12px}.content td:last-child{border-bottom:0}.content td::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;color:#397a7e;margin-bottom:3px}.content .resource-table{min-width:0}}
+@media print{.top,.side,.back{display:none}.layout{display:block;padding:0}.content{border:0;box-shadow:none;padding:0}body{background:#fff}.content h2{break-before:page}pre,table{break-inside:avoid}}
+</style>
+</head>
+<body id="top">
+<header class="top"><strong>视觉论文学习库</strong><nav><a href="index.html">30 篇论文目录</a><a href="guide.html">完整指南</a><a href="lab.html">PyTorch 小实验</a><a href="translation.html">翻译阅读指南</a></nav></header>
+<div class="layout"><aside class="side"><label for="toc-search">章节目录</label><input id="toc-search" type="search" placeholder="搜索章节…" aria-label="搜索章节"><div class="toc"><ul><li class="level-2"><a href="#1">1. 边读边看中英对照：沉浸式翻译扩展</a></li><li class="level-2"><a href="#2-babeldoc">2. 在线生成双语文档：BabelDOC</a></li><li class="level-2"><a href="#3">3. 当前入口提供哪些功能</a></li><li class="level-2"><a href="#4">4. 阅读时怎样使用译文</a></li></ul></div></aside>
+<main class="content"><h1 id="_1">英文论文翻译阅读指南</h1>
+<p>在论文目录点击任一论文的 <strong>“翻译阅读”</strong>，会弹出该论文的翻译助手，显示原始 PDF、复制链接按钮和在线工具入口。</p>
+<h2 id="1">1. 边读边看中英对照：沉浸式翻译扩展</h2>
+<p>适合在自己的 Chrome、Edge、Firefox 或 Safari 浏览器中持续阅读论文。</p>
+<ol>
+<li>从<a href="https://immersivetranslate.com/zh-Hans/" rel="noopener noreferrer" target="_blank">沉浸式翻译官网</a>选择自己的浏览器，安装官方扩展。</li>
+<li>在本网站的翻译助手中点击 <strong>“打开本篇 PDF”</strong>。</li>
+<li>点击浏览器扩展图标，选择 <strong>“翻译 PDF”</strong>，在工具中选择简体中文及翻译服务。</li>
+<li>在其 PDF 阅读器中查看双语内容。段落/页面的处理速度取决于文档和所选翻译服务。</li>
+</ol>
+<p>普通 PDF 翻译通常处理可提取文字的 PDF；扫描件和复杂排版应按工具指引选择 OCR 或其他文档翻译方式。参见<a href="https://immersivetranslate.com/zh-Hans/docs/usage/#pdf-文件翻译" rel="noopener noreferrer" target="_blank">官方 PDF 使用说明</a>。</p>
+<p>浏览器扩展需要安装在实际阅读论文的浏览器中。应用内嵌浏览器如果无法安装扩展，请选择下面的在线文档翻译方式，或在外部浏览器打开论文。</p>
+<h2 id="2-babeldoc">2. 在线生成双语文档：BabelDOC</h2>
+<ol>
+<li>在翻译助手中打开本篇 PDF，并将 PDF 保存到本地。</li>
+<li>打开 <a href="https://app.immersivetranslate.com/babel-doc/" rel="noopener noreferrer" target="_blank">BabelDOC 在线工具</a>。</li>
+<li>在服务页面上传 PDF，按其提示选择语言、模型和开始翻译。</li>
+<li>等待任务完成，再查看或下载双语文档。</li>
+</ol>
+<p>这种方式需要等待解析和翻译完成。账号、可用模型、文档大小限制和额度以第三方服务当前页面为准。请在服务页面自行决定是否上传和开始任务。<a href="https://immersivetranslate.com/zh-Hans/document/help/" rel="noopener noreferrer" target="_blank">官方文档翻译帮助</a></p>
+<h2 id="3">3. 当前入口提供哪些功能</h2>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>本网站提供的行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="操作">点击“翻译阅读”</td>
+<td data-label="本网站提供的行为">打开当前论文的翻译助手弹窗</td>
+</tr>
+<tr>
+<td data-label="操作">打开本篇 PDF</td>
+<td data-label="本网站提供的行为">在新标签页打开公开原文</td>
+</tr>
+<tr>
+<td data-label="操作">复制论文链接</td>
+<td data-label="本网站提供的行为">便于粘贴到支持链接导入的阅读工具</td>
+</tr>
+<tr>
+<td data-label="操作">打开在线翻译器</td>
+<td data-label="本网站提供的行为">在新标签页进入第三方在线服务</td>
+</tr>
+<tr>
+<td data-label="操作">完全在本站内自动翻译</td>
+<td data-label="本网站提供的行为">当前未提供；需要独立的 PDF 解析与翻译后端</td>
+</tr>
+</tbody>
+</table>
+<p>网页无法在已跳转到的出版商网站或浏览器内置 PDF 页面上直接注入本网站的翻译按钮。现有入口将论文和工具集中在一起，扩展或在线服务负责实际翻译。</p>
+<h2 id="4">4. 阅读时怎样使用译文</h2>
+<p>中文译文适合快速理解；推导、数值、实验结论和术语应与英文原文对照。遇到 <code>score</code>、<code>latent</code>、<code>token</code>、<code>guidance</code> 等术语，结合上下文确认译法；公式符号按原论文核对。</p>
+<p>返回<a href="index.html">论文目录</a>选择论文，或继续阅读<a href="tutorial.html">前置知识教程</a>。</p><p><a href="translation.md">下载本页 Markdown 源文</a></p></main></div><a class="back" href="#top" aria-label="返回顶部">↑ 返回顶部</a>
+<script>
+document.body.id='top';
+document.querySelectorAll('.content table').forEach(t=>{const w=document.createElement('div');w.className='table-wrap';t.parentNode.insertBefore(w,t);w.appendChild(t)});
+const tocLinks=[...document.querySelectorAll('.side li')];
+document.querySelector('#toc-search').addEventListener('input',e=>{const q=e.target.value.trim().toLowerCase();tocLinks.forEach(li=>{li.hidden=!!q && !li.textContent.toLowerCase().includes(q)})});
+const anchors=[...document.querySelectorAll('.side a[href^="#"]')];
+const byId=new Map(anchors.map(a=>[a.getAttribute('href').slice(1),a]));
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){anchors.forEach(a=>a.classList.remove('active'));byId.get(e.target.id)?.classList.add('active')}})},{rootMargin:'-10% 0px -75% 0px'});
+document.querySelectorAll('.content h1[id],.content h2[id],.content h3[id]').forEach(h=>obs.observe(h));
+</script>
+</body></html>

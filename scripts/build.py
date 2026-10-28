@@ -83,8 +83,10 @@ def build(local_pdfs=False):
     DOCS.mkdir(exist_ok=True)
     shutil.copytree(ROOT / "vendor" / "katex", DOCS / "assets" / "katex", dirs_exist_ok=True)
     shutil.copy2(ROOT / "assets" / "math.js", DOCS / "assets" / "math.js")
+    shutil.copy2(ROOT / "assets" / "translation.js", DOCS / "assets" / "translation.js")
     render("tutorial", "视觉论文前置知识完整教程")
     render("guide", "视觉论文完整指南")
+    render("translation", "英文论文翻译阅读指南")
     formatter = HtmlFormatter(style="monokai", linenos="inline", cssclass="highlight")
     code = (ROOT / "examples" / "vision_basics_lab.py").read_text(encoding="utf-8")
     css = formatter.get_style_defs(".highlight") + "\n.highlight{overflow:auto;border-radius:9px}.highlight pre{min-width:max-content;margin:0}.highlight .linenos{color:#91a0a8;margin-right:12px;user-select:none}"
@@ -99,7 +101,7 @@ def build(local_pdfs=False):
             pdf = "PDFs/" + p["filename"]
         authors = ', '.join(p["authors"][:3]) + (' et al.' if len(p["authors"]) > 3 else '')
         haystack = ' '.join([p["short"], p["title"], p["note"], ' '.join(p["authors"])]).lower()
-        cards.append(f'<article data-group="{esc(p["group"])}" data-level="{esc(p["level"])}" data-search="{esc(haystack)}"><div class="meta">{p["id"]:02d} · {p["year"]} <span>{esc(p["level"])}</span></div><h2>{esc(p["short"])}</h2><h3>{esc(p["title"])}</h3><p class="authors">{esc(authors)}<br>{esc(p["venue"])}</p><p>{esc(p["note"])}</p><footer><a class="download" href="{esc(pdf)}" target="_blank" rel="noopener noreferrer">打开论文 PDF ↗</a><a href="{esc(p["source"])}" target="_blank" rel="noopener noreferrer">原始来源 ↗</a></footer></article>')
+        cards.append(f'<article data-group="{esc(p["group"])}" data-level="{esc(p["level"])}" data-search="{esc(haystack)}"><div class="meta">{p["id"]:02d} · {p["year"]} <span>{esc(p["level"])}</span></div><h2>{esc(p["short"])}</h2><h3>{esc(p["title"])}</h3><p class="authors">{esc(authors)}<br>{esc(p["venue"])}</p><p>{esc(p["note"])}</p><footer><button type="button" class="translation-trigger" data-paper-id="{p["id"]}" data-title="{esc(p["title"])}" data-pdf="{esc(p["pdf_urls"][0])}">翻译阅读</button><a class="download" href="{esc(pdf)}" target="_blank" rel="noopener noreferrer">英文 PDF ↗</a><a href="{esc(p["source"])}" target="_blank" rel="noopener noreferrer">原始来源 ↗</a></footer></article>')
     catalog = (ROOT / "templates" / "catalog.html").read_text(encoding="utf-8").replace("{{cards}}", ''.join(cards))
     (DOCS / "index.html").write_text(catalog, encoding="utf-8")
     with (DOCS / "papers.csv").open("w", encoding="utf-8-sig", newline="") as f:
@@ -114,7 +116,7 @@ def build(local_pdfs=False):
     shutil.copy2(ROOT / "data" / "references.bib", DOCS / "references.bib")
     shutil.copy2(ROOT / "data" / "papers.json", DOCS / "papers.json")
     (DOCS / ".nojekyll").touch()
-    print(f"Built four HTML pages and {len(papers)} paper records in docs/")
+    print(f"Built five HTML pages and {len(papers)} paper records in docs/")
 
 
 if __name__ == "__main__":
