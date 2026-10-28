@@ -1,12 +1,13 @@
 # Vision Learning Hub · 视觉论文学习库
 
-面向扩散模型、视觉 Transformer、VAE 和 DINO 的中文学习项目：30 篇代表性论文、数学/PyTorch/视觉前置教程、逐步推导与数值例题、四项完整训练/评价实验、练习答案与公开考核量表。v2.0 把知识清单连接到可检验的学习成果。
+面向扩散模型、视觉 Transformer、VAE 和 DINO 的中文学习项目：30 篇代表性论文、数学/PyTorch/视觉前置教程、逐步推导与数值例题、四项完整训练/评价实验、练习答案与公开考核量表。v2.1新增网页Python数学运行器和7份可在Colab运行的教学Notebook。
 
 在线阅读：**[https://charlie-sys.github.io/vision-learning-hub/](https://charlie-sys.github.io/vision-learning-hub/)** · [Fork 仓库](https://github.com/charlie-sys/vision-learning-hub/fork)
 
 ## 阅读入口
 
 - [可搜索论文目录](docs/index.html)
+- [在线代码实验室](https://charlie-sys.github.io/vision-learning-hub/playground.html)：直接运行NumPy/SciPy/SymPy/Matplotlib，或打开PyTorch/TensorFlow的Colab实验
 - [前置知识完整教程](docs/tutorial.html) · [Markdown 源文](content/tutorial.md)
 - [论文阅读完整指南](docs/guide.html) · [Markdown 源文](content/guide.md)
 - [PyTorch 小实验网页](docs/lab.html) · [Python 源码](examples/vision_basics_lab.py)
@@ -20,6 +21,12 @@
 HTML 已随仓库提供。下载仓库后可直接用浏览器打开 `docs/index.html`，也可以在项目根目录运行 `python -m http.server 8000 --directory docs`，再访问 http://localhost:8000 。GitHub 文件页会展示 HTML 源码，在线渲染请使用仓库的 GitHub Pages 地址。
 
 教程公式使用 LaTeX 编写，由项目自带的 KaTeX 脚本、样式和字体渲染；离线打开 HTML 也能显示数学排版。长公式在自己的区域内横向滚动。
+
+数学运行器点击后才加载Pyodide 0.27.7与所需库，在浏览器Worker中执行，支持修改/运行/停止/恢复/下载代码和PNG绘图。首次需要网络；网页请通过HTTPS或本地HTTP服务打开。每次运行的变量相互独立，计算30秒超时，环境加载2分钟超时。torch和tensorflow使用Colab或本地Notebook，不在该浏览器Python中运行。
+
+7份Notebook位于 [notebooks/](notebooks/)：数学、PyTorch基础、TensorFlow基础、CNN、VAE、DDPM、DINOv2。在线实验页提供Colab按钮和原文件下载。Colab需要读者自己的Google账号，免费GPU和会话时长不保证；结果应及时下载。无需你维护Python服务器。
+
+本地Notebook可安装 `requirements-notebooks.txt`，另按各框架官方指南安装所需torch/torchvision或tensorflow，再用Jupyter/VS Code打开 `.ipynb`。构建网站不需要安装深度学习框架；`python scripts/check_notebooks.py` 检查7份文件的格式、39个代码单元的语法、干净输出与链接映射。
 
 ## Fork、运行和修改
 
@@ -76,6 +83,8 @@ python scripts/build.py --local-pdfs
 content/       可编辑的教程与指南 Markdown
 data/          论文元数据与引用
 examples/      可运行的 PyTorch 小实验
+notebooks/     7份中文教学Notebook，支持Colab和本地Jupyter
+assets/        浏览器运行器、Worker和页面脚本
 tests/         梯度、分布、mask、采样、指标和恢复的数值检查
 evidence/      可公开的真实实验指标与结果图（不含权重）
 templates/     网页模板与响应式排版
@@ -86,6 +95,8 @@ docs/          已生成的完整静态网页，可用于 GitHub Pages
 ## 发布自己的网页
 
 Fork 后在仓库 Settings → Pages 中选择从分支部署，分支 `main`、目录 `/docs`。修改源文件后重新构建并提交 `docs/`。验证工作流会检查 HTML 内部链接与表格结构。
+
+若希望Colab打开你Fork后的Notebook，将 `data/site.json` 的repository/branch改为你的仓库和分支，再重新构建。数学示例维护在 `data/runner_examples.json`，用正文标记插入。直接修改 `notebooks/` 即可维护教学内容；`scripts/make_notebooks.py` 会覆盖同名文件，仅在有意重新生成时使用。模型Notebook的源码依赖固定提交并验证SHA256；更换实现时应重新生成并测试。
 
 ## 内容范围
 

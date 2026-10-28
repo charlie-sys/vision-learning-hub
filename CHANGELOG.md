@@ -1,3 +1,17 @@
+# v2.1.0 · 在线代码实验室与Colab
+
+- 新增在线代码实验室与数学章节内嵌Python运行器，8个可编辑数学示例覆盖NumPy、SciPy、SymPy和Matplotlib。
+- 支持运行、停止、恢复示例、代码下载、文本/异常输出和PNG图像；使用独立Worker、执行超时和输出限制，首次按需加载Pyodide 0.27.7。
+- 新增7份中文Notebook：数学、PyTorch基础、TensorFlow基础、CNN、VAE、DDPM、DINOv2，接入Colab按钮和文件下载。
+- 模型Notebook固定课程代码提交并验证SHA256；7份Notebook的39个代码单元在本地Jupyter按默认设置逐格执行通过，公开验证摘要。
+- 首页、数学章节、完整实验和总览增加运行入口；新增Fork配置，维护者可让Colab指向自己的仓库。
+- 验证真实浏览器中的8个示例、绘图、错误提示、停止/重跑、下载内容和390px手机布局；全站12页与176处公式保留。
+- 新增Notebook格式/语法/干净输出/下载与启动映射检查，加入GitHub Actions。
+
+运行边界：浏览器Python处理数学小实验；原生torch/tensorflow运行于Colab或本地Python。Pyodide首次需联网；Colab需要读者账号，资源及GPU可用性由Google决定。本地逐格验证不等于在读者的Colab环境逐格验证。
+
+---
+
 # v2.0.0 · 从学习清单到可验证教程
 
 - 新增数学教学：ELBO/Jensen、对角高斯KL、DDPM闭式前向与后验配方、可训练QKV、ODE/SDE、OT/指派、InfoNCE与DINO评价。

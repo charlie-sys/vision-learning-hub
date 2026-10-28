@@ -17,6 +17,23 @@ ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 
 
+def colab_url(filename):
+    site = json.loads((ROOT / "data/site.json").read_text(encoding="utf-8"))
+    return f'https://colab.research.google.com/github/{site["repository"]}/blob/{site["branch"]}/notebooks/{filename}'
+
+
+def runner_markup(example):
+    name, title = html.escape(example["id"], quote=True), html.escape(example["title"])
+    source = html.escape(example["code"])
+    return f'''<section class="python-runner" data-example="{name}" aria-label="{title}代码运行器">
+<div class="runner-heading"><strong>{title}</strong><span>本机浏览器 Python · CPU</span></div>
+<label class="runner-editor" for="code-{name}">Python代码（可编辑；Ctrl / Command + Enter 运行）<textarea id="code-{name}" spellcheck="false" autocomplete="off" autocapitalize="off">{source}</textarea></label>
+<div class="runner-actions"><button type="button" class="run-code">运行代码</button><button type="button" class="stop-code" disabled>停止</button><button type="button" class="reset-code">恢复示例</button><button type="button" class="download-code">下载代码</button><a href="{colab_url('00_numpy_math.ipynb')}" target="_blank" rel="noopener noreferrer">在 Colab 学习 ↗</a></div>
+<p class="runner-status" role="status" aria-live="polite">点击运行后加载Python和所需数学库，首次需要网络。</p>
+<pre class="runner-output" aria-label="Python输出"></pre><div class="runner-figures"></div>
+<p class="runner-note">每次运行使用独立变量；支持NumPy / SciPy / SymPy / Matplotlib。torch、tensorflow请使用Colab实验。</p></section>'''
+
+
 def protect_math(text):
     """Keep LaTeX out of Markdown's underscore, escape and table parsing."""
     expressions = []
@@ -37,6 +54,7 @@ def protect_math(text):
 
 def render(name, title, code_html="", extra_css=""):
     text = (ROOT / "content" / f"{name}.md").read_text(encoding="utf-8")
+    examples = {item["id"]: item for item in json.loads((ROOT / "data/runner_examples.json").read_text(encoding="utf-8"))}
     protected, expressions = protect_math(text)
     body = markdown.markdown(protected, extensions=["tables", "fenced_code", "toc", "sane_lists"])
     for token, tex, display in expressions:
@@ -47,6 +65,16 @@ def render(name, title, code_html="", extra_css=""):
             body = body.replace(f"<p>{token}</p>", rendered)
         body = body.replace(token, rendered)
     body = body.replace("<!-- LAB_SOURCE -->", code_html)
+    for key, example in examples.items():
+        body = body.replace(f"<!-- RUNNER:{key} -->", runner_markup(example))
+    for notebook in (ROOT / "notebooks").glob("*.ipynb"):
+        body = body.replace(f"<!-- COLAB:{notebook.stem} -->", f'<p class="colab-callout"><a class="colab-link" href="{colab_url(notebook.name)}">在 Colab 运行本实验 ↗</a> · <a href="notebooks/{notebook.name}" download="{notebook.name}">下载Notebook</a> · <a href="playground.html">在线代码实验室</a></p>')
+    if "<!-- NOTEBOOKS -->" in body:
+        labels = [("00_numpy_math", "数学：NumPy / SciPy / SymPy"), ("01_pytorch_basics", "PyTorch基础"),
+                  ("02_tensorflow_basics", "TensorFlow基础"), ("03_cnn", "CNN图像分类"),
+                  ("04_vae", "VAE完整实验"), ("05_ddpm", "DDPM完整实验"), ("06_probe", "DINOv2线性评价")]
+        entries = ''.join(f'<li><strong>{label}</strong>：<a class="colab-link" href="{colab_url(key+".ipynb")}">在 Colab 运行 ↗</a> · <a href="notebooks/{key}.ipynb" download="{key}.ipynb">下载Notebook</a></li>' for key, label in labels)
+        body = body.replace("<!-- NOTEBOOKS -->", '<ul class="notebook-list">'+entries+'</ul>')
     body = re.sub(r"<li>\s*\[ \]", '<li><input type="checkbox" disabled>', body)
     soup = BeautifulSoup(body, "html.parser")
     for a in soup.select("a[href]"):
@@ -87,10 +115,13 @@ def build(local_pdfs=False):
     render("tutorial", "视觉论文前置知识完整教程")
     render("guide", "视觉论文完整指南")
     render("translation", "英文论文翻译阅读指南")
-    for name, title in [("math", "数学推导与数值例题"), ("practice", "四项完整视觉实验"),
+    for name, title in [("playground", "在线代码实验室"), ("math", "数学推导与数值例题"), ("practice", "四项完整视觉实验"),
                         ("answers", "练习答案与纠错"), ("resources", "可靠课程与知识映射"),
                         ("assessment", "学习路线与考核标准"), ("evidence", "实验实测记录")]:
         render(name, title)
+    for asset in ("runner.js", "runner-worker.js", "runner.css"):
+        shutil.copy2(ROOT / "assets" / asset, DOCS / "assets" / asset)
+    shutil.copytree(ROOT / "notebooks", DOCS / "notebooks", dirs_exist_ok=True)
     for name in ("course_labs.py", "solutions.py", "exercises.py"):
         shutil.copy2(ROOT / "examples" / name, DOCS / name)
     if (ROOT / "evidence").exists():

@@ -8,6 +8,8 @@
 <link rel="stylesheet" href="assets/katex/katex.min.css">
 <script defer src="assets/katex/katex.min.js"></script>
 <script defer src="assets/math.js"></script>
+<link rel="stylesheet" href="assets/runner.css">
+<script defer src="assets/runner.js"></script>
 <style>
 :root{--ink:#182536;--muted:#607185;--accent:#176e76;--paper:#fff;--bg:#f3f6f9;--line:#dce4eb}
 .math-inline{display:inline-block;max-width:100%;vertical-align:middle;overflow-x:auto;overflow-y:hidden;padding:2px 3px;scrollbar-width:none}.math-inline::-webkit-scrollbar{display:none}.math-display{max-width:100%;overflow-x:auto;overflow-y:hidden;padding:10px 0;margin:16px 0}.math-display .katex-display{margin:.5em 0}.math-error{color:#a32828;background:#fff0f0}.content .katex{font-size:1.08em}
@@ -48,10 +50,11 @@ pre{background:#15283d;color:#e8f1f6;border-radius:9px;padding:16px 19px;overflo
 </style>
 </head>
 <body id="top">
-<header class="top"><strong>视觉论文学习库</strong><nav><a href="index.html">论文目录</a><a href="tutorial.html">知识总览</a><a href="math.html">数学推导</a><a href="practice.html">四项实验</a><a href="answers.html">练习答案</a><a href="assessment.html">学习考核</a><a href="resources.html">课程来源</a><a href="evidence.html">实测记录</a></nav></header>
+<header class="top"><strong>视觉论文学习库</strong><nav><a href="index.html">论文目录</a><a href="tutorial.html">知识总览</a><a href="math.html">数学推导</a><a href="playground.html">在线运行代码</a><a href="practice.html">四项实验</a><a href="answers.html">练习答案</a><a href="assessment.html">学习考核</a><a href="resources.html">课程来源</a><a href="evidence.html">实测记录</a></nav></header>
 <div class="layout"><aside class="side"><label for="toc-search">章节目录</label><input id="toc-search" type="search" placeholder="搜索章节…" aria-label="搜索章节"><div class="toc"><ul><li class="level-2"><a href="#1">1. 环境与第一次运行</a></li><li class="level-3"><a href="#_1">无网络冒烟测试</a></li><li class="level-2"><a href="#2">2. 数据划分与记录规范</a></li><li class="level-2"><a href="#3-cnn">3. 实验一：CNN 真实图像分类</a></li><li class="level-2"><a href="#4-vae">4. 实验二：可训练 VAE</a></li><li class="level-2"><a href="#5-ddpm">5. 实验三：DDPM 完整训练与反向采样</a></li><li class="level-2"><a href="#6-dinov2">6. 实验四：DINOv2 冻结特征线性评价</a></li><li class="level-2"><a href="#7">7. 恢复、最终测试与复现</a></li><li class="level-2"><a href="#8">8. 排错与资源预算</a></li></ul></div></aside>
 <main class="content"><h1 id="pytorch">四项完整 PyTorch 视觉实验</h1>
 <p>从真实数据分类到 VAE、DDPM，再到官方 DINOv2 冻结特征评价。先读<a href="math.html">数学教学</a>，做<a href="answers.html">练习</a>，运行后对照<a href="evidence.html">实测记录</a>。这些是小规模教学实现，目标是解释流程，不承诺论文级指标。</p>
+<p>无需本地安装时，直接使用每项实验的Colab按钮；另有<a href="playground.html">PyTorch / TensorFlow基础Notebook与网页数学实验</a>。下面的命令供本地运行使用。</p>
 <h2 id="1">1. 环境与第一次运行</h2>
 <p>以下命令一律从 Clone 或解压后的<strong>仓库根目录</strong>运行。建议 Python 3.10 或 3.11；本次实测 Python 3.9、PyTorch 2.8、torchvision 0.23，DINOv2 使用固定的兼容历史提交。不同系统的 PyTorch 安装命令应从<a href="https://pytorch.org/get-started/locally/" rel="noopener noreferrer" target="_blank">官方安装向导</a>选择；先安装与本机匹配的 torch/torchvision，再安装实验依赖。</p>
 <pre><code class="language-bash">python -m pip install -r requirements-labs.txt
@@ -73,6 +76,7 @@ python examples/course_labs.py probe --encoder tiny --dataset synthetic --train-
 <p>固定 seed 打乱官方 60000 张训练数据，前 50000 张形成训练池、后 10000 张形成验证池，再按参数截取子集；训练和验证索引不重叠。官方测试集默认不读取。<code>metrics.json</code> 保存种子、划分索引哈希、超参数、环境、逐轮指标和耗时；索引哈希可检查是否用了同一划分。</p>
 <p>每个实验使用独立输出目录。CNN 按验证准确率、生成模型按验证损失保存 <code>best.pt</code>，每轮另存 <code>last.pt</code>。<code>curves.svg</code> 各面板独立缩放，便于看趋势，不能用视觉高度比较不同指标绝对量级；实际数值见 JSON。权重与数据默认忽略，避免上传大文件。</p>
 <h2 id="3-cnn">3. 实验一：CNN 真实图像分类</h2>
+<p class="colab-callout"><a class="colab-link" href="https://colab.research.google.com/github/charlie-sys/vision-learning-hub/blob/main/notebooks/03_cnn.ipynb" rel="noopener noreferrer" target="_blank">在 Colab 运行本实验 ↗</a> · <a download="03_cnn.ipynb" href="notebooks/03_cnn.ipynb">下载Notebook</a> · <a href="playground.html">在线代码实验室</a></p>
 <p><strong>目标：</strong> 掌握 Dataset→batch→logits→交叉熵→反向传播→验证与检查点的完整流程。网络两层卷积和池化，接小型分类头；输出10类 logits。</p>
 <pre><code class="language-bash">python examples/course_labs.py cnn --train-size 2048 --val-size 512 --epochs 3 --batch-size 64 --output runs/verified-cnn
 </code></pre>
@@ -80,6 +84,7 @@ python examples/course_labs.py probe --encoder tiny --dataset synthetic --train-
 <p><strong>验收：</strong> 指标超过同验证集上的多数类基线；用混淆矩阵指出至少一对易混类别；检查训练和验证差距。准确率要求来自你的实际基线与设置，不强制每台机器重复同一小数。</p>
 <p><strong>对照练习：</strong> 保持划分与轮数相同，将学习率从 <code>0.001</code> 改为 <code>0.01</code>，另存输出；解释收敛是否更快、是否不稳定。至少三个 seed 后再讨论稳健性。</p>
 <h2 id="4-vae">4. 实验二：可训练 VAE</h2>
+<p class="colab-callout"><a class="colab-link" href="https://colab.research.google.com/github/charlie-sys/vision-learning-hub/blob/main/notebooks/04_vae.ipynb" rel="noopener noreferrer" target="_blank">在 Colab 运行本实验 ↗</a> · <a download="04_vae.ipynb" href="notebooks/04_vae.ipynb">下载Notebook</a> · <a href="playground.html">在线代码实验室</a></p>
 <p><strong>目标：</strong> 同时训练编码器均值/方差与解码器；记录重建项、KL和总目标，生成重建图与先验样本。</p>
 <pre><code class="language-bash">python examples/course_labs.py vae --train-size 2048 --val-size 512 --epochs 6 --batch-size 64 --latent-dim 16 --beta 1 --output runs/verified-vae
 </code></pre>
@@ -88,6 +93,7 @@ python examples/course_labs.py probe --encoder tiny --dataset synthetic --train-
 <p><strong>验收：</strong> 梯度到达 mu/logvar 层；KL 有限且非负；总损失下降；能区分重建与先验采样。模糊图像是小型MLP和目标函数的实际局限，不应通过只展示最好的样本掩盖。</p>
 <p><strong>对照练习：</strong> 固定数据与 seed，对比 beta 为0.1/1/4。分别报告重建项和KL，不能只比较加权后总损失；同一固定先验噪声比较样本变化。</p>
 <h2 id="5-ddpm">5. 实验三：DDPM 完整训练与反向采样</h2>
+<p class="colab-callout"><a class="colab-link" href="https://colab.research.google.com/github/charlie-sys/vision-learning-hub/blob/main/notebooks/05_ddpm.ipynb" rel="noopener noreferrer" target="_blank">在 Colab 运行本实验 ↗</a> · <a download="05_ddpm.ipynb" href="notebooks/05_ddpm.ipynb">下载Notebook</a> · <a href="playground.html">在线代码实验室</a></p>
 <p><strong>目标：</strong> 训练带时间嵌入的小型 U-Net 噪声预测器，从纯噪声迭代生成图片，而非停留在正向加噪。</p>
 <pre><code class="language-bash">python examples/course_labs.py ddpm --train-size 2048 --val-size 512 --epochs 10 --batch-size 64 --steps 200 --output runs/verified-ddpm
 </code></pre>
@@ -96,6 +102,7 @@ python examples/course_labs.py probe --encoder tiny --dataset synthetic --train-
 <p><strong>验收：</strong> 预测误差低于零预测基线；生成图中能看到服饰轮廓；检查是否存在重复、破碎或模糊。只有MSE下降而无图像检查，不能完成验收。本实验未实现FID评估，不能报告FID或与大型论文模型排位比较。</p>
 <p><strong>对照练习：</strong> 比较100/200步，分别从头训练匹配设置；记录终端累计alpha、训练预算和生成时间。若仅改变已训练模型的时间索引并跳步，那不是本采样公式的有效消融。</p>
 <h2 id="6-dinov2">6. 实验四：DINOv2 冻结特征线性评价</h2>
+<p class="colab-callout"><a class="colab-link" href="https://colab.research.google.com/github/charlie-sys/vision-learning-hub/blob/main/notebooks/06_probe.ipynb" rel="noopener noreferrer" target="_blank">在 Colab 运行本实验 ↗</a> · <a download="06_probe.ipynb" href="notebooks/06_probe.ipynb">下载Notebook</a> · <a href="playground.html">在线代码实验室</a></p>
 <p><strong>目标：</strong> 判断预训练表征是否能在少量标签上支持分类，比较相同ViT架构的随机初始化骨干。</p>
 <pre><code class="language-bash">python examples/course_labs.py probe --train-size 1024 --val-size 256 --epochs 20 --batch-size 16 --lr 0.01 --random-baseline --output runs/verified-probe
 </code></pre>

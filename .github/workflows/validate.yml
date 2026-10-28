@@ -14,6 +14,9 @@ jobs:
       - run: python scripts/build.py
       - run: python scripts/validate.py
       - run: node scripts/check_math.cjs
+      - run: python scripts/check_notebooks.py
+      - run: node --check assets/runner.js
+      - run: node --check assets/runner-worker.js
   numerical-checks:
     runs-on: ubuntu-latest
     steps:

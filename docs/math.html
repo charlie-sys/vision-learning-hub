@@ -8,6 +8,8 @@
 <link rel="stylesheet" href="assets/katex/katex.min.css">
 <script defer src="assets/katex/katex.min.js"></script>
 <script defer src="assets/math.js"></script>
+<link rel="stylesheet" href="assets/runner.css">
+<script defer src="assets/runner.js"></script>
 <style>
 :root{--ink:#182536;--muted:#607185;--accent:#176e76;--paper:#fff;--bg:#f3f6f9;--line:#dce4eb}
 .math-inline{display:inline-block;max-width:100%;vertical-align:middle;overflow-x:auto;overflow-y:hidden;padding:2px 3px;scrollbar-width:none}.math-inline::-webkit-scrollbar{display:none}.math-display{max-width:100%;overflow-x:auto;overflow-y:hidden;padding:10px 0;margin:16px 0}.math-display .katex-display{margin:.5em 0}.math-error{color:#a32828;background:#fff0f0}.content .katex{font-size:1.08em}
@@ -48,20 +50,52 @@ pre{background:#15283d;color:#e8f1f6;border-radius:9px;padding:16px 19px;overflo
 </style>
 </head>
 <body id="top">
-<header class="top"><strong>视觉论文学习库</strong><nav><a href="index.html">论文目录</a><a href="tutorial.html">知识总览</a><a href="math.html">数学推导</a><a href="practice.html">四项实验</a><a href="answers.html">练习答案</a><a href="assessment.html">学习考核</a><a href="resources.html">课程来源</a><a href="evidence.html">实测记录</a></nav></header>
+<header class="top"><strong>视觉论文学习库</strong><nav><a href="index.html">论文目录</a><a href="tutorial.html">知识总览</a><a href="math.html">数学推导</a><a href="playground.html">在线运行代码</a><a href="practice.html">四项实验</a><a href="answers.html">练习答案</a><a href="assessment.html">学习考核</a><a href="resources.html">课程来源</a><a href="evidence.html">实测记录</a></nav></header>
 <div class="layout"><aside class="side"><label for="toc-search">章节目录</label><input id="toc-search" type="search" placeholder="搜索章节…" aria-label="搜索章节"><div class="toc"><ul><li class="level-2"><a href="#1">1. 张量、线性代数与形状</a></li><li class="level-2"><a href="#2">2. 导数、链式法则与自动微分</a></li><li class="level-2"><a href="#3">3. 概率、似然、熵与交叉熵</a></li><li class="level-2"><a href="#4-vae-elbo">4. VAE：为什么要引入 ELBO</a></li><li class="level-3"><a href="#kl">对角高斯 KL 的推导</a></li><li class="level-3"><a href="#_2">重参数化与重建项</a></li><li class="level-2"><a href="#5-ddpm">5. DDPM：从逐步加噪到闭式采样</a></li><li class="level-3"><a href="#_3">条件后验与反向均值</a></li><li class="level-3"><a href="#_4">训练与采样是两条流程</a></li><li class="level-3"><a href="#ddim">DDIM 与无分类器引导</a></li><li class="level-2"><a href="#6-odesde-flow-matching">6. ODE、SDE 与 Flow Matching</a></li><li class="level-2"><a href="#7">7. 最优传输与二分匹配</a></li><li class="level-2"><a href="#8-transformer">8. 注意力与视觉 Transformer</a></li><li class="level-2"><a href="#9-infoncedino">9. InfoNCE、DINO 与表征评价</a></li><li class="level-2"><a href="#10">10. 优化、泛化与可信指标</a></li></ul></div></aside>
 <main class="content"><h1 id="_1">从数学到视觉模型：推导、例题与实现</h1>
 <p>本章与<a href="tutorial.html">知识总览</a>、<a href="practice.html">四项完整实验</a>、<a href="answers.html">练习答案</a>配套。每节包含定义、关键推导、数值例子和检查任务。先在纸上算一次，再用张量验证；外部课程用于扩展，不作为省略本章解释的理由。</p>
+<p>也可进入<a href="playground.html">在线代码实验室</a>使用全部数学示例，或打开PyTorch / TensorFlow教学Notebook。本页代码面板在浏览器本机执行，每次运行变量相互独立，首次需要下载Python与数学库；停止会重置环境。</p>
 <h2 id="1">1. 张量、线性代数与形状</h2>
 <p>图像批次通常记为 <span class="math-inline" data-tex="X\in\mathbb R^{B\times C\times H\times W}">X\in\mathbb R^{B\times C\times H\times W}</span>。线性层使用 <span class="math-inline" data-tex="Y=XW^T+b">Y=XW^T+b</span>，其中输入最后一维为 <span class="math-inline" data-tex="d_{in}">d_{in}</span>，权重形状为 <span class="math-inline" data-tex="d_{out}\times d_{in}">d_{out}\times d_{in}</span>。矩阵乘法保留前导批次维，收缩匹配的内维；逐元素乘法则依赖广播。</p>
 <p>例如 <span class="math-inline" data-tex="X=[1,2]">X=[1,2]</span>，<span class="math-inline" data-tex="W=[3,4]">W=[3,4]</span>，<span class="math-inline" data-tex="b=1">b=1</span>，输出 <span class="math-inline" data-tex="12">12</span>。不是 <span class="math-inline" data-tex="[4,9]">[4,9]</span>，后者是另一种逐元素运算。广播从尾维对齐，维度相等或其中一个为 1 才合法。对 <code>[B,N,D]</code> 添加 <code>[D]</code> 合法；添加 <code>[N]</code> 往往不合法，或在碰巧同维时产生语义错误。</p>
 <p>内积衡量对齐程度，范数衡量大小。单位化向量的内积就是余弦相似度。协方差描述各特征共同变化，中心化数据的协方差为 <span class="math-inline" data-tex="X^TX/(n-1)">X^TX/(n-1)</span>。特征向量给出方差方向；SVD 将矩阵分解为 <span class="math-inline" data-tex="U\Sigma V^T">U\Sigma V^T</span>，截取最大的奇异值可得到低秩近似。这里的“低秩”是保留主要线性变化方向，不能保证保留所有类别信息。</p>
 <p><strong>检查任务：</strong> 写出 <code>[8,196,384] @ [384,64]</code> 的结果形状，并解释为什么不能把空间维随意当成通道维。延伸：<a href="https://d2l.ai/chapter_preliminaries/linear-algebra.html" rel="noopener noreferrer" target="_blank">D2L 线性代数</a>。</p>
+<section aria-label="矩阵乘法与形状代码运行器" class="python-runner" data-example="matrix">
+<div class="runner-heading"><strong>矩阵乘法与形状</strong><span>本机浏览器 Python · CPU</span></div>
+<label class="runner-editor" for="code-matrix">Python代码（可编辑；Ctrl / Command + Enter 运行）<textarea autocapitalize="off" autocomplete="off" id="code-matrix" spellcheck="false">import numpy as np
+X = np.array([[1., 2.], [3., 4.]])
+W = np.array([[3., 4.]])
+b = 1.
+Y = X @ W.T + b
+print('X shape:', X.shape, 'W shape:', W.shape)
+print('Y = X @ W.T + b:\n', Y)
+print('修改 W 或 b，再运行比较结果。')</textarea></label>
+<div class="runner-actions"><button class="run-code" type="button">运行代码</button><button class="stop-code" disabled="" type="button">停止</button><button class="reset-code" type="button">恢复示例</button><button class="download-code" type="button">下载代码</button><a href="https://colab.research.google.com/github/charlie-sys/vision-learning-hub/blob/main/notebooks/00_numpy_math.ipynb" rel="noopener noreferrer" target="_blank">在 Colab 学习 ↗</a></div>
+<p aria-live="polite" class="runner-status" role="status">点击运行后加载Python和所需数学库，首次需要网络。</p>
+<pre aria-label="Python输出" class="runner-output"></pre><div class="runner-figures"></div>
+<p class="runner-note">每次运行使用独立变量；支持NumPy / SciPy / SymPy / Matplotlib。torch、tensorflow请使用Colab实验。</p></section>
 <h2 id="2">2. 导数、链式法则与自动微分</h2>
 <p>设 <span class="math-inline" data-tex="y=wx+b">y=wx+b</span>，<span class="math-inline" data-tex="L=(y-t)^2/2">L=(y-t)^2/2</span>。先对损失求局部导数，再沿计算图相乘：</p>
 <div class="math-display" data-tex="\frac{\partial L}{\partial w}=(y-t)x,\qquad \frac{\partial L}{\partial b}=y-t.">\frac{\partial L}{\partial w}=(y-t)x,\qquad \frac{\partial L}{\partial b}=y-t.</div>
 <p>取 <span class="math-inline" data-tex="x=2,w=3,b=1,t=5">x=2,w=3,b=1,t=5</span>，有 <span class="math-inline" data-tex="y=7,L=2,\partial L/\partial w=4,\partial L/\partial b=2">y=7,L=2,\partial L/\partial w=4,\partial L/\partial b=2</span>。梯度下降以 <span class="math-inline" data-tex="w\leftarrow w-\eta\nabla_w L">w\leftarrow w-\eta\nabla_w L</span> 更新参数。PyTorch 的反向传播累加 <code>.grad</code>，所以每个优化步都需要 <code>optimizer.zero_grad(set_to_none=True)</code>。</p>
 <p>数值梯度检查使用中心差分 <span class="math-inline" data-tex="[L(w+h)-L(w-h)]/(2h)">[L(w+h)-L(w-h)]/(2h)</span>。用 float64 和适中的 <span class="math-inline" data-tex="h">h</span>，才能减少舍入与截断误差；它用于检查实现，不适合替代大模型的反向传播。<code>detach()</code> 切断图，<code>no_grad()</code> 禁止记录，二者均不能凭空让参数更新。延伸：<a href="https://docs.pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html" rel="noopener noreferrer" target="_blank">自动微分</a>。</p>
+<section aria-label="链式法则与数值梯度代码运行器" class="python-runner" data-example="gradient">
+<div class="runner-heading"><strong>链式法则与数值梯度</strong><span>本机浏览器 Python · CPU</span></div>
+<label class="runner-editor" for="code-gradient">Python代码（可编辑；Ctrl / Command + Enter 运行）<textarea autocapitalize="off" autocomplete="off" id="code-gradient" spellcheck="false">import numpy as np
+x, w, b, target = 2., 3., 1., 5.
+def loss(weight):
+    return (weight*x + b - target)**2 / 2
+h = 1e-5
+analytic = (w*x + b - target)*x
+numeric = (loss(w+h)-loss(w-h))/(2*h)
+print('loss:', loss(w))
+print('analytic gradient:', analytic)
+print('numeric gradient:', numeric)
+print('close:', np.isclose(analytic, numeric))</textarea></label>
+<div class="runner-actions"><button class="run-code" type="button">运行代码</button><button class="stop-code" disabled="" type="button">停止</button><button class="reset-code" type="button">恢复示例</button><button class="download-code" type="button">下载代码</button><a href="https://colab.research.google.com/github/charlie-sys/vision-learning-hub/blob/main/notebooks/00_numpy_math.ipynb" rel="noopener noreferrer" target="_blank">在 Colab 学习 ↗</a></div>
+<p aria-live="polite" class="runner-status" role="status">点击运行后加载Python和所需数学库，首次需要网络。</p>
+<pre aria-label="Python输出" class="runner-output"></pre><div class="runner-figures"></div>
+<p class="runner-note">每次运行使用独立变量；支持NumPy / SciPy / SymPy / Matplotlib。torch、tensorflow请使用Colab实验。</p></section>
 <h2 id="3">3. 概率、似然、熵与交叉熵</h2>
 <p>条件概率 <span class="math-inline" data-tex="p(a\mid b)=p(a,b)/p(b)">p(a\mid b)=p(a,b)/p(b)</span>，贝叶斯公式把似然与先验转成后验。独立样本的联合似然是乘积，取对数后成为求和；最小化负对数似然等价于最大化似然。</p>
 <p>分类 logits 为 <span class="math-inline" data-tex="z">z</span>，概率为 <span class="math-inline" data-tex="p_k=\exp(z_k)/\sum_j\exp(z_j)">p_k=\exp(z_k)/\sum_j\exp(z_j)</span>，真实类为 <span class="math-inline" data-tex="y">y</span> 时 <span class="math-inline" data-tex="L=-\log p_y">L=-\log p_y</span>。稳定实现先减去最大 logit，不改变 softmax。取 logits <code>[2,0]</code>、标签 0，有 <span class="math-inline" data-tex="L=\log(1+e^{-2})\approx0.126928">L=\log(1+e^{-2})\approx0.126928</span>。其梯度为 <span class="math-inline" data-tex="\partial L/\partial z_k=p_k-\mathbf1[k=y]">\partial L/\partial z_k=p_k-\mathbf1[k=y]</span>。</p>
@@ -82,6 +116,20 @@ pre{background:#15283d;color:#e8f1f6;border-radius:9px;padding:16px 19px;overflo
 <p>用 <span class="math-inline" data-tex="z=\mu+\sigma\epsilon,\epsilon\sim\mathcal N(0,I)">z=\mu+\sigma\epsilon,\epsilon\sim\mathcal N(0,I)</span> 把随机性移到与参数无关的噪声，编码器可以通过 <span class="math-inline" data-tex="z">z</span> 获得路径导数。把 <code>z</code> detach 会破坏这一梯度路径。</p>
 <p>本实验输出 Bernoulli logits，逐像素 BCE 求和后再对样本求平均；灰度像素处于 <code>[0,1]</code>，该做法是常用的教学重建目标，对连续灰度并非严格的离散 Bernoulli 观测生成假设。换成固定方差高斯时，重建项与平方误差成比例。BCE、MSE、逐像素均值与逐图求和的数值不能直接比较；改 reduction 后必须重新解释 KL 的相对权重。</p>
 <p><strong>检查任务：</strong> 分别画出重建项、KL 项、总损失，确认不是靠关闭 KL 或输出常数得到“下降”。阅读：<a href="https://arxiv.org/abs/1312.6114" rel="noopener noreferrer" target="_blank">VAE 原论文</a>、<a href="https://deepgenerativemodels.github.io/notes/vae/" rel="noopener noreferrer" target="_blank">Stanford生成模型课程：VAE</a>。</p>
+<section aria-label="高斯 KL 与重参数化代码运行器" class="python-runner" data-example="gaussian-kl">
+<div class="runner-heading"><strong>高斯 KL 与重参数化</strong><span>本机浏览器 Python · CPU</span></div>
+<label class="runner-editor" for="code-gaussian-kl">Python代码（可编辑；Ctrl / Command + Enter 运行）<textarea autocapitalize="off" autocomplete="off" id="code-gaussian-kl" spellcheck="false">import numpy as np
+rng = np.random.default_rng(7)
+mu, sigma = 1., 2.
+kl = .5*(mu**2 + sigma**2 - 1 - np.log(sigma**2))
+z = mu + sigma*rng.standard_normal(20000)
+print('KL(q || N(0,1)):', kl)
+print('sample mean / variance:', z.mean(), z.var())
+print('expected mean / variance:', mu, sigma**2)</textarea></label>
+<div class="runner-actions"><button class="run-code" type="button">运行代码</button><button class="stop-code" disabled="" type="button">停止</button><button class="reset-code" type="button">恢复示例</button><button class="download-code" type="button">下载代码</button><a href="https://colab.research.google.com/github/charlie-sys/vision-learning-hub/blob/main/notebooks/00_numpy_math.ipynb" rel="noopener noreferrer" target="_blank">在 Colab 学习 ↗</a></div>
+<p aria-live="polite" class="runner-status" role="status">点击运行后加载Python和所需数学库，首次需要网络。</p>
+<pre aria-label="Python输出" class="runner-output"></pre><div class="runner-figures"></div>
+<p class="runner-note">每次运行使用独立变量；支持NumPy / SciPy / SymPy / Matplotlib。torch、tensorflow请使用Colab实验。</p></section>
 <h2 id="5-ddpm">5. DDPM：从逐步加噪到闭式采样</h2>
 <p>设 <span class="math-inline" data-tex="\beta_t\in(0,1)">\beta_t\in(0,1)</span>，<span class="math-inline" data-tex="\alpha_t=1-\beta_t">\alpha_t=1-\beta_t</span>，<span class="math-inline" data-tex="\bar\alpha_t=\prod_{s=1}^t\alpha_s">\bar\alpha_t=\prod_{s=1}^t\alpha_s</span>。正向过程：</p>
 <div class="math-display" data-tex="q(x_t\mid x_{t-1})=\mathcal N(\sqrt{\alpha_t}x_{t-1},\beta_t I).">q(x_t\mid x_{t-1})=\mathcal N(\sqrt{\alpha_t}x_{t-1},\beta_t I).</div>
@@ -105,11 +153,52 @@ pre{background:#15283d;color:#e8f1f6;border-radius:9px;padding:16px 19px;overflo
 <h3 id="ddim">DDIM 与无分类器引导</h3>
 <p>DDIM 可在所选的递减时间子序列上构造更新；<span class="math-inline" data-tex="\eta=0">\eta=0</span> 的更新在固定初始噪声下是确定性的，但它不是简单跳过 DDPM 循环步骤。无分类器引导的一种约定为 <span class="math-inline" data-tex="\hat\epsilon=\epsilon_u+s(\epsilon_c-\epsilon_u)">\hat\epsilon=\epsilon_u+s(\epsilon_c-\epsilon_u)</span>，这里 <span class="math-inline" data-tex="s=0">s=0</span> 表示无条件、<span class="math-inline" data-tex="s=1">s=1</span> 表示条件预测。有些文章用另一种偏移约定，比较超参数前先看定义。当前教学代码为无条件 DDPM，没有实现 DDIM 或条件引导，不能把这些扩展当成已验证功能。</p>
 <p>阅读：<a href="https://arxiv.org/abs/2006.11239" rel="noopener noreferrer" target="_blank">DDPM</a>、<a href="https://arxiv.org/abs/2010.02502" rel="noopener noreferrer" target="_blank">DDIM</a>、<a href="https://diffusion.csail.mit.edu/2025/" rel="noopener noreferrer" target="_blank">MIT 扩散与流课程</a>。</p>
+<section aria-label="DDPM 加噪曲线代码运行器" class="python-runner" data-example="diffusion">
+<div class="runner-heading"><strong>DDPM 加噪曲线</strong><span>本机浏览器 Python · CPU</span></div>
+<label class="runner-editor" for="code-diffusion">Python代码（可编辑；Ctrl / Command + Enter 运行）<textarea autocapitalize="off" autocomplete="off" id="code-diffusion" spellcheck="false">import numpy as np
+import matplotlib.pyplot as plt
+beta = np.linspace(1e-4, .05, 200)
+alpha_bar = np.cumprod(1-beta)
+print('final alpha_bar:', alpha_bar[-1])
+print('scalar check:', np.sqrt(.25)*2 + np.sqrt(.75)*(-1))
+plt.figure(figsize=(6, 3))
+plt.plot(alpha_bar, label='signal variance')
+plt.plot(1-alpha_bar, label='noise variance')
+plt.xlabel('code timestep (0 = math t=1)')
+plt.ylabel('variance coefficient')
+plt.legend()
+plt.tight_layout()
+plt.show()</textarea></label>
+<div class="runner-actions"><button class="run-code" type="button">运行代码</button><button class="stop-code" disabled="" type="button">停止</button><button class="reset-code" type="button">恢复示例</button><button class="download-code" type="button">下载代码</button><a href="https://colab.research.google.com/github/charlie-sys/vision-learning-hub/blob/main/notebooks/00_numpy_math.ipynb" rel="noopener noreferrer" target="_blank">在 Colab 学习 ↗</a></div>
+<p aria-live="polite" class="runner-status" role="status">点击运行后加载Python和所需数学库，首次需要网络。</p>
+<pre aria-label="Python输出" class="runner-output"></pre><div class="runner-figures"></div>
+<p class="runner-note">每次运行使用独立变量；支持NumPy / SciPy / SymPy / Matplotlib。torch、tensorflow请使用Colab实验。</p></section>
 <h2 id="6-odesde-flow-matching">6. ODE、SDE 与 Flow Matching</h2>
 <p>ODE 给定初值与速度场 <span class="math-inline" data-tex="dx/dt=v(x,t)">dx/dt=v(x,t)</span>，Euler 更新 <span class="math-inline" data-tex="x_{k+1}=x_k+h v(x_k,t_k)">x_{k+1}=x_k+h v(x_k,t_k)</span>。对 <span class="math-inline" data-tex="v=-x,x_0=1,h=0.1">v=-x,x_0=1,h=0.1</span>，一步是 0.9，精确值为 <span class="math-inline" data-tex="e^{-0.1}\approx0.904837">e^{-0.1}\approx0.904837</span>；缩小步长用于检查离散误差。</p>
 <p>SDE 多了 Brownian 随机增量：<span class="math-inline" data-tex="dX_t=f(X_t,t)dt+g(t)dW_t">dX_t=f(X_t,t)dt+g(t)dW_t</span>。Euler–Maruyama 更新为 <span class="math-inline" data-tex="X_{k+1}=X_k+hf(X_k,t_k)+g(t_k)\sqrt h\,\xi_k">X_{k+1}=X_k+hf(X_k,t_k)+g(t_k)\sqrt h\,\xi_k</span>，<span class="math-inline" data-tex="\xi_k\sim\mathcal N(0,I)">\xi_k\sim\mathcal N(0,I)</span>。噪声系数是 <span class="math-inline" data-tex="\sqrt h">\sqrt h</span> 而非 <span class="math-inline" data-tex="h">h</span>；因为 Brownian 增量方差为 <span class="math-inline" data-tex="h">h</span>。当 <span class="math-inline" data-tex="f=0,g=1">f=0,g=1</span> 时，很多轨迹在时间 <span class="math-inline" data-tex="t">t</span> 的样本方差应接近 <span class="math-inline" data-tex="t">t</span>。</p>
 <p>Flow Matching 的简单条件路径为 <span class="math-inline" data-tex="x_t=(1-t)x_0+tx_1">x_t=(1-t)x_0+tx_1</span>，条件目标速度为 <span class="math-inline" data-tex="x_1-x_0">x_1-x_0</span>。平方误差最优解是给定当前位置的条件期望速度，学习的是对应边缘分布的速度场。独立配对端点的直线路径不自动等于最优传输路径；采样器步数、耦合和速度参数化都会影响结果。</p>
 <p><strong>练习：</strong> 比较 Euler 步长 0.1 与 0.05 的终点误差；模拟 10000 条 Brownian 路径验证方差。系统教学：<a href="https://diffusion.csail.mit.edu/2025/" rel="noopener noreferrer" target="_blank">MIT 课程讲义与带解答实验</a>。</p>
+<section aria-label="ODE 与 Brownian 方差代码运行器" class="python-runner" data-example="sde">
+<div class="runner-heading"><strong>ODE 与 Brownian 方差</strong><span>本机浏览器 Python · CPU</span></div>
+<label class="runner-editor" for="code-sde">Python代码（可编辑；Ctrl / Command + Enter 运行）<textarea autocapitalize="off" autocomplete="off" id="code-sde" spellcheck="false">import numpy as np
+import matplotlib.pyplot as plt
+rng = np.random.default_rng(7)
+h, steps = .01, 100
+paths = np.cumsum(rng.standard_normal((5000, steps))*np.sqrt(h), axis=1)
+t = np.arange(1, steps+1)*h
+print('Brownian terminal variance:', paths[:, -1].var())
+print('Euler x(1):', (1-h)**steps, 'exact:', np.exp(-1))
+plt.figure(figsize=(6, 3))
+plt.plot(t, paths.var(axis=0), label='empirical variance')
+plt.plot(t, t, '--', label='theory: Var(W_t)=t')
+plt.xlabel('time')
+plt.legend()
+plt.tight_layout()
+plt.show()</textarea></label>
+<div class="runner-actions"><button class="run-code" type="button">运行代码</button><button class="stop-code" disabled="" type="button">停止</button><button class="reset-code" type="button">恢复示例</button><button class="download-code" type="button">下载代码</button><a href="https://colab.research.google.com/github/charlie-sys/vision-learning-hub/blob/main/notebooks/00_numpy_math.ipynb" rel="noopener noreferrer" target="_blank">在 Colab 学习 ↗</a></div>
+<p aria-live="polite" class="runner-status" role="status">点击运行后加载Python和所需数学库，首次需要网络。</p>
+<pre aria-label="Python输出" class="runner-output"></pre><div class="runner-figures"></div>
+<p class="runner-note">每次运行使用独立变量；支持NumPy / SciPy / SymPy / Matplotlib。torch、tensorflow请使用Colab实验。</p></section>
 <h2 id="7">7. 最优传输与二分匹配</h2>
 <p>离散 OT 给定质量 <span class="math-inline" data-tex="a_i,b_j">a_i,b_j</span> 与代价 <span class="math-inline" data-tex="C_{ij}">C_{ij}</span>，求运输计划：</p>
 <div class="math-display" data-tex="\min_{P\geq0}\sum_{ij}P_{ij}C_{ij},\qquad P\mathbf1=a,\quad P^T\mathbf1=b.">\min_{P\geq0}\sum_{ij}P_{ij}C_{ij},\qquad P\mathbf1=a,\quad P^T\mathbf1=b.</div>
@@ -117,12 +206,42 @@ pre{background:#15283d;color:#e8f1f6;border-radius:9px;padding:16px 19px;overflo
 <p>熵正则 OT 在代价上加入 <span class="math-inline" data-tex="\varepsilon\sum P_{ij}(\log P_{ij}-1)">\varepsilon\sum P_{ij}(\log P_{ij}-1)</span>，令 <span class="math-inline" data-tex="K_{ij}=\exp(-C_{ij}/\varepsilon)">K_{ij}=\exp(-C_{ij}/\varepsilon)</span>，交替缩放 <span class="math-inline" data-tex="u=a/(Kv)">u=a/(Kv)</span>、<span class="math-inline" data-tex="v=b/(K^Tu)">v=b/(K^Tu)</span> 得到 Sinkhorn 迭代。小 epsilon 会引起数值问题，实际常用 log 域实现；本课程不把这段概念式当作大规模稳定求解器。</p>
 <p>DETR 的集合预测把预测框与真实框构成代价矩阵，求一对一匹配，再计算匹配后的分类与框损失。匹配是离散分配，不能理解成每个框独立选择最相似目标。矩阵 <code>[[4,1,3],[2,0,5],[3,2,2]]</code> 的最优列序为 <code>[1,0,2]</code>，总代价 5。文献常称 Hungarian matching；SciPy 当前 <code>linear_sum_assignment</code> 文档说明使用改进的 Jonker–Volgenant 算法，名称应区分。</p>
 <p>教学：<a href="https://optimaltransport.github.io/book/" rel="noopener noreferrer" target="_blank">作者的 Computational Optimal Transport 教材</a>、<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linear_sum_assignment.html" rel="noopener noreferrer" target="_blank">SciPy 指派问题定义与例子</a>、<a href="https://github.com/facebookresearch/detr" rel="noopener noreferrer" target="_blank">DETR 作者实现</a>。</p>
+<section aria-label="SciPy 一对一匹配代码运行器" class="python-runner" data-example="assignment">
+<div class="runner-heading"><strong>SciPy 一对一匹配</strong><span>本机浏览器 Python · CPU</span></div>
+<label class="runner-editor" for="code-assignment">Python代码（可编辑；Ctrl / Command + Enter 运行）<textarea autocapitalize="off" autocomplete="off" id="code-assignment" spellcheck="false">import numpy as np
+from scipy.optimize import linear_sum_assignment
+C = np.array([[4, 1, 3], [2, 0, 5], [3, 2, 2]])
+rows, cols = linear_sum_assignment(C)
+print('row -&gt; col:', list(zip(rows.tolist(), cols.tolist())))
+print('total cost:', C[rows, cols].sum())
+print('试着修改一个代价，再比较全局最优解。')</textarea></label>
+<div class="runner-actions"><button class="run-code" type="button">运行代码</button><button class="stop-code" disabled="" type="button">停止</button><button class="reset-code" type="button">恢复示例</button><button class="download-code" type="button">下载代码</button><a href="https://colab.research.google.com/github/charlie-sys/vision-learning-hub/blob/main/notebooks/00_numpy_math.ipynb" rel="noopener noreferrer" target="_blank">在 Colab 学习 ↗</a></div>
+<p aria-live="polite" class="runner-status" role="status">点击运行后加载Python和所需数学库，首次需要网络。</p>
+<pre aria-label="Python输出" class="runner-output"></pre><div class="runner-figures"></div>
+<p class="runner-note">每次运行使用独立变量；支持NumPy / SciPy / SymPy / Matplotlib。torch、tensorflow请使用Colab实验。</p></section>
 <h2 id="8-transformer">8. 注意力与视觉 Transformer</h2>
 <p>先线性投影 <span class="math-inline" data-tex="Q=XW_Q,K=XW_K,V=XW_V">Q=XW_Q,K=XW_K,V=XW_V</span>，单头输出为：</p>
 <div class="math-display" data-tex="A=\operatorname{softmax}(QK^T/\sqrt{d_k}+M),\qquad Y=AV.">A=\operatorname{softmax}(QK^T/\sqrt{d_k}+M),\qquad Y=AV.</div>
 <p>softmax 沿“被关注的 key”一维计算，因此每个 query 的权重和为 1；被禁止的位置在 mask 中加负无穷。缩放项缓解随维度增长的点积方差，但不能代替 LayerNorm。多头各自投影并拼接后还要输出投影。仅写 <code>Q=K=V=X</code> 可以演示形状，不能代表完整可训练注意力。</p>
 <p>图像划分为 patch，每个 patch 展平并投影为 token，加位置编码，进入“LayerNorm → 注意力 → 残差 → LayerNorm → MLP → 残差”的常见 pre-norm 模块。位置编码使模型知道空间位置，残差提供较直接的梯度路径，LayerNorm 沿特征维归一化。若 224×224 图像使用 16×16 patch，图像 token 数是 196，加 CLS 后是 197。注意力矩阵的内存随 token 数平方增长。</p>
 <p><strong>检查任务：</strong> 运行<a href="solutions.py">参考实现下载</a>，验证投影权重得到梯度；将一个 key 屏蔽后检查对应权重为 0。阅读：<a href="https://arxiv.org/abs/2010.11929" rel="noopener noreferrer" target="_blank">ViT</a>、<a href="https://d2l.ai/chapter_attention-mechanisms-and-transformers/index.html" rel="noopener noreferrer" target="_blank">D2L 注意力章节</a>。</p>
+<section aria-label="注意力归一化与 mask代码运行器" class="python-runner" data-example="attention">
+<div class="runner-heading"><strong>注意力归一化与 mask</strong><span>本机浏览器 Python · CPU</span></div>
+<label class="runner-editor" for="code-attention">Python代码（可编辑；Ctrl / Command + Enter 运行）<textarea autocapitalize="off" autocomplete="off" id="code-attention" spellcheck="false">import numpy as np
+Q = np.array([[1., 0.], [0., 1.]])
+K = np.array([[1., 0.], [0., 1.], [1., 1.]])
+V = np.array([[1., 2.], [3., 4.], [5., 6.]])
+scores = Q @ K.T / np.sqrt(Q.shape[-1])
+scores[:, -1] = -np.inf  # 屏蔽最后一个key
+weights = np.exp(scores - scores.max(axis=-1, keepdims=True))
+weights /= weights.sum(axis=-1, keepdims=True)
+print('weights:\n', weights)
+print('row sums:', weights.sum(axis=-1))
+print('output:\n', weights @ V)</textarea></label>
+<div class="runner-actions"><button class="run-code" type="button">运行代码</button><button class="stop-code" disabled="" type="button">停止</button><button class="reset-code" type="button">恢复示例</button><button class="download-code" type="button">下载代码</button><a href="https://colab.research.google.com/github/charlie-sys/vision-learning-hub/blob/main/notebooks/00_numpy_math.ipynb" rel="noopener noreferrer" target="_blank">在 Colab 学习 ↗</a></div>
+<p aria-live="polite" class="runner-status" role="status">点击运行后加载Python和所需数学库，首次需要网络。</p>
+<pre aria-label="Python输出" class="runner-output"></pre><div class="runner-figures"></div>
+<p class="runner-note">每次运行使用独立变量；支持NumPy / SciPy / SymPy / Matplotlib。torch、tensorflow请使用Colab实验。</p></section>
 <h2 id="9-infoncedino">9. InfoNCE、DINO 与表征评价</h2>
 <p>InfoNCE 让 anchor 与正样本的相似度相对负样本更高：</p>
 <div class="math-display" data-tex="L_i=-\log\frac{\exp(s_{i,+}/\tau)}{\sum_{j\in\mathcal C_i}\exp(s_{ij}/\tau)}.">L_i=-\log\frac{\exp(s_{i,+}/\tau)}{\sum_{j\in\mathcal C_i}\exp(s_{ij}/\tau)}.</div>

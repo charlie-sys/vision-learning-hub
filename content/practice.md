@@ -2,6 +2,8 @@
 
 从真实数据分类到 VAE、DDPM，再到官方 DINOv2 冻结特征评价。先读[数学教学](math.html)，做[练习](answers.html)，运行后对照[实测记录](evidence.html)。这些是小规模教学实现，目标是解释流程，不承诺论文级指标。
 
+无需本地安装时，直接使用每项实验的Colab按钮；另有[PyTorch / TensorFlow基础Notebook与网页数学实验](playground.html)。下面的命令供本地运行使用。
+
 ## 1. 环境与第一次运行
 
 以下命令一律从 Clone 或解压后的**仓库根目录**运行。建议 Python 3.10 或 3.11；本次实测 Python 3.9、PyTorch 2.8、torchvision 0.23，DINOv2 使用固定的兼容历史提交。不同系统的 PyTorch 安装命令应从[官方安装向导](https://pytorch.org/get-started/locally/)选择；先安装与本机匹配的 torch/torchvision，再安装实验依赖。
@@ -38,6 +40,8 @@ python examples/course_labs.py probe --encoder tiny --dataset synthetic --train-
 
 ## 3. 实验一：CNN 真实图像分类
 
+<!-- COLAB:03_cnn -->
+
 **目标：** 掌握 Dataset→batch→logits→交叉熵→反向传播→验证与检查点的完整流程。网络两层卷积和池化，接小型分类头；输出10类 logits。
 
 ```bash
@@ -51,6 +55,8 @@ python examples/course_labs.py cnn --train-size 2048 --val-size 512 --epochs 3 -
 **对照练习：** 保持划分与轮数相同，将学习率从 `0.001` 改为 `0.01`，另存输出；解释收敛是否更快、是否不稳定。至少三个 seed 后再讨论稳健性。
 
 ## 4. 实验二：可训练 VAE
+
+<!-- COLAB:04_vae -->
 
 **目标：** 同时训练编码器均值/方差与解码器；记录重建项、KL和总目标，生成重建图与先验样本。
 
@@ -68,6 +74,8 @@ python examples/course_labs.py vae --train-size 2048 --val-size 512 --epochs 6 -
 
 ## 5. 实验三：DDPM 完整训练与反向采样
 
+<!-- COLAB:05_ddpm -->
+
 **目标：** 训练带时间嵌入的小型 U-Net 噪声预测器，从纯噪声迭代生成图片，而非停留在正向加噪。
 
 ```bash
@@ -83,6 +91,8 @@ python examples/course_labs.py ddpm --train-size 2048 --val-size 512 --epochs 10
 **对照练习：** 比较100/200步，分别从头训练匹配设置；记录终端累计alpha、训练预算和生成时间。若仅改变已训练模型的时间索引并跳步，那不是本采样公式的有效消融。
 
 ## 6. 实验四：DINOv2 冻结特征线性评价
+
+<!-- COLAB:06_probe -->
 
 **目标：** 判断预训练表征是否能在少量标签上支持分类，比较相同ViT架构的随机初始化骨干。
 

@@ -1,0 +1,77 @@
+{
+  "date": "2026-10-28",
+  "execution_environment": "Local Jupyter Python 3.9 kernel on Windows; not a Colab session",
+  "validation": "Executed every code cell from top to bottom without replacing the default experiment configuration",
+  "notebooks": [
+    {
+      "notebook": "00_numpy_math.ipynb",
+      "result": "passed",
+      "seconds": 21.92,
+      "code_cells": 6
+    },
+    {
+      "notebook": "01_pytorch_basics.ipynb",
+      "result": "passed",
+      "seconds": 48.56,
+      "code_cells": 4
+    },
+    {
+      "notebook": "02_tensorflow_basics.ipynb",
+      "result": "passed",
+      "seconds": 34.6,
+      "code_cells": 5
+    },
+    {
+      "notebook": "03_cnn.ipynb",
+      "result": "passed",
+      "seconds": 104.25,
+      "code_cells": 6
+    },
+    {
+      "notebook": "04_vae.ipynb",
+      "result": "passed",
+      "seconds": 113.37,
+      "code_cells": 6
+    },
+    {
+      "notebook": "05_ddpm.ipynb",
+      "result": "passed",
+      "seconds": 140.74,
+      "code_cells": 6
+    },
+    {
+      "notebook": "06_probe.ipynb",
+      "result": "passed",
+      "seconds": 118.59,
+      "code_cells": 6
+    }
+  ],
+  "total_code_cells": 39,
+  "browser_runtime": "Pyodide 0.27.7 in the in-app Chromium browser",
+  "browser_examples_executed": [
+    "matrix",
+    "gradient",
+    "gaussian-kl",
+    "attention",
+    "diffusion",
+    "sde",
+    "assignment",
+    "symbolic"
+  ],
+  "interaction_checks": [
+    "editable code",
+    "Python error output rendered as text",
+    "torch guidance",
+    "stop infinite loop",
+    "restart after stop",
+    "reset sample",
+    "PNG plot rendering",
+    "Notebook file download and byte comparison",
+    "editor code download and content comparison"
+  ],
+  "limitations": [
+    "Colab compute availability and current runtime versions depend on Google.",
+    "GPU models and execution speed can differ.",
+    "Browser Python requires network for initial runtime/package downloads."
+  ]
+}

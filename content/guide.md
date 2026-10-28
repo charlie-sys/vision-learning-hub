@@ -1,5 +1,7 @@
 # 视觉论文阅读清单与路线
 
+[▶ 在线运行代码](playground.html)：网页数学实验，以及PyTorch、TensorFlow和四项视觉实验的Colab入口。
+
 配套进阶：[数学推导](math.html) · [四项真实数据实验](practice.html) · [练习答案](answers.html) · [考核标准](assessment.html)。基础小实验用于理解流程，完整训练与评价请进入四项实验。
 
 整理日期：2026-10-28。精选30篇，提供公开全文来源。

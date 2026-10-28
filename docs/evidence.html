@@ -8,6 +8,8 @@
 <link rel="stylesheet" href="assets/katex/katex.min.css">
 <script defer src="assets/katex/katex.min.js"></script>
 <script defer src="assets/math.js"></script>
+<link rel="stylesheet" href="assets/runner.css">
+<script defer src="assets/runner.js"></script>
 <style>
 :root{--ink:#182536;--muted:#607185;--accent:#176e76;--paper:#fff;--bg:#f3f6f9;--line:#dce4eb}
 .math-inline{display:inline-block;max-width:100%;vertical-align:middle;overflow-x:auto;overflow-y:hidden;padding:2px 3px;scrollbar-width:none}.math-inline::-webkit-scrollbar{display:none}.math-display{max-width:100%;overflow-x:auto;overflow-y:hidden;padding:10px 0;margin:16px 0}.math-display .katex-display{margin:.5em 0}.math-error{color:#a32828;background:#fff0f0}.content .katex{font-size:1.08em}
@@ -48,7 +50,7 @@ pre{background:#15283d;color:#e8f1f6;border-radius:9px;padding:16px 19px;overflo
 </style>
 </head>
 <body id="top">
-<header class="top"><strong>视觉论文学习库</strong><nav><a href="index.html">论文目录</a><a href="tutorial.html">知识总览</a><a href="math.html">数学推导</a><a href="practice.html">四项实验</a><a href="answers.html">练习答案</a><a href="assessment.html">学习考核</a><a href="resources.html">课程来源</a><a href="evidence.html">实测记录</a></nav></header>
+<header class="top"><strong>视觉论文学习库</strong><nav><a href="index.html">论文目录</a><a href="tutorial.html">知识总览</a><a href="math.html">数学推导</a><a href="playground.html">在线运行代码</a><a href="practice.html">四项实验</a><a href="answers.html">练习答案</a><a href="assessment.html">学习考核</a><a href="resources.html">课程来源</a><a href="evidence.html">实测记录</a></nav></header>
 <div class="layout"><aside class="side"><label for="toc-search">章节目录</label><input id="toc-search" type="search" placeholder="搜索章节…" aria-label="搜索章节"><div class="toc"><ul><li class="level-2"><a href="#1">1. 环境、划分与实验预算</a></li><li class="level-2"><a href="#2">2. 三种子结果</a></li><li class="level-2"><a href="#3-cnn">3. 一次锁定设置的CNN测试</a></li><li class="level-2"><a href="#4">4. 结果图与失败分析</a></li><li class="level-3"><a href="#cnn">CNN</a></li><li class="level-3"><a href="#vae">VAE</a></li><li class="level-3"><a href="#ddpm">DDPM</a></li><li class="level-3"><a href="#dinov2">DINOv2线性评价</a></li><li class="level-2"><a href="#5">5. 原始记录、耗时与复查</a></li><li class="level-2"><a href="#6">6. 自动化检查与尚未覆盖的部分</a></li></ul></div></aside>
 <main class="content"><h1 id="_1">真实实验记录与验证边界</h1>
 <p>记录日期：2026-10-28。以下数字来自真实运行的FashionMNIST实验，不是目标值或示意数据。原始记录仅将本机目录改为项目相对路径，保留配置、划分哈希、曲线、环境和结果。代码见<a href="practice.html">完整实验</a>，理论见<a href="math.html">数学章</a>。</p>

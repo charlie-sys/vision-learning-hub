@@ -11,3 +11,4 @@ data/datasets/
 runs/
 .cache/
 *.pth
+.ipynb_checkpoints/

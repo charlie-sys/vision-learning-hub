@@ -13,3 +13,5 @@
 DINOv2实验从Meta官方仓库与服务器加载标准ViT-S/14模型，固定代码提交为 `e1277af2ba9496fbadf7aec6eba56e8d882d1e35`。原代码与相应标准模型遵循其Apache-2.0许可，详见 https://github.com/facebookresearch/dinov2 及模型卡。仓库不重新分发DINO权重。PyTorch、TorchVision、Pillow等依赖分别遵循各自许可。
 
 新增教学入口来自MIT Diffusion/Flow Matching 2025、UvA Deep Learning Tutorials、Peyré/Cuturi的Computational Optimal Transport、SciPy官方文档。本站提供原创中文解释和链接，不复制这些课程全文或Notebook。
+
+网页Python运行器使用Pyodide 0.27.7（MPL-2.0），由jsDelivr公开CDN在用户点击运行后加载，来源 https://github.com/pyodide/pyodide 。运行时与其依赖包未随项目重新分发；NumPy、SciPy、SymPy、Matplotlib及其传递依赖遵守各自许可。运行器和Notebook教学代码为本项目原创。Colab是Google提供的外部服务，其账号、计算资源与条款由服务方管理；项目不转售或代理其计算资源。

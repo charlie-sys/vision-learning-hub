@@ -2,6 +2,8 @@
 
 本章与[知识总览](tutorial.html)、[四项完整实验](practice.html)、[练习答案](answers.html)配套。每节包含定义、关键推导、数值例子和检查任务。先在纸上算一次，再用张量验证；外部课程用于扩展，不作为省略本章解释的理由。
 
+也可进入[在线代码实验室](playground.html)使用全部数学示例，或打开PyTorch / TensorFlow教学Notebook。本页代码面板在浏览器本机执行，每次运行变量相互独立，首次需要下载Python与数学库；停止会重置环境。
+
 ## 1. 张量、线性代数与形状
 
 图像批次通常记为 $X\in\mathbb R^{B\times C\times H\times W}$。线性层使用 $Y=XW^T+b$，其中输入最后一维为 $d_{in}$，权重形状为 $d_{out}\times d_{in}$。矩阵乘法保留前导批次维，收缩匹配的内维；逐元素乘法则依赖广播。
@@ -12,6 +14,8 @@
 
 **检查任务：** 写出 `[8,196,384] @ [384,64]` 的结果形状，并解释为什么不能把空间维随意当成通道维。延伸：[D2L 线性代数](https://d2l.ai/chapter_preliminaries/linear-algebra.html)。
 
+<!-- RUNNER:matrix -->
+
 ## 2. 导数、链式法则与自动微分
 
 设 $y=wx+b$，$L=(y-t)^2/2$。先对损失求局部导数，再沿计算图相乘：
@@ -21,6 +25,8 @@ $$\frac{\partial L}{\partial w}=(y-t)x,\qquad \frac{\partial L}{\partial b}=y-t.
 取 $x=2,w=3,b=1,t=5$，有 $y=7,L=2,\partial L/\partial w=4,\partial L/\partial b=2$。梯度下降以 $w\leftarrow w-\eta\nabla_w L$ 更新参数。PyTorch 的反向传播累加 `.grad`，所以每个优化步都需要 `optimizer.zero_grad(set_to_none=True)`。
 
 数值梯度检查使用中心差分 $[L(w+h)-L(w-h)]/(2h)$。用 float64 和适中的 $h$，才能减少舍入与截断误差；它用于检查实现，不适合替代大模型的反向传播。`detach()` 切断图，`no_grad()` 禁止记录，二者均不能凭空让参数更新。延伸：[自动微分](https://docs.pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html)。
+
+<!-- RUNNER:gradient -->
 
 ## 3. 概率、似然、熵与交叉熵
 
@@ -61,6 +67,8 @@ $$D_{KL}(q\Vert p)=\frac12\sum_i(\mu_i^2+\sigma_i^2-1-\log\sigma_i^2).$$
 本实验输出 Bernoulli logits，逐像素 BCE 求和后再对样本求平均；灰度像素处于 `[0,1]`，该做法是常用的教学重建目标，对连续灰度并非严格的离散 Bernoulli 观测生成假设。换成固定方差高斯时，重建项与平方误差成比例。BCE、MSE、逐像素均值与逐图求和的数值不能直接比较；改 reduction 后必须重新解释 KL 的相对权重。
 
 **检查任务：** 分别画出重建项、KL 项、总损失，确认不是靠关闭 KL 或输出常数得到“下降”。阅读：[VAE 原论文](https://arxiv.org/abs/1312.6114)、[Stanford生成模型课程：VAE](https://deepgenerativemodels.github.io/notes/vae/)。
+
+<!-- RUNNER:gaussian-kl -->
 
 ## 5. DDPM：从逐步加噪到闭式采样
 
@@ -108,6 +116,8 @@ DDIM 可在所选的递减时间子序列上构造更新；$\eta=0$ 的更新在
 
 阅读：[DDPM](https://arxiv.org/abs/2006.11239)、[DDIM](https://arxiv.org/abs/2010.02502)、[MIT 扩散与流课程](https://diffusion.csail.mit.edu/2025/)。
 
+<!-- RUNNER:diffusion -->
+
 ## 6. ODE、SDE 与 Flow Matching
 
 ODE 给定初值与速度场 $dx/dt=v(x,t)$，Euler 更新 $x_{k+1}=x_k+h v(x_k,t_k)$。对 $v=-x,x_0=1,h=0.1$，一步是 0.9，精确值为 $e^{-0.1}\approx0.904837$；缩小步长用于检查离散误差。
@@ -117,6 +127,8 @@ SDE 多了 Brownian 随机增量：$dX_t=f(X_t,t)dt+g(t)dW_t$。Euler–Maruyama
 Flow Matching 的简单条件路径为 $x_t=(1-t)x_0+tx_1$，条件目标速度为 $x_1-x_0$。平方误差最优解是给定当前位置的条件期望速度，学习的是对应边缘分布的速度场。独立配对端点的直线路径不自动等于最优传输路径；采样器步数、耦合和速度参数化都会影响结果。
 
 **练习：** 比较 Euler 步长 0.1 与 0.05 的终点误差；模拟 10000 条 Brownian 路径验证方差。系统教学：[MIT 课程讲义与带解答实验](https://diffusion.csail.mit.edu/2025/)。
+
+<!-- RUNNER:sde -->
 
 ## 7. 最优传输与二分匹配
 
@@ -132,6 +144,8 @@ DETR 的集合预测把预测框与真实框构成代价矩阵，求一对一匹
 
 教学：[作者的 Computational Optimal Transport 教材](https://optimaltransport.github.io/book/)、[SciPy 指派问题定义与例子](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linear_sum_assignment.html)、[DETR 作者实现](https://github.com/facebookresearch/detr)。
 
+<!-- RUNNER:assignment -->
+
 ## 8. 注意力与视觉 Transformer
 
 先线性投影 $Q=XW_Q,K=XW_K,V=XW_V$，单头输出为：
@@ -143,6 +157,8 @@ softmax 沿“被关注的 key”一维计算，因此每个 query 的权重和�
 图像划分为 patch，每个 patch 展平并投影为 token，加位置编码，进入“LayerNorm → 注意力 → 残差 → LayerNorm → MLP → 残差”的常见 pre-norm 模块。位置编码使模型知道空间位置，残差提供较直接的梯度路径，LayerNorm 沿特征维归一化。若 224×224 图像使用 16×16 patch，图像 token 数是 196，加 CLS 后是 197。注意力矩阵的内存随 token 数平方增长。
 
 **检查任务：** 运行[参考实现下载](solutions.py)，验证投影权重得到梯度；将一个 key 屏蔽后检查对应权重为 0。阅读：[ViT](https://arxiv.org/abs/2010.11929)、[D2L 注意力章节](https://d2l.ai/chapter_attention-mechanisms-and-transformers/index.html)。
+
+<!-- RUNNER:attention -->
 
 ## 9. InfoNCE、DINO 与表征评价
 
