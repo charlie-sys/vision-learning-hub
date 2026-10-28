@@ -7,3 +7,9 @@
 学习链接主要来自《动手学深度学习》、PyTorch/TorchVision、MIT OpenCourseWare、斯坦福 CS231n/CS236、NumPy、Python、Pillow 和 scikit-learn。教程包含资料入口及学习目标；外部课程内容通过原始页面访问。
 
 数学排版使用 KaTeX 0.16.22（MIT 许可证），脚本、样式与字体存放于 `vendor/katex/`，完整许可证见该目录的 `LICENSE`。构建时复制到 `docs/assets/katex/`，支持离线渲染。来源：https://github.com/KaTeX/KaTeX 。
+
+四项实验使用FashionMNIST（Han Xiao、Kashif Rasul、Roland Vollgraf；Zalando Research，MIT许可），数据和许可见 https://github.com/zalandoresearch/fashion-mnist 。`evidence/` 中的重建示例含该数据集图像，生成图与指标为本项目教学运行结果；原始完整数据集不随仓库分发。
+
+DINOv2实验从Meta官方仓库与服务器加载标准ViT-S/14模型，固定代码提交为 `e1277af2ba9496fbadf7aec6eba56e8d882d1e35`。原代码与相应标准模型遵循其Apache-2.0许可，详见 https://github.com/facebookresearch/dinov2 及模型卡。仓库不重新分发DINO权重。PyTorch、TorchVision、Pillow等依赖分别遵循各自许可。
+
+新增教学入口来自MIT Diffusion/Flow Matching 2025、UvA Deep Learning Tutorials、Peyré/Cuturi的Computational Optimal Transport、SciPy官方文档。本站提供原创中文解释和链接，不复制这些课程全文或Notebook。

@@ -1,0 +1,100 @@
+{
+  "dataset": "FashionMNIST",
+  "split_seed": 17,
+  "train_indices_sha256": "569111f799f9b906726583aafb2e11b838efac65804188fb38ac13e226592ad4",
+  "val_indices_sha256": "b19e1af63866db668beddaeb5a77555c72b101d05d41eae6d8d3fcb768048bc4",
+  "test_used": false,
+  "config": {
+    "mode": "ddpm",
+    "dataset": "fashion",
+    "data_dir": "data/datasets",
+    "output": "runs/verified-ddpm-17",
+    "train_size": 2048,
+    "val_size": 512,
+    "epochs": 10,
+    "batch_size": 64,
+    "seed": 17,
+    "lr": 0.001,
+    "device": "cuda",
+    "resume": null,
+    "latent_dim": 16,
+    "beta": 1.0,
+    "steps": 200,
+    "encoder": "dinov2",
+    "hub_ref": "e1277af2ba9496fbadf7aec6eba56e8d882d1e35",
+    "hub_dir": null,
+    "random_baseline": false,
+    "evaluate_test": false
+  },
+  "results": {
+    "best_val_loss": 0.06963631976395845,
+    "parameters": 326049
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.2566044391132891,
+      "val_loss": 0.12924676667898893,
+      "zero_predictor_mse": 0.9956203624606133
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.130928402999416,
+      "val_loss": 0.1020400496199727,
+      "zero_predictor_mse": 0.9956203624606133
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.10535621363669634,
+      "val_loss": 0.09082463011145592,
+      "zero_predictor_mse": 0.9956203624606133
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.09791749296709895,
+      "val_loss": 0.08396694622933865,
+      "zero_predictor_mse": 0.9956203624606133
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.09004367887973785,
+      "val_loss": 0.07991146389394999,
+      "zero_predictor_mse": 0.9956203624606133
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.09302542451769114,
+      "val_loss": 0.07637116778641939,
+      "zero_predictor_mse": 0.9956203624606133
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.08854614314623177,
+      "val_loss": 0.07558887684717774,
+      "zero_predictor_mse": 0.9956203624606133
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.08700441825203598,
+      "val_loss": 0.07494009146466851,
+      "zero_predictor_mse": 0.9956203624606133
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.08590001752600074,
+      "val_loss": 0.07112516649067402,
+      "zero_predictor_mse": 0.9956203624606133
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.08065728342626244,
+      "val_loss": 0.06963631976395845,
+      "zero_predictor_mse": 0.9956203624606133
+    }
+  ],
+  "seconds": 56.0452443,
+  "python": "3.9.7",
+  "torch": "2.8.0+cu128",
+  "torchvision": "0.23.0+cu128",
+  "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU"
+}

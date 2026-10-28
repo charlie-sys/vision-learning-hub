@@ -1,0 +1,82 @@
+{
+  "dataset": "FashionMNIST",
+  "split_seed": 17,
+  "train_indices_sha256": "569111f799f9b906726583aafb2e11b838efac65804188fb38ac13e226592ad4",
+  "val_indices_sha256": "b19e1af63866db668beddaeb5a77555c72b101d05d41eae6d8d3fcb768048bc4",
+  "test_used": false,
+  "config": {
+    "mode": "vae",
+    "dataset": "fashion",
+    "data_dir": "data/datasets",
+    "output": "runs/verified-vae-17",
+    "train_size": 2048,
+    "val_size": 512,
+    "epochs": 6,
+    "batch_size": 64,
+    "seed": 17,
+    "lr": 0.001,
+    "device": "cuda",
+    "resume": null,
+    "latent_dim": 16,
+    "beta": 1.0,
+    "steps": 200,
+    "encoder": "dinov2",
+    "hub_ref": "e1277af2ba9496fbadf7aec6eba56e8d882d1e35",
+    "hub_dir": null,
+    "random_baseline": false,
+    "evaluate_test": false
+  },
+  "results": {
+    "best_val_loss": 283.428409576416,
+    "parameters": 415024
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 433.0530939102173,
+      "val_loss": 359.36962509155273,
+      "train_recon": 425.2379837036133,
+      "train_kl": 7.815110876224935
+    },
+    {
+      "epoch": 2,
+      "train_loss": 337.06470680236816,
+      "val_loss": 318.8777046203613,
+      "train_recon": 324.1120271682739,
+      "train_kl": 12.952680706977844
+    },
+    {
+      "epoch": 3,
+      "train_loss": 314.8657503128052,
+      "val_loss": 304.4814262390137,
+      "train_recon": 302.60801124572754,
+      "train_kl": 12.25774022936821
+    },
+    {
+      "epoch": 4,
+      "train_loss": 303.870548248291,
+      "val_loss": 296.7370185852051,
+      "train_recon": 291.0264434814453,
+      "train_kl": 12.844106316566467
+    },
+    {
+      "epoch": 5,
+      "train_loss": 297.0278568267822,
+      "val_loss": 289.6370658874512,
+      "train_recon": 283.7125644683838,
+      "train_kl": 13.315292030572891
+    },
+    {
+      "epoch": 6,
+      "train_loss": 291.22246742248535,
+      "val_loss": 283.428409576416,
+      "train_recon": 276.85443115234375,
+      "train_kl": 14.368035912513733
+    }
+  ],
+  "seconds": 12.1582909,
+  "python": "3.9.7",
+  "torch": "2.8.0+cu128",
+  "torchvision": "0.23.0+cu128",
+  "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU"
+}

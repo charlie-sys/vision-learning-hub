@@ -63,7 +63,7 @@ def train_demo():
                 pred = model(x.to(device)).argmax(dim=1).cpu()
                 correct += int((pred == y).sum())
                 total += len(y)
-        print(f"epoch={epoch + 1} train_loss={loss_sum / 800:.4f} val_acc={correct / total:.3f}")
+        print(f"epoch={epoch + 1} train_loss={loss_sum / len(train.dataset):.4f} val_acc={correct / total:.3f}")
     with tempfile.TemporaryDirectory() as temp_dir:
         out = Path(temp_dir) / "tinycnn_state.pt"
         torch.save(model.state_dict(), out)

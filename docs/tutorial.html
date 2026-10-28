@@ -10,7 +10,7 @@
 <script defer src="assets/math.js"></script>
 <style>
 :root{--ink:#182536;--muted:#607185;--accent:#176e76;--paper:#fff;--bg:#f3f6f9;--line:#dce4eb}
-.math-inline{display:inline-block;max-width:100%;vertical-align:middle;overflow-x:auto;overflow-y:hidden;padding:2px 0}.math-display{max-width:100%;overflow-x:auto;overflow-y:hidden;padding:10px 0;margin:16px 0}.math-display .katex-display{margin:.5em 0}.math-error{color:#a32828;background:#fff0f0}.content .katex{font-size:1.08em}
+.math-inline{display:inline-block;max-width:100%;vertical-align:middle;overflow-x:auto;overflow-y:hidden;padding:2px 3px;scrollbar-width:none}.math-inline::-webkit-scrollbar{display:none}.math-display{max-width:100%;overflow-x:auto;overflow-y:hidden;padding:10px 0;margin:16px 0}.math-display .katex-display{margin:.5em 0}.math-error{color:#a32828;background:#fff0f0}.content .katex{font-size:1.08em}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.8 system-ui,"Microsoft YaHei",sans-serif}
 a{color:var(--accent);text-underline-offset:3px}a:hover{color:#0e4b53}
 .top{background:#14273d;color:#fff;padding:14px max(4vw,24px);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
@@ -37,6 +37,7 @@ a{color:var(--accent);text-underline-offset:3px}a:hover{color:#0e4b53}
 .content .cols-5 td:nth-child(4),.content .cols-5 th:nth-child(4){white-space:nowrap}
 .content .table-wrap{overflow:auto;margin:18px 0;border-radius:8px}
 code{font-family:Consolas,"Cascadia Code",monospace;font-size:.88em;background:#eef3f6;border-radius:4px;padding:2px 5px;overflow-wrap:anywhere}
+.content img{display:block;max-width:100%;height:auto;margin:20px auto;border:1px solid var(--line);border-radius:8px}.content p:has(img){overflow:hidden}
 pre{background:#15283d;color:#e8f1f6;border-radius:9px;padding:16px 19px;overflow:auto;line-height:1.55}pre code{background:transparent;color:inherit;padding:0;white-space:pre;overflow-wrap:normal}
 .content input[type=checkbox]{margin-right:8px;accent-color:var(--accent)}
 .back{position:fixed;right:22px;bottom:22px;background:#176e76;color:white;padding:8px 14px;border-radius:999px;text-decoration:none;box-shadow:0 4px 15px #0002;font-size:13px}
@@ -47,15 +48,16 @@ pre{background:#15283d;color:#e8f1f6;border-radius:9px;padding:16px 19px;overflo
 </style>
 </head>
 <body id="top">
-<header class="top"><strong>视觉论文学习库</strong><nav><a href="index.html">30 篇论文目录</a><a href="guide.html">完整指南</a><a href="lab.html">PyTorch 小实验</a><a href="translation.html">翻译阅读指南</a></nav></header>
-<div class="layout"><aside class="side"><label for="toc-search">章节目录</label><input id="toc-search" type="search" placeholder="搜索章节…" aria-label="搜索章节"><div class="toc"><ul><li class="level-2"><a href="#0">0. 开始前：准备、术语与学习验收</a></li><li class="level-3"><a href="#01">0.1 环境</a></li><li class="level-3"><a href="#02">0.2 四层学习标准</a></li><li class="level-3"><a href="#03">0.3 共通约定</a></li><li class="level-2"><a href="#1">1. 数学基础：按论文需要学习</a></li><li class="level-3"><a href="#11">1.1 线性代数与张量</a></li><li class="level-3"><a href="#12">1.2 微积分、链式法则与反向传播</a></li><li class="level-3"><a href="#13">1.3 概率、统计与信息论</a></li><li class="level-3"><a href="#14">1.4 优化、数值稳定与泛化</a></li><li class="level-3"><a href="#15">1.5 生成模型专项数学</a></li><li class="level-3"><a href="#16">1.6 进阶数学何时补</a></li><li class="level-2"><a href="#2-pytorch">2. PyTorch：从张量到可靠实验</a></li><li class="level-3"><a href="#21">2.1 张量操作与设备</a></li><li class="level-3"><a href="#22">2.2 自动微分、模块与损失</a></li><li class="level-3"><a href="#23-datasetdataloader">2.3 Dataset、DataLoader 与数据增强</a></li><li class="level-3"><a href="#24">2.4 完整训练循环与评估</a></li><li class="level-3"><a href="#25">2.5 检查点、复现与性能</a></li><li class="level-3"><a href="#26">2.6 最小实现关卡</a></li><li class="level-2"><a href="#3">3. 计算机视觉：任务、模型与评价</a></li><li class="level-3"><a href="#31">3.1 数字图像与预处理</a></li><li class="level-3"><a href="#32">3.2 分类、检测、分割、检索与生成</a></li><li class="level-3"><a href="#33-cnn-u-net">3.3 CNN、残差网络与 U-Net</a></li><li class="level-3"><a href="#34-transformer">3.4 Transformer 在视觉中的用法</a></li><li class="level-3"><a href="#35">3.5 自监督学习、对比学习与蒸馏</a></li><li class="level-3"><a href="#36">3.6 生成视觉模型的结构关系</a></li><li class="level-3"><a href="#37">3.7 检测、分割与多模态</a></li><li class="level-3"><a href="#38">3.8 研究实验基本功</a></li><li class="level-2"><a href="#4-30">4. 30 篇论文的知识依赖地图</a></li><li class="level-2"><a href="#5-1216">5. 12–16 周执行计划与交付物</a></li><li class="level-2"><a href="#6">6. 最终自测清单</a></li><li class="level-3"><a href="#_2">数学</a></li><li class="level-3"><a href="#pytorch">PyTorch</a></li><li class="level-3"><a href="#_3">计算机视觉与论文</a></li><li class="level-2"><a href="#7">7. 可靠的后续学习入口</a></li></ul></div></aside>
+<header class="top"><strong>视觉论文学习库</strong><nav><a href="index.html">论文目录</a><a href="tutorial.html">知识总览</a><a href="math.html">数学推导</a><a href="practice.html">四项实验</a><a href="answers.html">练习答案</a><a href="assessment.html">学习考核</a><a href="resources.html">课程来源</a><a href="evidence.html">实测记录</a></nav></header>
+<div class="layout"><aside class="side"><label for="toc-search">章节目录</label><input id="toc-search" type="search" placeholder="搜索章节…" aria-label="搜索章节"><div class="toc"><ul><li class="level-2"><a href="#0">0. 开始前：准备、术语与学习验收</a></li><li class="level-3"><a href="#01">0.1 环境</a></li><li class="level-3"><a href="#02">0.2 四层学习标准</a></li><li class="level-3"><a href="#03">0.3 共通约定</a></li><li class="level-2"><a href="#1">1. 数学基础：按论文需要学习</a></li><li class="level-3"><a href="#11">1.1 线性代数与张量</a></li><li class="level-3"><a href="#12">1.2 微积分、链式法则与反向传播</a></li><li class="level-3"><a href="#13">1.3 概率、统计与信息论</a></li><li class="level-3"><a href="#14">1.4 优化、数值稳定与泛化</a></li><li class="level-3"><a href="#15">1.5 生成模型专项数学</a></li><li class="level-3"><a href="#16">1.6 进阶数学何时补</a></li><li class="level-2"><a href="#2-pytorch">2. PyTorch：从张量到可靠实验</a></li><li class="level-3"><a href="#21">2.1 张量操作与设备</a></li><li class="level-3"><a href="#22">2.2 自动微分、模块与损失</a></li><li class="level-3"><a href="#23-datasetdataloader">2.3 Dataset、DataLoader 与数据增强</a></li><li class="level-3"><a href="#24">2.4 完整训练循环与评估</a></li><li class="level-3"><a href="#25">2.5 检查点、复现与性能</a></li><li class="level-3"><a href="#26">2.6 最小实现关卡</a></li><li class="level-2"><a href="#3">3. 计算机视觉：任务、模型与评价</a></li><li class="level-3"><a href="#31">3.1 数字图像与预处理</a></li><li class="level-3"><a href="#32">3.2 分类、检测、分割、检索与生成</a></li><li class="level-3"><a href="#33-cnn-u-net">3.3 CNN、残差网络与 U-Net</a></li><li class="level-3"><a href="#34-transformer">3.4 Transformer 在视觉中的用法</a></li><li class="level-3"><a href="#35">3.5 自监督学习、对比学习与蒸馏</a></li><li class="level-3"><a href="#36">3.6 生成视觉模型的结构关系</a></li><li class="level-3"><a href="#37">3.7 检测、分割与多模态</a></li><li class="level-3"><a href="#38">3.8 研究实验基本功</a></li><li class="level-2"><a href="#4-30">4. 30 篇论文的知识依赖地图</a></li><li class="level-2"><a href="#5-1216">5. 12–16 周执行计划与交付物</a></li><li class="level-2"><a href="#6">6. 最终自测清单</a></li><li class="level-3"><a href="#_2">数学</a></li><li class="level-3"><a href="#pytorch">PyTorch</a></li><li class="level-3"><a href="#_3">计算机视觉与论文</a></li><li class="level-2"><a href="#7">7. 可靠的后续学习入口</a></li><li class="level-2"><a href="#8">8. 从知识清单到可检验能力</a></li></ul></div></aside>
 <main class="content"><h1 id="_1">视觉论文前置知识完整教程</h1>
 <p><strong>适用目标</strong>：读懂本资料夹中的 30 篇扩散模型、视觉 Transformer、VAE、DINO 与相关视觉论文，并能够独立实现小规模实验。<br/>
 <strong>学习方式</strong>：按“理解概念 → 手算一个例子 → 写最小代码 → 阅读对应论文 → 复现实验”的顺序。<br/>
-<strong>时间参考</strong>：有 Python 基础者约 12–16 周、每周 8–12 小时；时间是估算，不是能力保证。<br/>
+<strong>时间参考</strong>：会Python并学过基本线代/概率者可用12–16周、每周8–12小时作为规划起点；零基础另需准备阶段。按<a href="assessment.html">诊断与分层路线</a>调整，时间不是能力保证。<br/>
 <strong>配套资料</strong>：<a href="guide.html">论文阅读指南</a>｜<a href="index.html">可搜索论文目录</a>｜<a href="lab.html">可运行 PyTorch 实验</a>。</p>
 <blockquote>
 <p>本教程覆盖读这些论文的核心前置知识与入门实践，不替代完整的数学或深度学习教材。每节给出“合格标准”；达到标准后就可以进入对应论文，不必等所有知识都学完。</p>
+<p><strong>v2.0 学习闭环</strong>：本页为知识总览；系统推导与例题在<a href="math.html">数学章</a>，真实数据训练在<a href="practice.html">四项实验</a>，自测核对在<a href="answers.html">练习答案</a>，进度与成果按<a href="assessment.html">100分量表</a>验收。<a href="evidence.html">实测记录</a>公开配置、结果与局限。</p>
 </blockquote>
 <h2 id="0">0. 开始前：准备、术语与学习验收</h2>
 <h3 id="01">0.1 环境</h3>
@@ -63,7 +65,7 @@ pre{background:#15283d;color:#e8f1f6;border-radius:9px;padding:16px 19px;overflo
 <pre><code class="language-bash">python --version
 python -c "import torch; print(torch.__version__); print(torch.cuda.is_available())"
 </code></pre>
-<p>安装命令应按 <a href="https://pytorch.org/get-started/locally/" rel="noopener noreferrer" target="_blank">PyTorch 官方安装页</a> 的操作系统和硬件选项生成；CPU 也能完成本教程的小实验。无需大型数据集即可运行 <code>python vision_basics_lab.py</code>。若要训练真实分类模型，先从 FashionMNIST 或 CIFAR-10 开始。</p>
+<p>安装命令应按 <a href="https://pytorch.org/get-started/locally/" rel="noopener noreferrer" target="_blank">PyTorch 官方安装页</a> 的操作系统和硬件选项生成；CPU 也能完成本教程的小实验。无需大型数据集即可运行 <code>python examples/vision_basics_lab.py</code>。随后按<a href="practice.html">四项完整实验</a>运行FashionMNIST分类、VAE、DDPM与DINOv2线性评价。</p>
 <p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
 <table class="resource-table">
 <thead>
@@ -167,6 +169,7 @@ python -c "import torch; print(torch.__version__); print(torch.cuda.is_available
 </table>
 <h2 id="1">1. 数学基础：按论文需要学习</h2>
 <h3 id="11">1.1 线性代数与张量</h3>
+<p><a href="math.html">本章详细教学：矩阵、广播、协方差与SVD</a>；核对<a href="answers.html">练习A1–A3</a>。</p>
 <p><strong>必会内容</strong>：向量、矩阵、转置、矩阵乘法、内积、范数、正交、特征值/奇异值的直觉；张量的形状、广播、批量矩阵乘法。矩阵乘法要求内维相等：<code>[B,N,D] @ [B,D,M] -&gt; [B,N,M]</code>。广播要从右侧维度对齐，长度必须相同或其中一个为 1。</p>
 <p><strong>视觉例子</strong>：224×224 RGB 图像，patch 大小 16×16，共有 <span class="math-inline" data-tex="(224/16)^2=196">(224/16)^2=196</span> 个 patch。每个 patch 展平后有 <span class="math-inline" data-tex="16\times16\times3=768">16\times16\times3=768</span> 个值。线性投影到 <span class="math-inline" data-tex="D=768">D=768</span> 后，ViT 输入形状为 <code>[B,196,768]</code>；加入一个分类 token 后为 <code>[B,197,768]</code>。</p>
 <p><strong>自注意力形状推导</strong>：<span class="math-inline" data-tex="Q=XW_Q">Q=XW_Q</span>、<span class="math-inline" data-tex="K=XW_K">K=XW_K</span>、<span class="math-inline" data-tex="V=XW_V">V=XW_V</span>。若 <span class="math-inline" data-tex="X\in\mathbb{R}^{B\times N\times D}">X\in\mathbb{R}^{B\times N\times D}</span>，单头维度为 <span class="math-inline" data-tex="d">d</span>，则 <span class="math-inline" data-tex="Q,K,V\in\mathbb{R}^{B\times N\times d}">Q,K,V\in\mathbb{R}^{B\times N\times d}</span>，<span class="math-inline" data-tex="QK^\top\in\mathbb{R}^{B\times N\times N}">QK^\top\in\mathbb{R}^{B\times N\times N}</span>。注意力输出为：</p>
@@ -207,6 +210,7 @@ python -c "import torch; print(torch.__version__); print(torch.cuda.is_available
 </tbody>
 </table>
 <h3 id="12">1.2 微积分、链式法则与反向传播</h3>
+<p><a href="math.html">链式法则手算与数值梯度检查</a>；核对<a href="answers.html">练习A4</a>。</p>
 <p>函数 <span class="math-inline" data-tex="y=f(x)">y=f(x)</span> 的导数表示局部变化率；多变量函数用偏导/梯度。链式法则：若 <span class="math-inline" data-tex="L=g(f(x))">L=g(f(x))</span>，则：</p>
 <div class="math-display" data-tex="\frac{\mathrm dL}{\mathrm dx}=\frac{\mathrm dL}{\mathrm df}\frac{\mathrm df}{\mathrm dx}.">\frac{\mathrm dL}{\mathrm dx}=\frac{\mathrm dL}{\mathrm df}\frac{\mathrm df}{\mathrm dx}.</div>
 <p>神经网络反向传播就是把这个规则沿计算图重复应用。</p>
@@ -244,6 +248,7 @@ python -c "import torch; print(torch.__version__); print(torch.cuda.is_available
 </tbody>
 </table>
 <h3 id="13">1.3 概率、统计与信息论</h3>
+<p><a href="math.html">概率、稳定交叉熵与KL教学</a>；核对<a href="answers.html">练习A5–A7</a>。</p>
 <p><strong>概率必会</strong>：随机变量、条件概率、贝叶斯公式、期望、方差、协方差、独立与条件独立；正态分布 <span class="math-inline" data-tex="\mathcal N(\mu,\sigma^2)">\mathcal N(\mu,\sigma^2)</span>；联合分布与边缘化：</p>
 <div class="math-display" data-tex="p(z\mid x)=\frac{p(x\mid z)p(z)}{p(x)},\qquad p(x)=\int p(x,z)\,\mathrm dz.">p(z\mid x)=\frac{p(x\mid z)p(z)}{p(x)},\qquad p(x)=\int p(x,z)\,\mathrm dz.</div>
 <p>模型里的 <span class="math-inline" data-tex="p(x\mid z)">p(x\mid z)</span> 是“给定潜变量生成数据”的条件分布，<span class="math-inline" data-tex="q(z\mid x)">q(z\mid x)</span> 常是近似后验。</p>
@@ -335,6 +340,7 @@ D_{\mathrm{KL}}(q\Vert p)&amp;=\mathbb E_{x\sim q}\!\left[\log\frac{q(x)}{p(x)}\
 </tbody>
 </table>
 <h3 id="15">1.5 生成模型专项数学</h3>
+<p><a href="math.html">ELBO、对角高斯KL、DDPM前向和后验的完整推导</a>；完成<a href="answers.html">生成模型练习</a>。</p>
 <p><strong>VAE 的 ELBO</strong>：</p>
 <div class="math-display" data-tex="\begin{aligned}
 \log p_\theta(x)\;&amp;\ge\;\mathcal L_{\mathrm{ELBO}}(x),\\
@@ -389,6 +395,7 @@ D_{\mathrm{KL}}(q\Vert p)&amp;=\mathbb E_{x\sim q}\!\left[\log\frac{q(x)}{p(x)}\
 </tbody>
 </table>
 <h3 id="16">1.6 进阶数学何时补</h3>
+<p><a href="math.html">ODE/SDE、Flow Matching与OT例题</a>；<a href="resources.html">对应系统课程与作业</a>。</p>
 <table>
 <thead>
 <tr>
@@ -562,9 +569,10 @@ print(patches.shape)  # [8, 768, 196]
 </tbody>
 </table>
 <h3 id="24">2.4 完整训练循环与评估</h3>
+<p><a href="practice.html">真实数据CNN训练、验证与混淆矩阵</a>；用<a href="evidence.html">参考测试</a>检查指标与恢复。</p>
 <p>最小顺序：<code>model.train()</code> → 遍历 batch → <code>zero_grad</code> → 前向 → 损失 → <code>backward</code> → <code>step</code>；验证时 <code>model.eval()</code> + <code>torch.inference_mode()</code>。每轮记录训练损失和验证指标，最好保存最佳验证权重。不要在训练集上挑模型后声称是测试性能。</p>
 <p>配套的 <a href="lab.html"><code>vision_basics_lab.py</code></a> 给出可直接运行的 CNN 分类示范，数据是随机生成的“亮方块在左/右”图像，避免外部下载。它还演示注意力形状、VAE 重参数化、扩散前向加噪、<code>state_dict</code> 保存和恢复。运行：</p>
-<pre><code class="language-bash">python vision_basics_lab.py
+<pre><code class="language-bash">python examples/vision_basics_lab.py
 </code></pre>
 <p><strong>练习</strong>：修改 batch size、学习率和训练轮数，观察验证正确率；将 <code>model.eval()</code> 暂时去掉，加入 Dropout 后观察差别。<strong>验收</strong>：运行三次可解释结果波动；恢复的模型对同一输入得到相同输出。</p>
 <p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
@@ -626,6 +634,7 @@ print(patches.shape)  # [8, 768, 196]
 </tbody>
 </table>
 <h3 id="26">2.6 最小实现关卡</h3>
+<p><a href="practice.html">四项实验</a>提供CNN、VAE、DDPM、冻结DINOv2评价；<a href="exercises.py">练习骨架</a>用于自己实现。</p>
 <table>
 <thead>
 <tr>
@@ -841,6 +850,7 @@ print(patches.shape)  # [8, 768, 196]
 </tbody>
 </table>
 <h3 id="34-transformer">3.4 Transformer 在视觉中的用法</h3>
+<p><a href="math.html">完整QKV投影、mask与梯度教学</a>；<a href="solutions.py">可运行参考代码</a>。</p>
 <p>原始 Transformer 解决序列建模；ViT 把图像切成 patch，添加位置编码后用自注意力处理。全局注意力便于跨远距离信息交互，但 token 多时计算/显存压力大。Swin 用窗口及移位窗口构建分层特征；DeiT 重视数据高效训练和蒸馏；MAE 掩住大量 patch 并重建被遮挡内容。</p>
 <p><strong>三个问题</strong>：① patch 太大，细节会怎样？② 224×224、patch16 与 patch8 的 token 数分别是多少（196 与 784），注意力矩阵元素数约相差几倍（16 倍）？③ MAE 为什么只将可见 patch 送入编码器有计算优势？</p>
 <p><strong>验收</strong>：能从 <code>[B,C,H,W]</code> 推导 ViT 输入 <code>[B,N,D]</code>，解释位置编码、分类 token、局部窗口与掩码重建。对应 09–14、DiT、DINO。</p>
@@ -872,6 +882,7 @@ print(patches.shape)  # [8, 768, 196]
 </tbody>
 </table>
 <h3 id="35">3.5 自监督学习、对比学习与蒸馏</h3>
+<p><a href="math.html">InfoNCE数值例题、DINO目标与冻结评价</a>；<a href="practice.html">实际预训练/随机骨干对照</a>。</p>
 <p>自监督从数据本身构造训练信号，无需人工类别标签；它不等于“没有监督目标”。SimCLR 对同一图像的两种增强视图作为正样本，其他图像视图常作负样本；MoCo 用动量编码器和队列维持字典。CLIP 用图文配对做跨模态对比学习。DINO 系列用 teacher-student 自蒸馏，不依赖传统负样本对比训练；DINO 中多裁剪、teacher 更新、输出中心化/温度等防止塌缩的细节很重要。iBOT 结合掩码 patch 预测与自蒸馏。DINOv2/v3 扩大训练与特征迁移能力；Registers 关注稠密特征的异常 token。</p>
 <p><strong>表示塌缩</strong>：若所有输入都映射成相同向量，就无法区分图像。看 loss 下降不足以证明表征有用，还要线性探测、kNN、检索或下游迁移。<strong>练习</strong>：在同一数据划分下比较随机初始化特征与预训练特征的线性分类器。<strong>验收</strong>：能说明每种方法的正样本、负样本/教师、目标和评价方式。对应 21–26、28–29。</p>
 <p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
@@ -977,6 +988,7 @@ print(patches.shape)  # [8, 768, 196]
 </tbody>
 </table>
 <h3 id="38">3.8 研究实验基本功</h3>
+<p><a href="assessment.html">按100分量表准备报告、对照、多种子与失败记录</a>。</p>
 <p>论文复现先固定数据集和评估协议，再实现基线。一次只改变一个主要因素；报告参数量、计算预算、训练步数和推理成本。需要做训练/验证曲线、消融、失败案例、不同随机种子。若复制论文中大规模结果需要大量算力，可复现核心机制而非声称达到原始性能。</p>
 <p><strong>最小研究报告模板</strong>：问题与假设；数据和划分；模型及参数量；训练设置；评价指标；主结果表；消融表；错误分析；局限；可复现命令。<strong>验收</strong>：另一人按你的记录能复现大致结论。</p>
 <hr/>
@@ -1143,7 +1155,9 @@ print(patches.shape)  # [8, 768, 196]
 <li><a href="https://docs.pytorch.org/docs/stable/notes/amp_examples.html" rel="noopener noreferrer" target="_blank">PyTorch 混合精度示例</a>：<code>torch.autocast</code> 和 <code>torch.amp.GradScaler</code>。</li>
 <li><a href="https://docs.pytorch.org/vision/stable/transforms.html" rel="noopener noreferrer" target="_blank">TorchVision 数据增强文档</a>：图像以及检测/分割标注的变换。</li>
 <li>本资料夹的<a href="guide.html">30 篇论文清单</a>：每篇的原始论文入口及主题说明。</li>
-</ol><p><a href="tutorial.md" download="tutorial.md">下载本页 Markdown 源文</a></p></main></div><a class="back" href="#top" aria-label="返回顶部">↑ 返回顶部</a>
+</ol>
+<h2 id="8">8. 从知识清单到可检验能力</h2>
+<p>继续阅读<a href="math.html">数学教学与推导</a> → <a href="practice.html">四项完整训练实验</a> → <a href="answers.html">26道题与编程答案</a> → <a href="assessment.html">分层路线与考核</a>。<a href="resources.html">课程映射</a>补齐SDE、OT、InfoNCE与一对一匹配，实测配置与结果见<a href="evidence.html">公开记录</a>。</p><p><a href="tutorial.md" download="tutorial.md">下载本页 Markdown 源文</a></p></main></div><a class="back" href="#top" aria-label="返回顶部">↑ 返回顶部</a>
 <script>
 document.body.id='top';
 document.querySelectorAll('.content table').forEach(t=>{const w=document.createElement('div');w.className='table-wrap';t.parentNode.insertBefore(w,t);w.appendChild(t)});

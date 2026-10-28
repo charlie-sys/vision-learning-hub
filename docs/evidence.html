@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>实验实测记录</title>
+<link rel="stylesheet" href="assets/katex/katex.min.css">
+<script defer src="assets/katex/katex.min.js"></script>
+<script defer src="assets/math.js"></script>
+<style>
+:root{--ink:#182536;--muted:#607185;--accent:#176e76;--paper:#fff;--bg:#f3f6f9;--line:#dce4eb}
+.math-inline{display:inline-block;max-width:100%;vertical-align:middle;overflow-x:auto;overflow-y:hidden;padding:2px 3px;scrollbar-width:none}.math-inline::-webkit-scrollbar{display:none}.math-display{max-width:100%;overflow-x:auto;overflow-y:hidden;padding:10px 0;margin:16px 0}.math-display .katex-display{margin:.5em 0}.math-error{color:#a32828;background:#fff0f0}.content .katex{font-size:1.08em}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.8 system-ui,"Microsoft YaHei",sans-serif}
+a{color:var(--accent);text-underline-offset:3px}a:hover{color:#0e4b53}
+.top{background:#14273d;color:#fff;padding:14px max(4vw,24px);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.top a{color:#e8f5f5;text-decoration:none}.top strong{letter-spacing:.02em}.top nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}
+.layout{max-width:1500px;margin:auto;display:grid;grid-template-columns:280px minmax(0,1fr);gap:26px;padding:28px 4vw 64px}
+.side{align-self:start;position:sticky;top:20px;max-height:calc(100vh - 40px);overflow:auto;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px 16px;box-shadow:0 4px 18px #17233708}
+.side label{display:block;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.12em;margin:0 0 10px}
+.side input{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:14px;margin-bottom:10px}
+.side ul{list-style:none;padding-left:0;margin:0}.side ul ul{padding-left:14px;border-left:1px solid var(--line);margin-left:5px}
+.side li{margin:3px 0}.side a{display:block;text-decoration:none;padding:3px 6px;border-radius:6px;color:#31475e;font-size:13px;line-height:1.45}
+.side li.level-3{padding-left:15px}
+.side a:hover,.side a.active{background:#e8f3f2;color:#0e6167}.side li[hidden]{display:none}
+.content{min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:clamp(22px,4vw,60px);box-shadow:0 8px 28px #17233708}
+.content h1{font-size:clamp(28px,3vw,40px);line-height:1.3;margin-top:0;color:#14273d}
+.content h2{font-size:26px;border-top:1px solid var(--line);padding-top:32px;margin-top:48px;color:#154f62}
+.content h3{font-size:20px;margin-top:28px;color:#1e6672}.content h1,.content h2,.content h3{scroll-margin-top:20px}
+.content p{margin:13px 0}.content li{margin:5px 0}.content blockquote{margin:20px 0;padding:10px 20px;border-left:4px solid #31868a;background:#eff7f7;color:#385b60}
+.content table{border-collapse:collapse;width:100%;min-width:0;font-size:14px;line-height:1.55;table-layout:auto}
+.content th,.content td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+.content th,.content td{overflow-wrap:anywhere}
+.content th{background:#edf3f6}.content tr:nth-child(even){background:#fafcfd}
+.content .resource-table th{background:#e7f1f0;color:#135d63}.content .resource-table td:nth-child(2){font-weight:600}
+.content .cols-5{table-layout:fixed}.content .cols-5 th:nth-child(1){width:6%}.content .cols-5 th:nth-child(2){width:41%}.content .cols-5 th:nth-child(3){width:19%}.content .cols-5 th:nth-child(4){width:9%}.content .cols-5 th:nth-child(5){width:25%}
+.content .cols-5 td:nth-child(4),.content .cols-5 th:nth-child(4){white-space:nowrap}
+.content .table-wrap{overflow:auto;margin:18px 0;border-radius:8px}
+code{font-family:Consolas,"Cascadia Code",monospace;font-size:.88em;background:#eef3f6;border-radius:4px;padding:2px 5px;overflow-wrap:anywhere}
+.content img{display:block;max-width:100%;height:auto;margin:20px auto;border:1px solid var(--line);border-radius:8px}.content p:has(img){overflow:hidden}
+pre{background:#15283d;color:#e8f1f6;border-radius:9px;padding:16px 19px;overflow:auto;line-height:1.55}pre code{background:transparent;color:inherit;padding:0;white-space:pre;overflow-wrap:normal}
+.content input[type=checkbox]{margin-right:8px;accent-color:var(--accent)}
+.back{position:fixed;right:22px;bottom:22px;background:#176e76;color:white;padding:8px 14px;border-radius:999px;text-decoration:none;box-shadow:0 4px 15px #0002;font-size:13px}
+@media(max-width:1150px){.layout{display:block;padding:14px}.side{position:relative;max-height:260px;margin-bottom:14px}.content{padding:22px}}
+@media(min-width:761px) and (max-width:1300px){.content .wide-table,.content .wide-table tbody,.content .wide-table tr,.content .wide-table td{display:block;width:100%}.content .wide-table thead{display:none}.content .wide-table tr{border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:13px 0;background:#fff;box-shadow:0 2px 9px #1723370a}.content .wide-table td{border:0;border-bottom:1px solid var(--line);padding:9px 12px;white-space:normal}.content .wide-table td:last-child{border-bottom:0}.content .wide-table td::before{content:attr(data-label);display:inline-block;min-width:115px;font-size:12px;font-weight:700;color:#397a7e;margin-right:12px;vertical-align:top}}
+@media(max-width:760px){.content{padding:18px}.content h2{font-size:22px}.content h3{font-size:18px}.content .table-wrap{overflow:visible}.content table,.content tbody,.content tr,.content td{display:block;width:100%}.content thead{display:none}.content tr{border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:13px 0;background:#fff;box-shadow:0 2px 9px #1723370a}.content td{border:0;border-bottom:1px solid var(--line);padding:9px 12px}.content td:last-child{border-bottom:0}.content td::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;color:#397a7e;margin-bottom:3px}.content .resource-table{min-width:0}}
+@media print{.top,.side,.back{display:none}.layout{display:block;padding:0}.content{border:0;box-shadow:none;padding:0}body{background:#fff}.content h2{break-before:page}pre,table{break-inside:avoid}}
+</style>
+</head>
+<body id="top">
+<header class="top"><strong>视觉论文学习库</strong><nav><a href="index.html">论文目录</a><a href="tutorial.html">知识总览</a><a href="math.html">数学推导</a><a href="practice.html">四项实验</a><a href="answers.html">练习答案</a><a href="assessment.html">学习考核</a><a href="resources.html">课程来源</a><a href="evidence.html">实测记录</a></nav></header>
+<div class="layout"><aside class="side"><label for="toc-search">章节目录</label><input id="toc-search" type="search" placeholder="搜索章节…" aria-label="搜索章节"><div class="toc"><ul><li class="level-2"><a href="#1">1. 环境、划分与实验预算</a></li><li class="level-2"><a href="#2">2. 三种子结果</a></li><li class="level-2"><a href="#3-cnn">3. 一次锁定设置的CNN测试</a></li><li class="level-2"><a href="#4">4. 结果图与失败分析</a></li><li class="level-3"><a href="#cnn">CNN</a></li><li class="level-3"><a href="#vae">VAE</a></li><li class="level-3"><a href="#ddpm">DDPM</a></li><li class="level-3"><a href="#dinov2">DINOv2线性评价</a></li><li class="level-2"><a href="#5">5. 原始记录、耗时与复查</a></li><li class="level-2"><a href="#6">6. 自动化检查与尚未覆盖的部分</a></li></ul></div></aside>
+<main class="content"><h1 id="_1">真实实验记录与验证边界</h1>
+<p>记录日期：2026-10-28。以下数字来自真实运行的FashionMNIST实验，不是目标值或示意数据。原始记录仅将本机目录改为项目相对路径，保留配置、划分哈希、曲线、环境和结果。代码见<a href="practice.html">完整实验</a>，理论见<a href="math.html">数学章</a>。</p>
+<h2 id="1">1. 环境、划分与实验预算</h2>
+<p>实测Python 3.9.7、torch 2.8.0+cu128、torchvision 0.23.0+cu128，GPU：NVIDIA GeForce RTX 5060 Laptop GPU。三次seed为7、17、27；<strong>seed同时改变模型初始化、数据子集/划分和训练随机性</strong>，下表样本标准差包含这些来源，不能解释为仅初始化噪声或置信区间。</p>
+<p>CNN/VAE/DDPM：训练2048、验证512，batch64，分别3/6/10轮；VAE潜变量16、beta1；DDPM200步。DINO：训练1024、验证256，batch16，线性头20轮、lr0.01，骨干冻结；预训练和随机骨干在各seed内使用相同划分、处理与预算。模型按验证指标选最好一轮，报告的是<strong>验证分数</strong>，不能把它当作无偏测试估计。DINO与CNN的数据量不同，也不用于宣称公平架构排名。</p>
+<h2 id="2">2. 三种子结果</h2>
+<table class="wide-table cols-5">
+<thead>
+<tr>
+<th>指标</th>
+<th>seed7</th>
+<th>seed17</th>
+<th>seed27</th>
+<th>均值 ± 样本标准差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="指标">CNN验证准确率</td>
+<td data-label="seed7">75.78%</td>
+<td data-label="seed17">72.27%</td>
+<td data-label="seed27">70.31%</td>
+<td data-label="均值 ± 样本标准差">72.79 ± 2.77%</td>
+</tr>
+<tr>
+<td data-label="指标">VAE验证负目标</td>
+<td data-label="seed7">282.12122</td>
+<td data-label="seed17">283.42841</td>
+<td data-label="seed27">286.75586</td>
+<td data-label="均值 ± 样本标准差">284.10 ± 2.39</td>
+</tr>
+<tr>
+<td data-label="指标">DDPM验证噪声MSE</td>
+<td data-label="seed7">0.08134</td>
+<td data-label="seed17">0.06964</td>
+<td data-label="seed27">0.09290</td>
+<td data-label="均值 ± 样本标准差">0.08 ± 0.01</td>
+</tr>
+<tr>
+<td data-label="指标">DINOv2预训练线性评价</td>
+<td data-label="seed7">87.89%</td>
+<td data-label="seed17">87.11%</td>
+<td data-label="seed27">82.03%</td>
+<td data-label="均值 ± 样本标准差">85.68 ± 3.18%</td>
+</tr>
+<tr>
+<td data-label="指标">DINOv2随机骨干线性评价</td>
+<td data-label="seed7">54.69%</td>
+<td data-label="seed17">54.69%</td>
+<td data-label="seed27">47.66%</td>
+<td data-label="均值 ± 样本标准差">52.34 ± 4.06%</td>
+</tr>
+</tbody>
+</table>
+<p>VAE“负目标”为每图像素BCE求和加KL，DDPM为逐元素噪声MSE，不同方法间不能比较损失大小。DDPM零预测器MSE约1；当前模型有明显去噪学习，但生成质量仍需看图。三种子只是小样本稳定性检查，不足以支持广泛性能结论。</p>
+<h2 id="3-cnn">3. 一次锁定设置的CNN测试</h2>
+<p>在不根据测试结果改变模型或超参数的前提下，重跑seed7原CNN设置，并按验证集选best，在官方10000张测试图上评价一次：准确率 <strong>74.71%</strong>，交叉熵 <strong>0.69948</strong>。配置和混淆矩阵见<a href="evidence/cnn-final-test.json">最终测试记录</a>。三种子统计仍是验证统计；未对DINO或生成模型报告最终测试分数。</p>
+<h2 id="4">4. 结果图与失败分析</h2>
+<h3 id="cnn">CNN</h3>
+<p><img alt="CNN seed7训练与验证曲线" src="evidence/cnn-curves.svg"/></p>
+<p>每个面板独立缩放，以JSON的数值为准。seed7验证混淆矩阵中，Pullover有19张被预测为Coat、18张为Shirt；Shirt也常被预测成Coat。小模型、小数据与相近服饰外观限制了准确率；这比只说“模型收敛了”提供更多改进线索。</p>
+<h3 id="vae">VAE</h3>
+<p><img alt="VAE seed7原图与均值重建" src="evidence/vae-reconstructions.png"/></p>
+<p>前16张为验证原图，后16张为均值潜变量重建。模型保留了轮廓，但鞋和上衣细节明显模糊。</p>
+<p><img alt="VAE seed7标准高斯先验采样" src="evidence/vae-samples.png"/></p>
+<p>这是固定seed的完整16张采样，不是挑选最好样本；整体模糊，部分样本不易辨认。可通过beta/容量/观测模型对照研究原因，不把训练损失下降等同于高保真生成。</p>
+<h3 id="ddpm">DDPM</h3>
+<p><img alt="DDPM seed7完整反向采样结果" src="evidence/ddpm-samples.png"/></p>
+<p>能看到服饰与鞋的轮廓，仍有破碎、噪点和畸形。训练规模较小且没有FID或人工盲评，不对生成效果作论文级质量判断。</p>
+<p><img alt="DDPM固定图像在四个时间步的正向加噪" src="evidence/ddpm-forward_noising.png"/></p>
+<p>从上至下为早期到末期，共4行、每行16张。末期图像主要为噪声，与开始反向采样的近似高斯条件一致。</p>
+<h3 id="dinov2">DINOv2线性评价</h3>
+<p>seed7预训练特征最佳验证准确率87.89%，随机骨干54.69%；三seed均观察到预训练优势。预训练组训练交叉熵下降到约0.006，但验证损失在后期上升，说明仍有过拟合；因此保存验证best，而不是默认用最后一轮。随机骨干不是“零信息”模型，在服饰这类简单任务上也可能提供可分特征。</p>
+<h2 id="5">5. 原始记录、耗时与复查</h2>
+<ul>
+<li>CNN：<a href="evidence/cnn-seed-7.json">seed 7</a> · <a href="evidence/cnn-seed-17.json">seed 17</a> · <a href="evidence/cnn-seed-27.json">seed 27</a></li>
+<li>VAE：<a href="evidence/vae-seed-7.json">seed 7</a> · <a href="evidence/vae-seed-17.json">seed 17</a> · <a href="evidence/vae-seed-27.json">seed 27</a></li>
+<li>DDPM：<a href="evidence/ddpm-seed-7.json">seed 7</a> · <a href="evidence/ddpm-seed-17.json">seed 17</a> · <a href="evidence/ddpm-seed-27.json">seed 27</a></li>
+<li>PROBE：<a href="evidence/probe-seed-7.json">seed 7</a> · <a href="evidence/probe-seed-17.json">seed 17</a> · <a href="evidence/probe-seed-27.json">seed 27</a></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>运行</th>
+<th>seed7 / seed17 / seed27 墙钟秒数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="运行">CNN</td>
+<td data-label="seed7 / seed17 / seed27 墙钟秒数">68.9 / 4.7 / 0.9</td>
+</tr>
+<tr>
+<td data-label="运行">VAE</td>
+<td data-label="seed7 / seed17 / seed27 墙钟秒数">2.0 / 12.2 / 1.6</td>
+</tr>
+<tr>
+<td data-label="运行">DDPM</td>
+<td data-label="seed7 / seed17 / seed27 墙钟秒数">7.0 / 56.0 / 6.6</td>
+</tr>
+<tr>
+<td data-label="运行">PROBE</td>
+<td data-label="seed7 / seed17 / seed27 墙钟秒数">155.1 / 32.6 / 11.8</td>
+</tr>
+</tbody>
+</table>
+<p>耗时由程序从数据准备计到结果写出前，包含该次需要的下载与特征提取；seed7 CNN与DINO首次下载，其余使用缓存，不能直接比较为算法速度。GPU负载和CPU线程也会影响耗时。检查点较大且可重新训练，未打包；指标和小图已随仓库提供。</p>
+<p>复现实测记录：按实验页四条命令运行seed7，然后为每条命令添加 <code>--seed 17</code> / <code>--seed 27</code>，输出目录分别用 <code>runs/verified-模型-17</code> 和 <code>runs/verified-模型-27</code>；最后以CNN相同seed7设置加 <code>--evaluate-test --output runs/verified-cnn-final</code> 执行锁定测试。完成后运行 <code>python scripts/export_evidence.py</code>、<code>python scripts/build.py</code> 更新本页。导出脚本不训练模型、不生成虚构结果，缺记录会直接报错。</p>
+<h2 id="6">6. 自动化检查与尚未覆盖的部分</h2>
+<p><code>python -m unittest discover -s tests -v</code> 覆盖10项数值/流程检查：有限差分梯度、非零高斯KL、attention mask及投影梯度、DDPM均值/方差与端点、VAE编码器梯度、DDPM反向与采样有限性、ODE/SDE统计、残批损失汇总、CPU断点恢复一致性、冻结骨干梯度隔离。GitHub Actions另运行离线tiny线性评价冒烟，不下载数据或预训练权重。</p>
+<p>网站构建、内部链接/表格检查和所有页面KaTeX公式编译另行验证。自动化不是独立学术评审；没有从头训练DINO、没有大型检测/分割或Flow Matching完整模型实验，也未验证所有操作系统/GPU。是否达到<a href="assessment.html">100分考核</a>仍需要学习者提交自己的推导、对照、报告与复现证据。</p><p><a href="evidence.md" download="evidence.md">下载本页 Markdown 源文</a></p></main></div><a class="back" href="#top" aria-label="返回顶部">↑ 返回顶部</a>
+<script>
+document.body.id='top';
+document.querySelectorAll('.content table').forEach(t=>{const w=document.createElement('div');w.className='table-wrap';t.parentNode.insertBefore(w,t);w.appendChild(t)});
+const tocLinks=[...document.querySelectorAll('.side li')];
+document.querySelector('#toc-search').addEventListener('input',e=>{const q=e.target.value.trim().toLowerCase();tocLinks.forEach(li=>{li.hidden=!!q && !li.textContent.toLowerCase().includes(q)})});
+const anchors=[...document.querySelectorAll('.side a[href^="#"]')];
+const byId=new Map(anchors.map(a=>[a.getAttribute('href').slice(1),a]));
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){anchors.forEach(a=>a.classList.remove('active'));byId.get(e.target.id)?.classList.add('active')}})},{rootMargin:'-10% 0px -75% 0px'});
+document.querySelectorAll('.content h1[id],.content h2[id],.content h3[id]').forEach(h=>obs.observe(h));
+</script>
+</body></html>

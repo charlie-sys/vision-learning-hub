@@ -1,0 +1,182 @@
+{
+  "dataset": "FashionMNIST",
+  "split_seed": 27,
+  "train_indices_sha256": "6ebdfd13d8d0323a6056d13de2c1a85fd440be42201121436dbe9f5d508a1300",
+  "val_indices_sha256": "9db2664dd48696272763692cb76494b91d043d2f74a3a761dc64fe2f551eacb9",
+  "test_used": false,
+  "config": {
+    "mode": "cnn",
+    "dataset": "fashion",
+    "data_dir": "data/datasets",
+    "output": "runs/verified-cnn-27",
+    "train_size": 2048,
+    "val_size": 512,
+    "epochs": 3,
+    "batch_size": 64,
+    "seed": 27,
+    "lr": 0.001,
+    "device": "cuda",
+    "resume": null,
+    "latent_dim": 16,
+    "beta": 1.0,
+    "steps": 200,
+    "encoder": "dinov2",
+    "hub_ref": "e1277af2ba9496fbadf7aec6eba56e8d882d1e35",
+    "hub_dir": null,
+    "random_baseline": false,
+    "evaluate_test": false
+  },
+  "results": {
+    "best_val_accuracy": 0.703125,
+    "val_confusion": [
+      [
+        42,
+        0,
+        0,
+        6,
+        0,
+        1,
+        5,
+        0,
+        2,
+        0
+      ],
+      [
+        0,
+        41,
+        0,
+        3,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        13,
+        1,
+        20,
+        0,
+        24,
+        0,
+        0,
+        0
+      ],
+      [
+        3,
+        2,
+        0,
+        40,
+        2,
+        0,
+        14,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        2,
+        12,
+        42,
+        0,
+        3,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        34,
+        0,
+        5,
+        0,
+        0
+      ],
+      [
+        9,
+        1,
+        2,
+        2,
+        12,
+        1,
+        29,
+        0,
+        3,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        4,
+        0,
+        31,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        35,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        2,
+        4,
+        0,
+        53
+      ]
+    ]
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.8399188704788685,
+      "val_loss": 1.194636881351471,
+      "train_accuracy": 0.37548828125,
+      "val_accuracy": 0.640625
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.9318701736629009,
+      "val_loss": 0.8595545068383217,
+      "train_accuracy": 0.646484375,
+      "val_accuracy": 0.685546875
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.7596543710678816,
+      "val_loss": 0.7780846431851387,
+      "train_accuracy": 0.7119140625,
+      "val_accuracy": 0.703125
+    }
+  ],
+  "seconds": 0.9189335999999999,
+  "python": "3.9.7",
+  "torch": "2.8.0+cu128",
+  "torchvision": "0.23.0+cu128",
+  "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU"
+}

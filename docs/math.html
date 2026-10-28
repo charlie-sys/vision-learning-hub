@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>数学推导与数值例题</title>
+<link rel="stylesheet" href="assets/katex/katex.min.css">
+<script defer src="assets/katex/katex.min.js"></script>
+<script defer src="assets/math.js"></script>
+<style>
+:root{--ink:#182536;--muted:#607185;--accent:#176e76;--paper:#fff;--bg:#f3f6f9;--line:#dce4eb}
+.math-inline{display:inline-block;max-width:100%;vertical-align:middle;overflow-x:auto;overflow-y:hidden;padding:2px 3px;scrollbar-width:none}.math-inline::-webkit-scrollbar{display:none}.math-display{max-width:100%;overflow-x:auto;overflow-y:hidden;padding:10px 0;margin:16px 0}.math-display .katex-display{margin:.5em 0}.math-error{color:#a32828;background:#fff0f0}.content .katex{font-size:1.08em}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.8 system-ui,"Microsoft YaHei",sans-serif}
+a{color:var(--accent);text-underline-offset:3px}a:hover{color:#0e4b53}
+.top{background:#14273d;color:#fff;padding:14px max(4vw,24px);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.top a{color:#e8f5f5;text-decoration:none}.top strong{letter-spacing:.02em}.top nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}
+.layout{max-width:1500px;margin:auto;display:grid;grid-template-columns:280px minmax(0,1fr);gap:26px;padding:28px 4vw 64px}
+.side{align-self:start;position:sticky;top:20px;max-height:calc(100vh - 40px);overflow:auto;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px 16px;box-shadow:0 4px 18px #17233708}
+.side label{display:block;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.12em;margin:0 0 10px}
+.side input{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:14px;margin-bottom:10px}
+.side ul{list-style:none;padding-left:0;margin:0}.side ul ul{padding-left:14px;border-left:1px solid var(--line);margin-left:5px}
+.side li{margin:3px 0}.side a{display:block;text-decoration:none;padding:3px 6px;border-radius:6px;color:#31475e;font-size:13px;line-height:1.45}
+.side li.level-3{padding-left:15px}
+.side a:hover,.side a.active{background:#e8f3f2;color:#0e6167}.side li[hidden]{display:none}
+.content{min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:clamp(22px,4vw,60px);box-shadow:0 8px 28px #17233708}
+.content h1{font-size:clamp(28px,3vw,40px);line-height:1.3;margin-top:0;color:#14273d}
+.content h2{font-size:26px;border-top:1px solid var(--line);padding-top:32px;margin-top:48px;color:#154f62}
+.content h3{font-size:20px;margin-top:28px;color:#1e6672}.content h1,.content h2,.content h3{scroll-margin-top:20px}
+.content p{margin:13px 0}.content li{margin:5px 0}.content blockquote{margin:20px 0;padding:10px 20px;border-left:4px solid #31868a;background:#eff7f7;color:#385b60}
+.content table{border-collapse:collapse;width:100%;min-width:0;font-size:14px;line-height:1.55;table-layout:auto}
+.content th,.content td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+.content th,.content td{overflow-wrap:anywhere}
+.content th{background:#edf3f6}.content tr:nth-child(even){background:#fafcfd}
+.content .resource-table th{background:#e7f1f0;color:#135d63}.content .resource-table td:nth-child(2){font-weight:600}
+.content .cols-5{table-layout:fixed}.content .cols-5 th:nth-child(1){width:6%}.content .cols-5 th:nth-child(2){width:41%}.content .cols-5 th:nth-child(3){width:19%}.content .cols-5 th:nth-child(4){width:9%}.content .cols-5 th:nth-child(5){width:25%}
+.content .cols-5 td:nth-child(4),.content .cols-5 th:nth-child(4){white-space:nowrap}
+.content .table-wrap{overflow:auto;margin:18px 0;border-radius:8px}
+code{font-family:Consolas,"Cascadia Code",monospace;font-size:.88em;background:#eef3f6;border-radius:4px;padding:2px 5px;overflow-wrap:anywhere}
+.content img{display:block;max-width:100%;height:auto;margin:20px auto;border:1px solid var(--line);border-radius:8px}.content p:has(img){overflow:hidden}
+pre{background:#15283d;color:#e8f1f6;border-radius:9px;padding:16px 19px;overflow:auto;line-height:1.55}pre code{background:transparent;color:inherit;padding:0;white-space:pre;overflow-wrap:normal}
+.content input[type=checkbox]{margin-right:8px;accent-color:var(--accent)}
+.back{position:fixed;right:22px;bottom:22px;background:#176e76;color:white;padding:8px 14px;border-radius:999px;text-decoration:none;box-shadow:0 4px 15px #0002;font-size:13px}
+@media(max-width:1150px){.layout{display:block;padding:14px}.side{position:relative;max-height:260px;margin-bottom:14px}.content{padding:22px}}
+@media(min-width:761px) and (max-width:1300px){.content .wide-table,.content .wide-table tbody,.content .wide-table tr,.content .wide-table td{display:block;width:100%}.content .wide-table thead{display:none}.content .wide-table tr{border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:13px 0;background:#fff;box-shadow:0 2px 9px #1723370a}.content .wide-table td{border:0;border-bottom:1px solid var(--line);padding:9px 12px;white-space:normal}.content .wide-table td:last-child{border-bottom:0}.content .wide-table td::before{content:attr(data-label);display:inline-block;min-width:115px;font-size:12px;font-weight:700;color:#397a7e;margin-right:12px;vertical-align:top}}
+@media(max-width:760px){.content{padding:18px}.content h2{font-size:22px}.content h3{font-size:18px}.content .table-wrap{overflow:visible}.content table,.content tbody,.content tr,.content td{display:block;width:100%}.content thead{display:none}.content tr{border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:13px 0;background:#fff;box-shadow:0 2px 9px #1723370a}.content td{border:0;border-bottom:1px solid var(--line);padding:9px 12px}.content td:last-child{border-bottom:0}.content td::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;color:#397a7e;margin-bottom:3px}.content .resource-table{min-width:0}}
+@media print{.top,.side,.back{display:none}.layout{display:block;padding:0}.content{border:0;box-shadow:none;padding:0}body{background:#fff}.content h2{break-before:page}pre,table{break-inside:avoid}}
+</style>
+</head>
+<body id="top">
+<header class="top"><strong>视觉论文学习库</strong><nav><a href="index.html">论文目录</a><a href="tutorial.html">知识总览</a><a href="math.html">数学推导</a><a href="practice.html">四项实验</a><a href="answers.html">练习答案</a><a href="assessment.html">学习考核</a><a href="resources.html">课程来源</a><a href="evidence.html">实测记录</a></nav></header>
+<div class="layout"><aside class="side"><label for="toc-search">章节目录</label><input id="toc-search" type="search" placeholder="搜索章节…" aria-label="搜索章节"><div class="toc"><ul><li class="level-2"><a href="#1">1. 张量、线性代数与形状</a></li><li class="level-2"><a href="#2">2. 导数、链式法则与自动微分</a></li><li class="level-2"><a href="#3">3. 概率、似然、熵与交叉熵</a></li><li class="level-2"><a href="#4-vae-elbo">4. VAE：为什么要引入 ELBO</a></li><li class="level-3"><a href="#kl">对角高斯 KL 的推导</a></li><li class="level-3"><a href="#_2">重参数化与重建项</a></li><li class="level-2"><a href="#5-ddpm">5. DDPM：从逐步加噪到闭式采样</a></li><li class="level-3"><a href="#_3">条件后验与反向均值</a></li><li class="level-3"><a href="#_4">训练与采样是两条流程</a></li><li class="level-3"><a href="#ddim">DDIM 与无分类器引导</a></li><li class="level-2"><a href="#6-odesde-flow-matching">6. ODE、SDE 与 Flow Matching</a></li><li class="level-2"><a href="#7">7. 最优传输与二分匹配</a></li><li class="level-2"><a href="#8-transformer">8. 注意力与视觉 Transformer</a></li><li class="level-2"><a href="#9-infoncedino">9. InfoNCE、DINO 与表征评价</a></li><li class="level-2"><a href="#10">10. 优化、泛化与可信指标</a></li></ul></div></aside>
+<main class="content"><h1 id="_1">从数学到视觉模型：推导、例题与实现</h1>
+<p>本章与<a href="tutorial.html">知识总览</a>、<a href="practice.html">四项完整实验</a>、<a href="answers.html">练习答案</a>配套。每节包含定义、关键推导、数值例子和检查任务。先在纸上算一次，再用张量验证；外部课程用于扩展，不作为省略本章解释的理由。</p>
+<h2 id="1">1. 张量、线性代数与形状</h2>
+<p>图像批次通常记为 <span class="math-inline" data-tex="X\in\mathbb R^{B\times C\times H\times W}">X\in\mathbb R^{B\times C\times H\times W}</span>。线性层使用 <span class="math-inline" data-tex="Y=XW^T+b">Y=XW^T+b</span>，其中输入最后一维为 <span class="math-inline" data-tex="d_{in}">d_{in}</span>，权重形状为 <span class="math-inline" data-tex="d_{out}\times d_{in}">d_{out}\times d_{in}</span>。矩阵乘法保留前导批次维，收缩匹配的内维；逐元素乘法则依赖广播。</p>
+<p>例如 <span class="math-inline" data-tex="X=[1,2]">X=[1,2]</span>，<span class="math-inline" data-tex="W=[3,4]">W=[3,4]</span>，<span class="math-inline" data-tex="b=1">b=1</span>，输出 <span class="math-inline" data-tex="12">12</span>。不是 <span class="math-inline" data-tex="[4,9]">[4,9]</span>，后者是另一种逐元素运算。广播从尾维对齐，维度相等或其中一个为 1 才合法。对 <code>[B,N,D]</code> 添加 <code>[D]</code> 合法；添加 <code>[N]</code> 往往不合法，或在碰巧同维时产生语义错误。</p>
+<p>内积衡量对齐程度，范数衡量大小。单位化向量的内积就是余弦相似度。协方差描述各特征共同变化，中心化数据的协方差为 <span class="math-inline" data-tex="X^TX/(n-1)">X^TX/(n-1)</span>。特征向量给出方差方向；SVD 将矩阵分解为 <span class="math-inline" data-tex="U\Sigma V^T">U\Sigma V^T</span>，截取最大的奇异值可得到低秩近似。这里的“低秩”是保留主要线性变化方向，不能保证保留所有类别信息。</p>
+<p><strong>检查任务：</strong> 写出 <code>[8,196,384] @ [384,64]</code> 的结果形状，并解释为什么不能把空间维随意当成通道维。延伸：<a href="https://d2l.ai/chapter_preliminaries/linear-algebra.html" rel="noopener noreferrer" target="_blank">D2L 线性代数</a>。</p>
+<h2 id="2">2. 导数、链式法则与自动微分</h2>
+<p>设 <span class="math-inline" data-tex="y=wx+b">y=wx+b</span>，<span class="math-inline" data-tex="L=(y-t)^2/2">L=(y-t)^2/2</span>。先对损失求局部导数，再沿计算图相乘：</p>
+<div class="math-display" data-tex="\frac{\partial L}{\partial w}=(y-t)x,\qquad \frac{\partial L}{\partial b}=y-t.">\frac{\partial L}{\partial w}=(y-t)x,\qquad \frac{\partial L}{\partial b}=y-t.</div>
+<p>取 <span class="math-inline" data-tex="x=2,w=3,b=1,t=5">x=2,w=3,b=1,t=5</span>，有 <span class="math-inline" data-tex="y=7,L=2,\partial L/\partial w=4,\partial L/\partial b=2">y=7,L=2,\partial L/\partial w=4,\partial L/\partial b=2</span>。梯度下降以 <span class="math-inline" data-tex="w\leftarrow w-\eta\nabla_w L">w\leftarrow w-\eta\nabla_w L</span> 更新参数。PyTorch 的反向传播累加 <code>.grad</code>，所以每个优化步都需要 <code>optimizer.zero_grad(set_to_none=True)</code>。</p>
+<p>数值梯度检查使用中心差分 <span class="math-inline" data-tex="[L(w+h)-L(w-h)]/(2h)">[L(w+h)-L(w-h)]/(2h)</span>。用 float64 和适中的 <span class="math-inline" data-tex="h">h</span>，才能减少舍入与截断误差；它用于检查实现，不适合替代大模型的反向传播。<code>detach()</code> 切断图，<code>no_grad()</code> 禁止记录，二者均不能凭空让参数更新。延伸：<a href="https://docs.pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html" rel="noopener noreferrer" target="_blank">自动微分</a>。</p>
+<h2 id="3">3. 概率、似然、熵与交叉熵</h2>
+<p>条件概率 <span class="math-inline" data-tex="p(a\mid b)=p(a,b)/p(b)">p(a\mid b)=p(a,b)/p(b)</span>，贝叶斯公式把似然与先验转成后验。独立样本的联合似然是乘积，取对数后成为求和；最小化负对数似然等价于最大化似然。</p>
+<p>分类 logits 为 <span class="math-inline" data-tex="z">z</span>，概率为 <span class="math-inline" data-tex="p_k=\exp(z_k)/\sum_j\exp(z_j)">p_k=\exp(z_k)/\sum_j\exp(z_j)</span>，真实类为 <span class="math-inline" data-tex="y">y</span> 时 <span class="math-inline" data-tex="L=-\log p_y">L=-\log p_y</span>。稳定实现先减去最大 logit，不改变 softmax。取 logits <code>[2,0]</code>、标签 0，有 <span class="math-inline" data-tex="L=\log(1+e^{-2})\approx0.126928">L=\log(1+e^{-2})\approx0.126928</span>。其梯度为 <span class="math-inline" data-tex="\partial L/\partial z_k=p_k-\mathbf1[k=y]">\partial L/\partial z_k=p_k-\mathbf1[k=y]</span>。</p>
+<p><code>CrossEntropyLoss</code> 接收 logits 和整数类别，不能先 softmax 再交给它。二分类的 <code>BCEWithLogitsLoss</code> 同样接收 logits，内部稳定合并 sigmoid 与对数。熵 <span class="math-inline" data-tex="H(p)=-\sum p\log p">H(p)=-\sum p\log p</span> 表示分布的不确定性；KL 散度 <span class="math-inline" data-tex="D_{KL}(p\Vert q)=\mathbb E_p\log(p/q)">D_{KL}(p\Vert q)=\mathbb E_p\log(p/q)</span> 非负且不对称。延伸：<a href="https://d2l.ai/chapter_preliminaries/probability.html" rel="noopener noreferrer" target="_blank">D2L 概率</a>。</p>
+<h2 id="4-vae-elbo">4. VAE：为什么要引入 ELBO</h2>
+<p>生成模型假设 <span class="math-inline" data-tex="p_\theta(x,z)=p(z)p_\theta(x\mid z)">p_\theta(x,z)=p(z)p_\theta(x\mid z)</span>。真实后验通常难算，引入可计算的编码分布 <span class="math-inline" data-tex="q_\phi(z\mid x)">q_\phi(z\mid x)</span>。在分布支撑适当、相关期望存在的条件下：</p>
+<div class="math-display" data-tex="\log p_\theta(x)=\log\mathbb E_{q_\phi}\left[\frac{p_\theta(x,z)}{q_\phi(z\mid x)}\right]\geq\mathbb E_{q_\phi}\log\frac{p_\theta(x,z)}{q_\phi(z\mid x)}=\mathcal L(x).">\log p_\theta(x)=\log\mathbb E_{q_\phi}\left[\frac{p_\theta(x,z)}{q_\phi(z\mid x)}\right]\geq\mathbb E_{q_\phi}\log\frac{p_\theta(x,z)}{q_\phi(z\mid x)}=\mathcal L(x).</div>
+<p>不等式来自 log 的凹性与 Jensen 不等式。展开联合概率得到：</p>
+<div class="math-display" data-tex="\mathcal L(x)=\mathbb E_q\log p_\theta(x\mid z)-D_{KL}(q_\phi(z\mid x)\Vert p(z)).">\mathcal L(x)=\mathbb E_q\log p_\theta(x\mid z)-D_{KL}(q_\phi(z\mid x)\Vert p(z)).</div>
+<p>还可以直接得到精确差距：</p>
+<div class="math-display" data-tex="\log p_\theta(x)-\mathcal L(x)=D_{KL}(q_\phi(z\mid x)\Vert p_\theta(z\mid x))\geq0.">\log p_\theta(x)-\mathcal L(x)=D_{KL}(q_\phi(z\mid x)\Vert p_\theta(z\mid x))\geq0.</div>
+<p>因此训练最大化下界，而不是直接算出真实似然。本项目最小化负下界：重建负对数似然加 KL。额外乘 <span class="math-inline" data-tex="\beta\ne1">\beta\ne1</span> 是一种权衡目标，一般不再等于原模型的标准负 ELBO。</p>
+<h3 id="kl">对角高斯 KL 的推导</h3>
+<p>设 <span class="math-inline" data-tex="q=\mathcal N(\mu,\operatorname{diag}(\sigma^2))">q=\mathcal N(\mu,\operatorname{diag}(\sigma^2))</span>，<span class="math-inline" data-tex="p=\mathcal N(0,I)">p=\mathcal N(0,I)</span>。将高斯对数密度相减，利用 <span class="math-inline" data-tex="\mathbb E_q(z_i-\mu_i)^2=\sigma_i^2">\mathbb E_q(z_i-\mu_i)^2=\sigma_i^2</span>、<span class="math-inline" data-tex="\mathbb E_qz_i^2=\mu_i^2+\sigma_i^2">\mathbb E_qz_i^2=\mu_i^2+\sigma_i^2</span>，得到：</p>
+<div class="math-display" data-tex="D_{KL}(q\Vert p)=\frac12\sum_i(\mu_i^2+\sigma_i^2-1-\log\sigma_i^2).">D_{KL}(q\Vert p)=\frac12\sum_i(\mu_i^2+\sigma_i^2-1-\log\sigma_i^2).</div>
+<p>实现保存 <code>logvar</code>，即 <span class="math-inline" data-tex="\log\sigma^2">\log\sigma^2</span>，所以 <code>exp(logvar)</code> 是方差，<code>exp(0.5*logvar)</code> 才是标准差。例：一维 <span class="math-inline" data-tex="\mu=1,\sigma=2">\mu=1,\sigma=2</span>，KL 为 <span class="math-inline" data-tex="[1+4-1-\log4]/2\approx1.306853">[1+4-1-\log4]/2\approx1.306853</span>；<span class="math-inline" data-tex="\mu=0,\sigma=1">\mu=0,\sigma=1</span> 时为 0。</p>
+<h3 id="_2">重参数化与重建项</h3>
+<p>用 <span class="math-inline" data-tex="z=\mu+\sigma\epsilon,\epsilon\sim\mathcal N(0,I)">z=\mu+\sigma\epsilon,\epsilon\sim\mathcal N(0,I)</span> 把随机性移到与参数无关的噪声，编码器可以通过 <span class="math-inline" data-tex="z">z</span> 获得路径导数。把 <code>z</code> detach 会破坏这一梯度路径。</p>
+<p>本实验输出 Bernoulli logits，逐像素 BCE 求和后再对样本求平均；灰度像素处于 <code>[0,1]</code>，该做法是常用的教学重建目标，对连续灰度并非严格的离散 Bernoulli 观测生成假设。换成固定方差高斯时，重建项与平方误差成比例。BCE、MSE、逐像素均值与逐图求和的数值不能直接比较；改 reduction 后必须重新解释 KL 的相对权重。</p>
+<p><strong>检查任务：</strong> 分别画出重建项、KL 项、总损失，确认不是靠关闭 KL 或输出常数得到“下降”。阅读：<a href="https://arxiv.org/abs/1312.6114" rel="noopener noreferrer" target="_blank">VAE 原论文</a>、<a href="https://deepgenerativemodels.github.io/notes/vae/" rel="noopener noreferrer" target="_blank">Stanford生成模型课程：VAE</a>。</p>
+<h2 id="5-ddpm">5. DDPM：从逐步加噪到闭式采样</h2>
+<p>设 <span class="math-inline" data-tex="\beta_t\in(0,1)">\beta_t\in(0,1)</span>，<span class="math-inline" data-tex="\alpha_t=1-\beta_t">\alpha_t=1-\beta_t</span>，<span class="math-inline" data-tex="\bar\alpha_t=\prod_{s=1}^t\alpha_s">\bar\alpha_t=\prod_{s=1}^t\alpha_s</span>。正向过程：</p>
+<div class="math-display" data-tex="q(x_t\mid x_{t-1})=\mathcal N(\sqrt{\alpha_t}x_{t-1},\beta_t I).">q(x_t\mid x_{t-1})=\mathcal N(\sqrt{\alpha_t}x_{t-1},\beta_t I).</div>
+<p>把 <span class="math-inline" data-tex="x_{t-1}">x_{t-1}</span> 的表达式代入，独立高斯噪声的方差相加，有 <span class="math-inline" data-tex="\alpha_t(1-\bar\alpha_{t-1})+\beta_t=1-\bar\alpha_t">\alpha_t(1-\bar\alpha_{t-1})+\beta_t=1-\bar\alpha_t</span>。归纳得到：</p>
+<div class="math-display" data-tex="x_t=\sqrt{\bar\alpha_t}x_0+\sqrt{1-\bar\alpha_t}\epsilon,\qquad\epsilon\sim\mathcal N(0,I).">x_t=\sqrt{\bar\alpha_t}x_0+\sqrt{1-\bar\alpha_t}\epsilon,\qquad\epsilon\sim\mathcal N(0,I).</div>
+<p>这使训练时能直接随机抽取一个时间步，无需真的做前面的全部加噪。例：<span class="math-inline" data-tex="\bar\alpha_t=0.25,x_0=2,\epsilon=-1">\bar\alpha_t=0.25,x_0=2,\epsilon=-1</span>，则 <span class="math-inline" data-tex="x_t=1-\sqrt{0.75}\approx0.133975">x_t=1-\sqrt{0.75}\approx0.133975</span>。这里的单个标量只用于验算公式，实际图像会先归一化到 <code>[-1,1]</code>。</p>
+<h3 id="_3">条件后验与反向均值</h3>
+<p>令待求变量为 <span class="math-inline" data-tex="u=x_{t-1}">u=x_{t-1}</span>。由Bayes公式，固定 <span class="math-inline" data-tex="x_t,x_0">x_t,x_0</span> 后，后验正比于 <span class="math-inline" data-tex="q(x_t\mid u)q(u\mid x_0)">q(x_t\mid u)q(u\mid x_0)</span>。忽略与u无关的常数，其对数为：</p>
+<div class="math-display" data-tex="-\frac{\Vert x_t-\sqrt{\alpha_t}u\Vert^2}{2\beta_t}-\frac{\Vert u-\sqrt{\bar\alpha_{t-1}}x_0\Vert^2}{2(1-\bar\alpha_{t-1})}=-\frac12 A\Vert u\Vert^2+B^Tu+\mathrm{const}.">-\frac{\Vert x_t-\sqrt{\alpha_t}u\Vert^2}{2\beta_t}-\frac{\Vert u-\sqrt{\bar\alpha_{t-1}}x_0\Vert^2}{2(1-\bar\alpha_{t-1})}=-\frac12 A\Vert u\Vert^2+B^Tu+\mathrm{const}.</div>
+<p>展开平方，精度系数与一次项分别为：</p>
+<div class="math-display" data-tex="A=\frac{\alpha_t}{\beta_t}+\frac{1}{1-\bar\alpha_{t-1}}=\frac{1-\bar\alpha_t}{\beta_t(1-\bar\alpha_{t-1})},\qquad B=\frac{\sqrt{\alpha_t}}{\beta_t}x_t+\frac{\sqrt{\bar\alpha_{t-1}}}{1-\bar\alpha_{t-1}}x_0.">A=\frac{\alpha_t}{\beta_t}+\frac{1}{1-\bar\alpha_{t-1}}=\frac{1-\bar\alpha_t}{\beta_t(1-\bar\alpha_{t-1})},\qquad B=\frac{\sqrt{\alpha_t}}{\beta_t}x_t+\frac{\sqrt{\bar\alpha_{t-1}}}{1-\bar\alpha_{t-1}}x_0.</div>
+<p>配方为 <span class="math-inline" data-tex="-A\Vert u-B/A\Vert^2/2+\mathrm{const}">-A\Vert u-B/A\Vert^2/2+\mathrm{const}</span>，所以方差是 <span class="math-inline" data-tex="A^{-1}">A^{-1}</span>、均值是 <span class="math-inline" data-tex="B/A">B/A</span>。整理便得到下面两式。这个推导先用于t&gt;1；t=1时以零方差的退化后验单独处理：</p>
+<div class="math-display" data-tex="\tilde\beta_t=\frac{1-\bar\alpha_{t-1}}{1-\bar\alpha_t}\beta_t,">\tilde\beta_t=\frac{1-\bar\alpha_{t-1}}{1-\bar\alpha_t}\beta_t,</div>
+<div class="math-display" data-tex="\tilde\mu_t=\frac{\sqrt{\bar\alpha_{t-1}}\beta_t}{1-\bar\alpha_t}x_0+\frac{\sqrt{\alpha_t}(1-\bar\alpha_{t-1})}{1-\bar\alpha_t}x_t.">\tilde\mu_t=\frac{\sqrt{\bar\alpha_{t-1}}\beta_t}{1-\bar\alpha_t}x_0+\frac{\sqrt{\alpha_t}(1-\bar\alpha_{t-1})}{1-\bar\alpha_t}x_t.</div>
+<p>模型不能看到生成时未知的 <span class="math-inline" data-tex="x_0">x_0</span>，因此用噪声预测 <span class="math-inline" data-tex="\epsilon_\theta(x_t,t)">\epsilon_\theta(x_t,t)</span> 估计：</p>
+<div class="math-display" data-tex="\hat x_0=\frac{x_t-\sqrt{1-\bar\alpha_t}\epsilon_\theta(x_t,t)}{\sqrt{\bar\alpha_t}}.">\hat x_0=\frac{x_t-\sqrt{1-\bar\alpha_t}\epsilon_\theta(x_t,t)}{\sqrt{\bar\alpha_t}}.</div>
+<p>不做裁剪时，代入后等价于 <span class="math-inline" data-tex="\mu_\theta=\alpha_t^{-1/2}[x_t-\beta_t\epsilon_\theta/\sqrt{1-\bar\alpha_t}]">\mu_\theta=\alpha_t^{-1/2}[x_t-\beta_t\epsilon_\theta/\sqrt{1-\bar\alpha_t}]</span>。本项目将 <span class="math-inline" data-tex="\hat x_0">\hat x_0</span> 裁剪到 <code>[-1,1]</code> 再使用后验系数；这是稳定小实验的选择，不应与未裁剪的式子混为完全相同的算法。</p>
+<h3 id="_4">训练与采样是两条流程</h3>
+<p>训练抽 <span class="math-inline" data-tex="x_0,t,\epsilon">x_0,t,\epsilon</span>，构造 <span class="math-inline" data-tex="x_t">x_t</span>，最小化 <span class="math-inline" data-tex="\mathbb E\Vert\epsilon-\epsilon_\theta(x_t,t)\Vert^2">\mathbb E\Vert\epsilon-\epsilon_\theta(x_t,t)\Vert^2</span>；简化的均匀噪声 MSE 不是把变分下界的所有时间权重原样保留。采样从 <span class="math-inline" data-tex="x_T\sim\mathcal N(0,I)">x_T\sim\mathcal N(0,I)</span> 开始，倒序循环均值和后验噪声，最后一步不再加噪。</p>
+<p>代码索引 <code>0</code> 对应数学 <span class="math-inline" data-tex="t=1">t=1</span>，此时前一项 <span class="math-inline" data-tex="\bar\alpha_0=1">\bar\alpha_0=1</span>，后验方差为 0。默认 200 步线性 beta 从 <code>1e-4</code> 到 <code>0.05</code>，末端累计 alpha 接近 0，才适合从近似纯噪声开始；冒烟测试的 8 或 16 步只检查程序流程，不能验证生成质量。应查看生成图，噪声 MSE 下降不能独立证明样本好看或覆盖充分。</p>
+<h3 id="ddim">DDIM 与无分类器引导</h3>
+<p>DDIM 可在所选的递减时间子序列上构造更新；<span class="math-inline" data-tex="\eta=0">\eta=0</span> 的更新在固定初始噪声下是确定性的，但它不是简单跳过 DDPM 循环步骤。无分类器引导的一种约定为 <span class="math-inline" data-tex="\hat\epsilon=\epsilon_u+s(\epsilon_c-\epsilon_u)">\hat\epsilon=\epsilon_u+s(\epsilon_c-\epsilon_u)</span>，这里 <span class="math-inline" data-tex="s=0">s=0</span> 表示无条件、<span class="math-inline" data-tex="s=1">s=1</span> 表示条件预测。有些文章用另一种偏移约定，比较超参数前先看定义。当前教学代码为无条件 DDPM，没有实现 DDIM 或条件引导，不能把这些扩展当成已验证功能。</p>
+<p>阅读：<a href="https://arxiv.org/abs/2006.11239" rel="noopener noreferrer" target="_blank">DDPM</a>、<a href="https://arxiv.org/abs/2010.02502" rel="noopener noreferrer" target="_blank">DDIM</a>、<a href="https://diffusion.csail.mit.edu/2025/" rel="noopener noreferrer" target="_blank">MIT 扩散与流课程</a>。</p>
+<h2 id="6-odesde-flow-matching">6. ODE、SDE 与 Flow Matching</h2>
+<p>ODE 给定初值与速度场 <span class="math-inline" data-tex="dx/dt=v(x,t)">dx/dt=v(x,t)</span>，Euler 更新 <span class="math-inline" data-tex="x_{k+1}=x_k+h v(x_k,t_k)">x_{k+1}=x_k+h v(x_k,t_k)</span>。对 <span class="math-inline" data-tex="v=-x,x_0=1,h=0.1">v=-x,x_0=1,h=0.1</span>，一步是 0.9，精确值为 <span class="math-inline" data-tex="e^{-0.1}\approx0.904837">e^{-0.1}\approx0.904837</span>；缩小步长用于检查离散误差。</p>
+<p>SDE 多了 Brownian 随机增量：<span class="math-inline" data-tex="dX_t=f(X_t,t)dt+g(t)dW_t">dX_t=f(X_t,t)dt+g(t)dW_t</span>。Euler–Maruyama 更新为 <span class="math-inline" data-tex="X_{k+1}=X_k+hf(X_k,t_k)+g(t_k)\sqrt h\,\xi_k">X_{k+1}=X_k+hf(X_k,t_k)+g(t_k)\sqrt h\,\xi_k</span>，<span class="math-inline" data-tex="\xi_k\sim\mathcal N(0,I)">\xi_k\sim\mathcal N(0,I)</span>。噪声系数是 <span class="math-inline" data-tex="\sqrt h">\sqrt h</span> 而非 <span class="math-inline" data-tex="h">h</span>；因为 Brownian 增量方差为 <span class="math-inline" data-tex="h">h</span>。当 <span class="math-inline" data-tex="f=0,g=1">f=0,g=1</span> 时，很多轨迹在时间 <span class="math-inline" data-tex="t">t</span> 的样本方差应接近 <span class="math-inline" data-tex="t">t</span>。</p>
+<p>Flow Matching 的简单条件路径为 <span class="math-inline" data-tex="x_t=(1-t)x_0+tx_1">x_t=(1-t)x_0+tx_1</span>，条件目标速度为 <span class="math-inline" data-tex="x_1-x_0">x_1-x_0</span>。平方误差最优解是给定当前位置的条件期望速度，学习的是对应边缘分布的速度场。独立配对端点的直线路径不自动等于最优传输路径；采样器步数、耦合和速度参数化都会影响结果。</p>
+<p><strong>练习：</strong> 比较 Euler 步长 0.1 与 0.05 的终点误差；模拟 10000 条 Brownian 路径验证方差。系统教学：<a href="https://diffusion.csail.mit.edu/2025/" rel="noopener noreferrer" target="_blank">MIT 课程讲义与带解答实验</a>。</p>
+<h2 id="7">7. 最优传输与二分匹配</h2>
+<p>离散 OT 给定质量 <span class="math-inline" data-tex="a_i,b_j">a_i,b_j</span> 与代价 <span class="math-inline" data-tex="C_{ij}">C_{ij}</span>，求运输计划：</p>
+<div class="math-display" data-tex="\min_{P\geq0}\sum_{ij}P_{ij}C_{ij},\qquad P\mathbf1=a,\quad P^T\mathbf1=b.">\min_{P\geq0}\sum_{ij}P_{ij}C_{ij},\qquad P\mathbf1=a,\quad P^T\mathbf1=b.</div>
+<p>对 <span class="math-inline" data-tex="a=b=(1/2,1/2)">a=b=(1/2,1/2)</span>、<span class="math-inline" data-tex="C=\begin{bmatrix}1&amp;4\\3&amp;2\end{bmatrix}">C=\begin{bmatrix}1&amp;4\\3&amp;2\end{bmatrix}</span>，对角运输的总代价为 1.5，交叉为 3.5。若改成“两个任务各分配一次”的指派问题，每条边质量为 1，代价分别是 3 和 7，不能混淆归一化。</p>
+<p>熵正则 OT 在代价上加入 <span class="math-inline" data-tex="\varepsilon\sum P_{ij}(\log P_{ij}-1)">\varepsilon\sum P_{ij}(\log P_{ij}-1)</span>，令 <span class="math-inline" data-tex="K_{ij}=\exp(-C_{ij}/\varepsilon)">K_{ij}=\exp(-C_{ij}/\varepsilon)</span>，交替缩放 <span class="math-inline" data-tex="u=a/(Kv)">u=a/(Kv)</span>、<span class="math-inline" data-tex="v=b/(K^Tu)">v=b/(K^Tu)</span> 得到 Sinkhorn 迭代。小 epsilon 会引起数值问题，实际常用 log 域实现；本课程不把这段概念式当作大规模稳定求解器。</p>
+<p>DETR 的集合预测把预测框与真实框构成代价矩阵，求一对一匹配，再计算匹配后的分类与框损失。匹配是离散分配，不能理解成每个框独立选择最相似目标。矩阵 <code>[[4,1,3],[2,0,5],[3,2,2]]</code> 的最优列序为 <code>[1,0,2]</code>，总代价 5。文献常称 Hungarian matching；SciPy 当前 <code>linear_sum_assignment</code> 文档说明使用改进的 Jonker–Volgenant 算法，名称应区分。</p>
+<p>教学：<a href="https://optimaltransport.github.io/book/" rel="noopener noreferrer" target="_blank">作者的 Computational Optimal Transport 教材</a>、<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linear_sum_assignment.html" rel="noopener noreferrer" target="_blank">SciPy 指派问题定义与例子</a>、<a href="https://github.com/facebookresearch/detr" rel="noopener noreferrer" target="_blank">DETR 作者实现</a>。</p>
+<h2 id="8-transformer">8. 注意力与视觉 Transformer</h2>
+<p>先线性投影 <span class="math-inline" data-tex="Q=XW_Q,K=XW_K,V=XW_V">Q=XW_Q,K=XW_K,V=XW_V</span>，单头输出为：</p>
+<div class="math-display" data-tex="A=\operatorname{softmax}(QK^T/\sqrt{d_k}+M),\qquad Y=AV.">A=\operatorname{softmax}(QK^T/\sqrt{d_k}+M),\qquad Y=AV.</div>
+<p>softmax 沿“被关注的 key”一维计算，因此每个 query 的权重和为 1；被禁止的位置在 mask 中加负无穷。缩放项缓解随维度增长的点积方差，但不能代替 LayerNorm。多头各自投影并拼接后还要输出投影。仅写 <code>Q=K=V=X</code> 可以演示形状，不能代表完整可训练注意力。</p>
+<p>图像划分为 patch，每个 patch 展平并投影为 token，加位置编码，进入“LayerNorm → 注意力 → 残差 → LayerNorm → MLP → 残差”的常见 pre-norm 模块。位置编码使模型知道空间位置，残差提供较直接的梯度路径，LayerNorm 沿特征维归一化。若 224×224 图像使用 16×16 patch，图像 token 数是 196，加 CLS 后是 197。注意力矩阵的内存随 token 数平方增长。</p>
+<p><strong>检查任务：</strong> 运行<a href="solutions.py">参考实现下载</a>，验证投影权重得到梯度；将一个 key 屏蔽后检查对应权重为 0。阅读：<a href="https://arxiv.org/abs/2010.11929" rel="noopener noreferrer" target="_blank">ViT</a>、<a href="https://d2l.ai/chapter_attention-mechanisms-and-transformers/index.html" rel="noopener noreferrer" target="_blank">D2L 注意力章节</a>。</p>
+<h2 id="9-infoncedino">9. InfoNCE、DINO 与表征评价</h2>
+<p>InfoNCE 让 anchor 与正样本的相似度相对负样本更高：</p>
+<div class="math-display" data-tex="L_i=-\log\frac{\exp(s_{i,+}/\tau)}{\sum_{j\in\mathcal C_i}\exp(s_{ij}/\tau)}.">L_i=-\log\frac{\exp(s_{i,+}/\tau)}{\sum_{j\in\mathcal C_i}\exp(s_{ij}/\tau)}.</div>
+<p>候选集合包含正样本，通常排除 anchor 自身；不同实现是否包含其他视图需要明确。若候选只有一个正样本相似度 1、一个负样本相似度 0，<span class="math-inline" data-tex="\tau=0.5">\tau=0.5</span>，则损失同样为 <span class="math-inline" data-tex="\log(1+e^{-2})">\log(1+e^{-2})</span>。温度改变分布锐度，负样本来源与增广决定任务难度。</p>
+<p>DINO 自监督学习用教师分布指导学生分布，不是直接采用上述负样本对比损失。教师输出经过中心化和温度调整；教师不反传，参数以学生的 EMA 更新：<span class="math-inline" data-tex="\theta_T\leftarrow m\theta_T+(1-m)\theta_S">\theta_T\leftarrow m\theta_T+(1-m)\theta_S</span>。不同视图之间计算交叉熵并配合多裁剪等机制。只用“teacher = student”加 MSE 不等于复现 DINO。DINOv2 还包含更完整的数据和训练目标设计；不要与目标检测论文 DINO 混淆。</p>
+<p>表征评价要冻结编码器，只训练线性分类头；特征标准化统计只从训练集计算。比较同架构随机初始化编码器，可以帮助判断提升是否来自预训练表征。当前实验使用官方 DINOv2 ViT-S/14、固定提交与冻结骨干，属于迁移评价；没有从头训练 DINO，也不复现论文的完整大规模基准。</p>
+<p>教学：<a href="https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial17/SimCLR.html" rel="noopener noreferrer" target="_blank">UvA SimCLR 完整 Notebook</a>、<a href="https://github.com/facebookresearch/dino" rel="noopener noreferrer" target="_blank">DINO 作者代码</a>、<a href="https://github.com/facebookresearch/dinov2/blob/main/MODEL_CARD.md" rel="noopener noreferrer" target="_blank">DINOv2 模型卡</a>。</p>
+<h2 id="10">10. 优化、泛化与可信指标</h2>
+<p>训练集用于更新参数，验证集用于选择超参数和检查点，测试集在设置锁定后评价。反复根据测试集调参会产生信息泄漏，即使没有执行反向传播。生成实验也应保存固定的验证噪声与时间步，让不同轮的 MSE 更可比。</p>
+<p>SGD 使用梯度方向，动量积累历史；Adam 对梯度的一阶、二阶矩进行指数平均和偏差修正，AdamW 将权重衰减与自适应梯度更新解耦。学习率决定每步大小，batch size 影响噪声和吞吐，随机种子改善重复性，但不保证所有硬件逐位一致。</p>
+<p>样本平均损失必须按实际样本数加权。若两个 batch 大小为 64 和 6，不能简单平均两个 batch 的平均损失。评价时同时用 <code>model.eval()</code> 和 <code>inference_mode()</code>；前者改变 Dropout/BatchNorm 行为，后者关闭梯度记录，作用不同。</p>
+<p>混淆矩阵约定行为真实类、列为预测类。<span class="math-inline" data-tex="\mathrm{Precision}=TP/(TP+FP)">\mathrm{Precision}=TP/(TP+FP)</span>，<span class="math-inline" data-tex="\mathrm{Recall}=TP/(TP+FN)">\mathrm{Recall}=TP/(TP+FN)</span>。分割有 <span class="math-inline" data-tex="\mathrm{IoU}=TP/(TP+FP+FN)">\mathrm{IoU}=TP/(TP+FP+FN)</span> 与 <span class="math-inline" data-tex="\mathrm{Dice}=2TP/(2TP+FP+FN)">\mathrm{Dice}=2TP/(2TP+FP+FN)</span>。零分母时必须说明约定。例：TP=1,FP=1,FN=1 时 IoU=1/3、Dice=1/2。类别不平衡时只看 accuracy 可能误导；报告每类或宏平均指标。</p>
+<p><strong>结束检查：</strong> 能否不看公式写出 VAE 正负号、DDPM 训练与采样的区别、attention 的归一化方向，以及 DINO 教师为何不接收梯度？用<a href="answers.html">答案与参考代码</a>核对，再按<a href="assessment.html">考核标准</a>提交证据。</p><p><a href="math.md" download="math.md">下载本页 Markdown 源文</a></p></main></div><a class="back" href="#top" aria-label="返回顶部">↑ 返回顶部</a>
+<script>
+document.body.id='top';
+document.querySelectorAll('.content table').forEach(t=>{const w=document.createElement('div');w.className='table-wrap';t.parentNode.insertBefore(w,t);w.appendChild(t)});
+const tocLinks=[...document.querySelectorAll('.side li')];
+document.querySelector('#toc-search').addEventListener('input',e=>{const q=e.target.value.trim().toLowerCase();tocLinks.forEach(li=>{li.hidden=!!q && !li.textContent.toLowerCase().includes(q)})});
+const anchors=[...document.querySelectorAll('.side a[href^="#"]')];
+const byId=new Map(anchors.map(a=>[a.getAttribute('href').slice(1),a]));
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){anchors.forEach(a=>a.classList.remove('active'));byId.get(e.target.id)?.classList.add('active')}})},{rootMargin:'-10% 0px -75% 0px'});
+document.querySelectorAll('.content h1[id],.content h2[id],.content h3[id]').forEach(h=>obs.observe(h));
+</script>
+</body></html>

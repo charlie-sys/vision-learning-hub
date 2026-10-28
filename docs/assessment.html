@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>学习路线与考核标准</title>
+<link rel="stylesheet" href="assets/katex/katex.min.css">
+<script defer src="assets/katex/katex.min.js"></script>
+<script defer src="assets/math.js"></script>
+<style>
+:root{--ink:#182536;--muted:#607185;--accent:#176e76;--paper:#fff;--bg:#f3f6f9;--line:#dce4eb}
+.math-inline{display:inline-block;max-width:100%;vertical-align:middle;overflow-x:auto;overflow-y:hidden;padding:2px 3px;scrollbar-width:none}.math-inline::-webkit-scrollbar{display:none}.math-display{max-width:100%;overflow-x:auto;overflow-y:hidden;padding:10px 0;margin:16px 0}.math-display .katex-display{margin:.5em 0}.math-error{color:#a32828;background:#fff0f0}.content .katex{font-size:1.08em}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.8 system-ui,"Microsoft YaHei",sans-serif}
+a{color:var(--accent);text-underline-offset:3px}a:hover{color:#0e4b53}
+.top{background:#14273d;color:#fff;padding:14px max(4vw,24px);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.top a{color:#e8f5f5;text-decoration:none}.top strong{letter-spacing:.02em}.top nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}
+.layout{max-width:1500px;margin:auto;display:grid;grid-template-columns:280px minmax(0,1fr);gap:26px;padding:28px 4vw 64px}
+.side{align-self:start;position:sticky;top:20px;max-height:calc(100vh - 40px);overflow:auto;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px 16px;box-shadow:0 4px 18px #17233708}
+.side label{display:block;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.12em;margin:0 0 10px}
+.side input{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:14px;margin-bottom:10px}
+.side ul{list-style:none;padding-left:0;margin:0}.side ul ul{padding-left:14px;border-left:1px solid var(--line);margin-left:5px}
+.side li{margin:3px 0}.side a{display:block;text-decoration:none;padding:3px 6px;border-radius:6px;color:#31475e;font-size:13px;line-height:1.45}
+.side li.level-3{padding-left:15px}
+.side a:hover,.side a.active{background:#e8f3f2;color:#0e6167}.side li[hidden]{display:none}
+.content{min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:clamp(22px,4vw,60px);box-shadow:0 8px 28px #17233708}
+.content h1{font-size:clamp(28px,3vw,40px);line-height:1.3;margin-top:0;color:#14273d}
+.content h2{font-size:26px;border-top:1px solid var(--line);padding-top:32px;margin-top:48px;color:#154f62}
+.content h3{font-size:20px;margin-top:28px;color:#1e6672}.content h1,.content h2,.content h3{scroll-margin-top:20px}
+.content p{margin:13px 0}.content li{margin:5px 0}.content blockquote{margin:20px 0;padding:10px 20px;border-left:4px solid #31868a;background:#eff7f7;color:#385b60}
+.content table{border-collapse:collapse;width:100%;min-width:0;font-size:14px;line-height:1.55;table-layout:auto}
+.content th,.content td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+.content th,.content td{overflow-wrap:anywhere}
+.content th{background:#edf3f6}.content tr:nth-child(even){background:#fafcfd}
+.content .resource-table th{background:#e7f1f0;color:#135d63}.content .resource-table td:nth-child(2){font-weight:600}
+.content .cols-5{table-layout:fixed}.content .cols-5 th:nth-child(1){width:6%}.content .cols-5 th:nth-child(2){width:41%}.content .cols-5 th:nth-child(3){width:19%}.content .cols-5 th:nth-child(4){width:9%}.content .cols-5 th:nth-child(5){width:25%}
+.content .cols-5 td:nth-child(4),.content .cols-5 th:nth-child(4){white-space:nowrap}
+.content .table-wrap{overflow:auto;margin:18px 0;border-radius:8px}
+code{font-family:Consolas,"Cascadia Code",monospace;font-size:.88em;background:#eef3f6;border-radius:4px;padding:2px 5px;overflow-wrap:anywhere}
+.content img{display:block;max-width:100%;height:auto;margin:20px auto;border:1px solid var(--line);border-radius:8px}.content p:has(img){overflow:hidden}
+pre{background:#15283d;color:#e8f1f6;border-radius:9px;padding:16px 19px;overflow:auto;line-height:1.55}pre code{background:transparent;color:inherit;padding:0;white-space:pre;overflow-wrap:normal}
+.content input[type=checkbox]{margin-right:8px;accent-color:var(--accent)}
+.back{position:fixed;right:22px;bottom:22px;background:#176e76;color:white;padding:8px 14px;border-radius:999px;text-decoration:none;box-shadow:0 4px 15px #0002;font-size:13px}
+@media(max-width:1150px){.layout{display:block;padding:14px}.side{position:relative;max-height:260px;margin-bottom:14px}.content{padding:22px}}
+@media(min-width:761px) and (max-width:1300px){.content .wide-table,.content .wide-table tbody,.content .wide-table tr,.content .wide-table td{display:block;width:100%}.content .wide-table thead{display:none}.content .wide-table tr{border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:13px 0;background:#fff;box-shadow:0 2px 9px #1723370a}.content .wide-table td{border:0;border-bottom:1px solid var(--line);padding:9px 12px;white-space:normal}.content .wide-table td:last-child{border-bottom:0}.content .wide-table td::before{content:attr(data-label);display:inline-block;min-width:115px;font-size:12px;font-weight:700;color:#397a7e;margin-right:12px;vertical-align:top}}
+@media(max-width:760px){.content{padding:18px}.content h2{font-size:22px}.content h3{font-size:18px}.content .table-wrap{overflow:visible}.content table,.content tbody,.content tr,.content td{display:block;width:100%}.content thead{display:none}.content tr{border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:13px 0;background:#fff;box-shadow:0 2px 9px #1723370a}.content td{border:0;border-bottom:1px solid var(--line);padding:9px 12px}.content td:last-child{border-bottom:0}.content td::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;color:#397a7e;margin-bottom:3px}.content .resource-table{min-width:0}}
+@media print{.top,.side,.back{display:none}.layout{display:block;padding:0}.content{border:0;box-shadow:none;padding:0}body{background:#fff}.content h2{break-before:page}pre,table{break-inside:avoid}}
+</style>
+</head>
+<body id="top">
+<header class="top"><strong>视觉论文学习库</strong><nav><a href="index.html">论文目录</a><a href="tutorial.html">知识总览</a><a href="math.html">数学推导</a><a href="practice.html">四项实验</a><a href="answers.html">练习答案</a><a href="assessment.html">学习考核</a><a href="resources.html">课程来源</a><a href="evidence.html">实测记录</a></nav></header>
+<div class="layout"><aside class="side"><label for="toc-search">章节目录</label><input id="toc-search" type="search" placeholder="搜索章节…" aria-label="搜索章节"><div class="toc"><ul><li class="level-2"><a href="#1">1. 入门诊断与分层路线</a></li><li class="level-2"><a href="#2">2. 每周交付物</a></li><li class="level-2"><a href="#3-100">3. 100分量表</a></li><li class="level-2"><a href="#4">4. 最终项目模板</a></li><li class="level-2"><a href="#5">5. 教程自身的质量检查</a></li></ul></div></aside>
+<main class="content"><h1 id="_1">学习路线、验收标准与项目考核</h1>
+<p>这份标准用于判断“学会了什么”和“还缺什么”。100 分是公开量表的总分，需要实际提交证据；课程发布者不能通过自称满分替代独立评阅。研究创新、论文发表和岗位胜任还需要额外项目经验。</p>
+<h2 id="1">1. 入门诊断与分层路线</h2>
+<p>先完成<a href="answers.html">答案页 A1–A8</a>，写一个 Dataset，解释 <code>backward/step/zero_grad</code>，并在小数据上训练分类器。不会的题先学，不以背出名词代替操作。</p>
+<table>
+<thead>
+<tr>
+<th>起点</th>
+<th>建议路线</th>
+<th>时间预算与调整规则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="起点">Python、函数和数组也不熟悉</td>
+<td data-label="建议路线">Python基础→总览数学/PyTorch→数学章1–3→基础实验→四项实验</td>
+<td data-label="时间预算与调整规则">先给基础学习额外4–8周，每周8–12小时；以诊断与交付物决定进度，零基础可能更久。</td>
+</tr>
+<tr>
+<td data-label="起点">会Python，学过线代/概率但没训练过模型</td>
+<td data-label="建议路线">总览→数学1–4→CNN/VAE→attention→DDPM→DINO</td>
+<td data-label="时间预算与调整规则">约12–16周、每周8–12小时是规划起点。先完成每节检查再推进。</td>
+</tr>
+<tr>
+<td data-label="起点">已熟悉PyTorch和CNN</td>
+<td data-label="建议路线">先做诊断→补推导→完成四项实验及对照→选一篇论文复现</td>
+<td data-label="时间预算与调整规则">可跳过已通过部分；重点用可复现报告检验能力，不承诺固定周数。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2">2. 每周交付物</h2>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>学习内容</th>
+<th>必须交付</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="阶段">1–2</td>
+<td data-label="学习内容">张量、矩阵、梯度、概率、稳定交叉熵</td>
+<td data-label="必须交付">A1–A8推导；自动梯度与数值梯度对照；Dataset和训练循环。</td>
+</tr>
+<tr>
+<td data-label="阶段">3–4</td>
+<td data-label="学习内容">CNN、划分、优化、视觉指标</td>
+<td data-label="必须交付">CNN训练/验证曲线与混淆矩阵；记录一个失败设置及修正。</td>
+</tr>
+<tr>
+<td data-label="阶段">5–6</td>
+<td data-label="学习内容">VAE、ELBO、重参数化</td>
+<td data-label="必须交付">从Jensen到KL差距的推导；重建/先验采样；beta对照。</td>
+</tr>
+<tr>
+<td data-label="阶段">7–8</td>
+<td data-label="学习内容">QKV、mask、ViT、自监督</td>
+<td data-label="必须交付">可训练注意力实现和梯度检查；DINO冻结线性评价及随机骨干对照。</td>
+</tr>
+<tr>
+<td data-label="阶段">9–10</td>
+<td data-label="学习内容">DDPM正反过程、噪声目标</td>
+<td data-label="必须交付">闭式加噪验算；训练曲线；完整反向采样；时间步对照。</td>
+</tr>
+<tr>
+<td data-label="阶段">11–12</td>
+<td data-label="学习内容">ODE/SDE、Flow Matching、OT与匹配</td>
+<td data-label="必须交付">Euler误差/Brownian方差实验；OT质量规范和全局匹配例题。</td>
+</tr>
+<tr>
+<td data-label="阶段">13–16（进阶项目）</td>
+<td data-label="学习内容">精读一篇论文，复现实验和消融</td>
+<td data-label="必须交付">独立报告、完整配置、三个种子、至少一个失败分析；按下表评阅。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-100">3. 100分量表</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>分值</th>
+<th>获得全部分值所需证据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="维度">数学理解</td>
+<td data-label="分值">20</td>
+<td data-label="获得全部分值所需证据">ELBO/高斯KL/DDPM闭式与后验推导各4分，attention和SDE验算各2分。符号、假设、索引与数值结果均正确。</td>
+</tr>
+<tr>
+<td data-label="维度">PyTorch与工程</td>
+<td data-label="分值">20</td>
+<td data-label="获得全部分值所需证据">数据划分/无泄漏5分；正确训练评价5分；检查点恢复与配置5分；shape/梯度/数值检查5分。</td>
+</tr>
+<tr>
+<td data-label="维度">四项实验</td>
+<td data-label="分值">24</td>
+<td data-label="获得全部分值所需证据">每项6分：能运行2分、解释目标与结果2分、提交可核查指标/图/配置2分。DINO需真实官方预训练骨干，tiny只算流程检查。</td>
+</tr>
+<tr>
+<td data-label="维度">对照与可信评价</td>
+<td data-label="分值">16</td>
+<td data-label="获得全部分值所需证据">同划分同预算基线4分；至少一项控制变量消融4分；至少三个种子均值与标准差4分；测试集锁定且如实描述局限4分。</td>
+</tr>
+<tr>
+<td data-label="维度">论文理解与报告</td>
+<td data-label="分值">12</td>
+<td data-label="获得全部分值所需证据">问题/方法/关键式/证据/局限/与实验关联六项各2分；引用指向原文而非只引用摘要。</td>
+</tr>
+<tr>
+<td data-label="维度">可复现与表达</td>
+<td data-label="分值">8</td>
+<td data-label="获得全部分值所需证据">新环境按说明复现4分；依赖/命令/资源来源2分；清晰图注与失败记录2分。</td>
+</tr>
+</tbody>
+</table>
+<p>计分按证据逐项累加。缺少真实运行证据的实验不满6分；未做多种子不获得相应4分；发现测试泄漏应修正划分并重跑相关评价后再计分。不同方法的损失值不能横向比较高低，课程示例的单种子结果也不自动满足多种子考核。</p>
+<h2 id="4">4. 最终项目模板</h2>
+<p>题目建议从“VAE中beta对重建与潜变量的影响”“DDPM噪声步数与采样代价”“冻结DINO特征与随机特征的低样本分类”三者选一。控制训练样本、划分、增广、优化预算；每次只改一个关键因素。对照应公平，随机特征也可能在简单数据上有效，必须照实记录。</p>
+<p>报告至少包含：研究问题和假设；数据与划分；模型/损失/优化设置；运行命令与环境；主表与曲线；三种子统计；失败样本；结论能支持到哪里；代码与引用。不要把小规模教学模型的表现表述为复现论文主结果。</p>
+<p>提交目录建议：<code>report.md</code>、<code>config.json</code>、<code>metrics_seed_7/17/27.json</code>、<code>figures/</code>、<code>requirements-lock.txt</code>。随机种子标准差用样本标准差，说明每次改变了初始化和数据划分还是仅初始化；若划分也变了，方差包含划分变动，不能混称仅优化噪声。</p>
+<h2 id="5">5. 教程自身的质量检查</h2>
+<table>
+<thead>
+<tr>
+<th>教材要求</th>
+<th>本项目可核查的实现</th>
+<th>仍需学习者完成</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="教材要求">自洽知识链</td>
+<td data-label="本项目可核查的实现">总览→数学推导→实验→答案→考核；保留章节学习来源。</td>
+<td data-label="仍需学习者完成">亲手推导与解释，外部课程的完整习题。</td>
+</tr>
+<tr>
+<td data-label="教材要求">可运行代码</td>
+<td data-label="本项目可核查的实现">真实数据四实验、冻结特征评价、检查点、自动化数值测试。</td>
+<td data-label="仍需学习者完成">新环境复现、扩展数据和模型。</td>
+</tr>
+<tr>
+<td data-label="教材要求">结果透明</td>
+<td data-label="本项目可核查的实现"><a href="evidence.html">实测记录</a>区分真实训练、代理指标和局限。</td>
+<td data-label="仍需学习者完成">多种子和独立最终测试评价。</td>
+</tr>
+<tr>
+<td data-label="教材要求">可访问性</td>
+<td data-label="本项目可核查的实现">静态HTML、离线公式、源码下载、响应式表格和项目ZIP。</td>
+<td data-label="仍需学习者完成">网络资源首次下载，算力和时间投入。</td>
+</tr>
+</tbody>
+</table>
+<p>课程的定位是“从基础到能理解并实现小规模视觉实验”。完成并通过量表后，可以把它作为阅读相关论文、做毕业设计或进入科研训练的基础；独立提出可靠新方法仍需持续实践。</p><p><a href="assessment.md" download="assessment.md">下载本页 Markdown 源文</a></p></main></div><a class="back" href="#top" aria-label="返回顶部">↑ 返回顶部</a>
+<script>
+document.body.id='top';
+document.querySelectorAll('.content table').forEach(t=>{const w=document.createElement('div');w.className='table-wrap';t.parentNode.insertBefore(w,t);w.appendChild(t)});
+const tocLinks=[...document.querySelectorAll('.side li')];
+document.querySelector('#toc-search').addEventListener('input',e=>{const q=e.target.value.trim().toLowerCase();tocLinks.forEach(li=>{li.hidden=!!q && !li.textContent.toLowerCase().includes(q)})});
+const anchors=[...document.querySelectorAll('.side a[href^="#"]')];
+const byId=new Map(anchors.map(a=>[a.getAttribute('href').slice(1),a]));
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){anchors.forEach(a=>a.classList.remove('active'));byId.get(e.target.id)?.classList.add('active')}})},{rootMargin:'-10% 0px -75% 0px'});
+document.querySelectorAll('.content h1[id],.content h2[id],.content h3[id]').forEach(h=>obs.observe(h));
+</script>
+</body></html>

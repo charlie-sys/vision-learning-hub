@@ -14,3 +14,13 @@ jobs:
       - run: python scripts/build.py
       - run: python scripts/validate.py
       - run: node scripts/check_math.cjs
+  numerical-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+      - run: python -m unittest discover -s tests -v
+      - run: python examples/course_labs.py probe --encoder tiny --dataset synthetic --train-size 40 --val-size 20 --epochs 1 --batch-size 10 --device cpu --output runs/ci-probe

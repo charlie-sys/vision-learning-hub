@@ -3,7 +3,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const katex = require(path.join(root, 'vendor/katex/katex.min.js'));
-const html = fs.readFileSync(path.join(root, 'docs/tutorial.html'), 'utf8');
+const html = fs.readdirSync(path.join(root, 'docs')).filter(f => f.endsWith('.html'))
+  .map(f => fs.readFileSync(path.join(root, 'docs', f), 'utf8')).join('\n');
 const decode = s => s.replace(/&quot;/g, '"').replace(/&#x27;/g, "'")
   .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
 const expressions = [...html.matchAll(/data-tex="([^"]*)"/g)];

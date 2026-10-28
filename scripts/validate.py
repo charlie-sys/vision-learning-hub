@@ -16,6 +16,8 @@ for path in docs.glob("*.html"):
     assert "D:\\" not in text and "file:///" not in text, f"Machine-specific path in {path.name}"
     soup = BeautifulSoup(text, "html.parser")
     ids = {el.get("id") for el in soup.select("[id]")}
+    assert len(ids) == len(soup.select("[id]")), f"Duplicate anchors in {path.name}"
+    assert "MATHPLACEHOLDER" not in text, f"Unrestored equation in {path.name}"
     for a in soup.select("a[href]"):
         href = unquote(a["href"])
         if href.startswith(("http://", "https://", "mailto:")):
@@ -24,6 +26,15 @@ for path in docs.glob("*.html"):
             assert href[1:] in ids, (path.name, href)
         else:
             assert (path.parent / href.split("#")[0]).exists(), (path.name, href)
+            if "#" in href:
+                target, anchor = href.split("#", 1)
+                other = BeautifulSoup((path.parent / target).read_text(encoding="utf-8"), "html.parser")
+                assert other.find(id=anchor), (path.name, href)
+    for img in soup.select("img[src]"):
+        if not img["src"].startswith(("http://", "https://")):
+            assert (path.parent / unquote(img["src"])).is_file(), (path.name, img["src"])
+    if path.name != "index.html":
+        assert soup.select_one(f'a[download="{path.stem}.md"]'), f"Missing source download in {path.name}"
     for asset in soup.select("script[src],link[rel=stylesheet][href]"):
         url = asset.get("src") or asset["href"]
         if not url.startswith(("http://", "https://")):
@@ -45,4 +56,4 @@ math_page = BeautifulSoup((docs / "tutorial.html").read_text(encoding="utf-8"), 
 assert len(math_page.select("[data-tex]")) >= 40, "Mathematical expressions were not preserved"
 assert len(math_page.select(".math-display")) >= 10, "Missing display equations"
 assert "MATHPLACEHOLDER" not in str(math_page), "Unrestored equation placeholder"
-print("30 paper records, five pages, translation entries, internal links and table labels: OK")
+print("30 paper records, all generated pages, translation entries, internal links and table labels: OK")

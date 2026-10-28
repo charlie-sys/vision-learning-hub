@@ -2,10 +2,12 @@
 
 **适用目标**：读懂本资料夹中的 30 篇扩散模型、视觉 Transformer、VAE、DINO 与相关视觉论文，并能够独立实现小规模实验。  
 **学习方式**：按“理解概念 → 手算一个例子 → 写最小代码 → 阅读对应论文 → 复现实验”的顺序。  
-**时间参考**：有 Python 基础者约 12–16 周、每周 8–12 小时；时间是估算，不是能力保证。  
+**时间参考**：会Python并学过基本线代/概率者可用12–16周、每周8–12小时作为规划起点；零基础另需准备阶段。按[诊断与分层路线](assessment.html)调整，时间不是能力保证。  
 **配套资料**：[论文阅读指南](guide.md)｜[可搜索论文目录](index.html)｜[可运行 PyTorch 实验](vision_basics_lab.py)。
 
 > 本教程覆盖读这些论文的核心前置知识与入门实践，不替代完整的数学或深度学习教材。每节给出“合格标准”；达到标准后就可以进入对应论文，不必等所有知识都学完。
+
+> **v2.0 学习闭环**：本页为知识总览；系统推导与例题在[数学章](math.html)，真实数据训练在[四项实验](practice.html)，自测核对在[练习答案](answers.html)，进度与成果按[100分量表](assessment.html)验收。[实测记录](evidence.html)公开配置、结果与局限。
 
 ## 0. 开始前：准备、术语与学习验收
 
@@ -18,7 +20,7 @@ python --version
 python -c "import torch; print(torch.__version__); print(torch.cuda.is_available())"
 ```
 
-安装命令应按 [PyTorch 官方安装页](https://pytorch.org/get-started/locally/) 的操作系统和硬件选项生成；CPU 也能完成本教程的小实验。无需大型数据集即可运行 `python vision_basics_lab.py`。若要训练真实分类模型，先从 FashionMNIST 或 CIFAR-10 开始。
+安装命令应按 [PyTorch 官方安装页](https://pytorch.org/get-started/locally/) 的操作系统和硬件选项生成；CPU 也能完成本教程的小实验。无需大型数据集即可运行 `python examples/vision_basics_lab.py`。随后按[四项完整实验](practice.html)运行FashionMNIST分类、VAE、DDPM与DINOv2线性评价。
 
 
 **逐项学习链接**（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：
@@ -63,6 +65,8 @@ python -c "import torch; print(torch.__version__); print(torch.cuda.is_available
 
 ### 1.1 线性代数与张量
 
+[本章详细教学：矩阵、广播、协方差与SVD](math.html)；核对[练习A1–A3](answers.html)。
+
 **必会内容**：向量、矩阵、转置、矩阵乘法、内积、范数、正交、特征值/奇异值的直觉；张量的形状、广播、批量矩阵乘法。矩阵乘法要求内维相等：`[B,N,D] @ [B,D,M] -> [B,N,M]`。广播要从右侧维度对齐，长度必须相同或其中一个为 1。
 
 **视觉例子**：224×224 RGB 图像，patch 大小 16×16，共有 $(224/16)^2=196$ 个 patch。每个 patch 展平后有 $16\times16\times3=768$ 个值。线性投影到 $D=768$ 后，ViT 输入形状为 `[B,196,768]`；加入一个分类 token 后为 `[B,197,768]`。
@@ -90,6 +94,8 @@ $N\times N$ 注意力矩阵解释了标准全局注意力随 token 数增长的�
 | Q/K/V 与多头形状 | [《动手学深度学习》多头注意力（中文）](https://zh.d2l.ai/chapter_attention-mechanisms/multihead-attention.html) | 对照本文的 `[B,N,D]` 形状推导。 |
 
 ### 1.2 微积分、链式法则与反向传播
+
+[链式法则手算与数值梯度检查](math.html)；核对[练习A4](answers.html)。
 
 函数 $y=f(x)$ 的导数表示局部变化率；多变量函数用偏导/梯度。链式法则：若 $L=g(f(x))$，则：
 
@@ -123,6 +129,8 @@ $$
 | 自动微分和计算图 | [PyTorch 自动微分教程（官方）](https://docs.pytorch.org/tutorials/beginner/introyt/autogradyt_tutorial.html) | 运行例子并对照手算梯度。 |
 
 ### 1.3 概率、统计与信息论
+
+[概率、稳定交叉熵与KL教学](math.html)；核对[练习A5–A7](answers.html)。
 
 **概率必会**：随机变量、条件概率、贝叶斯公式、期望、方差、协方差、独立与条件独立；正态分布 $\mathcal N(\mu,\sigma^2)$；联合分布与边缘化：
 
@@ -194,6 +202,8 @@ SGD 使用小批量梯度近似全数据梯度；Adam/AdamW 使用动量与自�
 
 ### 1.5 生成模型专项数学
 
+[ELBO、对角高斯KL、DDPM前向和后验的完整推导](math.html)；完成[生成模型练习](answers.html)。
+
 **VAE 的 ELBO**：
 
 $$
@@ -243,6 +253,8 @@ $$
 | 潜空间扩散与文本条件 | [Hugging Face 扩散课程 Unit 3](https://huggingface.co/learn/diffusion-course/en/unit3/1) | 观察编码器、U-Net、文本条件与解码器。 |
 
 ### 1.6 进阶数学何时补
+
+[ODE/SDE、Flow Matching与OT例题](math.html)；[对应系统课程与作业](resources.html)。
 
 | 主题 | 什么时候需要 | 要掌握到什么程度 |
 |---|---|---|
@@ -325,12 +337,14 @@ print(patches.shape)  # [8, 768, 196]
 
 ### 2.4 完整训练循环与评估
 
+[真实数据CNN训练、验证与混淆矩阵](practice.html)；用[参考测试](evidence.html)检查指标与恢复。
+
 最小顺序：`model.train()` → 遍历 batch → `zero_grad` → 前向 → 损失 → `backward` → `step`；验证时 `model.eval()` + `torch.inference_mode()`。每轮记录训练损失和验证指标，最好保存最佳验证权重。不要在训练集上挑模型后声称是测试性能。
 
 配套的 [`vision_basics_lab.py`](vision_basics_lab.py) 给出可直接运行的 CNN 分类示范，数据是随机生成的“亮方块在左/右”图像，避免外部下载。它还演示注意力形状、VAE 重参数化、扩散前向加噪、`state_dict` 保存和恢复。运行：
 
 ```bash
-python vision_basics_lab.py
+python examples/vision_basics_lab.py
 ```
 
 **练习**：修改 batch size、学习率和训练轮数，观察验证正确率；将 `model.eval()` 暂时去掉，加入 Dropout 后观察差别。**验收**：运行三次可解释结果波动；恢复的模型对同一输入得到相同输出。
@@ -362,6 +376,8 @@ python vision_basics_lab.py
 | 迁移学习与冻结骨干 | [PyTorch 视觉迁移学习教程](https://docs.pytorch.org/tutorials/beginner/transfer_learning_tutorial.html) | 分别尝试冻结与微调。 |
 
 ### 2.6 最小实现关卡
+
+[四项实验](practice.html)提供CNN、VAE、DDPM、冻结DINOv2评价；[练习骨架](exercises.py)用于自己实现。
 
 | 关卡 | 实现内容 | 检查点 |
 |---|---|---|
@@ -446,6 +462,8 @@ CNN 用局部卷积和权重共享提取特征；随层数增加，感受野变�
 
 ### 3.4 Transformer 在视觉中的用法
 
+[完整QKV投影、mask与梯度教学](math.html)；[可运行参考代码](solutions.py)。
+
 原始 Transformer 解决序列建模；ViT 把图像切成 patch，添加位置编码后用自注意力处理。全局注意力便于跨远距离信息交互，但 token 多时计算/显存压力大。Swin 用窗口及移位窗口构建分层特征；DeiT 重视数据高效训练和蒸馏；MAE 掩住大量 patch 并重建被遮挡内容。
 
 **三个问题**：① patch 太大，细节会怎样？② 224×224、patch16 与 patch8 的 token 数分别是多少（196 与 784），注意力矩阵元素数约相差几倍（16 倍）？③ MAE 为什么只将可见 patch 送入编码器有计算优势？
@@ -462,6 +480,8 @@ CNN 用局部卷积和权重共享提取特征；随层数增加，感受野变�
 | ViT、Swin、MAE 原文 | [本地 30 篇论文目录](index.html) | 按 09–14 顺序结合图和代码阅读。 |
 
 ### 3.5 自监督学习、对比学习与蒸馏
+
+[InfoNCE数值例题、DINO目标与冻结评价](math.html)；[实际预训练/随机骨干对照](practice.html)。
 
 自监督从数据本身构造训练信号，无需人工类别标签；它不等于“没有监督目标”。SimCLR 对同一图像的两种增强视图作为正样本，其他图像视图常作负样本；MoCo 用动量编码器和队列维持字典。CLIP 用图文配对做跨模态对比学习。DINO 系列用 teacher-student 自蒸馏，不依赖传统负样本对比训练；DINO 中多裁剪、teacher 更新、输出中心化/温度等防止塌缩的细节很重要。iBOT 结合掩码 patch 预测与自蒸馏。DINOv2/v3 扩大训练与特征迁移能力；Registers 关注稠密特征的异常 token。
 
@@ -510,6 +530,8 @@ CNN 用局部卷积和权重共享提取特征；随层数增加，感受野变�
 | DETR、检测 DINO、CLIP、SAM | [本地 30 篇论文目录](index.html) | 按 13→30、26→27 顺序读原文。 |
 
 ### 3.8 研究实验基本功
+
+[按100分量表准备报告、对照、多种子与失败记录](assessment.html)。
 
 论文复现先固定数据集和评估协议，再实现基线。一次只改变一个主要因素；报告参数量、计算预算、训练步数和推理成本。需要做训练/验证曲线、消融、失败案例、不同随机种子。若复制论文中大规模结果需要大量算力，可复现核心机制而非声称达到原始性能。
 
@@ -597,3 +619,8 @@ CNN 用局部卷积和权重共享提取特征；随层数增加，感受野变�
 5. [PyTorch 混合精度示例](https://docs.pytorch.org/docs/stable/notes/amp_examples.html)：`torch.autocast` 和 `torch.amp.GradScaler`。
 6. [TorchVision 数据增强文档](https://docs.pytorch.org/vision/stable/transforms.html)：图像以及检测/分割标注的变换。
 7. 本资料夹的[30 篇论文清单](guide.md)：每篇的原始论文入口及主题说明。
+
+
+## 8. 从知识清单到可检验能力
+
+继续阅读[数学教学与推导](math.html) → [四项完整训练实验](practice.html) → [26道题与编程答案](answers.html) → [分层路线与考核](assessment.html)。[课程映射](resources.html)补齐SDE、OT、InfoNCE与一对一匹配，实测配置与结果见[公开记录](evidence.html)。

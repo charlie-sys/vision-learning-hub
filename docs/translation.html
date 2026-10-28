@@ -10,7 +10,7 @@
 <script defer src="assets/math.js"></script>
 <style>
 :root{--ink:#182536;--muted:#607185;--accent:#176e76;--paper:#fff;--bg:#f3f6f9;--line:#dce4eb}
-.math-inline{display:inline-block;max-width:100%;vertical-align:middle;overflow-x:auto;overflow-y:hidden;padding:2px 0}.math-display{max-width:100%;overflow-x:auto;overflow-y:hidden;padding:10px 0;margin:16px 0}.math-display .katex-display{margin:.5em 0}.math-error{color:#a32828;background:#fff0f0}.content .katex{font-size:1.08em}
+.math-inline{display:inline-block;max-width:100%;vertical-align:middle;overflow-x:auto;overflow-y:hidden;padding:2px 3px;scrollbar-width:none}.math-inline::-webkit-scrollbar{display:none}.math-display{max-width:100%;overflow-x:auto;overflow-y:hidden;padding:10px 0;margin:16px 0}.math-display .katex-display{margin:.5em 0}.math-error{color:#a32828;background:#fff0f0}.content .katex{font-size:1.08em}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.8 system-ui,"Microsoft YaHei",sans-serif}
 a{color:var(--accent);text-underline-offset:3px}a:hover{color:#0e4b53}
 .top{background:#14273d;color:#fff;padding:14px max(4vw,24px);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
@@ -37,6 +37,7 @@ a{color:var(--accent);text-underline-offset:3px}a:hover{color:#0e4b53}
 .content .cols-5 td:nth-child(4),.content .cols-5 th:nth-child(4){white-space:nowrap}
 .content .table-wrap{overflow:auto;margin:18px 0;border-radius:8px}
 code{font-family:Consolas,"Cascadia Code",monospace;font-size:.88em;background:#eef3f6;border-radius:4px;padding:2px 5px;overflow-wrap:anywhere}
+.content img{display:block;max-width:100%;height:auto;margin:20px auto;border:1px solid var(--line);border-radius:8px}.content p:has(img){overflow:hidden}
 pre{background:#15283d;color:#e8f1f6;border-radius:9px;padding:16px 19px;overflow:auto;line-height:1.55}pre code{background:transparent;color:inherit;padding:0;white-space:pre;overflow-wrap:normal}
 .content input[type=checkbox]{margin-right:8px;accent-color:var(--accent)}
 .back{position:fixed;right:22px;bottom:22px;background:#176e76;color:white;padding:8px 14px;border-radius:999px;text-decoration:none;box-shadow:0 4px 15px #0002;font-size:13px}
@@ -47,7 +48,7 @@ pre{background:#15283d;color:#e8f1f6;border-radius:9px;padding:16px 19px;overflo
 </style>
 </head>
 <body id="top">
-<header class="top"><strong>视觉论文学习库</strong><nav><a href="index.html">30 篇论文目录</a><a href="guide.html">完整指南</a><a href="lab.html">PyTorch 小实验</a><a href="translation.html">翻译阅读指南</a></nav></header>
+<header class="top"><strong>视觉论文学习库</strong><nav><a href="index.html">论文目录</a><a href="tutorial.html">知识总览</a><a href="math.html">数学推导</a><a href="practice.html">四项实验</a><a href="answers.html">练习答案</a><a href="assessment.html">学习考核</a><a href="resources.html">课程来源</a><a href="evidence.html">实测记录</a></nav></header>
 <div class="layout"><aside class="side"><label for="toc-search">章节目录</label><input id="toc-search" type="search" placeholder="搜索章节…" aria-label="搜索章节"><div class="toc"><ul><li class="level-2"><a href="#1">1. 边读边看中英对照：沉浸式翻译扩展</a></li><li class="level-2"><a href="#2-babeldoc">2. 在线生成双语文档：BabelDOC</a></li><li class="level-2"><a href="#3">3. 当前入口提供哪些功能</a></li><li class="level-2"><a href="#4">4. 阅读时怎样使用译文</a></li></ul></div></aside>
 <main class="content"><h1 id="_1">英文论文翻译阅读指南</h1>
 <p>在论文目录点击任一论文的 <strong>“翻译阅读”</strong>，会弹出该论文的翻译助手，显示原始 PDF、复制链接按钮和在线工具入口。</p>

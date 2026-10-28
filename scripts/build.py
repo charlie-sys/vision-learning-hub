@@ -87,6 +87,14 @@ def build(local_pdfs=False):
     render("tutorial", "视觉论文前置知识完整教程")
     render("guide", "视觉论文完整指南")
     render("translation", "英文论文翻译阅读指南")
+    for name, title in [("math", "数学推导与数值例题"), ("practice", "四项完整视觉实验"),
+                        ("answers", "练习答案与纠错"), ("resources", "可靠课程与知识映射"),
+                        ("assessment", "学习路线与考核标准"), ("evidence", "实验实测记录")]:
+        render(name, title)
+    for name in ("course_labs.py", "solutions.py", "exercises.py"):
+        shutil.copy2(ROOT / "examples" / name, DOCS / name)
+    if (ROOT / "evidence").exists():
+        shutil.copytree(ROOT / "evidence", DOCS / "evidence", dirs_exist_ok=True)
     formatter = HtmlFormatter(style="monokai", linenos="inline", cssclass="highlight")
     code = (ROOT / "examples" / "vision_basics_lab.py").read_text(encoding="utf-8")
     css = formatter.get_style_defs(".highlight") + "\n.highlight{overflow:auto;border-radius:9px}.highlight pre{min-width:max-content;margin:0}.highlight .linenos{color:#91a0a8;margin-right:12px;user-select:none}"
@@ -116,7 +124,7 @@ def build(local_pdfs=False):
     shutil.copy2(ROOT / "data" / "references.bib", DOCS / "references.bib")
     shutil.copy2(ROOT / "data" / "papers.json", DOCS / "papers.json")
     (DOCS / ".nojekyll").touch()
-    print(f"Built five HTML pages and {len(papers)} paper records in docs/")
+    print(f"Built {len(list(DOCS.glob('*.html')))} HTML pages and {len(papers)} paper records in docs/")
 
 
 if __name__ == "__main__":

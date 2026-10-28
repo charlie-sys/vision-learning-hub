@@ -1,6 +1,6 @@
 # Vision Learning Hub · 视觉论文学习库
 
-面向扩散模型、视觉 Transformer、VAE 和 DINO 的中文学习项目：30 篇代表性论文、数学/PyTorch/视觉前置教程、76 个逐项学习入口，以及一个无需外部数据集的 PyTorch 实验。
+面向扩散模型、视觉 Transformer、VAE 和 DINO 的中文学习项目：30 篇代表性论文、数学/PyTorch/视觉前置教程、逐步推导与数值例题、四项完整训练/评价实验、练习答案与公开考核量表。v2.0 把知识清单连接到可检验的学习成果。
 
 在线阅读：**[https://charlie-sys.github.io/vision-learning-hub/](https://charlie-sys.github.io/vision-learning-hub/)** · [Fork 仓库](https://github.com/charlie-sys/vision-learning-hub/fork)
 
@@ -11,6 +11,10 @@
 - [论文阅读完整指南](docs/guide.html) · [Markdown 源文](content/guide.md)
 - [PyTorch 小实验网页](docs/lab.html) · [Python 源码](examples/vision_basics_lab.py)
 - [英文论文翻译阅读指南](docs/translation.html)：目录中每篇论文提供“翻译阅读”弹窗
+- [数学推导与例题](docs/math.html)：ELBO、KL、DDPM、attention、SDE、OT、InfoNCE
+- [四项完整实验](docs/practice.html)：CNN、VAE、DDPM、官方DINOv2冻结线性评价
+- [练习与参考答案](docs/answers.html) · [知识点课程映射](docs/resources.html)
+- [分层路线与100分考核标准](docs/assessment.html) · [真实实验记录](docs/evidence.html)
 - [论文清单 CSV](docs/papers.csv) · [BibTeX](data/references.bib)
 
 HTML 已随仓库提供。下载仓库后可直接用浏览器打开 `docs/index.html`，也可以在项目根目录运行 `python -m http.server 8000 --directory docs`，再访问 http://localhost:8000 。GitHub 文件页会展示 HTML 源码，在线渲染请使用仓库的 GitHub Pages 地址。
@@ -36,6 +40,19 @@ python scripts/validate.py
 python examples/vision_basics_lab.py
 ```
 
+完整实验建议 Python 3.10/3.11，安装与硬件匹配的PyTorch后，在仓库根目录运行：
+
+```bash
+python -m pip install -r requirements-labs.txt
+python -m unittest discover -s tests -v
+python examples/course_labs.py cnn --train-size 2048 --val-size 512 --epochs 3
+python examples/course_labs.py vae --train-size 2048 --val-size 512 --epochs 6
+python examples/course_labs.py ddpm --train-size 2048 --val-size 512 --epochs 10
+python examples/course_labs.py probe --train-size 1024 --val-size 256 --epochs 20 --batch-size 16 --lr 0.01 --random-baseline
+```
+
+首次需要下载FashionMNIST，DINO另需官方代码和约84MiB权重。训练、验证、保存检查点、结果图与多种子实测详见实验页。离线可用 `--dataset synthetic` 和 probe 的 `--encoder tiny` 做冒烟检查；它们不能代替真实数据或DINO结果。数据、权重和 `runs/` 不进入Git或项目ZIP。
+
 ## 获取论文全文与离线阅读
 
 目录的 PDF 按钮可直接打开原始公开全文。也可下载到本地；共 30 篇，可能需要较长时间和数百 MB 空间：
@@ -59,6 +76,8 @@ python scripts/build.py --local-pdfs
 content/       可编辑的教程与指南 Markdown
 data/          论文元数据与引用
 examples/      可运行的 PyTorch 小实验
+tests/         梯度、分布、mask、采样、指标和恢复的数值检查
+evidence/      可公开的真实实验指标与结果图（不含权重）
 templates/     网页模板与响应式排版
 scripts/       构建、验证、下载和打包脚本
 docs/          已生成的完整静态网页，可用于 GitHub Pages
@@ -70,6 +89,6 @@ Fork 后在仓库 Settings → Pages 中选择从分支部署，分支 `main`、
 
 ## 内容范围
 
-这是一份以经典方法和代表性演进为主的学习清单，涵盖 2013–2025 年论文，不是穷尽综述或 2026 年前沿排名。小实验的合成分类任务用于理解训练流程，不能代表真实视觉任务性能。欢迎通过 Issue/PR 修正和扩充。
+这是一份以经典方法和代表性演进为主的学习课程，涵盖2013–2025年论文，不是穷尽综述或2026年前沿排名。真实实验采用教学规模，DINO使用官方预训练骨干做迁移评价，未从头复现DINO大规模训练。检测、分割、Flow Matching等提供教学与进一步学习入口，尚未提供全模型训练。100分量表需要学习者提交证据，不是对所有读者或课程的成绩保证。欢迎通过Issue/PR修正和扩充。
 
 原创内容与代码采用 [MIT 许可证](LICENSE)。第三方论文与课程遵循各自许可。
