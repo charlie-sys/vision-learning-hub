@@ -14,6 +14,8 @@
 
 HTML 已随仓库提供。下载仓库后可直接用浏览器打开 `docs/index.html`，也可以在项目根目录运行 `python -m http.server 8000 --directory docs`，再访问 http://localhost:8000 。GitHub 文件页会展示 HTML 源码，在线渲染请使用仓库的 GitHub Pages 地址。
 
+教程公式使用 LaTeX 编写，由项目自带的 KaTeX 脚本、样式和字体渲染；离线打开 HTML 也能显示数学排版。长公式在自己的区域内横向滚动。
+
 ## Fork、运行和修改
 
 点击 GitHub 的 **Fork** 创建自己的副本，再 Clone 到本地。网页阅读无需安装依赖。

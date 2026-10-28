@@ -17,9 +17,35 @@ ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 
 
+def protect_math(text):
+    """Keep LaTeX out of Markdown's underscore, escape and table parsing."""
+    expressions = []
+    pattern = re.compile(r"(```[\s\S]*?```|`[^`\n]*`)|(\$\$[\s\S]*?\$\$|\$[^$\n]+?\$)")
+
+    def replace(match):
+        if match.group(1):
+            return match.group(0)
+        value = match.group(2)
+        display = value.startswith("$$")
+        tex = value[2:-2].strip() if display else value[1:-1].strip()
+        token = f"MATHPLACEHOLDER{len(expressions)}END"
+        expressions.append((token, tex, display))
+        return "\n\n" + token + "\n\n" if display else token
+
+    return pattern.sub(replace, text), expressions
+
+
 def render(name, title, code_html="", extra_css=""):
     text = (ROOT / "content" / f"{name}.md").read_text(encoding="utf-8")
-    body = markdown.markdown(text, extensions=["tables", "fenced_code", "toc", "sane_lists"])
+    protected, expressions = protect_math(text)
+    body = markdown.markdown(protected, extensions=["tables", "fenced_code", "toc", "sane_lists"])
+    for token, tex, display in expressions:
+        tag = "div" if display else "span"
+        kind = "math-display" if display else "math-inline"
+        rendered = f'<{tag} class="{kind}" data-tex="{html.escape(tex, quote=True)}">{html.escape(tex)}</{tag}>'
+        if display:
+            body = body.replace(f"<p>{token}</p>", rendered)
+        body = body.replace(token, rendered)
     body = body.replace("<!-- LAB_SOURCE -->", code_html)
     body = re.sub(r"<li>\s*\[ \]", '<li><input type="checkbox" disabled>', body)
     soup = BeautifulSoup(body, "html.parser")
@@ -55,6 +81,8 @@ def render(name, title, code_html="", extra_css=""):
 
 def build(local_pdfs=False):
     DOCS.mkdir(exist_ok=True)
+    shutil.copytree(ROOT / "vendor" / "katex", DOCS / "assets" / "katex", dirs_exist_ok=True)
+    shutil.copy2(ROOT / "assets" / "math.js", DOCS / "assets" / "math.js")
     render("tutorial", "视觉论文前置知识完整教程")
     render("guide", "视觉论文完整指南")
     formatter = HtmlFormatter(style="monokai", linenos="inline", cssclass="highlight")

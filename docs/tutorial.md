@@ -65,9 +65,15 @@ python -c "import torch; print(torch.__version__); print(torch.cuda.is_available
 
 **必会内容**：向量、矩阵、转置、矩阵乘法、内积、范数、正交、特征值/奇异值的直觉；张量的形状、广播、批量矩阵乘法。矩阵乘法要求内维相等：`[B,N,D] @ [B,D,M] -> [B,N,M]`。广播要从右侧维度对齐，长度必须相同或其中一个为 1。
 
-**视觉例子**：224×224 RGB 图像，patch 大小 16×16，共有 `(224/16)^2=196` 个 patch。每个 patch 展平后有 `16×16×3=768` 个值。线性投影到 `D=768` 后，ViT 输入形状为 `[B,196,768]`；加入一个分类 token 后为 `[B,197,768]`。
+**视觉例子**：224×224 RGB 图像，patch 大小 16×16，共有 $(224/16)^2=196$ 个 patch。每个 patch 展平后有 $16\times16\times3=768$ 个值。线性投影到 $D=768$ 后，ViT 输入形状为 `[B,196,768]`；加入一个分类 token 后为 `[B,197,768]`。
 
-**自注意力形状推导**：`Q=XW_Q`、`K=XW_K`、`V=XW_V`。若 `X∈R^{B×N×D}`，单头维度为 `d`，则 `Q,K,V∈R^{B×N×d}`，`QKᵀ∈R^{B×N×N}`，`softmax(QKᵀ/√d)V∈R^{B×N×d}`。`N×N` 注意力矩阵解释了标准全局注意力随 token 数增长的内存压力。多头注意力把通道拆成若干头，输出拼接后再投影。
+**自注意力形状推导**：$Q=XW_Q$、$K=XW_K$、$V=XW_V$。若 $X\in\mathbb{R}^{B\times N\times D}$，单头维度为 $d$，则 $Q,K,V\in\mathbb{R}^{B\times N\times d}$，$QK^\top\in\mathbb{R}^{B\times N\times N}$。注意力输出为：
+
+$$
+\operatorname{Attention}(Q,K,V)=\operatorname{softmax}\!\left(\frac{QK^\top}{\sqrt d}\right)V\in\mathbb{R}^{B\times N\times d}.
+$$
+
+$N\times N$ 注意力矩阵解释了标准全局注意力随 token 数增长的内存压力。多头注意力把通道拆成若干头，输出拼接后再投影。
 
 **练习**：用纸算 `2×3` 矩阵乘 `3×2` 矩阵；在 PyTorch 中分别打印 `x.shape`、`x.transpose(-2,-1).shape` 和 `x @ x.transpose(-2,-1)` 的形状。
 
@@ -85,13 +91,25 @@ python -c "import torch; print(torch.__version__); print(torch.cuda.is_available
 
 ### 1.2 微积分、链式法则与反向传播
 
-函数 `y=f(x)` 的导数表示局部变化率；多变量函数用偏导/梯度。链式法则：若 `L=g(f(x))`，则 `dL/dx=(dL/df)(df/dx)`。神经网络反向传播就是把这个规则沿计算图重复应用。
+函数 $y=f(x)$ 的导数表示局部变化率；多变量函数用偏导/梯度。链式法则：若 $L=g(f(x))$，则：
 
-**手算例子**：`y=wx+b`，`L=(y-t)^2/2`，所以 `∂L/∂w=(y-t)x`、`∂L/∂b=y-t`。一次 SGD 更新是 `w←w−η∂L/∂w`。梯度不是直接“修改参数”；优化器读取梯度后才更新。多步累积梯度前通常要清零。
+$$
+\frac{\mathrm dL}{\mathrm dx}=\frac{\mathrm dL}{\mathrm df}\frac{\mathrm df}{\mathrm dx}.
+$$
+
+神经网络反向传播就是把这个规则沿计算图重复应用。
+
+**手算例子**：$y=wx+b$，$L=(y-t)^2/2$，所以：
+
+$$
+\frac{\partial L}{\partial w}=(y-t)x,\qquad \frac{\partial L}{\partial b}=y-t.
+$$
+
+一次 SGD 更新是 $w\leftarrow w-\eta\,\frac{\partial L}{\partial w}$。梯度不是直接“修改参数”；优化器读取梯度后才更新。多步累积梯度前通常要清零。
 
 **常见坑**：在训练前错误调用 `detach()` 会切断梯度；原地操作可能破坏反向传播需要的值；把 `model.eval()` 当成关闭梯度是误解——它主要切换 Dropout/BatchNorm 行为，评估还需 `torch.inference_mode()` 或 `torch.no_grad()`。
 
-**练习**：手算 `x=2,w=3,b=1,t=5` 的 `L`、`∂L/∂w`、`∂L/∂b`；再用 PyTorch `backward()` 对照。
+**练习**：手算 $x=2,w=3,b=1,t=5$ 的 $L$、$\partial L/\partial w$、$\partial L/\partial b$；再用 PyTorch `backward()` 对照。
 
 **合格标准**：能解释 `loss.backward()`、`optimizer.step()`、`zero_grad()` 的顺序，并能定位“梯度为 None”的问题。对应全部 30 篇。
 
@@ -106,13 +124,35 @@ python -c "import torch; print(torch.__version__); print(torch.cuda.is_available
 
 ### 1.3 概率、统计与信息论
 
-**概率必会**：随机变量、条件概率、贝叶斯公式 `p(z|x)=p(x|z)p(z)/p(x)`、期望、方差、协方差、独立与条件独立；正态分布 `N(μ,σ²)`；联合分布与边缘化 `p(x)=∫p(x,z)dz`。模型里的 `p(x|z)` 是“给定潜变量生成数据”的条件分布，`q(z|x)` 常是近似后验。
+**概率必会**：随机变量、条件概率、贝叶斯公式、期望、方差、协方差、独立与条件独立；正态分布 $\mathcal N(\mu,\sigma^2)$；联合分布与边缘化：
+
+$$
+p(z\mid x)=\frac{p(x\mid z)p(z)}{p(x)},\qquad p(x)=\int p(x,z)\,\mathrm dz.
+$$
+
+模型里的 $p(x\mid z)$ 是“给定潜变量生成数据”的条件分布，$q(z\mid x)$ 常是近似后验。
 
 **统计必会**：样本均值、标准误、置信区间直觉、随机种子与重复运行、分布偏移。训练集指标高不证明泛化；评价必须区分随机波动和真实改进。分类还要理解类别不平衡与混淆矩阵。
 
-**信息论必会**：熵 `H(p)=−E_p log p`，交叉熵 `H(p,q)=−E_p log q`，KL 散度 `D_KL(q||p)=E_q log(q/p)≥0`。交叉熵可用于分类；KL 在 VAE 中约束近似后验与先验，在蒸馏和分布匹配中也会出现。KL 不对称：`D_KL(p||q)` 与 `D_KL(q||p)` 通常不同。
+**信息论必会**：熵、交叉熵、KL 散度分别为：
 
-**练习**：对二分类 `p=(1,0)`、预测 `q=(0.8,0.2)` 计算交叉熵 `−log 0.8`；把预测改成 `(0.2,0.8)` 再比较。对一维高斯 `q=N(μ,σ²)` 与 `p=N(0,1)`，记住 `KL=0.5(μ²+σ²−1−log σ²)`，检查 `μ=0,σ=1` 时为 0。
+$$
+\begin{aligned}
+H(p)&=-\mathbb E_{x\sim p}[\log p(x)],\\
+H(p,q)&=-\mathbb E_{x\sim p}[\log q(x)],\\
+D_{\mathrm{KL}}(q\Vert p)&=\mathbb E_{x\sim q}\!\left[\log\frac{q(x)}{p(x)}\right]\ge0.
+\end{aligned}
+$$
+
+交叉熵可用于分类；KL 在 VAE 中约束近似后验与先验，在蒸馏和分布匹配中也会出现。KL 不对称：$D_{\mathrm{KL}}(p\Vert q)$ 与 $D_{\mathrm{KL}}(q\Vert p)$ 通常不同。
+
+**练习**：对二分类 $p=(1,0)$、预测 $q=(0.8,0.2)$ 计算交叉熵 $-\log 0.8$；把预测改成 $(0.2,0.8)$ 再比较。对一维高斯 $q=\mathcal N(\mu,\sigma^2)$ 与 $p=\mathcal N(0,1)$，记住：
+
+$$
+D_{\mathrm{KL}}(q\Vert p)=\frac12\left(\mu^2+\sigma^2-1-\log\sigma^2\right).
+$$
+
+检查 $\mu=0,\sigma=1$ 时为 0。
 
 **合格标准**：读 VAE 的 ELBO、DINO/CLIP 的分布或对比目标时，能说清概率分布、目标和优化方向。对应 VAE、beta-VAE、NVAE、DINO、CLIP、扩散模型。
 
@@ -128,7 +168,13 @@ python -c "import torch; print(torch.__version__); print(torch.cuda.is_available
 
 ### 1.4 优化、数值稳定与泛化
 
-经验风险最小化：`min_θ (1/n)Σ_i ℓ(f_θ(x_i),y_i)`。SGD 使用小批量梯度近似全数据梯度；Adam/AdamW 使用动量与自适应尺度。学习率通常比“换一个新模块”更影响能否稳定训练。权重衰减、数据增强、早停、学习率调度控制过拟合或训练动态。
+经验风险最小化：
+
+$$
+\min_\theta\;\frac1n\sum_{i=1}^{n}\ell\bigl(f_\theta(x_i),y_i\bigr).
+$$
+
+SGD 使用小批量梯度近似全数据梯度；Adam/AdamW 使用动量与自适应尺度。学习率通常比“换一个新模块”更影响能否稳定训练。权重衰减、数据增强、早停、学习率调度控制过拟合或训练动态。
 
 **数值知识**：`logsumexp`/稳定 softmax，梯度裁剪，混合精度，过大/过小学习率，NaN/Inf 排查。`softmax` 之前直接 `exp` 很大数会溢出；分类任务优先给 `CrossEntropyLoss` 原始 logits，避免重复 softmax。训练日志至少记录 loss、验证指标、学习率、随机种子、耗时。
 
@@ -150,15 +196,39 @@ python -c "import torch; print(torch.__version__); print(torch.cuda.is_available
 
 **VAE 的 ELBO**：
 
-`log p_θ(x) ≥ E_{q_φ(z|x)}[log p_θ(x|z)] − D_KL(q_φ(z|x)||p(z))`。
+$$
+\begin{aligned}
+\log p_\theta(x)\;&\ge\;\mathcal L_{\mathrm{ELBO}}(x),\\
+\mathcal L_{\mathrm{ELBO}}(x)&=\mathbb E_{q_\phi(z\mid x)}[\log p_\theta(x\mid z)]\\
+&\quad-D_{\mathrm{KL}}\!\left(q_\phi(z\mid x)\Vert p(z)\right).
+\end{aligned}
+$$
 
-前一项鼓励重建/生成质量，后一项约束潜变量分布。常见重参数化：`z=μ_φ(x)+σ_φ(x)⊙ε`，`ε∼N(0,I)`；随机性移到不依赖参数的 `ε`，梯度能传到 `μ,σ`。beta-VAE 改成 `重建项−β·KL`，更大 β 常加强约束，但不保证真实因素自动解耦。离散 VQ-VAE 采用码本量化，不是把上述连续高斯公式直接套上。
+前一项鼓励重建/生成质量，后一项约束潜变量分布。常见重参数化：
 
-**DDPM 的前向加噪**：给定 `α_t=1−β_t`、`ᾱ_t=∏_{s≤t}α_s`，可一次采样 `x_t=√ᾱ_t x_0+√(1−ᾱ_t) ε`，`ε∼N(0,I)`。最小训练目标常写成 `E||ε−ε_θ(x_t,t)||²`。训练是预测噪声，采样是从噪声逐步回到图像；两者不要混淆。DDIM 改变采样路径，CFG 组合有条件/无条件预测以调节条件引导。
+$$
+z=\mu_\phi(x)+\sigma_\phi(x)\odot\varepsilon,\qquad\varepsilon\sim\mathcal N(0,I).
+$$
 
-**Flow Matching 的直觉**：学习随时间变化的速度场 `v_θ(x,t)`，让样本沿连续流从简单分布到数据分布；它与扩散模型有关联，但目标和采样表述需要单独读。Score-SDE 则用连续时间随机微分方程表述得分模型，要求对微分方程有基本直觉。
+随机性移到不依赖参数的 $\varepsilon$，梯度能传到 $\mu,\sigma$。beta-VAE 将目标改成“重建项 $-\beta\cdot\mathrm{KL}$”，更大 $\beta$ 常加强约束，但不保证真实因素自动解耦。离散 VQ-VAE 采用码本量化，不是把上述连续高斯公式直接套上。
 
-**练习**：画出 `ᾱ_t` 从接近 1 降到接近 0 时 `x_t` 的信噪变化；手算 `μ=0,σ=1` 的 VAE KL；运行配套脚本中的 `concepts_demo()`。
+**DDPM 的前向加噪**：给定 $\alpha_t=1-\beta_t$、$\bar\alpha_t=\prod_{s=1}^{t}\alpha_s$，可一次采样：
+
+$$
+x_t=\sqrt{\bar\alpha_t}\,x_0+\sqrt{1-\bar\alpha_t}\,\varepsilon,\qquad\varepsilon\sim\mathcal N(0,I).
+$$
+
+常见的简化训练目标是：
+
+$$
+\mathcal L_{\mathrm{simple}}=\mathbb E_{x_0,t,\varepsilon}\!\left[\left\|\varepsilon-\varepsilon_\theta(x_t,t)\right\|_2^2\right].
+$$
+
+训练是预测噪声，采样是从噪声逐步回到图像；两者不要混淆。DDIM 改变采样路径，CFG 组合有条件/无条件预测以调节条件引导。
+
+**Flow Matching 的直觉**：学习随时间变化的速度场 $v_\theta(x,t)$，让样本沿连续流从简单分布到数据分布；它与扩散模型有关联，但目标和采样表述需要单独读。Score-SDE 则用连续时间随机微分方程表述得分模型，要求对微分方程有基本直觉。
+
+**练习**：画出 $\bar\alpha_t$ 从接近 1 降到接近 0 时 $x_t$ 的信噪变化；手算 $\mu=0,\sigma=1$ 的 VAE KL；运行配套脚本中的 `concepts_demo()`。
 
 **合格标准**：能逐项解释 ELBO 与 DDPM 噪声预测公式，并清楚区分 VAE、VQ-VAE、扩散、Flow Matching。对应 01–08、15–20。
 
@@ -319,7 +389,13 @@ python vision_basics_lab.py
 
 图像是采样后的像素阵列。区分像素坐标、通道顺序 RGB/BGR、uint8 `0–255` 与 float `0–1`、均值方差归一化、插值、缩放、裁剪和长宽比。卷积核聚合局部邻域，步幅改变采样间隔，padding 影响边缘和输出尺寸；下采样可能损失细节。图像分类可接受某些几何变化，医学/遥感等领域增强必须符合任务语义。
 
-卷积输出高度公式：`H_out=floor((H+2P−D(K−1)−1)/S+1)`，宽度同理；其中 `K` 核大小、`S` 步幅、`P` padding、`D` 膨胀。**练习**：计算输入 32、核 3、padding 1、stride 2 的输出尺寸 16。**验收**：能独立解释输入图像预处理与模型预训练设置不一致为何导致性能下降。
+卷积输出高度公式：
+
+$$
+H_{\mathrm{out}}=\left\lfloor\frac{H+2P-D(K-1)-1}{S}+1\right\rfloor.
+$$
+
+宽度同理；其中 $K$ 是核大小、$S$ 是步幅、$P$ 是 padding、$D$ 是膨胀。**练习**：计算输入 32、核 3、padding 1、stride 2 的输出尺寸 16。**验收**：能独立解释输入图像预处理与模型预训练设置不一致为何导致性能下降。
 
 
 **逐项学习链接**（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：
@@ -355,7 +431,7 @@ python vision_basics_lab.py
 
 ### 3.3 CNN、残差网络与 U-Net
 
-CNN 用局部卷积和权重共享提取特征；随层数增加，感受野变大、分辨率常下降。残差连接 `y=x+F(x)` 帮助深网络优化。U-Net 以编码器提取多尺度特征、解码器恢复空间分辨率、跳连保留细节，是理解扩散去噪网络的重要前置结构。
+CNN 用局部卷积和权重共享提取特征；随层数增加，感受野变大、分辨率常下降。残差连接 $y=x+F(x)$ 帮助深网络优化。U-Net 以编码器提取多尺度特征、解码器恢复空间分辨率、跳连保留细节，是理解扩散去噪网络的重要前置结构。
 
 **练习**：画出 28×28 → 14×14 → 7×7 的特征图大小与通道数；实现一个两层 CNN 分类器。**验收**：能解释为何分割比分类更需要保留空间位置。
 
@@ -419,7 +495,7 @@ CNN 用局部卷积和权重共享提取特征；随层数增加，感受野变�
 
 ### 3.7 检测、分割与多模态
 
-目标检测需表示框坐标、类别、无目标类与重叠程度。IoU=`交集面积/并集面积`。DETR 将预测视为集合，通过一对一匹配对应真实目标；检测 DINO 基于 DETR 路线，和自监督 DINO 不是同一系列。分割需区分语义类别与实例身份；SAM 接受点、框或掩码提示，输出分割掩码。CLIP 的图文共享嵌入支持零样本类别文本匹配，但其相似度不是未经校准的概率。
+目标检测需表示框坐标、类别、无目标类与重叠程度。两个区域 $A,B$ 的重叠程度可用 $\operatorname{IoU}(A,B)=\frac{|A\cap B|}{|A\cup B|}$ 表示。DETR 将预测视为集合，通过一对一匹配对应真实目标；检测 DINO 基于 DETR 路线，和自监督 DINO 不是同一系列。分割需区分语义类别与实例身份；SAM 接受点、框或掩码提示，输出分割掩码。CLIP 的图文共享嵌入支持零样本类别文本匹配，但其相似度不是未经校准的概率。
 
 **练习**：手算两个 4×4 方框水平错开 2 像素时的 IoU（交集 8、并集 24，IoU=1/3）；手动画一个图像里两个同类物体的语义掩码与实例掩码。**验收**：能区分分类、检测、语义分割、实例分割、提示分割的标注和指标。
 
@@ -486,7 +562,7 @@ CNN 用局部卷积和权重共享提取特征；随层数增加，感受野变�
 - [ ] 能在纸上推导 patch 数、Q/K/V 和注意力矩阵的形状。
 - [ ] 能手算单层线性模型的梯度，并用 autograd 验证。
 - [ ] 能解释交叉熵、KL、ELBO 和重参数化。
-- [ ] 能解释 `x_t=√ᾱ_t x_0+√(1−ᾱ_t)ε` 的每一项。
+- [ ] 能解释 $x_t=\sqrt{\bar\alpha_t}\,x_0+\sqrt{1-\bar\alpha_t}\,\varepsilon$ 的每一项。
 - [ ] 知道何时需要 ODE/SDE、匹配、互信息等进阶知识。
 
 ### PyTorch

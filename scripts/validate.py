@@ -24,6 +24,10 @@ for path in docs.glob("*.html"):
             assert href[1:] in ids, (path.name, href)
         else:
             assert (path.parent / href.split("#")[0]).exists(), (path.name, href)
+    for asset in soup.select("script[src],link[rel=stylesheet][href]"):
+        url = asset.get("src") or asset["href"]
+        if not url.startswith(("http://", "https://")):
+            assert (path.parent / url).is_file(), (path.name, url)
     for table in soup.select("table"):
         n = len(table.select("thead th"))
         for row in table.select("tbody tr"):
@@ -31,4 +35,8 @@ for path in docs.glob("*.html"):
             assert len(cells) == n and all("data-label" in c.attrs for c in cells)
     print(f"{path.name}: OK")
 assert len(BeautifulSoup((docs / "index.html").read_text(encoding="utf-8"), "html.parser").select("article")) == 30
+math_page = BeautifulSoup((docs / "tutorial.html").read_text(encoding="utf-8"), "html.parser")
+assert len(math_page.select("[data-tex]")) >= 40, "Mathematical expressions were not preserved"
+assert len(math_page.select(".math-display")) >= 10, "Missing display equations"
+assert "MATHPLACEHOLDER" not in str(math_page), "Unrestored equation placeholder"
 print("30 paper records, four pages, internal links and table labels: OK")

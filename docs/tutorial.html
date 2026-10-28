@@ -5,8 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
 <title>视觉论文前置知识完整教程</title>
+<link rel="stylesheet" href="assets/katex/katex.min.css">
+<script defer src="assets/katex/katex.min.js"></script>
+<script defer src="assets/math.js"></script>
 <style>
 :root{--ink:#182536;--muted:#607185;--accent:#176e76;--paper:#fff;--bg:#f3f6f9;--line:#dce4eb}
+.math-inline{display:inline-block;max-width:100%;vertical-align:middle;overflow-x:auto;overflow-y:hidden;padding:2px 0}.math-display{max-width:100%;overflow-x:auto;overflow-y:hidden;padding:10px 0;margin:16px 0}.math-display .katex-display{margin:.5em 0}.math-error{color:#a32828;background:#fff0f0}.content .katex{font-size:1.08em}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.8 system-ui,"Microsoft YaHei",sans-serif}
 a{color:var(--accent);text-underline-offset:3px}a:hover{color:#0e4b53}
 .top{background:#14273d;color:#fff;padding:14px max(4vw,24px);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
@@ -164,8 +168,10 @@ python -c "import torch; print(torch.__version__); print(torch.cuda.is_available
 <h2 id="1">1. 数学基础：按论文需要学习</h2>
 <h3 id="11">1.1 线性代数与张量</h3>
 <p><strong>必会内容</strong>：向量、矩阵、转置、矩阵乘法、内积、范数、正交、特征值/奇异值的直觉；张量的形状、广播、批量矩阵乘法。矩阵乘法要求内维相等：<code>[B,N,D] @ [B,D,M] -&gt; [B,N,M]</code>。广播要从右侧维度对齐，长度必须相同或其中一个为 1。</p>
-<p><strong>视觉例子</strong>：224×224 RGB 图像，patch 大小 16×16，共有 <code>(224/16)^2=196</code> 个 patch。每个 patch 展平后有 <code>16×16×3=768</code> 个值。线性投影到 <code>D=768</code> 后，ViT 输入形状为 <code>[B,196,768]</code>；加入一个分类 token 后为 <code>[B,197,768]</code>。</p>
-<p><strong>自注意力形状推导</strong>：<code>Q=XW_Q</code>、<code>K=XW_K</code>、<code>V=XW_V</code>。若 <code>X∈R^{B×N×D}</code>，单头维度为 <code>d</code>，则 <code>Q,K,V∈R^{B×N×d}</code>，<code>QKᵀ∈R^{B×N×N}</code>，<code>softmax(QKᵀ/√d)V∈R^{B×N×d}</code>。<code>N×N</code> 注意力矩阵解释了标准全局注意力随 token 数增长的内存压力。多头注意力把通道拆成若干头，输出拼接后再投影。</p>
+<p><strong>视觉例子</strong>：224×224 RGB 图像，patch 大小 16×16，共有 <span class="math-inline" data-tex="(224/16)^2=196">(224/16)^2=196</span> 个 patch。每个 patch 展平后有 <span class="math-inline" data-tex="16\times16\times3=768">16\times16\times3=768</span> 个值。线性投影到 <span class="math-inline" data-tex="D=768">D=768</span> 后，ViT 输入形状为 <code>[B,196,768]</code>；加入一个分类 token 后为 <code>[B,197,768]</code>。</p>
+<p><strong>自注意力形状推导</strong>：<span class="math-inline" data-tex="Q=XW_Q">Q=XW_Q</span>、<span class="math-inline" data-tex="K=XW_K">K=XW_K</span>、<span class="math-inline" data-tex="V=XW_V">V=XW_V</span>。若 <span class="math-inline" data-tex="X\in\mathbb{R}^{B\times N\times D}">X\in\mathbb{R}^{B\times N\times D}</span>，单头维度为 <span class="math-inline" data-tex="d">d</span>，则 <span class="math-inline" data-tex="Q,K,V\in\mathbb{R}^{B\times N\times d}">Q,K,V\in\mathbb{R}^{B\times N\times d}</span>，<span class="math-inline" data-tex="QK^\top\in\mathbb{R}^{B\times N\times N}">QK^\top\in\mathbb{R}^{B\times N\times N}</span>。注意力输出为：</p>
+<div class="math-display" data-tex="\operatorname{Attention}(Q,K,V)=\operatorname{softmax}\!\left(\frac{QK^\top}{\sqrt d}\right)V\in\mathbb{R}^{B\times N\times d}.">\operatorname{Attention}(Q,K,V)=\operatorname{softmax}\!\left(\frac{QK^\top}{\sqrt d}\right)V\in\mathbb{R}^{B\times N\times d}.</div>
+<p><span class="math-inline" data-tex="N\times N">N\times N</span> 注意力矩阵解释了标准全局注意力随 token 数增长的内存压力。多头注意力把通道拆成若干头，输出拼接后再投影。</p>
 <p><strong>练习</strong>：用纸算 <code>2×3</code> 矩阵乘 <code>3×2</code> 矩阵；在 PyTorch 中分别打印 <code>x.shape</code>、<code>x.transpose(-2,-1).shape</code> 和 <code>x @ x.transpose(-2,-1)</code> 的形状。</p>
 <p><strong>合格标准</strong>：不靠运行代码，也能说出卷积特征图、patch tokens、Q/K/V 与注意力权重的形状。对应 Transformer、ViT、Swin、DETR、DiT、DINO。</p>
 <p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
@@ -201,10 +207,14 @@ python -c "import torch; print(torch.__version__); print(torch.cuda.is_available
 </tbody>
 </table>
 <h3 id="12">1.2 微积分、链式法则与反向传播</h3>
-<p>函数 <code>y=f(x)</code> 的导数表示局部变化率；多变量函数用偏导/梯度。链式法则：若 <code>L=g(f(x))</code>，则 <code>dL/dx=(dL/df)(df/dx)</code>。神经网络反向传播就是把这个规则沿计算图重复应用。</p>
-<p><strong>手算例子</strong>：<code>y=wx+b</code>，<code>L=(y-t)^2/2</code>，所以 <code>∂L/∂w=(y-t)x</code>、<code>∂L/∂b=y-t</code>。一次 SGD 更新是 <code>w←w−η∂L/∂w</code>。梯度不是直接“修改参数”；优化器读取梯度后才更新。多步累积梯度前通常要清零。</p>
+<p>函数 <span class="math-inline" data-tex="y=f(x)">y=f(x)</span> 的导数表示局部变化率；多变量函数用偏导/梯度。链式法则：若 <span class="math-inline" data-tex="L=g(f(x))">L=g(f(x))</span>，则：</p>
+<div class="math-display" data-tex="\frac{\mathrm dL}{\mathrm dx}=\frac{\mathrm dL}{\mathrm df}\frac{\mathrm df}{\mathrm dx}.">\frac{\mathrm dL}{\mathrm dx}=\frac{\mathrm dL}{\mathrm df}\frac{\mathrm df}{\mathrm dx}.</div>
+<p>神经网络反向传播就是把这个规则沿计算图重复应用。</p>
+<p><strong>手算例子</strong>：<span class="math-inline" data-tex="y=wx+b">y=wx+b</span>，<span class="math-inline" data-tex="L=(y-t)^2/2">L=(y-t)^2/2</span>，所以：</p>
+<div class="math-display" data-tex="\frac{\partial L}{\partial w}=(y-t)x,\qquad \frac{\partial L}{\partial b}=y-t.">\frac{\partial L}{\partial w}=(y-t)x,\qquad \frac{\partial L}{\partial b}=y-t.</div>
+<p>一次 SGD 更新是 <span class="math-inline" data-tex="w\leftarrow w-\eta\,\frac{\partial L}{\partial w}">w\leftarrow w-\eta\,\frac{\partial L}{\partial w}</span>。梯度不是直接“修改参数”；优化器读取梯度后才更新。多步累积梯度前通常要清零。</p>
 <p><strong>常见坑</strong>：在训练前错误调用 <code>detach()</code> 会切断梯度；原地操作可能破坏反向传播需要的值；把 <code>model.eval()</code> 当成关闭梯度是误解——它主要切换 Dropout/BatchNorm 行为，评估还需 <code>torch.inference_mode()</code> 或 <code>torch.no_grad()</code>。</p>
-<p><strong>练习</strong>：手算 <code>x=2,w=3,b=1,t=5</code> 的 <code>L</code>、<code>∂L/∂w</code>、<code>∂L/∂b</code>；再用 PyTorch <code>backward()</code> 对照。</p>
+<p><strong>练习</strong>：手算 <span class="math-inline" data-tex="x=2,w=3,b=1,t=5">x=2,w=3,b=1,t=5</span> 的 <span class="math-inline" data-tex="L">L</span>、<span class="math-inline" data-tex="\partial L/\partial w">\partial L/\partial w</span>、<span class="math-inline" data-tex="\partial L/\partial b">\partial L/\partial b</span>；再用 PyTorch <code>backward()</code> 对照。</p>
 <p><strong>合格标准</strong>：能解释 <code>loss.backward()</code>、<code>optimizer.step()</code>、<code>zero_grad()</code> 的顺序，并能定位“梯度为 None”的问题。对应全部 30 篇。</p>
 <p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
 <table class="resource-table">
@@ -234,10 +244,24 @@ python -c "import torch; print(torch.__version__); print(torch.cuda.is_available
 </tbody>
 </table>
 <h3 id="13">1.3 概率、统计与信息论</h3>
-<p><strong>概率必会</strong>：随机变量、条件概率、贝叶斯公式 <code>p(z|x)=p(x|z)p(z)/p(x)</code>、期望、方差、协方差、独立与条件独立；正态分布 <code>N(μ,σ²)</code>；联合分布与边缘化 <code>p(x)=∫p(x,z)dz</code>。模型里的 <code>p(x|z)</code> 是“给定潜变量生成数据”的条件分布，<code>q(z|x)</code> 常是近似后验。</p>
+<p><strong>概率必会</strong>：随机变量、条件概率、贝叶斯公式、期望、方差、协方差、独立与条件独立；正态分布 <span class="math-inline" data-tex="\mathcal N(\mu,\sigma^2)">\mathcal N(\mu,\sigma^2)</span>；联合分布与边缘化：</p>
+<div class="math-display" data-tex="p(z\mid x)=\frac{p(x\mid z)p(z)}{p(x)},\qquad p(x)=\int p(x,z)\,\mathrm dz.">p(z\mid x)=\frac{p(x\mid z)p(z)}{p(x)},\qquad p(x)=\int p(x,z)\,\mathrm dz.</div>
+<p>模型里的 <span class="math-inline" data-tex="p(x\mid z)">p(x\mid z)</span> 是“给定潜变量生成数据”的条件分布，<span class="math-inline" data-tex="q(z\mid x)">q(z\mid x)</span> 常是近似后验。</p>
 <p><strong>统计必会</strong>：样本均值、标准误、置信区间直觉、随机种子与重复运行、分布偏移。训练集指标高不证明泛化；评价必须区分随机波动和真实改进。分类还要理解类别不平衡与混淆矩阵。</p>
-<p><strong>信息论必会</strong>：熵 <code>H(p)=−E_p log p</code>，交叉熵 <code>H(p,q)=−E_p log q</code>，KL 散度 <code>D_KL(q||p)=E_q log(q/p)≥0</code>。交叉熵可用于分类；KL 在 VAE 中约束近似后验与先验，在蒸馏和分布匹配中也会出现。KL 不对称：<code>D_KL(p||q)</code> 与 <code>D_KL(q||p)</code> 通常不同。</p>
-<p><strong>练习</strong>：对二分类 <code>p=(1,0)</code>、预测 <code>q=(0.8,0.2)</code> 计算交叉熵 <code>−log 0.8</code>；把预测改成 <code>(0.2,0.8)</code> 再比较。对一维高斯 <code>q=N(μ,σ²)</code> 与 <code>p=N(0,1)</code>，记住 <code>KL=0.5(μ²+σ²−1−log σ²)</code>，检查 <code>μ=0,σ=1</code> 时为 0。</p>
+<p><strong>信息论必会</strong>：熵、交叉熵、KL 散度分别为：</p>
+<div class="math-display" data-tex="\begin{aligned}
+H(p)&amp;=-\mathbb E_{x\sim p}[\log p(x)],\\
+H(p,q)&amp;=-\mathbb E_{x\sim p}[\log q(x)],\\
+D_{\mathrm{KL}}(q\Vert p)&amp;=\mathbb E_{x\sim q}\!\left[\log\frac{q(x)}{p(x)}\right]\ge0.
+\end{aligned}">\begin{aligned}
+H(p)&amp;=-\mathbb E_{x\sim p}[\log p(x)],\\
+H(p,q)&amp;=-\mathbb E_{x\sim p}[\log q(x)],\\
+D_{\mathrm{KL}}(q\Vert p)&amp;=\mathbb E_{x\sim q}\!\left[\log\frac{q(x)}{p(x)}\right]\ge0.
+\end{aligned}</div>
+<p>交叉熵可用于分类；KL 在 VAE 中约束近似后验与先验，在蒸馏和分布匹配中也会出现。KL 不对称：<span class="math-inline" data-tex="D_{\mathrm{KL}}(p\Vert q)">D_{\mathrm{KL}}(p\Vert q)</span> 与 <span class="math-inline" data-tex="D_{\mathrm{KL}}(q\Vert p)">D_{\mathrm{KL}}(q\Vert p)</span> 通常不同。</p>
+<p><strong>练习</strong>：对二分类 <span class="math-inline" data-tex="p=(1,0)">p=(1,0)</span>、预测 <span class="math-inline" data-tex="q=(0.8,0.2)">q=(0.8,0.2)</span> 计算交叉熵 <span class="math-inline" data-tex="-\log 0.8">-\log 0.8</span>；把预测改成 <span class="math-inline" data-tex="(0.2,0.8)">(0.2,0.8)</span> 再比较。对一维高斯 <span class="math-inline" data-tex="q=\mathcal N(\mu,\sigma^2)">q=\mathcal N(\mu,\sigma^2)</span> 与 <span class="math-inline" data-tex="p=\mathcal N(0,1)">p=\mathcal N(0,1)</span>，记住：</p>
+<div class="math-display" data-tex="D_{\mathrm{KL}}(q\Vert p)=\frac12\left(\mu^2+\sigma^2-1-\log\sigma^2\right).">D_{\mathrm{KL}}(q\Vert p)=\frac12\left(\mu^2+\sigma^2-1-\log\sigma^2\right).</div>
+<p>检查 <span class="math-inline" data-tex="\mu=0,\sigma=1">\mu=0,\sigma=1</span> 时为 0。</p>
 <p><strong>合格标准</strong>：读 VAE 的 ELBO、DINO/CLIP 的分布或对比目标时，能说清概率分布、目标和优化方向。对应 VAE、beta-VAE、NVAE、DINO、CLIP、扩散模型。</p>
 <p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
 <table class="resource-table">
@@ -272,7 +296,9 @@ python -c "import torch; print(torch.__version__); print(torch.cuda.is_available
 </tbody>
 </table>
 <h3 id="14">1.4 优化、数值稳定与泛化</h3>
-<p>经验风险最小化：<code>min_θ (1/n)Σ_i ℓ(f_θ(x_i),y_i)</code>。SGD 使用小批量梯度近似全数据梯度；Adam/AdamW 使用动量与自适应尺度。学习率通常比“换一个新模块”更影响能否稳定训练。权重衰减、数据增强、早停、学习率调度控制过拟合或训练动态。</p>
+<p>经验风险最小化：</p>
+<div class="math-display" data-tex="\min_\theta\;\frac1n\sum_{i=1}^{n}\ell\bigl(f_\theta(x_i),y_i\bigr).">\min_\theta\;\frac1n\sum_{i=1}^{n}\ell\bigl(f_\theta(x_i),y_i\bigr).</div>
+<p>SGD 使用小批量梯度近似全数据梯度；Adam/AdamW 使用动量与自适应尺度。学习率通常比“换一个新模块”更影响能否稳定训练。权重衰减、数据增强、早停、学习率调度控制过拟合或训练动态。</p>
 <p><strong>数值知识</strong>：<code>logsumexp</code>/稳定 softmax，梯度裁剪，混合精度，过大/过小学习率，NaN/Inf 排查。<code>softmax</code> 之前直接 <code>exp</code> 很大数会溢出；分类任务优先给 <code>CrossEntropyLoss</code> 原始 logits，避免重复 softmax。训练日志至少记录 loss、验证指标、学习率、随机种子、耗时。</p>
 <p><strong>练习</strong>：同一个小模型比较学习率 <code>1e-4</code>、<code>1e-3</code>、<code>1e-1</code>；画训练/验证曲线，描述欠拟合、过拟合和发散。</p>
 <p><strong>合格标准</strong>：能判断性能变化来自模型还是训练设置，能排查不收敛。对应 DeiT、DINOv2/v3、DiT、NVAE 等训练敏感论文。</p>
@@ -310,11 +336,25 @@ python -c "import torch; print(torch.__version__); print(torch.cuda.is_available
 </table>
 <h3 id="15">1.5 生成模型专项数学</h3>
 <p><strong>VAE 的 ELBO</strong>：</p>
-<p><code>log p_θ(x) ≥ E_{q_φ(z|x)}[log p_θ(x|z)] − D_KL(q_φ(z|x)||p(z))</code>。</p>
-<p>前一项鼓励重建/生成质量，后一项约束潜变量分布。常见重参数化：<code>z=μ_φ(x)+σ_φ(x)⊙ε</code>，<code>ε∼N(0,I)</code>；随机性移到不依赖参数的 <code>ε</code>，梯度能传到 <code>μ,σ</code>。beta-VAE 改成 <code>重建项−β·KL</code>，更大 β 常加强约束，但不保证真实因素自动解耦。离散 VQ-VAE 采用码本量化，不是把上述连续高斯公式直接套上。</p>
-<p><strong>DDPM 的前向加噪</strong>：给定 <code>α_t=1−β_t</code>、<code>ᾱ_t=∏_{s≤t}α_s</code>，可一次采样 <code>x_t=√ᾱ_t x_0+√(1−ᾱ_t) ε</code>，<code>ε∼N(0,I)</code>。最小训练目标常写成 <code>E||ε−ε_θ(x_t,t)||²</code>。训练是预测噪声，采样是从噪声逐步回到图像；两者不要混淆。DDIM 改变采样路径，CFG 组合有条件/无条件预测以调节条件引导。</p>
-<p><strong>Flow Matching 的直觉</strong>：学习随时间变化的速度场 <code>v_θ(x,t)</code>，让样本沿连续流从简单分布到数据分布；它与扩散模型有关联，但目标和采样表述需要单独读。Score-SDE 则用连续时间随机微分方程表述得分模型，要求对微分方程有基本直觉。</p>
-<p><strong>练习</strong>：画出 <code>ᾱ_t</code> 从接近 1 降到接近 0 时 <code>x_t</code> 的信噪变化；手算 <code>μ=0,σ=1</code> 的 VAE KL；运行配套脚本中的 <code>concepts_demo()</code>。</p>
+<div class="math-display" data-tex="\begin{aligned}
+\log p_\theta(x)\;&amp;\ge\;\mathcal L_{\mathrm{ELBO}}(x),\\
+\mathcal L_{\mathrm{ELBO}}(x)&amp;=\mathbb E_{q_\phi(z\mid x)}[\log p_\theta(x\mid z)]\\
+&amp;\quad-D_{\mathrm{KL}}\!\left(q_\phi(z\mid x)\Vert p(z)\right).
+\end{aligned}">\begin{aligned}
+\log p_\theta(x)\;&amp;\ge\;\mathcal L_{\mathrm{ELBO}}(x),\\
+\mathcal L_{\mathrm{ELBO}}(x)&amp;=\mathbb E_{q_\phi(z\mid x)}[\log p_\theta(x\mid z)]\\
+&amp;\quad-D_{\mathrm{KL}}\!\left(q_\phi(z\mid x)\Vert p(z)\right).
+\end{aligned}</div>
+<p>前一项鼓励重建/生成质量，后一项约束潜变量分布。常见重参数化：</p>
+<div class="math-display" data-tex="z=\mu_\phi(x)+\sigma_\phi(x)\odot\varepsilon,\qquad\varepsilon\sim\mathcal N(0,I).">z=\mu_\phi(x)+\sigma_\phi(x)\odot\varepsilon,\qquad\varepsilon\sim\mathcal N(0,I).</div>
+<p>随机性移到不依赖参数的 <span class="math-inline" data-tex="\varepsilon">\varepsilon</span>，梯度能传到 <span class="math-inline" data-tex="\mu,\sigma">\mu,\sigma</span>。beta-VAE 将目标改成“重建项 <span class="math-inline" data-tex="-\beta\cdot\mathrm{KL}">-\beta\cdot\mathrm{KL}</span>”，更大 <span class="math-inline" data-tex="\beta">\beta</span> 常加强约束，但不保证真实因素自动解耦。离散 VQ-VAE 采用码本量化，不是把上述连续高斯公式直接套上。</p>
+<p><strong>DDPM 的前向加噪</strong>：给定 <span class="math-inline" data-tex="\alpha_t=1-\beta_t">\alpha_t=1-\beta_t</span>、<span class="math-inline" data-tex="\bar\alpha_t=\prod_{s=1}^{t}\alpha_s">\bar\alpha_t=\prod_{s=1}^{t}\alpha_s</span>，可一次采样：</p>
+<div class="math-display" data-tex="x_t=\sqrt{\bar\alpha_t}\,x_0+\sqrt{1-\bar\alpha_t}\,\varepsilon,\qquad\varepsilon\sim\mathcal N(0,I).">x_t=\sqrt{\bar\alpha_t}\,x_0+\sqrt{1-\bar\alpha_t}\,\varepsilon,\qquad\varepsilon\sim\mathcal N(0,I).</div>
+<p>常见的简化训练目标是：</p>
+<div class="math-display" data-tex="\mathcal L_{\mathrm{simple}}=\mathbb E_{x_0,t,\varepsilon}\!\left[\left\|\varepsilon-\varepsilon_\theta(x_t,t)\right\|_2^2\right].">\mathcal L_{\mathrm{simple}}=\mathbb E_{x_0,t,\varepsilon}\!\left[\left\|\varepsilon-\varepsilon_\theta(x_t,t)\right\|_2^2\right].</div>
+<p>训练是预测噪声，采样是从噪声逐步回到图像；两者不要混淆。DDIM 改变采样路径，CFG 组合有条件/无条件预测以调节条件引导。</p>
+<p><strong>Flow Matching 的直觉</strong>：学习随时间变化的速度场 <span class="math-inline" data-tex="v_\theta(x,t)">v_\theta(x,t)</span>，让样本沿连续流从简单分布到数据分布；它与扩散模型有关联，但目标和采样表述需要单独读。Score-SDE 则用连续时间随机微分方程表述得分模型，要求对微分方程有基本直觉。</p>
+<p><strong>练习</strong>：画出 <span class="math-inline" data-tex="\bar\alpha_t">\bar\alpha_t</span> 从接近 1 降到接近 0 时 <span class="math-inline" data-tex="x_t">x_t</span> 的信噪变化；手算 <span class="math-inline" data-tex="\mu=0,\sigma=1">\mu=0,\sigma=1</span> 的 VAE KL；运行配套脚本中的 <code>concepts_demo()</code>。</p>
 <p><strong>合格标准</strong>：能逐项解释 ELBO 与 DDPM 噪声预测公式，并清楚区分 VAE、VQ-VAE、扩散、Flow Matching。对应 01–08、15–20。</p>
 <p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
 <table class="resource-table">
@@ -625,7 +665,9 @@ print(patches.shape)  # [8, 768, 196]
 <h2 id="3">3. 计算机视觉：任务、模型与评价</h2>
 <h3 id="31">3.1 数字图像与预处理</h3>
 <p>图像是采样后的像素阵列。区分像素坐标、通道顺序 RGB/BGR、uint8 <code>0–255</code> 与 float <code>0–1</code>、均值方差归一化、插值、缩放、裁剪和长宽比。卷积核聚合局部邻域，步幅改变采样间隔，padding 影响边缘和输出尺寸；下采样可能损失细节。图像分类可接受某些几何变化，医学/遥感等领域增强必须符合任务语义。</p>
-<p>卷积输出高度公式：<code>H_out=floor((H+2P−D(K−1)−1)/S+1)</code>，宽度同理；其中 <code>K</code> 核大小、<code>S</code> 步幅、<code>P</code> padding、<code>D</code> 膨胀。<strong>练习</strong>：计算输入 32、核 3、padding 1、stride 2 的输出尺寸 16。<strong>验收</strong>：能独立解释输入图像预处理与模型预训练设置不一致为何导致性能下降。</p>
+<p>卷积输出高度公式：</p>
+<div class="math-display" data-tex="H_{\mathrm{out}}=\left\lfloor\frac{H+2P-D(K-1)-1}{S}+1\right\rfloor.">H_{\mathrm{out}}=\left\lfloor\frac{H+2P-D(K-1)-1}{S}+1\right\rfloor.</div>
+<p>宽度同理；其中 <span class="math-inline" data-tex="K">K</span> 是核大小、<span class="math-inline" data-tex="S">S</span> 是步幅、<span class="math-inline" data-tex="P">P</span> 是 padding、<span class="math-inline" data-tex="D">D</span> 是膨胀。<strong>练习</strong>：计算输入 32、核 3、padding 1、stride 2 的输出尺寸 16。<strong>验收</strong>：能独立解释输入图像预处理与模型预训练设置不一致为何导致性能下降。</p>
 <p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
 <table class="resource-table">
 <thead>
@@ -736,7 +778,7 @@ print(patches.shape)  # [8, 768, 196]
 </tbody>
 </table>
 <h3 id="33-cnn-u-net">3.3 CNN、残差网络与 U-Net</h3>
-<p>CNN 用局部卷积和权重共享提取特征；随层数增加，感受野变大、分辨率常下降。残差连接 <code>y=x+F(x)</code> 帮助深网络优化。U-Net 以编码器提取多尺度特征、解码器恢复空间分辨率、跳连保留细节，是理解扩散去噪网络的重要前置结构。</p>
+<p>CNN 用局部卷积和权重共享提取特征；随层数增加，感受野变大、分辨率常下降。残差连接 <span class="math-inline" data-tex="y=x+F(x)">y=x+F(x)</span> 帮助深网络优化。U-Net 以编码器提取多尺度特征、解码器恢复空间分辨率、跳连保留细节，是理解扩散去噪网络的重要前置结构。</p>
 <p><strong>练习</strong>：画出 28×28 → 14×14 → 7×7 的特征图大小与通道数；实现一个两层 CNN 分类器。<strong>验收</strong>：能解释为何分割比分类更需要保留空间位置。</p>
 <p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
 <table class="resource-table">
@@ -867,7 +909,7 @@ print(patches.shape)  # [8, 768, 196]
 </tbody>
 </table>
 <h3 id="37">3.7 检测、分割与多模态</h3>
-<p>目标检测需表示框坐标、类别、无目标类与重叠程度。IoU=<code>交集面积/并集面积</code>。DETR 将预测视为集合，通过一对一匹配对应真实目标；检测 DINO 基于 DETR 路线，和自监督 DINO 不是同一系列。分割需区分语义类别与实例身份；SAM 接受点、框或掩码提示，输出分割掩码。CLIP 的图文共享嵌入支持零样本类别文本匹配，但其相似度不是未经校准的概率。</p>
+<p>目标检测需表示框坐标、类别、无目标类与重叠程度。两个区域 <span class="math-inline" data-tex="A,B">A,B</span> 的重叠程度可用 <span class="math-inline" data-tex="\operatorname{IoU}(A,B)=\frac{|A\cap B|}{|A\cup B|}">\operatorname{IoU}(A,B)=\frac{|A\cap B|}{|A\cup B|}</span> 表示。DETR 将预测视为集合，通过一对一匹配对应真实目标；检测 DINO 基于 DETR 路线，和自监督 DINO 不是同一系列。分割需区分语义类别与实例身份；SAM 接受点、框或掩码提示，输出分割掩码。CLIP 的图文共享嵌入支持零样本类别文本匹配，但其相似度不是未经校准的概率。</p>
 <p><strong>练习</strong>：手算两个 4×4 方框水平错开 2 像素时的 IoU（交集 8、并集 24，IoU=1/3）；手动画一个图像里两个同类物体的语义掩码与实例掩码。<strong>验收</strong>：能区分分类、检测、语义分割、实例分割、提示分割的标注和指标。</p>
 <p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
 <table class="resource-table">
@@ -1036,7 +1078,7 @@ print(patches.shape)  # [8, 768, 196]
 <li><input disabled="" type="checkbox"/> 能在纸上推导 patch 数、Q/K/V 和注意力矩阵的形状。</li>
 <li><input disabled="" type="checkbox"/> 能手算单层线性模型的梯度，并用 autograd 验证。</li>
 <li><input disabled="" type="checkbox"/> 能解释交叉熵、KL、ELBO 和重参数化。</li>
-<li><input disabled="" type="checkbox"/> 能解释 <code>x_t=√ᾱ_t x_0+√(1−ᾱ_t)ε</code> 的每一项。</li>
+<li><input disabled="" type="checkbox"/> 能解释 <span class="math-inline" data-tex="x_t=\sqrt{\bar\alpha_t}\,x_0+\sqrt{1-\bar\alpha_t}\,\varepsilon">x_t=\sqrt{\bar\alpha_t}\,x_0+\sqrt{1-\bar\alpha_t}\,\varepsilon</span> 的每一项。</li>
 <li><input disabled="" type="checkbox"/> 知道何时需要 ODE/SDE、匹配、互信息等进阶知识。</li>
 </ul>
 <h3 id="pytorch">PyTorch</h3>

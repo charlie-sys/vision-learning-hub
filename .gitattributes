@@ -1,2 +1,5 @@
 * text=auto eol=lf
 *.pdf binary
+*.woff binary
+*.woff2 binary
+*.ttf binary

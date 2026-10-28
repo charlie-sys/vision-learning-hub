@@ -5,3 +5,5 @@
 论文记录及引用见 `data/papers.json`、`data/references.bib`。仓库中的论文目录链接到 arXiv、会议网站或作者公开页面；下载脚本直接从这些公开来源获取文件。公开访问不等于允许再分发，因此第三方 PDF 不纳入本仓库的 Git 历史。下载后请遵循原始来源的许可。
 
 学习链接主要来自《动手学深度学习》、PyTorch/TorchVision、MIT OpenCourseWare、斯坦福 CS231n/CS236、NumPy、Python、Pillow 和 scikit-learn。教程包含资料入口及学习目标；外部课程内容通过原始页面访问。
+
+数学排版使用 KaTeX 0.16.22（MIT 许可证），脚本、样式与字体存放于 `vendor/katex/`，完整许可证见该目录的 `LICENSE`。构建时复制到 `docs/assets/katex/`，支持离线渲染。来源：https://github.com/KaTeX/KaTeX 。
