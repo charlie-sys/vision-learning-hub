@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>视觉论文完整指南</title>
+<style>
+:root{--ink:#182536;--muted:#607185;--accent:#176e76;--paper:#fff;--bg:#f3f6f9;--line:#dce4eb}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.8 system-ui,"Microsoft YaHei",sans-serif}
+a{color:var(--accent);text-underline-offset:3px}a:hover{color:#0e4b53}
+.top{background:#14273d;color:#fff;padding:14px max(4vw,24px);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.top a{color:#e8f5f5;text-decoration:none}.top strong{letter-spacing:.02em}.top nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}
+.layout{max-width:1500px;margin:auto;display:grid;grid-template-columns:280px minmax(0,1fr);gap:26px;padding:28px 4vw 64px}
+.side{align-self:start;position:sticky;top:20px;max-height:calc(100vh - 40px);overflow:auto;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px 16px;box-shadow:0 4px 18px #17233708}
+.side label{display:block;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.12em;margin:0 0 10px}
+.side input{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:14px;margin-bottom:10px}
+.side ul{list-style:none;padding-left:0;margin:0}.side ul ul{padding-left:14px;border-left:1px solid var(--line);margin-left:5px}
+.side li{margin:3px 0}.side a{display:block;text-decoration:none;padding:3px 6px;border-radius:6px;color:#31475e;font-size:13px;line-height:1.45}
+.side li.level-3{padding-left:15px}
+.side a:hover,.side a.active{background:#e8f3f2;color:#0e6167}.side li[hidden]{display:none}
+.content{min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:clamp(22px,4vw,60px);box-shadow:0 8px 28px #17233708}
+.content h1{font-size:clamp(28px,3vw,40px);line-height:1.3;margin-top:0;color:#14273d}
+.content h2{font-size:26px;border-top:1px solid var(--line);padding-top:32px;margin-top:48px;color:#154f62}
+.content h3{font-size:20px;margin-top:28px;color:#1e6672}.content h1,.content h2,.content h3{scroll-margin-top:20px}
+.content p{margin:13px 0}.content li{margin:5px 0}.content blockquote{margin:20px 0;padding:10px 20px;border-left:4px solid #31868a;background:#eff7f7;color:#385b60}
+.content table{border-collapse:collapse;width:100%;min-width:0;font-size:14px;line-height:1.55;table-layout:auto}
+.content th,.content td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+.content th,.content td{overflow-wrap:anywhere}
+.content th{background:#edf3f6}.content tr:nth-child(even){background:#fafcfd}
+.content .resource-table th{background:#e7f1f0;color:#135d63}.content .resource-table td:nth-child(2){font-weight:600}
+.content .cols-5{table-layout:fixed}.content .cols-5 th:nth-child(1){width:6%}.content .cols-5 th:nth-child(2){width:41%}.content .cols-5 th:nth-child(3){width:19%}.content .cols-5 th:nth-child(4){width:9%}.content .cols-5 th:nth-child(5){width:25%}
+.content .cols-5 td:nth-child(4),.content .cols-5 th:nth-child(4){white-space:nowrap}
+.content .table-wrap{overflow:auto;margin:18px 0;border-radius:8px}
+code{font-family:Consolas,"Cascadia Code",monospace;font-size:.88em;background:#eef3f6;border-radius:4px;padding:2px 5px;overflow-wrap:anywhere}
+pre{background:#15283d;color:#e8f1f6;border-radius:9px;padding:16px 19px;overflow:auto;line-height:1.55}pre code{background:transparent;color:inherit;padding:0;white-space:pre;overflow-wrap:normal}
+.content input[type=checkbox]{margin-right:8px;accent-color:var(--accent)}
+.back{position:fixed;right:22px;bottom:22px;background:#176e76;color:white;padding:8px 14px;border-radius:999px;text-decoration:none;box-shadow:0 4px 15px #0002;font-size:13px}
+@media(max-width:1150px){.layout{display:block;padding:14px}.side{position:relative;max-height:260px;margin-bottom:14px}.content{padding:22px}}
+@media(min-width:761px) and (max-width:1300px){.content .wide-table,.content .wide-table tbody,.content .wide-table tr,.content .wide-table td{display:block;width:100%}.content .wide-table thead{display:none}.content .wide-table tr{border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:13px 0;background:#fff;box-shadow:0 2px 9px #1723370a}.content .wide-table td{border:0;border-bottom:1px solid var(--line);padding:9px 12px;white-space:normal}.content .wide-table td:last-child{border-bottom:0}.content .wide-table td::before{content:attr(data-label);display:inline-block;min-width:115px;font-size:12px;font-weight:700;color:#397a7e;margin-right:12px;vertical-align:top}}
+@media(max-width:760px){.content{padding:18px}.content h2{font-size:22px}.content h3{font-size:18px}.content .table-wrap{overflow:visible}.content table,.content tbody,.content tr,.content td{display:block;width:100%}.content thead{display:none}.content tr{border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:13px 0;background:#fff;box-shadow:0 2px 9px #1723370a}.content td{border:0;border-bottom:1px solid var(--line);padding:9px 12px}.content td:last-child{border-bottom:0}.content td::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;color:#397a7e;margin-bottom:3px}.content .resource-table{min-width:0}}
+@media print{.top,.side,.back{display:none}.layout{display:block;padding:0}.content{border:0;box-shadow:none;padding:0}body{background:#fff}.content h2{break-before:page}pre,table{break-inside:avoid}}
+</style>
+</head>
+<body id="top">
+<header class="top"><strong>视觉论文学习库</strong><nav><a href="index.html">30 篇论文目录</a><a href="guide.html">完整指南</a><a href="lab.html">PyTorch 小实验</a></nav></header>
+<div class="layout"><aside class="side"><label for="toc-search">章节目录</label><input id="toc-search" type="search" placeholder="搜索章节…" aria-label="搜索章节"><div class="toc"><ul><li class="level-2"><a href="#_2">推荐阅读顺序</a></li><li class="level-2"><a href="#_3">概念区分</a></li><li class="level-2"><a href="#_4">分组清单</a></li><li class="level-3"><a href="#_5">扩散与流匹配</a></li><li class="level-3"><a href="#transformer">视觉Transformer</a></li><li class="level-3"><a href="#vae">VAE与视觉编码</a></li><li class="level-3"><a href="#dino">自监督DINO</a></li><li class="level-3"><a href="#_6">其他视觉基础</a></li><li class="level-2"><a href="#_7">获取论文全文</a></li></ul></div></aside>
+<main class="content"><h1 id="_1">视觉论文阅读清单与路线</h1>
+<p>整理日期：2026-10-28。精选30篇，提供公开全文来源。</p>
+<p>范围：扩散/流匹配、视觉Transformer、VAE及视觉编码、自监督DINO和相邻视觉基础模型。以经典方法和代表性演进为主，并非完整综述或2026年最新论文排名。标题、作者和首发日期主要通过arXiv官方API核对；beta-VAE依据作者主页。阅读年份按会议年份或标明的预印本年份排列，可能不同于arXiv首发年份。</p>
+<h2 id="_2">推荐阅读顺序</h2>
+<ol>
+<li><strong>架构基础</strong>：Transformer → ViT → Swin。原始Transformer论文研究机器翻译，作为视觉方法的前置基础。</li>
+<li><strong>生成主线</strong>：VAE → VQ-VAE / VQGAN → DDPM → DDIM → CFG → Latent Diffusion → DiT。之后阅读Score-SDE、Consistency Models与Flow Matching。</li>
+<li><strong>视觉表征主线</strong>：SimCLR / MoCo → DINO → iBOT → DINOv2 → Registers → DINOv3；与MAE对照理解不同自监督目标。</li>
+<li><strong>视觉任务与多模态</strong>：DETR → 目标检测DINO；CLIP → SAM，用来理解图文对齐与提示分割。</li>
+</ol>
+<h2 id="_3">概念区分</h2>
+<ul>
+<li>自监督DINO（Caron等）与目标检测DINO（Zhang等）是不同工作。</li>
+<li>MAE的autoencoder不等同于变分自编码器VAE；VQGAN也包含对抗训练与离散视觉编码。</li>
+<li>Flow Matching是相邻的连续流生成方法，不应直接当成DDPM的同义词。</li>
+<li>只下载论文PDF，不另行获取补充附件；公开PDF内原本包含的附录予以保留。arXiv公开稿可能与最终出版版不同。</li>
+</ul>
+<h2 id="_4">分组清单</h2>
+<h3 id="_5">扩散与流匹配</h3>
+<table class="wide-table cols-5">
+<thead>
+<tr>
+<th>编号</th>
+<th>简称 / 论文</th>
+<th>年份与会议</th>
+<th>优先级</th>
+<th>阅读重点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="编号">01</td>
+<td data-label="简称 / 论文"><strong>DDPM</strong>：<a href="https://arxiv.org/abs/2006.11239" rel="noopener noreferrer" target="_blank"> Denoising Diffusion Probabilistic Models </a></td>
+<td data-label="年份与会议">2020 · NeurIPS 2020</td>
+<td data-label="优先级">必读</td>
+<td data-label="阅读重点">扩散生成基础：前向加噪、反向去噪与噪声预测训练目标。</td>
+</tr>
+<tr>
+<td data-label="编号">02</td>
+<td data-label="简称 / 论文"><strong>DDIM</strong>：<a href="https://arxiv.org/abs/2010.02502" rel="noopener noreferrer" target="_blank"> Denoising Diffusion Implicit Models </a></td>
+<td data-label="年份与会议">2021 · ICLR 2021</td>
+<td data-label="优先级">必读</td>
+<td data-label="阅读重点">理解非马尔可夫采样，以及少步生成与采样轨迹。</td>
+</tr>
+<tr>
+<td data-label="编号">03</td>
+<td data-label="简称 / 论文"><strong>Score-SDE</strong>：<a href="https://arxiv.org/abs/2011.13456" rel="noopener noreferrer" target="_blank"> Score-Based Generative Modeling through Stochastic Differential Equations </a></td>
+<td data-label="年份与会议">2021 · ICLR 2021</td>
+<td data-label="优先级">进阶</td>
+<td data-label="阅读重点">用随机微分方程统一得分模型与扩散模型，连接概率流ODE。</td>
+</tr>
+<tr>
+<td data-label="编号">04</td>
+<td data-label="简称 / 论文"><strong>CFG</strong>：<a href="https://arxiv.org/abs/2207.12598" rel="noopener noreferrer" target="_blank"> Classifier-Free Diffusion Guidance </a></td>
+<td data-label="年份与会议">2022 · arXiv / NeurIPS 2021 Workshop</td>
+<td data-label="优先级">必读</td>
+<td data-label="阅读重点">无分类器引导：条件与无条件预测结合，控制条件遵循程度。</td>
+</tr>
+<tr>
+<td data-label="编号">05</td>
+<td data-label="简称 / 论文"><strong>Latent-Diffusion</strong>：<a href="https://arxiv.org/abs/2112.10752" rel="noopener noreferrer" target="_blank"> High-Resolution Image Synthesis with Latent Diffusion Models </a></td>
+<td data-label="年份与会议">2022 · CVPR 2022</td>
+<td data-label="优先级">必读</td>
+<td data-label="阅读重点">将扩散放入压缩潜空间；理解自编码器、交叉注意力与文本条件生成。</td>
+</tr>
+<tr>
+<td data-label="编号">06</td>
+<td data-label="简称 / 论文"><strong>DiT</strong>：<a href="https://arxiv.org/abs/2212.09748" rel="noopener noreferrer" target="_blank"> Scalable Diffusion Models with Transformers </a></td>
+<td data-label="年份与会议">2023 · ICCV 2023</td>
+<td data-label="优先级">必读</td>
+<td data-label="阅读重点">用Transformer替代U-Net，连接视觉Transformer与潜空间扩散。</td>
+</tr>
+<tr>
+<td data-label="编号">07</td>
+<td data-label="简称 / 论文"><strong>Consistency-Models</strong>：<a href="https://arxiv.org/abs/2303.01469" rel="noopener noreferrer" target="_blank"> Consistency Models </a></td>
+<td data-label="年份与会议">2023 · ICML 2023</td>
+<td data-label="优先级">进阶</td>
+<td data-label="阅读重点">通过一致性映射实现一步或少步生成；可与扩散蒸馏对照。</td>
+</tr>
+<tr>
+<td data-label="编号">08</td>
+<td data-label="简称 / 论文"><strong>Flow-Matching</strong>：<a href="https://arxiv.org/abs/2210.02747" rel="noopener noreferrer" target="_blank"> Flow Matching for Generative Modeling </a></td>
+<td data-label="年份与会议">2023 · ICLR 2023</td>
+<td data-label="优先级">进阶</td>
+<td data-label="阅读重点">学习连续流的速度场；属于相邻生成路线，并不等同于DDPM。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="transformer">视觉Transformer</h3>
+<table class="wide-table cols-5">
+<thead>
+<tr>
+<th>编号</th>
+<th>简称 / 论文</th>
+<th>年份与会议</th>
+<th>优先级</th>
+<th>阅读重点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="编号">09</td>
+<td data-label="简称 / 论文"><strong>Transformer</strong>：<a href="https://arxiv.org/abs/1706.03762" rel="noopener noreferrer" target="_blank"> Attention Is All You Need </a></td>
+<td data-label="年份与会议">2017 · NeurIPS 2017</td>
+<td data-label="优先级">必读</td>
+<td data-label="阅读重点">自注意力与Transformer原始论文；任务是机器翻译，作为视觉Transformer前置基础。</td>
+</tr>
+<tr>
+<td data-label="编号">10</td>
+<td data-label="简称 / 论文"><strong>ViT</strong>：<a href="https://arxiv.org/abs/2010.11929" rel="noopener noreferrer" target="_blank"> An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale </a></td>
+<td data-label="年份与会议">2021 · ICLR 2021</td>
+<td data-label="优先级">必读</td>
+<td data-label="阅读重点">图像切成patch token，再用Transformer进行图像分类。</td>
+</tr>
+<tr>
+<td data-label="编号">11</td>
+<td data-label="简称 / 论文"><strong>DeiT</strong>：<a href="https://arxiv.org/abs/2012.12877" rel="noopener noreferrer" target="_blank"> Training data-efficient image transformers &amp; distillation through attention </a></td>
+<td data-label="年份与会议">2021 · ICML 2021</td>
+<td data-label="优先级">拓展</td>
+<td data-label="阅读重点">数据高效训练与蒸馏token，理解ViT训练策略。</td>
+</tr>
+<tr>
+<td data-label="编号">12</td>
+<td data-label="简称 / 论文"><strong>Swin</strong>：<a href="https://arxiv.org/abs/2103.14030" rel="noopener noreferrer" target="_blank"> Swin Transformer: Hierarchical Vision Transformer using Shifted Windows </a></td>
+<td data-label="年份与会议">2021 · ICCV 2021</td>
+<td data-label="优先级">必读</td>
+<td data-label="阅读重点">分层表示与移位窗口注意力，面向检测和分割的通用视觉骨干。</td>
+</tr>
+<tr>
+<td data-label="编号">13</td>
+<td data-label="简称 / 论文"><strong>DETR</strong>：<a href="https://arxiv.org/abs/2005.12872" rel="noopener noreferrer" target="_blank"> End-to-End Object Detection with Transformers </a></td>
+<td data-label="年份与会议">2020 · ECCV 2020</td>
+<td data-label="优先级">必读</td>
+<td data-label="阅读重点">集合预测、object query与二分图匹配，建立端到端目标检测框架。</td>
+</tr>
+<tr>
+<td data-label="编号">14</td>
+<td data-label="简称 / 论文"><strong>MAE</strong>：<a href="https://arxiv.org/abs/2111.06377" rel="noopener noreferrer" target="_blank"> Masked Autoencoders Are Scalable Vision Learners </a></td>
+<td data-label="年份与会议">2022 · CVPR 2022</td>
+<td data-label="优先级">必读</td>
+<td data-label="阅读重点">高比例掩码与像素重建，理解视觉自监督预训练；MAE不是VAE。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="vae">VAE与视觉编码</h3>
+<table class="wide-table cols-5">
+<thead>
+<tr>
+<th>编号</th>
+<th>简称 / 论文</th>
+<th>年份与会议</th>
+<th>优先级</th>
+<th>阅读重点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="编号">15</td>
+<td data-label="简称 / 论文"><strong>VAE</strong>：<a href="https://arxiv.org/abs/1312.6114" rel="noopener noreferrer" target="_blank"> Auto-Encoding Variational Bayes </a></td>
+<td data-label="年份与会议">2014 · ICLR 2014</td>
+<td data-label="优先级">必读</td>
+<td data-label="阅读重点">ELBO、重参数化技巧和连续潜变量生成模型的基础。</td>
+</tr>
+<tr>
+<td data-label="编号">16</td>
+<td data-label="简称 / 论文"><strong>beta-VAE</strong>：<a href="https://www.matthey.me/publication/beta_vae/" rel="noopener noreferrer" target="_blank"> beta-VAE: Learning Basic Visual Concepts with a Constrained Variational Framework </a></td>
+<td data-label="年份与会议">2017 · ICLR 2017</td>
+<td data-label="优先级">必读</td>
+<td data-label="阅读重点">调整KL项权重探索解耦表征；不能保证在任意数据上自动得到真实生成因素。</td>
+</tr>
+<tr>
+<td data-label="编号">17</td>
+<td data-label="简称 / 论文"><strong>VQ-VAE</strong>：<a href="https://arxiv.org/abs/1711.00937" rel="noopener noreferrer" target="_blank"> Neural Discrete Representation Learning </a></td>
+<td data-label="年份与会议">2017 · NeurIPS 2017</td>
+<td data-label="优先级">必读</td>
+<td data-label="阅读重点">向量量化和离散码本，将图像转成可供生成模型使用的离散潜变量。</td>
+</tr>
+<tr>
+<td data-label="编号">18</td>
+<td data-label="简称 / 论文"><strong>VQ-VAE-2</strong>：<a href="https://arxiv.org/abs/1906.00446" rel="noopener noreferrer" target="_blank"> Generating Diverse High-Fidelity Images with VQ-VAE-2 </a></td>
+<td data-label="年份与会议">2019 · NeurIPS 2019</td>
+<td data-label="优先级">拓展</td>
+<td data-label="阅读重点">分层离散潜表示与高保真图像生成，接续VQ-VAE阅读。</td>
+</tr>
+<tr>
+<td data-label="编号">19</td>
+<td data-label="简称 / 论文"><strong>NVAE</strong>：<a href="https://arxiv.org/abs/2007.03898" rel="noopener noreferrer" target="_blank"> NVAE: A Deep Hierarchical Variational Autoencoder </a></td>
+<td data-label="年份与会议">2020 · NeurIPS 2020</td>
+<td data-label="优先级">进阶</td>
+<td data-label="阅读重点">深层分层VAE及其训练和架构设计，研究高分辨率图像建模。</td>
+</tr>
+<tr>
+<td data-label="编号">20</td>
+<td data-label="简称 / 论文"><strong>VQGAN</strong>：<a href="https://arxiv.org/abs/2012.09841" rel="noopener noreferrer" target="_blank"> Taming Transformers for High-Resolution Image Synthesis </a></td>
+<td data-label="年份与会议">2021 · CVPR 2021</td>
+<td data-label="优先级">必读</td>
+<td data-label="阅读重点">融合感知压缩、对抗训练与Transformer先验；属于离散视觉编码与生成路线。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dino">自监督DINO</h3>
+<table class="wide-table cols-5">
+<thead>
+<tr>
+<th>编号</th>
+<th>简称 / 论文</th>
+<th>年份与会议</th>
+<th>优先级</th>
+<th>阅读重点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="编号">21</td>
+<td data-label="简称 / 论文"><strong>DINO-SSL</strong>：<a href="https://arxiv.org/abs/2104.14294" rel="noopener noreferrer" target="_blank"> Emerging Properties in Self-Supervised Vision Transformers </a></td>
+<td data-label="年份与会议">2021 · ICCV 2021</td>
+<td data-label="优先级">必读</td>
+<td data-label="阅读重点">无标签自蒸馏、teacher-student和多裁剪训练，观察ViT的语义特征。</td>
+</tr>
+<tr>
+<td data-label="编号">22</td>
+<td data-label="简称 / 论文"><strong>DINOv2</strong>：<a href="https://arxiv.org/abs/2304.07193" rel="noopener noreferrer" target="_blank"> DINOv2: Learning Robust Visual Features without Supervision </a></td>
+<td data-label="年份与会议">2023 · arXiv 2023 / TMLR 2024</td>
+<td data-label="优先级">必读</td>
+<td data-label="阅读重点">规模化数据整理和自监督训练，获得可迁移的视觉通用特征。</td>
+</tr>
+<tr>
+<td data-label="编号">23</td>
+<td data-label="简称 / 论文"><strong>Registers</strong>：<a href="https://arxiv.org/abs/2309.16588" rel="noopener noreferrer" target="_blank"> Vision Transformers Need Registers </a></td>
+<td data-label="年份与会议">2024 · ICLR 2024</td>
+<td data-label="优先级">进阶</td>
+<td data-label="阅读重点">用register token改善ViT特征图中的伪影，关联DINOv2的稠密特征。</td>
+</tr>
+<tr>
+<td data-label="编号">24</td>
+<td data-label="简称 / 论文"><strong>DINOv3</strong>：<a href="https://arxiv.org/abs/2508.10104" rel="noopener noreferrer" target="_blank"> DINOv3 </a></td>
+<td data-label="年份与会议">2025 · arXiv 2025</td>
+<td data-label="优先级">进阶</td>
+<td data-label="阅读重点">研究更大规模自监督视觉特征与稠密表示；与DINO、DINOv2形成演进线。</td>
+</tr>
+<tr>
+<td data-label="编号">25</td>
+<td data-label="简称 / 论文"><strong>iBOT</strong>：<a href="https://arxiv.org/abs/2111.07832" rel="noopener noreferrer" target="_blank"> iBOT: Image BERT Pre-Training with Online Tokenizer </a></td>
+<td data-label="年份与会议">2022 · ICLR 2022</td>
+<td data-label="优先级">进阶</td>
+<td data-label="阅读重点">在线视觉tokenizer与掩码预测，连接DINO式自蒸馏和局部patch表征。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_6">其他视觉基础</h3>
+<table class="wide-table cols-5">
+<thead>
+<tr>
+<th>编号</th>
+<th>简称 / 论文</th>
+<th>年份与会议</th>
+<th>优先级</th>
+<th>阅读重点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="编号">26</td>
+<td data-label="简称 / 论文"><strong>CLIP</strong>：<a href="https://arxiv.org/abs/2103.00020" rel="noopener noreferrer" target="_blank"> Learning Transferable Visual Models From Natural Language Supervision </a></td>
+<td data-label="年份与会议">2021 · ICML 2021</td>
+<td data-label="优先级">必读</td>
+<td data-label="阅读重点">图像与文本对比学习及零样本迁移，连接视觉表征和语言条件生成。</td>
+</tr>
+<tr>
+<td data-label="编号">27</td>
+<td data-label="简称 / 论文"><strong>SAM</strong>：<a href="https://arxiv.org/abs/2304.02643" rel="noopener noreferrer" target="_blank"> Segment Anything </a></td>
+<td data-label="年份与会议">2023 · ICCV 2023</td>
+<td data-label="优先级">必读</td>
+<td data-label="阅读重点">提示驱动的通用分割基础模型，关注点、框和掩码提示。</td>
+</tr>
+<tr>
+<td data-label="编号">28</td>
+<td data-label="简称 / 论文"><strong>SimCLR</strong>：<a href="https://arxiv.org/abs/2002.05709" rel="noopener noreferrer" target="_blank"> A Simple Framework for Contrastive Learning of Visual Representations </a></td>
+<td data-label="年份与会议">2020 · ICML 2020</td>
+<td data-label="优先级">拓展</td>
+<td data-label="阅读重点">对比学习中的数据增强、投影头与批量大小，作为自监督基础对照。</td>
+</tr>
+<tr>
+<td data-label="编号">29</td>
+<td data-label="简称 / 论文"><strong>MoCo</strong>：<a href="https://arxiv.org/abs/1911.05722" rel="noopener noreferrer" target="_blank"> Momentum Contrast for Unsupervised Visual Representation Learning </a></td>
+<td data-label="年份与会议">2020 · CVPR 2020</td>
+<td data-label="优先级">拓展</td>
+<td data-label="阅读重点">动量编码器与队列字典，理解视觉对比学习如何构造负样本。</td>
+</tr>
+<tr>
+<td data-label="编号">30</td>
+<td data-label="简称 / 论文"><strong>DINO-Detection</strong>：<a href="https://arxiv.org/abs/2203.03605" rel="noopener noreferrer" target="_blank"> DINO: DETR with Improved DeNoising Anchor Boxes for End-to-End Object Detection </a></td>
+<td data-label="年份与会议">2023 · ICLR 2023</td>
+<td data-label="优先级">拓展</td>
+<td data-label="阅读重点">改进去噪anchor query的DETR检测器；与Meta的自监督DINO系列不同。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_7">获取论文全文</h2>
+<p>在<a href="index.html">论文目录</a>中点击公开 PDF 来源，或在项目根目录运行 <code>python scripts/download_papers.py</code>。下载的第三方论文遵循各自许可证。</p><p><a href="guide.md">下载本页 Markdown 源文</a></p></main></div><a class="back" href="#top" aria-label="返回顶部">↑ 返回顶部</a>
+<script>
+document.body.id='top';
+document.querySelectorAll('.content table').forEach(t=>{const w=document.createElement('div');w.className='table-wrap';t.parentNode.insertBefore(w,t);w.appendChild(t)});
+const tocLinks=[...document.querySelectorAll('.side li')];
+document.querySelector('#toc-search').addEventListener('input',e=>{const q=e.target.value.trim().toLowerCase();tocLinks.forEach(li=>{li.hidden=!!q && !li.textContent.toLowerCase().includes(q)})});
+const anchors=[...document.querySelectorAll('.side a[href^="#"]')];
+const byId=new Map(anchors.map(a=>[a.getAttribute('href').slice(1),a]));
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){anchors.forEach(a=>a.classList.remove('active'));byId.get(e.target.id)?.classList.add('active')}})},{rootMargin:'-10% 0px -75% 0px'});
+document.querySelectorAll('.content h1[id],.content h2[id],.content h3[id]').forEach(h=>obs.observe(h));
+</script>
+</body></html>

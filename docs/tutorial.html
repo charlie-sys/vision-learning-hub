@@ -1,0 +1,1082 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>视觉论文前置知识完整教程</title>
+<style>
+:root{--ink:#182536;--muted:#607185;--accent:#176e76;--paper:#fff;--bg:#f3f6f9;--line:#dce4eb}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.8 system-ui,"Microsoft YaHei",sans-serif}
+a{color:var(--accent);text-underline-offset:3px}a:hover{color:#0e4b53}
+.top{background:#14273d;color:#fff;padding:14px max(4vw,24px);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.top a{color:#e8f5f5;text-decoration:none}.top strong{letter-spacing:.02em}.top nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}
+.layout{max-width:1500px;margin:auto;display:grid;grid-template-columns:280px minmax(0,1fr);gap:26px;padding:28px 4vw 64px}
+.side{align-self:start;position:sticky;top:20px;max-height:calc(100vh - 40px);overflow:auto;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px 16px;box-shadow:0 4px 18px #17233708}
+.side label{display:block;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.12em;margin:0 0 10px}
+.side input{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:14px;margin-bottom:10px}
+.side ul{list-style:none;padding-left:0;margin:0}.side ul ul{padding-left:14px;border-left:1px solid var(--line);margin-left:5px}
+.side li{margin:3px 0}.side a{display:block;text-decoration:none;padding:3px 6px;border-radius:6px;color:#31475e;font-size:13px;line-height:1.45}
+.side li.level-3{padding-left:15px}
+.side a:hover,.side a.active{background:#e8f3f2;color:#0e6167}.side li[hidden]{display:none}
+.content{min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:clamp(22px,4vw,60px);box-shadow:0 8px 28px #17233708}
+.content h1{font-size:clamp(28px,3vw,40px);line-height:1.3;margin-top:0;color:#14273d}
+.content h2{font-size:26px;border-top:1px solid var(--line);padding-top:32px;margin-top:48px;color:#154f62}
+.content h3{font-size:20px;margin-top:28px;color:#1e6672}.content h1,.content h2,.content h3{scroll-margin-top:20px}
+.content p{margin:13px 0}.content li{margin:5px 0}.content blockquote{margin:20px 0;padding:10px 20px;border-left:4px solid #31868a;background:#eff7f7;color:#385b60}
+.content table{border-collapse:collapse;width:100%;min-width:0;font-size:14px;line-height:1.55;table-layout:auto}
+.content th,.content td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+.content th,.content td{overflow-wrap:anywhere}
+.content th{background:#edf3f6}.content tr:nth-child(even){background:#fafcfd}
+.content .resource-table th{background:#e7f1f0;color:#135d63}.content .resource-table td:nth-child(2){font-weight:600}
+.content .cols-5{table-layout:fixed}.content .cols-5 th:nth-child(1){width:6%}.content .cols-5 th:nth-child(2){width:41%}.content .cols-5 th:nth-child(3){width:19%}.content .cols-5 th:nth-child(4){width:9%}.content .cols-5 th:nth-child(5){width:25%}
+.content .cols-5 td:nth-child(4),.content .cols-5 th:nth-child(4){white-space:nowrap}
+.content .table-wrap{overflow:auto;margin:18px 0;border-radius:8px}
+code{font-family:Consolas,"Cascadia Code",monospace;font-size:.88em;background:#eef3f6;border-radius:4px;padding:2px 5px;overflow-wrap:anywhere}
+pre{background:#15283d;color:#e8f1f6;border-radius:9px;padding:16px 19px;overflow:auto;line-height:1.55}pre code{background:transparent;color:inherit;padding:0;white-space:pre;overflow-wrap:normal}
+.content input[type=checkbox]{margin-right:8px;accent-color:var(--accent)}
+.back{position:fixed;right:22px;bottom:22px;background:#176e76;color:white;padding:8px 14px;border-radius:999px;text-decoration:none;box-shadow:0 4px 15px #0002;font-size:13px}
+@media(max-width:1150px){.layout{display:block;padding:14px}.side{position:relative;max-height:260px;margin-bottom:14px}.content{padding:22px}}
+@media(min-width:761px) and (max-width:1300px){.content .wide-table,.content .wide-table tbody,.content .wide-table tr,.content .wide-table td{display:block;width:100%}.content .wide-table thead{display:none}.content .wide-table tr{border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:13px 0;background:#fff;box-shadow:0 2px 9px #1723370a}.content .wide-table td{border:0;border-bottom:1px solid var(--line);padding:9px 12px;white-space:normal}.content .wide-table td:last-child{border-bottom:0}.content .wide-table td::before{content:attr(data-label);display:inline-block;min-width:115px;font-size:12px;font-weight:700;color:#397a7e;margin-right:12px;vertical-align:top}}
+@media(max-width:760px){.content{padding:18px}.content h2{font-size:22px}.content h3{font-size:18px}.content .table-wrap{overflow:visible}.content table,.content tbody,.content tr,.content td{display:block;width:100%}.content thead{display:none}.content tr{border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:13px 0;background:#fff;box-shadow:0 2px 9px #1723370a}.content td{border:0;border-bottom:1px solid var(--line);padding:9px 12px}.content td:last-child{border-bottom:0}.content td::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;color:#397a7e;margin-bottom:3px}.content .resource-table{min-width:0}}
+@media print{.top,.side,.back{display:none}.layout{display:block;padding:0}.content{border:0;box-shadow:none;padding:0}body{background:#fff}.content h2{break-before:page}pre,table{break-inside:avoid}}
+</style>
+</head>
+<body id="top">
+<header class="top"><strong>视觉论文学习库</strong><nav><a href="index.html">30 篇论文目录</a><a href="guide.html">完整指南</a><a href="lab.html">PyTorch 小实验</a></nav></header>
+<div class="layout"><aside class="side"><label for="toc-search">章节目录</label><input id="toc-search" type="search" placeholder="搜索章节…" aria-label="搜索章节"><div class="toc"><ul><li class="level-2"><a href="#0">0. 开始前：准备、术语与学习验收</a></li><li class="level-3"><a href="#01">0.1 环境</a></li><li class="level-3"><a href="#02">0.2 四层学习标准</a></li><li class="level-3"><a href="#03">0.3 共通约定</a></li><li class="level-2"><a href="#1">1. 数学基础：按论文需要学习</a></li><li class="level-3"><a href="#11">1.1 线性代数与张量</a></li><li class="level-3"><a href="#12">1.2 微积分、链式法则与反向传播</a></li><li class="level-3"><a href="#13">1.3 概率、统计与信息论</a></li><li class="level-3"><a href="#14">1.4 优化、数值稳定与泛化</a></li><li class="level-3"><a href="#15">1.5 生成模型专项数学</a></li><li class="level-3"><a href="#16">1.6 进阶数学何时补</a></li><li class="level-2"><a href="#2-pytorch">2. PyTorch：从张量到可靠实验</a></li><li class="level-3"><a href="#21">2.1 张量操作与设备</a></li><li class="level-3"><a href="#22">2.2 自动微分、模块与损失</a></li><li class="level-3"><a href="#23-datasetdataloader">2.3 Dataset、DataLoader 与数据增强</a></li><li class="level-3"><a href="#24">2.4 完整训练循环与评估</a></li><li class="level-3"><a href="#25">2.5 检查点、复现与性能</a></li><li class="level-3"><a href="#26">2.6 最小实现关卡</a></li><li class="level-2"><a href="#3">3. 计算机视觉：任务、模型与评价</a></li><li class="level-3"><a href="#31">3.1 数字图像与预处理</a></li><li class="level-3"><a href="#32">3.2 分类、检测、分割、检索与生成</a></li><li class="level-3"><a href="#33-cnn-u-net">3.3 CNN、残差网络与 U-Net</a></li><li class="level-3"><a href="#34-transformer">3.4 Transformer 在视觉中的用法</a></li><li class="level-3"><a href="#35">3.5 自监督学习、对比学习与蒸馏</a></li><li class="level-3"><a href="#36">3.6 生成视觉模型的结构关系</a></li><li class="level-3"><a href="#37">3.7 检测、分割与多模态</a></li><li class="level-3"><a href="#38">3.8 研究实验基本功</a></li><li class="level-2"><a href="#4-30">4. 30 篇论文的知识依赖地图</a></li><li class="level-2"><a href="#5-1216">5. 12–16 周执行计划与交付物</a></li><li class="level-2"><a href="#6">6. 最终自测清单</a></li><li class="level-3"><a href="#_2">数学</a></li><li class="level-3"><a href="#pytorch">PyTorch</a></li><li class="level-3"><a href="#_3">计算机视觉与论文</a></li><li class="level-2"><a href="#7">7. 可靠的后续学习入口</a></li></ul></div></aside>
+<main class="content"><h1 id="_1">视觉论文前置知识完整教程</h1>
+<p><strong>适用目标</strong>：读懂本资料夹中的 30 篇扩散模型、视觉 Transformer、VAE、DINO 与相关视觉论文，并能够独立实现小规模实验。<br/>
+<strong>学习方式</strong>：按“理解概念 → 手算一个例子 → 写最小代码 → 阅读对应论文 → 复现实验”的顺序。<br/>
+<strong>时间参考</strong>：有 Python 基础者约 12–16 周、每周 8–12 小时；时间是估算，不是能力保证。<br/>
+<strong>配套资料</strong>：<a href="guide.html">论文阅读指南</a>｜<a href="index.html">可搜索论文目录</a>｜<a href="lab.html">可运行 PyTorch 实验</a>。</p>
+<blockquote>
+<p>本教程覆盖读这些论文的核心前置知识与入门实践，不替代完整的数学或深度学习教材。每节给出“合格标准”；达到标准后就可以进入对应论文，不必等所有知识都学完。</p>
+</blockquote>
+<h2 id="0">0. 开始前：准备、术语与学习验收</h2>
+<h3 id="01">0.1 环境</h3>
+<p>建议掌握 Python 函数、类、列表/字典、文件路径、虚拟环境、NumPy 数组。先在终端检查：</p>
+<pre><code class="language-bash">python --version
+python -c "import torch; print(torch.__version__); print(torch.cuda.is_available())"
+</code></pre>
+<p>安装命令应按 <a href="https://pytorch.org/get-started/locally/" rel="noopener noreferrer" target="_blank">PyTorch 官方安装页</a> 的操作系统和硬件选项生成；CPU 也能完成本教程的小实验。无需大型数据集即可运行 <code>python vision_basics_lab.py</code>。若要训练真实分类模型，先从 FashionMNIST 或 CIFAR-10 开始。</p>
+<p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
+<table class="resource-table">
+<thead>
+<tr>
+<th>知识点</th>
+<th>直达教学资料</th>
+<th>学习目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="知识点">Python 语法、函数、类</td>
+<td data-label="直达教学资料"><a href="https://docs.python.org/3/tutorial/" rel="noopener noreferrer" target="_blank">Python 官方教程（完整课程）</a></td>
+<td data-label="学习目标">先学第 3–9 章，再写函数和类。</td>
+</tr>
+<tr>
+<td data-label="知识点">NumPy 数组、索引、形状</td>
+<td data-label="直达教学资料"><a href="https://numpy.org/doc/stable/user/quickstart.html" rel="noopener noreferrer" target="_blank">NumPy Quickstart（官方）</a></td>
+<td data-label="学习目标">边读边做数组形状与索引练习。</td>
+</tr>
+<tr>
+<td data-label="知识点">PyTorch 安装和设备</td>
+<td data-label="直达教学资料"><a href="https://pytorch.org/get-started/locally/" rel="noopener noreferrer" target="_blank">PyTorch 官方安装向导</a></td>
+<td data-label="学习目标">按本机系统和 CPU/CUDA 选择命令。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="02">0.2 四层学习标准</h3>
+<table>
+<thead>
+<tr>
+<th>层级</th>
+<th>你能做什么</th>
+<th>证据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="层级">识别</td>
+<td data-label="你能做什么">说出术语和任务</td>
+<td data-label="证据">能解释输入、输出、损失和数据</td>
+</tr>
+<tr>
+<td data-label="层级">推导</td>
+<td data-label="你能做什么">从公式推出张量形状和目标</td>
+<td data-label="证据">能手算二维或小批量例子</td>
+</tr>
+<tr>
+<td data-label="层级">实现</td>
+<td data-label="你能做什么">写出能训练、验证的最小模型</td>
+<td data-label="证据">代码运行，损失下降，指标可复现</td>
+</tr>
+<tr>
+<td data-label="层级">研究</td>
+<td data-label="你能做什么">解释论文选择并做公平对照</td>
+<td data-label="证据">有基线、消融、误差分析和实验记录</td>
+</tr>
+</tbody>
+</table>
+<p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
+<table class="resource-table">
+<thead>
+<tr>
+<th>知识点</th>
+<th>直达教学资料</th>
+<th>学习目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="知识点">从概念到实验的完整路径</td>
+<td data-label="直达教学资料"><a href="https://cs231n.stanford.edu/2025/" rel="noopener noreferrer" target="_blank">斯坦福 CS231n 课程与作业</a></td>
+<td data-label="学习目标">用课程安排和作业检验能否实现与分析。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="03">0.3 共通约定</h3>
+<p>图像张量在 PyTorch 中常用 <code>[B,C,H,W]</code>：批量、通道、高、宽。ViT 中常用 <code>[B,N,D]</code>：批量、token 数、通道维。务必在每次 <code>reshape/permute/flatten</code> 前写出形状。<code>train/validation/test</code> 三份数据各司其职：训练更新参数，验证选择超参数，测试只用于最后报告。所有指标都要注明数据集、划分、预处理和评价协议。</p>
+<hr/>
+<p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
+<table class="resource-table">
+<thead>
+<tr>
+<th>知识点</th>
+<th>直达教学资料</th>
+<th>学习目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="知识点">图像和 token 张量形状</td>
+<td data-label="直达教学资料"><a href="https://docs.pytorch.org/tutorials/beginner/blitz/tensor_tutorial.html" rel="noopener noreferrer" target="_blank">PyTorch 张量教程</a></td>
+<td data-label="学习目标">重点练习 shape、reshape、索引和设备。</td>
+</tr>
+<tr>
+<td data-label="知识点">数据划分与避免泄漏</td>
+<td data-label="直达教学资料"><a href="https://scikit-learn.org/stable/common_pitfalls.html" rel="noopener noreferrer" target="_blank">scikit-learn 常见错误：数据泄漏</a></td>
+<td data-label="学习目标">重点看训练/测试划分和预处理拟合顺序。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="1">1. 数学基础：按论文需要学习</h2>
+<h3 id="11">1.1 线性代数与张量</h3>
+<p><strong>必会内容</strong>：向量、矩阵、转置、矩阵乘法、内积、范数、正交、特征值/奇异值的直觉；张量的形状、广播、批量矩阵乘法。矩阵乘法要求内维相等：<code>[B,N,D] @ [B,D,M] -&gt; [B,N,M]</code>。广播要从右侧维度对齐，长度必须相同或其中一个为 1。</p>
+<p><strong>视觉例子</strong>：224×224 RGB 图像，patch 大小 16×16，共有 <code>(224/16)^2=196</code> 个 patch。每个 patch 展平后有 <code>16×16×3=768</code> 个值。线性投影到 <code>D=768</code> 后，ViT 输入形状为 <code>[B,196,768]</code>；加入一个分类 token 后为 <code>[B,197,768]</code>。</p>
+<p><strong>自注意力形状推导</strong>：<code>Q=XW_Q</code>、<code>K=XW_K</code>、<code>V=XW_V</code>。若 <code>X∈R^{B×N×D}</code>，单头维度为 <code>d</code>，则 <code>Q,K,V∈R^{B×N×d}</code>，<code>QKᵀ∈R^{B×N×N}</code>，<code>softmax(QKᵀ/√d)V∈R^{B×N×d}</code>。<code>N×N</code> 注意力矩阵解释了标准全局注意力随 token 数增长的内存压力。多头注意力把通道拆成若干头，输出拼接后再投影。</p>
+<p><strong>练习</strong>：用纸算 <code>2×3</code> 矩阵乘 <code>3×2</code> 矩阵；在 PyTorch 中分别打印 <code>x.shape</code>、<code>x.transpose(-2,-1).shape</code> 和 <code>x @ x.transpose(-2,-1)</code> 的形状。</p>
+<p><strong>合格标准</strong>：不靠运行代码，也能说出卷积特征图、patch tokens、Q/K/V 与注意力权重的形状。对应 Transformer、ViT、Swin、DETR、DiT、DINO。</p>
+<p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
+<table class="resource-table">
+<thead>
+<tr>
+<th>知识点</th>
+<th>直达教学资料</th>
+<th>学习目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="知识点">向量、矩阵、内积、范数</td>
+<td data-label="直达教学资料"><a href="https://zh.d2l.ai/chapter_preliminaries/linear-algebra.html" rel="noopener noreferrer" target="_blank">《动手学深度学习》2.3 线性代数（中文）</a></td>
+<td data-label="学习目标">含代码与练习，先完成本节。</td>
+</tr>
+<tr>
+<td data-label="知识点">矩阵分解、特征值、SVD</td>
+<td data-label="直达教学资料"><a href="https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/" rel="noopener noreferrer" target="_blank">MIT 18.06 线性代数（完整课程）</a></td>
+<td data-label="学习目标">按需学习特征值与奇异值章节。</td>
+</tr>
+<tr>
+<td data-label="知识点">广播规则</td>
+<td data-label="直达教学资料"><a href="https://numpy.org/doc/stable/user/basics.broadcasting.html" rel="noopener noreferrer" target="_blank">NumPy Broadcasting（官方）</a></td>
+<td data-label="学习目标">手算维度对齐再运行例子。</td>
+</tr>
+<tr>
+<td data-label="知识点">Q/K/V 与多头形状</td>
+<td data-label="直达教学资料"><a href="https://zh.d2l.ai/chapter_attention-mechanisms/multihead-attention.html" rel="noopener noreferrer" target="_blank">《动手学深度学习》多头注意力（中文）</a></td>
+<td data-label="学习目标">对照本文的 <code>[B,N,D]</code> 形状推导。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="12">1.2 微积分、链式法则与反向传播</h3>
+<p>函数 <code>y=f(x)</code> 的导数表示局部变化率；多变量函数用偏导/梯度。链式法则：若 <code>L=g(f(x))</code>，则 <code>dL/dx=(dL/df)(df/dx)</code>。神经网络反向传播就是把这个规则沿计算图重复应用。</p>
+<p><strong>手算例子</strong>：<code>y=wx+b</code>，<code>L=(y-t)^2/2</code>，所以 <code>∂L/∂w=(y-t)x</code>、<code>∂L/∂b=y-t</code>。一次 SGD 更新是 <code>w←w−η∂L/∂w</code>。梯度不是直接“修改参数”；优化器读取梯度后才更新。多步累积梯度前通常要清零。</p>
+<p><strong>常见坑</strong>：在训练前错误调用 <code>detach()</code> 会切断梯度；原地操作可能破坏反向传播需要的值；把 <code>model.eval()</code> 当成关闭梯度是误解——它主要切换 Dropout/BatchNorm 行为，评估还需 <code>torch.inference_mode()</code> 或 <code>torch.no_grad()</code>。</p>
+<p><strong>练习</strong>：手算 <code>x=2,w=3,b=1,t=5</code> 的 <code>L</code>、<code>∂L/∂w</code>、<code>∂L/∂b</code>；再用 PyTorch <code>backward()</code> 对照。</p>
+<p><strong>合格标准</strong>：能解释 <code>loss.backward()</code>、<code>optimizer.step()</code>、<code>zero_grad()</code> 的顺序，并能定位“梯度为 None”的问题。对应全部 30 篇。</p>
+<p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
+<table class="resource-table">
+<thead>
+<tr>
+<th>知识点</th>
+<th>直达教学资料</th>
+<th>学习目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="知识点">导数、偏导、梯度、链式法则</td>
+<td data-label="直达教学资料"><a href="https://zh.d2l.ai/chapter_preliminaries/calculus.html" rel="noopener noreferrer" target="_blank">《动手学深度学习》2.4 微积分（中文）</a></td>
+<td data-label="学习目标">完成链式法则与梯度练习。</td>
+</tr>
+<tr>
+<td data-label="知识点">多元微积分系统学习</td>
+<td data-label="直达教学资料"><a href="https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/" rel="noopener noreferrer" target="_blank">MIT 18.02SC 多元微积分（完整课程）</a></td>
+<td data-label="学习目标">重点看偏导、梯度与链式法则单元。</td>
+</tr>
+<tr>
+<td data-label="知识点">自动微分和计算图</td>
+<td data-label="直达教学资料"><a href="https://docs.pytorch.org/tutorials/beginner/introyt/autogradyt_tutorial.html" rel="noopener noreferrer" target="_blank">PyTorch 自动微分教程（官方）</a></td>
+<td data-label="学习目标">运行例子并对照手算梯度。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="13">1.3 概率、统计与信息论</h3>
+<p><strong>概率必会</strong>：随机变量、条件概率、贝叶斯公式 <code>p(z|x)=p(x|z)p(z)/p(x)</code>、期望、方差、协方差、独立与条件独立；正态分布 <code>N(μ,σ²)</code>；联合分布与边缘化 <code>p(x)=∫p(x,z)dz</code>。模型里的 <code>p(x|z)</code> 是“给定潜变量生成数据”的条件分布，<code>q(z|x)</code> 常是近似后验。</p>
+<p><strong>统计必会</strong>：样本均值、标准误、置信区间直觉、随机种子与重复运行、分布偏移。训练集指标高不证明泛化；评价必须区分随机波动和真实改进。分类还要理解类别不平衡与混淆矩阵。</p>
+<p><strong>信息论必会</strong>：熵 <code>H(p)=−E_p log p</code>，交叉熵 <code>H(p,q)=−E_p log q</code>，KL 散度 <code>D_KL(q||p)=E_q log(q/p)≥0</code>。交叉熵可用于分类；KL 在 VAE 中约束近似后验与先验，在蒸馏和分布匹配中也会出现。KL 不对称：<code>D_KL(p||q)</code> 与 <code>D_KL(q||p)</code> 通常不同。</p>
+<p><strong>练习</strong>：对二分类 <code>p=(1,0)</code>、预测 <code>q=(0.8,0.2)</code> 计算交叉熵 <code>−log 0.8</code>；把预测改成 <code>(0.2,0.8)</code> 再比较。对一维高斯 <code>q=N(μ,σ²)</code> 与 <code>p=N(0,1)</code>，记住 <code>KL=0.5(μ²+σ²−1−log σ²)</code>，检查 <code>μ=0,σ=1</code> 时为 0。</p>
+<p><strong>合格标准</strong>：读 VAE 的 ELBO、DINO/CLIP 的分布或对比目标时，能说清概率分布、目标和优化方向。对应 VAE、beta-VAE、NVAE、DINO、CLIP、扩散模型。</p>
+<p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
+<table class="resource-table">
+<thead>
+<tr>
+<th>知识点</th>
+<th>直达教学资料</th>
+<th>学习目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="知识点">条件概率、贝叶斯、期望方差</td>
+<td data-label="直达教学资料"><a href="https://zh.d2l.ai/chapter_preliminaries/probability.html" rel="noopener noreferrer" target="_blank">《动手学深度学习》2.6 概率（中文）</a></td>
+<td data-label="学习目标">先学概念、再做小题。</td>
+</tr>
+<tr>
+<td data-label="知识点">概率论系统课程</td>
+<td data-label="直达教学资料"><a href="https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/" rel="noopener noreferrer" target="_blank">MIT 6.041SC 概率论（完整课程与习题）</a></td>
+<td data-label="学习目标">需要更完整的概率训练时按课程顺序学。</td>
+</tr>
+<tr>
+<td data-label="知识点">交叉熵与分类概率</td>
+<td data-label="直达教学资料"><a href="https://zh.d2l.ai/chapter_linear-networks/softmax-regression.html" rel="noopener noreferrer" target="_blank">《动手学深度学习》Softmax 回归（中文）</a></td>
+<td data-label="学习目标">理解 logits、softmax 与交叉熵。</td>
+</tr>
+<tr>
+<td data-label="知识点">KL 与变分推断</td>
+<td data-label="直达教学资料"><a href="https://deepgenerativemodels.github.io/notes/vae/" rel="noopener noreferrer" target="_blank">斯坦福 CS236：VAE 教学笔记</a></td>
+<td data-label="学习目标">结合 ELBO 逐项理解 KL 的作用。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="14">1.4 优化、数值稳定与泛化</h3>
+<p>经验风险最小化：<code>min_θ (1/n)Σ_i ℓ(f_θ(x_i),y_i)</code>。SGD 使用小批量梯度近似全数据梯度；Adam/AdamW 使用动量与自适应尺度。学习率通常比“换一个新模块”更影响能否稳定训练。权重衰减、数据增强、早停、学习率调度控制过拟合或训练动态。</p>
+<p><strong>数值知识</strong>：<code>logsumexp</code>/稳定 softmax，梯度裁剪，混合精度，过大/过小学习率，NaN/Inf 排查。<code>softmax</code> 之前直接 <code>exp</code> 很大数会溢出；分类任务优先给 <code>CrossEntropyLoss</code> 原始 logits，避免重复 softmax。训练日志至少记录 loss、验证指标、学习率、随机种子、耗时。</p>
+<p><strong>练习</strong>：同一个小模型比较学习率 <code>1e-4</code>、<code>1e-3</code>、<code>1e-1</code>；画训练/验证曲线，描述欠拟合、过拟合和发散。</p>
+<p><strong>合格标准</strong>：能判断性能变化来自模型还是训练设置，能排查不收敛。对应 DeiT、DINOv2/v3、DiT、NVAE 等训练敏感论文。</p>
+<p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
+<table class="resource-table">
+<thead>
+<tr>
+<th>知识点</th>
+<th>直达教学资料</th>
+<th>学习目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="知识点">SGD 与小批量优化</td>
+<td data-label="直达教学资料"><a href="https://zh.d2l.ai/chapter_optimization/sgd.html" rel="noopener noreferrer" target="_blank">《动手学深度学习》随机梯度下降（中文）</a></td>
+<td data-label="学习目标">手算一次参数更新。</td>
+</tr>
+<tr>
+<td data-label="知识点">Adam 和优化器</td>
+<td data-label="直达教学资料"><a href="https://zh.d2l.ai/chapter_optimization/adam.html" rel="noopener noreferrer" target="_blank">《动手学深度学习》Adam（中文）</a></td>
+<td data-label="学习目标">与 SGD 对比收敛曲线。</td>
+</tr>
+<tr>
+<td data-label="知识点">训练循环与学习率</td>
+<td data-label="直达教学资料"><a href="https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html" rel="noopener noreferrer" target="_blank">PyTorch 优化教程（官方）</a></td>
+<td data-label="学习目标">重点看 zero_grad/backward/step。</td>
+</tr>
+<tr>
+<td data-label="知识点">数据泄漏与泛化</td>
+<td data-label="直达教学资料"><a href="https://scikit-learn.org/stable/common_pitfalls.html" rel="noopener noreferrer" target="_blank">scikit-learn 常见错误（官方）</a></td>
+<td data-label="学习目标">检查先划分数据再拟合预处理。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="15">1.5 生成模型专项数学</h3>
+<p><strong>VAE 的 ELBO</strong>：</p>
+<p><code>log p_θ(x) ≥ E_{q_φ(z|x)}[log p_θ(x|z)] − D_KL(q_φ(z|x)||p(z))</code>。</p>
+<p>前一项鼓励重建/生成质量，后一项约束潜变量分布。常见重参数化：<code>z=μ_φ(x)+σ_φ(x)⊙ε</code>，<code>ε∼N(0,I)</code>；随机性移到不依赖参数的 <code>ε</code>，梯度能传到 <code>μ,σ</code>。beta-VAE 改成 <code>重建项−β·KL</code>，更大 β 常加强约束，但不保证真实因素自动解耦。离散 VQ-VAE 采用码本量化，不是把上述连续高斯公式直接套上。</p>
+<p><strong>DDPM 的前向加噪</strong>：给定 <code>α_t=1−β_t</code>、<code>ᾱ_t=∏_{s≤t}α_s</code>，可一次采样 <code>x_t=√ᾱ_t x_0+√(1−ᾱ_t) ε</code>，<code>ε∼N(0,I)</code>。最小训练目标常写成 <code>E||ε−ε_θ(x_t,t)||²</code>。训练是预测噪声，采样是从噪声逐步回到图像；两者不要混淆。DDIM 改变采样路径，CFG 组合有条件/无条件预测以调节条件引导。</p>
+<p><strong>Flow Matching 的直觉</strong>：学习随时间变化的速度场 <code>v_θ(x,t)</code>，让样本沿连续流从简单分布到数据分布；它与扩散模型有关联，但目标和采样表述需要单独读。Score-SDE 则用连续时间随机微分方程表述得分模型，要求对微分方程有基本直觉。</p>
+<p><strong>练习</strong>：画出 <code>ᾱ_t</code> 从接近 1 降到接近 0 时 <code>x_t</code> 的信噪变化；手算 <code>μ=0,σ=1</code> 的 VAE KL；运行配套脚本中的 <code>concepts_demo()</code>。</p>
+<p><strong>合格标准</strong>：能逐项解释 ELBO 与 DDPM 噪声预测公式，并清楚区分 VAE、VQ-VAE、扩散、Flow Matching。对应 01–08、15–20。</p>
+<p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
+<table class="resource-table">
+<thead>
+<tr>
+<th>知识点</th>
+<th>直达教学资料</th>
+<th>学习目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="知识点">VAE、ELBO、重参数化</td>
+<td data-label="直达教学资料"><a href="https://deepgenerativemodels.github.io/notes/vae/" rel="noopener noreferrer" target="_blank">斯坦福 CS236 深度生成模型：VAE</a></td>
+<td data-label="学习目标">从潜变量到 ELBO 按顺序阅读。</td>
+</tr>
+<tr>
+<td data-label="知识点">生成模型完整课程</td>
+<td data-label="直达教学资料"><a href="https://deepgenerativemodels.github.io/notes/" rel="noopener noreferrer" target="_blank">斯坦福 CS236 开放讲义目录</a></td>
+<td data-label="学习目标">补生成模型、变分推断的整体框架。</td>
+</tr>
+<tr>
+<td data-label="知识点">DDPM 前向/反向过程</td>
+<td data-label="直达教学资料"><a href="https://huggingface.co/learn/diffusion-course/en/unit1/1" rel="noopener noreferrer" target="_blank">Hugging Face 扩散课程 Unit 1</a></td>
+<td data-label="学习目标">跟随 notebook 做加噪和去噪实验。</td>
+</tr>
+<tr>
+<td data-label="知识点">潜空间扩散与文本条件</td>
+<td data-label="直达教学资料"><a href="https://huggingface.co/learn/diffusion-course/en/unit3/1" rel="noopener noreferrer" target="_blank">Hugging Face 扩散课程 Unit 3</a></td>
+<td data-label="学习目标">观察编码器、U-Net、文本条件与解码器。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="16">1.6 进阶数学何时补</h3>
+<table>
+<thead>
+<tr>
+<th>主题</th>
+<th>什么时候需要</th>
+<th>要掌握到什么程度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="主题">常微分/随机微分方程</td>
+<td data-label="什么时候需要">Score-SDE、Flow Matching、Consistency Models</td>
+<td data-label="要掌握到什么程度">状态随时间变化、漂移/噪声项、数值积分直觉</td>
+</tr>
+<tr>
+<td data-label="主题">最优传输</td>
+<td data-label="什么时候需要">深读 Flow Matching</td>
+<td data-label="要掌握到什么程度">耦合、路径、速度场的概念即可起步</td>
+</tr>
+<tr>
+<td data-label="主题">互信息与对比估计</td>
+<td data-label="什么时候需要">CLIP、SimCLR、MoCo</td>
+<td data-label="要掌握到什么程度">正负样本、温度、InfoNCE 目标</td>
+</tr>
+<tr>
+<td data-label="主题">集合匹配/匈牙利算法</td>
+<td data-label="什么时候需要">DETR、检测 DINO</td>
+<td data-label="要掌握到什么程度">一对一匹配为什么避免重复预测</td>
+</tr>
+<tr>
+<td data-label="主题">频域与图像信号处理</td>
+<td data-label="什么时候需要">扩散细节、图像伪影分析</td>
+<td data-label="要掌握到什么程度">低/高频、卷积与采样伪影直觉</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
+<table class="resource-table">
+<thead>
+<tr>
+<th>知识点</th>
+<th>直达教学资料</th>
+<th>学习目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="知识点">ODE 与数值积分</td>
+<td data-label="直达教学资料"><a href="https://ocw.mit.edu/courses/18-03-differential-equations-spring-2010/" rel="noopener noreferrer" target="_blank">MIT 18.03 微分方程（完整课程）</a></td>
+<td data-label="学习目标">学一阶微分方程和欧拉数值法。</td>
+</tr>
+<tr>
+<td data-label="知识点">生成模型的连续时间背景</td>
+<td data-label="直达教学资料"><a href="https://deepgenerativemodels.github.io/notes/" rel="noopener noreferrer" target="_blank">斯坦福 CS236 讲义目录</a></td>
+<td data-label="学习目标">为 Score-SDE 与 Flow Matching 补先修。</td>
+</tr>
+<tr>
+<td data-label="知识点">注意力与对比目标的基础</td>
+<td data-label="直达教学资料"><a href="https://zh.d2l.ai/chapter_attention-mechanisms/index.html" rel="noopener noreferrer" target="_blank">《动手学深度学习》注意力机制（中文）</a></td>
+<td data-label="学习目标">先掌握相似度、softmax 和 Q/K/V。</td>
+</tr>
+<tr>
+<td data-label="知识点">目标检测和框匹配前置</td>
+<td data-label="直达教学资料"><a href="https://zh.d2l.ai/chapter_computer-vision/bounding-box.html" rel="noopener noreferrer" target="_blank">《动手学深度学习》目标检测与边界框（中文）</a></td>
+<td data-label="学习目标">先能计算 IoU 再读 DETR。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-pytorch">2. PyTorch：从张量到可靠实验</h2>
+<h3 id="21">2.1 张量操作与设备</h3>
+<p>掌握 <code>torch.tensor/zeros/randn</code>、<code>dtype</code>、<code>device</code>、<code>shape</code>、索引、切片、<code>view/reshape</code>、<code>permute</code>、<code>flatten</code>、<code>unsqueeze</code>、广播、<code>matmul/einsum</code>。<code>reshape</code> 可能复制数据；<code>view</code> 对内存连续性有限制。图像网络输入通常是 float32 <code>[B,C,H,W]</code>，分类标签通常是 int64 <code>[B]</code>。把模型和输入放在同一设备：</p>
+<pre><code class="language-python">device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+x = torch.randn(8, 3, 224, 224).to(device)
+patches = torch.nn.functional.unfold(x, kernel_size=16, stride=16)
+print(patches.shape)  # [8, 768, 196]
+</code></pre>
+<p><strong>练习</strong>：将上面的结果转成 <code>[8,196,768]</code>；逆向解释每个数字来源。<strong>验收</strong>：能独立查出 shape mismatch 出现在哪一层。</p>
+<p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
+<table class="resource-table">
+<thead>
+<tr>
+<th>知识点</th>
+<th>直达教学资料</th>
+<th>学习目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="知识点">张量、索引、形状、设备</td>
+<td data-label="直达教学资料"><a href="https://docs.pytorch.org/tutorials/beginner/blitz/tensor_tutorial.html" rel="noopener noreferrer" target="_blank">PyTorch 张量教程（官方）</a></td>
+<td data-label="学习目标">完整做完操作示例。</td>
+</tr>
+<tr>
+<td data-label="知识点">NumPy 与广播对照</td>
+<td data-label="直达教学资料"><a href="https://numpy.org/doc/stable/user/quickstart.html" rel="noopener noreferrer" target="_blank">NumPy Quickstart（官方）</a></td>
+<td data-label="学习目标">对照数组的 dtype、shape 和广播。</td>
+</tr>
+<tr>
+<td data-label="知识点">矩阵乘法与展开</td>
+<td data-label="直达教学资料"><a href="https://docs.pytorch.org/docs/stable/generated/torch.matmul.html" rel="noopener noreferrer" target="_blank">PyTorch torch.matmul 文档</a></td>
+<td data-label="学习目标">查批量维的行为，再写小例子。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="22">2.2 自动微分、模块与损失</h3>
+<p>定义网络时继承 <code>nn.Module</code>，在 <code>__init__</code> 注册层，在 <code>forward</code> 定义计算。<code>nn.Parameter</code> 会被模块管理。<code>requires_grad</code> 决定是否跟踪梯度；冻结预训练骨干时可对参数调用 <code>requires_grad_(False)</code>。<code>loss.backward()</code> 计算梯度，<code>optimizer.step()</code> 更新参数。</p>
+<p>常用层：<code>Conv2d</code>、<code>Linear</code>、<code>LayerNorm</code>、<code>BatchNorm2d</code>、<code>ReLU/GELU</code>、<code>Dropout</code>、<code>Embedding</code>、<code>MultiheadAttention</code>。常用损失：<code>CrossEntropyLoss</code>（多类分类、输入 logits）、<code>BCEWithLogitsLoss</code>（多标签/二类独立输出）、<code>MSELoss</code>（回归/重建/噪声预测）。辨别“二分类两个 logits 的交叉熵”和“单 logit 的 BCE”实现差别。</p>
+<p><strong>练习</strong>：写 <code>nn.Linear(10,3)</code>，输入 <code>[4,10]</code>，检查输出 <code>[4,3]</code>；冻结该层后查看梯度。<strong>验收</strong>：能说明每个参数的形状和梯度是否存在。</p>
+<p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
+<table class="resource-table">
+<thead>
+<tr>
+<th>知识点</th>
+<th>直达教学资料</th>
+<th>学习目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="知识点">nn.Module 与网络层</td>
+<td data-label="直达教学资料"><a href="https://docs.pytorch.org/tutorials/beginner/basics/buildmodel_tutorial.html" rel="noopener noreferrer" target="_blank">PyTorch 构建神经网络教程</a></td>
+<td data-label="学习目标">自己改层数和输出维度。</td>
+</tr>
+<tr>
+<td data-label="知识点">自动微分与冻结参数</td>
+<td data-label="直达教学资料"><a href="https://docs.pytorch.org/docs/stable/notes/autograd.html" rel="noopener noreferrer" target="_blank">PyTorch Autograd 机制</a></td>
+<td data-label="学习目标">分清 requires_grad、no_grad、eval。</td>
+</tr>
+<tr>
+<td data-label="知识点">分类/重建损失</td>
+<td data-label="直达教学资料"><a href="https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html" rel="noopener noreferrer" target="_blank">PyTorch 优化教程</a></td>
+<td data-label="学习目标">从 logits 到 loss 再反传。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="23-datasetdataloader">2.3 Dataset、DataLoader 与数据增强</h3>
+<p><code>Dataset.__len__</code> 给样本数，<code>Dataset.__getitem__</code> 返回单个样本及标签；<code>DataLoader</code> 做批处理、打乱和多进程读取。训练集可做随机裁剪、翻转、颜色扰动；验证/测试集使用确定性的预处理。检测与分割的图像和框/掩码必须一起变换，不能只变换图像。新项目可参考 torchvision 的 transforms v2 文档。</p>
+<p><strong>数据泄漏例子</strong>：先对全数据集做均值/方差拟合再切分训练/测试，会把测试信息带入训练。正确顺序是先划分，再只用训练集计算统计量。按患者/视频/设备等相关实体划分，避免同源帧同时进入训练和测试。</p>
+<p><strong>练习</strong>：给配套脚本的 <code>make_data</code> 添加随机亮度变化，只在训练集使用；验证集保持原样。<strong>验收</strong>：能打印一个 batch 的图像、标签形状，并可视化增强前后。</p>
+<p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
+<table class="resource-table">
+<thead>
+<tr>
+<th>知识点</th>
+<th>直达教学资料</th>
+<th>学习目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="知识点">Dataset 与 DataLoader</td>
+<td data-label="直达教学资料"><a href="https://docs.pytorch.org/tutorials/beginner/basics/data_tutorial.html" rel="noopener noreferrer" target="_blank">PyTorch 数据集与加载器教程</a></td>
+<td data-label="学习目标">写自己的 <strong>getitem</strong> 和 batch。</td>
+</tr>
+<tr>
+<td data-label="知识点">图像增强与标准化</td>
+<td data-label="直达教学资料"><a href="https://zh.d2l.ai/chapter_computer-vision/image-augmentation.html" rel="noopener noreferrer" target="_blank">《动手学深度学习》图像增广（中文）</a></td>
+<td data-label="学习目标">辨别训练与验证增强。</td>
+</tr>
+<tr>
+<td data-label="知识点">框、掩码同步增强</td>
+<td data-label="直达教学资料"><a href="https://docs.pytorch.org/vision/stable/auto_examples/transforms/plot_transforms_getting_started.html" rel="noopener noreferrer" target="_blank">TorchVision transforms v2 入门</a></td>
+<td data-label="学习目标">重点看图像、BoundingBoxes、Mask 同步变换。</td>
+</tr>
+<tr>
+<td data-label="知识点">防止数据泄漏</td>
+<td data-label="直达教学资料"><a href="https://scikit-learn.org/stable/common_pitfalls.html" rel="noopener noreferrer" target="_blank">scikit-learn 常见错误（官方）</a></td>
+<td data-label="学习目标">只在训练集上拟合统计量。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="24">2.4 完整训练循环与评估</h3>
+<p>最小顺序：<code>model.train()</code> → 遍历 batch → <code>zero_grad</code> → 前向 → 损失 → <code>backward</code> → <code>step</code>；验证时 <code>model.eval()</code> + <code>torch.inference_mode()</code>。每轮记录训练损失和验证指标，最好保存最佳验证权重。不要在训练集上挑模型后声称是测试性能。</p>
+<p>配套的 <a href="lab.html"><code>vision_basics_lab.py</code></a> 给出可直接运行的 CNN 分类示范，数据是随机生成的“亮方块在左/右”图像，避免外部下载。它还演示注意力形状、VAE 重参数化、扩散前向加噪、<code>state_dict</code> 保存和恢复。运行：</p>
+<pre><code class="language-bash">python vision_basics_lab.py
+</code></pre>
+<p><strong>练习</strong>：修改 batch size、学习率和训练轮数，观察验证正确率；将 <code>model.eval()</code> 暂时去掉，加入 Dropout 后观察差别。<strong>验收</strong>：运行三次可解释结果波动；恢复的模型对同一输入得到相同输出。</p>
+<p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
+<table class="resource-table">
+<thead>
+<tr>
+<th>知识点</th>
+<th>直达教学资料</th>
+<th>学习目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="知识点">训练、验证、优化器</td>
+<td data-label="直达教学资料"><a href="https://docs.pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html" rel="noopener noreferrer" target="_blank">PyTorch Quickstart（官方）</a></td>
+<td data-label="学习目标">先运行端到端范例。</td>
+</tr>
+<tr>
+<td data-label="知识点">训练循环逐步拆解</td>
+<td data-label="直达教学资料"><a href="https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html" rel="noopener noreferrer" target="_blank">PyTorch 优化教程（官方）</a></td>
+<td data-label="学习目标">按步骤实现 train/eval 两个函数。</td>
+</tr>
+<tr>
+<td data-label="知识点">本地无下载练习</td>
+<td data-label="直达教学资料"><a href="lab.html">配套 PyTorch 小实验</a></td>
+<td data-label="学习目标">先运行，再改学习率和模型结构。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="25">2.5 检查点、复现与性能</h3>
+<p>保存 <code>model.state_dict()</code>；恢复时构建同样结构并 <code>load_state_dict(torch.load(path, weights_only=True, map_location=device))</code>，推理再调用 <code>eval()</code>。恢复训练通常还需保存优化器状态、轮次与调度器状态。实验记录固定种子、数据划分、代码版本、超参数和硬件；固定随机种子并不保证所有硬件操作完全确定。</p>
+<p>显存不足时依次检查 batch size、分辨率、token 数、是否在验证阶段保留计算图；可考虑梯度累积或混合精度。对于 <code>float16</code> 混合精度，官方示例使用 <code>torch.autocast</code> 与 <code>torch.amp.GradScaler</code>。初学者先让 float32 训练正确，再优化性能。</p>
+<p><strong>练习</strong>：对同一模型保存“只含权重”的检查点和“可继续训练”的检查点，列出两者内容差别。<strong>验收</strong>：从检查点恢复后能完成预测；继续训练的 loss 曲线接续原实验。</p>
+<p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
+<table class="resource-table">
+<thead>
+<tr>
+<th>知识点</th>
+<th>直达教学资料</th>
+<th>学习目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="知识点">state_dict 与继续训练</td>
+<td data-label="直达教学资料"><a href="https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html" rel="noopener noreferrer" target="_blank">PyTorch 模型保存/加载（官方）</a></td>
+<td data-label="学习目标">区分推理权重与完整训练检查点。</td>
+</tr>
+<tr>
+<td data-label="知识点">混合精度</td>
+<td data-label="直达教学资料"><a href="https://docs.pytorch.org/docs/stable/notes/amp_examples.html" rel="noopener noreferrer" target="_blank">PyTorch AMP 示例（官方）</a></td>
+<td data-label="学习目标">先读典型训练例子，再决定是否使用。</td>
+</tr>
+<tr>
+<td data-label="知识点">迁移学习与冻结骨干</td>
+<td data-label="直达教学资料"><a href="https://docs.pytorch.org/tutorials/beginner/transfer_learning_tutorial.html" rel="noopener noreferrer" target="_blank">PyTorch 视觉迁移学习教程</a></td>
+<td data-label="学习目标">分别尝试冻结与微调。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="26">2.6 最小实现关卡</h3>
+<p>| 关卡 | 实现内容 | 检查点 |
+|---|---|
+| P1 | NumPy/torch 实现线性回归 | 手算梯度与 autograd 相符 |
+| P2 | CNN 分类 | 正确区分训练/验证、保存最佳模型 |
+| P3 | 单头注意力和 patchify | 权重每行求和为 1，形状正确 |
+| P4 | 简化 VAE | 重建、KL 和总损失均有记录 |
+| P5 | DDPM 前向加噪 | <code>t</code> 增大时图像逐渐接近噪声 |
+| P6 | 用现成骨干提取特征 | 冻结与微调的评价协议相同 |</p>
+<hr/>
+<p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
+<table class="resource-table">
+<thead>
+<tr>
+<th>知识点</th>
+<th>直达教学资料</th>
+<th>学习目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="知识点">P1–P3：基础实现</td>
+<td data-label="直达教学资料"><a href="https://docs.pytorch.org/tutorials/beginner/basics/" rel="noopener noreferrer" target="_blank">PyTorch 基础课程（官方完整路径）</a></td>
+<td data-label="学习目标">逐章完成张量、数据、网络、训练、保存。</td>
+</tr>
+<tr>
+<td data-label="知识点">P4–P5：生成模型动手</td>
+<td data-label="直达教学资料"><a href="https://huggingface.co/learn/diffusion-course/en/unit0/1" rel="noopener noreferrer" target="_blank">Hugging Face 扩散模型课程</a></td>
+<td data-label="学习目标">先做 Unit 1，再读 VAE 与扩散论文。</td>
+</tr>
+<tr>
+<td data-label="知识点">P6：预训练特征迁移</td>
+<td data-label="直达教学资料"><a href="https://docs.pytorch.org/tutorials/beginner/transfer_learning_tutorial.html" rel="noopener noreferrer" target="_blank">PyTorch 迁移学习教程</a></td>
+<td data-label="学习目标">用相同数据划分对比冻结与微调。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3">3. 计算机视觉：任务、模型与评价</h2>
+<h3 id="31">3.1 数字图像与预处理</h3>
+<p>图像是采样后的像素阵列。区分像素坐标、通道顺序 RGB/BGR、uint8 <code>0–255</code> 与 float <code>0–1</code>、均值方差归一化、插值、缩放、裁剪和长宽比。卷积核聚合局部邻域，步幅改变采样间隔，padding 影响边缘和输出尺寸；下采样可能损失细节。图像分类可接受某些几何变化，医学/遥感等领域增强必须符合任务语义。</p>
+<p>卷积输出高度公式：<code>H_out=floor((H+2P−D(K−1)−1)/S+1)</code>，宽度同理；其中 <code>K</code> 核大小、<code>S</code> 步幅、<code>P</code> padding、<code>D</code> 膨胀。<strong>练习</strong>：计算输入 32、核 3、padding 1、stride 2 的输出尺寸 16。<strong>验收</strong>：能独立解释输入图像预处理与模型预训练设置不一致为何导致性能下降。</p>
+<p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
+<table class="resource-table">
+<thead>
+<tr>
+<th>知识点</th>
+<th>直达教学资料</th>
+<th>学习目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="知识点">图像、通道、色彩与数组</td>
+<td data-label="直达教学资料"><a href="https://pillow.readthedocs.io/en/stable/handbook/concepts.html" rel="noopener noreferrer" target="_blank">Pillow 图像概念（官方）</a></td>
+<td data-label="学习目标">观察像素、通道顺序和裁剪。</td>
+</tr>
+<tr>
+<td data-label="知识点">卷积核、填充、步幅</td>
+<td data-label="直达教学资料"><a href="https://zh.d2l.ai/chapter_convolutional-neural-networks/padding-and-strides.html" rel="noopener noreferrer" target="_blank">《动手学深度学习》卷积与填充（中文）</a></td>
+<td data-label="学习目标">手算输出尺寸后用代码验证。</td>
+</tr>
+<tr>
+<td data-label="知识点">视觉预处理与增广</td>
+<td data-label="直达教学资料"><a href="https://zh.d2l.ai/chapter_computer-vision/image-augmentation.html" rel="noopener noreferrer" target="_blank">《动手学深度学习》图像增广（中文）</a></td>
+<td data-label="学习目标">重点比较训练和验证处理。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32">3.2 分类、检测、分割、检索与生成</h3>
+<table class="wide-table cols-4">
+<thead>
+<tr>
+<th>任务</th>
+<th>输入 → 输出</th>
+<th>常见指标</th>
+<th>对应论文</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="任务">分类</td>
+<td data-label="输入 → 输出">图像 → 类别</td>
+<td data-label="常见指标">accuracy、macro-F1、top-k</td>
+<td data-label="对应论文">ViT、DeiT、Swin</td>
+</tr>
+<tr>
+<td data-label="任务">目标检测</td>
+<td data-label="输入 → 输出">图像 → 类别与边框集合</td>
+<td data-label="常见指标">IoU、AP/mAP</td>
+<td data-label="对应论文">DETR、检测 DINO</td>
+</tr>
+<tr>
+<td data-label="任务">语义分割</td>
+<td data-label="输入 → 输出">图像 → 每像素类别</td>
+<td data-label="常见指标">mIoU、Dice</td>
+<td data-label="对应论文">SAM 可作提示分割基础</td>
+</tr>
+<tr>
+<td data-label="任务">实例分割</td>
+<td data-label="输入 → 输出">图像 → 各实例掩码</td>
+<td data-label="常见指标">mask AP</td>
+<td data-label="对应论文">SAM</td>
+</tr>
+<tr>
+<td data-label="任务">图像检索/表征</td>
+<td data-label="输入 → 输出">图像 → 嵌入向量</td>
+<td data-label="常见指标">Recall@K、线性探测</td>
+<td data-label="对应论文">DINO、DINOv2/v3、CLIP</td>
+</tr>
+<tr>
+<td data-label="任务">图像生成</td>
+<td data-label="输入 → 输出">噪声/条件 → 图像</td>
+<td data-label="常见指标">人评、FID 等</td>
+<td data-label="对应论文">VAE、扩散、DiT</td>
+</tr>
+</tbody>
+</table>
+<p>指标不能跨任务互换。准确率在严重类别不平衡时会误导；检测 AP 依赖 IoU 阈值和评价协议；生成指标需说明真实样本数量、特征提取器和预处理。视觉模型结果也需要查看定性样例与失败样例。</p>
+<p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
+<table class="resource-table">
+<thead>
+<tr>
+<th>知识点</th>
+<th>直达教学资料</th>
+<th>学习目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="知识点">分类与准确率</td>
+<td data-label="直达教学资料"><a href="https://zh.d2l.ai/chapter_linear-networks/image-classification-dataset.html" rel="noopener noreferrer" target="_blank">《动手学深度学习》图像分类数据集（中文）</a></td>
+<td data-label="学习目标">从单标签分类开始。</td>
+</tr>
+<tr>
+<td data-label="知识点">检测与边界框</td>
+<td data-label="直达教学资料"><a href="https://zh.d2l.ai/chapter_computer-vision/bounding-box.html" rel="noopener noreferrer" target="_blank">《动手学深度学习》目标检测和边界框（中文）</a></td>
+<td data-label="学习目标">先练标注、坐标和 IoU。</td>
+</tr>
+<tr>
+<td data-label="知识点">语义/实例分割</td>
+<td data-label="直达教学资料"><a href="https://zh.d2l.ai/chapter_computer-vision/semantic-segmentation-and-dataset.html" rel="noopener noreferrer" target="_blank">《动手学深度学习》语义分割与数据集（中文）</a></td>
+<td data-label="学习目标">区别每像素类别与实例掩码。</td>
+</tr>
+<tr>
+<td data-label="知识点">分类指标选择</td>
+<td data-label="直达教学资料"><a href="https://scikit-learn.org/stable/modules/model_evaluation.html" rel="noopener noreferrer" target="_blank">scikit-learn 模型评价（官方）</a></td>
+<td data-label="学习目标">查 accuracy、precision、recall、F1 适用条件。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="33-cnn-u-net">3.3 CNN、残差网络与 U-Net</h3>
+<p>CNN 用局部卷积和权重共享提取特征；随层数增加，感受野变大、分辨率常下降。残差连接 <code>y=x+F(x)</code> 帮助深网络优化。U-Net 以编码器提取多尺度特征、解码器恢复空间分辨率、跳连保留细节，是理解扩散去噪网络的重要前置结构。</p>
+<p><strong>练习</strong>：画出 28×28 → 14×14 → 7×7 的特征图大小与通道数；实现一个两层 CNN 分类器。<strong>验收</strong>：能解释为何分割比分类更需要保留空间位置。</p>
+<p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
+<table class="resource-table">
+<thead>
+<tr>
+<th>知识点</th>
+<th>直达教学资料</th>
+<th>学习目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="知识点">CNN、感受野、卷积</td>
+<td data-label="直达教学资料"><a href="https://zh.d2l.ai/chapter_convolutional-neural-networks/index.html" rel="noopener noreferrer" target="_blank">《动手学深度学习》卷积神经网络整章（中文）</a></td>
+<td data-label="学习目标">从卷积到 LeNet 完整学习。</td>
+</tr>
+<tr>
+<td data-label="知识点">残差连接与 ResNet</td>
+<td data-label="直达教学资料"><a href="https://zh.d2l.ai/chapter_convolutional-modern/resnet.html" rel="noopener noreferrer" target="_blank">《动手学深度学习》ResNet（中文）</a></td>
+<td data-label="学习目标">画残差块并比较普通堆叠。</td>
+</tr>
+<tr>
+<td data-label="知识点">U-Net 编解码与跳连</td>
+<td data-label="直达教学资料"><a href="https://arxiv.org/abs/1505.04597" rel="noopener noreferrer" target="_blank">U-Net 原论文（作者原始公开稿）</a></td>
+<td data-label="学习目标">重点看结构图，结合 CNN 课程理解。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="34-transformer">3.4 Transformer 在视觉中的用法</h3>
+<p>原始 Transformer 解决序列建模；ViT 把图像切成 patch，添加位置编码后用自注意力处理。全局注意力便于跨远距离信息交互，但 token 多时计算/显存压力大。Swin 用窗口及移位窗口构建分层特征；DeiT 重视数据高效训练和蒸馏；MAE 掩住大量 patch 并重建被遮挡内容。</p>
+<p><strong>三个问题</strong>：① patch 太大，细节会怎样？② 224×224、patch16 与 patch8 的 token 数分别是多少（196 与 784），注意力矩阵元素数约相差几倍（16 倍）？③ MAE 为什么只将可见 patch 送入编码器有计算优势？</p>
+<p><strong>验收</strong>：能从 <code>[B,C,H,W]</code> 推导 ViT 输入 <code>[B,N,D]</code>，解释位置编码、分类 token、局部窗口与掩码重建。对应 09–14、DiT、DINO。</p>
+<p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
+<table class="resource-table">
+<thead>
+<tr>
+<th>知识点</th>
+<th>直达教学资料</th>
+<th>学习目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="知识点">注意力与 Transformer</td>
+<td data-label="直达教学资料"><a href="https://zh.d2l.ai/chapter_attention-mechanisms/transformer.html" rel="noopener noreferrer" target="_blank">《动手学深度学习》Transformer（中文）</a></td>
+<td data-label="学习目标">先弄懂 Q/K/V、位置编码和编码器。</td>
+</tr>
+<tr>
+<td data-label="知识点">视觉 Transformer 专题</td>
+<td data-label="直达教学资料"><a href="https://cs231n.stanford.edu/2025/schedule.html" rel="noopener noreferrer" target="_blank">斯坦福 CS231n 2025 课程日程</a></td>
+<td data-label="学习目标">查 Attention/Transformers 课程材料与作业。</td>
+</tr>
+<tr>
+<td data-label="知识点">ViT、Swin、MAE 原文</td>
+<td data-label="直达教学资料"><a href="index.html">本地 30 篇论文目录</a></td>
+<td data-label="学习目标">按 09–14 顺序结合图和代码阅读。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="35">3.5 自监督学习、对比学习与蒸馏</h3>
+<p>自监督从数据本身构造训练信号，无需人工类别标签；它不等于“没有监督目标”。SimCLR 对同一图像的两种增强视图作为正样本，其他图像视图常作负样本；MoCo 用动量编码器和队列维持字典。CLIP 用图文配对做跨模态对比学习。DINO 系列用 teacher-student 自蒸馏，不依赖传统负样本对比训练；DINO 中多裁剪、teacher 更新、输出中心化/温度等防止塌缩的细节很重要。iBOT 结合掩码 patch 预测与自蒸馏。DINOv2/v3 扩大训练与特征迁移能力；Registers 关注稠密特征的异常 token。</p>
+<p><strong>表示塌缩</strong>：若所有输入都映射成相同向量，就无法区分图像。看 loss 下降不足以证明表征有用，还要线性探测、kNN、检索或下游迁移。<strong>练习</strong>：在同一数据划分下比较随机初始化特征与预训练特征的线性分类器。<strong>验收</strong>：能说明每种方法的正样本、负样本/教师、目标和评价方式。对应 21–26、28–29。</p>
+<p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
+<table class="resource-table">
+<thead>
+<tr>
+<th>知识点</th>
+<th>直达教学资料</th>
+<th>学习目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="知识点">自监督与对比学习课程</td>
+<td data-label="直达教学资料"><a href="https://cs231n.stanford.edu/2025/schedule.html" rel="noopener noreferrer" target="_blank">斯坦福 CS231n 2025 课程日程</a></td>
+<td data-label="学习目标">找 Lecture 12：pretext tasks、contrastive learning。</td>
+</tr>
+<tr>
+<td data-label="知识点">DINO 训练与评价</td>
+<td data-label="直达教学资料"><a href="https://github.com/facebookresearch/dino" rel="noopener noreferrer" target="_blank">Meta DINO 官方代码与说明</a></td>
+<td data-label="学习目标">看 teacher-student、预训练模型和线性评价。</td>
+</tr>
+<tr>
+<td data-label="知识点">DINOv2 与特征迁移</td>
+<td data-label="直达教学资料"><a href="https://github.com/facebookresearch/dinov2" rel="noopener noreferrer" target="_blank">Meta DINOv2 官方代码与说明</a></td>
+<td data-label="学习目标">理解冻结特征与下游任务。</td>
+</tr>
+<tr>
+<td data-label="知识点">方法演进原文</td>
+<td data-label="直达教学资料"><a href="index.html">本地 30 篇论文目录</a></td>
+<td data-label="学习目标">按 SimCLR→MoCo→DINO→iBOT→DINOv2/v3 阅读。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="36">3.6 生成视觉模型的结构关系</h3>
+<p>普通 autoencoder 压缩并重建；VAE 在连续概率潜空间中建模；VQ-VAE/VQGAN 用离散码本或量化后的潜变量；Latent Diffusion 把扩散过程放到学习到的压缩空间，降低计算成本；DiT 用 Transformer 处理扩散中的潜空间 patch。不要把“用 autoencoder”直接等同“VAE”。</p>
+<p><strong>条件生成</strong>：模型可以接受类别、文本或图像条件。交叉注意力让图像/潜变量 token 查询文本表示；CFG 在推理时组合有条件与无条件预测。生成结果要同时看条件遵循、质量、多样性和可能的训练数据记忆。<strong>练习</strong>：画出“文本 → 文本编码器 → 交叉注意力 → 潜空间去噪 → 解码成图像”的数据流。<strong>验收</strong>：能解释像素空间和潜空间生成的计算差异。对应 01–08、15–20。</p>
+<p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
+<table class="resource-table">
+<thead>
+<tr>
+<th>知识点</th>
+<th>直达教学资料</th>
+<th>学习目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="知识点">VAE、潜空间与 ELBO</td>
+<td data-label="直达教学资料"><a href="https://deepgenerativemodels.github.io/notes/vae/" rel="noopener noreferrer" target="_blank">斯坦福 CS236 VAE 教学笔记</a></td>
+<td data-label="学习目标">先辨别连续潜变量与普通自编码器。</td>
+</tr>
+<tr>
+<td data-label="知识点">像素扩散到潜空间扩散</td>
+<td data-label="直达教学资料"><a href="https://huggingface.co/learn/diffusion-course/en/unit3/1" rel="noopener noreferrer" target="_blank">Hugging Face 扩散课程 Unit 3</a></td>
+<td data-label="学习目标">跟着图理解编码、去噪、解码。</td>
+</tr>
+<tr>
+<td data-label="知识点">完整生成模型课程</td>
+<td data-label="直达教学资料"><a href="https://deepgenerativemodels.github.io/notes/" rel="noopener noreferrer" target="_blank">斯坦福 CS236 开放讲义</a></td>
+<td data-label="学习目标">系统补潜变量、生成与评价。</td>
+</tr>
+<tr>
+<td data-label="知识点">VQ 与扩散原文</td>
+<td data-label="直达教学资料"><a href="index.html">本地 30 篇论文目录</a></td>
+<td data-label="学习目标">对照 15–20 与 01–08 的建模空间。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="37">3.7 检测、分割与多模态</h3>
+<p>目标检测需表示框坐标、类别、无目标类与重叠程度。IoU=<code>交集面积/并集面积</code>。DETR 将预测视为集合，通过一对一匹配对应真实目标；检测 DINO 基于 DETR 路线，和自监督 DINO 不是同一系列。分割需区分语义类别与实例身份；SAM 接受点、框或掩码提示，输出分割掩码。CLIP 的图文共享嵌入支持零样本类别文本匹配，但其相似度不是未经校准的概率。</p>
+<p><strong>练习</strong>：手算两个 4×4 方框水平错开 2 像素时的 IoU（交集 8、并集 24，IoU=1/3）；手动画一个图像里两个同类物体的语义掩码与实例掩码。<strong>验收</strong>：能区分分类、检测、语义分割、实例分割、提示分割的标注和指标。</p>
+<p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
+<table class="resource-table">
+<thead>
+<tr>
+<th>知识点</th>
+<th>直达教学资料</th>
+<th>学习目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="知识点">边界框、IoU</td>
+<td data-label="直达教学资料"><a href="https://zh.d2l.ai/chapter_computer-vision/bounding-box.html" rel="noopener noreferrer" target="_blank">《动手学深度学习》目标检测与边界框（中文）</a></td>
+<td data-label="学习目标">手算 IoU 再写代码。</td>
+</tr>
+<tr>
+<td data-label="知识点">检测/实例分割实际训练</td>
+<td data-label="直达教学资料"><a href="https://docs.pytorch.org/tutorials/intermediate/torchvision_tutorial.html" rel="noopener noreferrer" target="_blank">TorchVision 官方检测微调教程</a></td>
+<td data-label="学习目标">看数据格式、框/掩码和评价流程。</td>
+</tr>
+<tr>
+<td data-label="知识点">语义分割</td>
+<td data-label="直达教学资料"><a href="https://zh.d2l.ai/chapter_computer-vision/semantic-segmentation-and-dataset.html" rel="noopener noreferrer" target="_blank">《动手学深度学习》语义分割（中文）</a></td>
+<td data-label="学习目标">明确像素类别和实例身份差别。</td>
+</tr>
+<tr>
+<td data-label="知识点">DETR、检测 DINO、CLIP、SAM</td>
+<td data-label="直达教学资料"><a href="index.html">本地 30 篇论文目录</a></td>
+<td data-label="学习目标">按 13→30、26→27 顺序读原文。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="38">3.8 研究实验基本功</h3>
+<p>论文复现先固定数据集和评估协议，再实现基线。一次只改变一个主要因素；报告参数量、计算预算、训练步数和推理成本。需要做训练/验证曲线、消融、失败案例、不同随机种子。若复制论文中大规模结果需要大量算力，可复现核心机制而非声称达到原始性能。</p>
+<p><strong>最小研究报告模板</strong>：问题与假设；数据和划分；模型及参数量；训练设置；评价指标；主结果表；消融表；错误分析；局限；可复现命令。<strong>验收</strong>：另一人按你的记录能复现大致结论。</p>
+<hr/>
+<p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
+<table class="resource-table">
+<thead>
+<tr>
+<th>知识点</th>
+<th>直达教学资料</th>
+<th>学习目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="知识点">实验设计与常见陷阱</td>
+<td data-label="直达教学资料"><a href="https://scikit-learn.org/stable/common_pitfalls.html" rel="noopener noreferrer" target="_blank">scikit-learn 常见错误（官方）</a></td>
+<td data-label="学习目标">对照数据泄漏、不一致预处理和随机性。</td>
+</tr>
+<tr>
+<td data-label="知识点">评价指标与报告</td>
+<td data-label="直达教学资料"><a href="https://scikit-learn.org/stable/modules/model_evaluation.html" rel="noopener noreferrer" target="_blank">scikit-learn 模型评价（官方）</a></td>
+<td data-label="学习目标">先定义指标，再做模型比较。</td>
+</tr>
+<tr>
+<td data-label="知识点">完整课程项目训练</td>
+<td data-label="直达教学资料"><a href="https://cs231n.stanford.edu/2025/" rel="noopener noreferrer" target="_blank">斯坦福 CS231n 课程与作业</a></td>
+<td data-label="学习目标">参照作业和项目要求写可复现报告。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-30">4. 30 篇论文的知识依赖地图</h2>
+<table class="wide-table cols-4">
+<thead>
+<tr>
+<th>学习模块</th>
+<th>先掌握</th>
+<th>建议读的论文</th>
+<th>要回答的核心问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="学习模块">A 基础架构</td>
+<td data-label="先掌握">线性代数、反向传播、CNN、注意力</td>
+<td data-label="建议读的论文">Transformer → ViT → DeiT → Swin</td>
+<td data-label="要回答的核心问题">图像如何变成 token？全局与窗口注意力如何取舍？</td>
+</tr>
+<tr>
+<td data-label="学习模块">B 表征学习</td>
+<td data-label="先掌握">概率/交叉熵、数据增强、分类评价</td>
+<td data-label="建议读的论文">SimCLR → MoCo → DINO → iBOT → DINOv2 → Registers → DINOv3</td>
+<td data-label="要回答的核心问题">无标签信号怎样产生可迁移特征？</td>
+</tr>
+<tr>
+<td data-label="学习模块">C 自编码与潜变量</td>
+<td data-label="先掌握">条件概率、KL、ELBO</td>
+<td data-label="建议读的论文">VAE → beta-VAE → VQ-VAE → VQ-VAE-2 → NVAE → VQGAN</td>
+<td data-label="要回答的核心问题">连续/离散潜变量各解决什么问题？</td>
+</tr>
+<tr>
+<td data-label="学习模块">D 扩散与流</td>
+<td data-label="先掌握">高斯、噪声预测、U-Net、ODE 直觉</td>
+<td data-label="建议读的论文">DDPM → DDIM → CFG → Score-SDE → Latent Diffusion → DiT → Consistency Models → Flow Matching</td>
+<td data-label="要回答的核心问题">训练目标与采样路径如何对应？</td>
+</tr>
+<tr>
+<td data-label="学习模块">E 下游任务</td>
+<td data-label="先掌握">IoU、检测/分割、图文配对</td>
+<td data-label="建议读的论文">DETR → 检测 DINO；CLIP → SAM；MAE 可与 DINO 对照</td>
+<td data-label="要回答的核心问题">表征如何迁移到检测、分割和多模态？</td>
+</tr>
+</tbody>
+</table>
+<p>注意：上表为<strong>学习顺序</strong>，不是按论文发表时间排序。可按兴趣选生成或表征一条主线深读，另一条先读概览。完整题名、论文来源与已下载 PDF 在<a href="index.html">论文目录</a>。</p>
+<hr/>
+<h2 id="5-1216">5. 12–16 周执行计划与交付物</h2>
+<table>
+<thead>
+<tr>
+<th>周次</th>
+<th>学习内容</th>
+<th>必交成果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="周次">1–2</td>
+<td data-label="学习内容">Python/NumPy、线性代数、微积分、概率基础</td>
+<td data-label="必交成果">形状练习、手算梯度与 KL、简短笔记</td>
+</tr>
+<tr>
+<td data-label="周次">3–4</td>
+<td data-label="学习内容">PyTorch 张量、autograd、Dataset、训练循环；CNN</td>
+<td data-label="必交成果">跑通配套脚本，自己训练一个真实小数据集分类器</td>
+</tr>
+<tr>
+<td data-label="周次">5–6</td>
+<td data-label="学习内容">图像预处理、分类评价、Transformer/ViT</td>
+<td data-label="必交成果">手写 patchify 和单头注意力；读 Transformer、ViT、Swin</td>
+</tr>
+<tr>
+<td data-label="周次">7–8</td>
+<td data-label="学习内容">VAE、ELBO、VQ 与潜空间</td>
+<td data-label="必交成果">最小 VAE，记录重建和 KL；读 VAE、VQ-VAE、VQGAN</td>
+</tr>
+<tr>
+<td data-label="周次">9–10</td>
+<td data-label="学习内容">DDPM、DDIM、LDM、DiT</td>
+<td data-label="必交成果">画加噪过程，训练小型噪声预测器；读核心 4 篇</td>
+</tr>
+<tr>
+<td data-label="周次">11–12</td>
+<td data-label="学习内容">自监督、DINO、MAE、CLIP</td>
+<td data-label="必交成果">比较两种特征的线性探测；读 DINO、MAE、CLIP</td>
+</tr>
+<tr>
+<td data-label="周次">13–14（可选）</td>
+<td data-label="学习内容">DETR、SAM、检测 DINO；Score-SDE/Flow Matching</td>
+<td data-label="必交成果">一个检测/分割案例与一份方法对照表</td>
+</tr>
+<tr>
+<td data-label="周次">15–16（可选）</td>
+<td data-label="学习内容">复现与研究能力</td>
+<td data-label="必交成果">一份 4–6 页实验报告，含基线、消融、失败分析</td>
+</tr>
+</tbody>
+</table>
+<p>每篇论文使用一张读书卡：<strong>任务和输入/输出 → 核心假设 → 模型结构 → 损失 → 训练数据/成本 → 评价协议 → 最关键表格/消融 → 自己的疑问 → 最小复现想法</strong>。优先读摘要、图 1、方法、主结果和消融；遇到推导再回补数学。不要把“读过 PDF”当成“会使用该方法”。</p>
+<h2 id="6">6. 最终自测清单</h2>
+<h3 id="_2">数学</h3>
+<ul>
+<li><input disabled="" type="checkbox"/> 能在纸上推导 patch 数、Q/K/V 和注意力矩阵的形状。</li>
+<li><input disabled="" type="checkbox"/> 能手算单层线性模型的梯度，并用 autograd 验证。</li>
+<li><input disabled="" type="checkbox"/> 能解释交叉熵、KL、ELBO 和重参数化。</li>
+<li><input disabled="" type="checkbox"/> 能解释 <code>x_t=√ᾱ_t x_0+√(1−ᾱ_t)ε</code> 的每一项。</li>
+<li><input disabled="" type="checkbox"/> 知道何时需要 ODE/SDE、匹配、互信息等进阶知识。</li>
+</ul>
+<h3 id="pytorch">PyTorch</h3>
+<ul>
+<li><input disabled="" type="checkbox"/> 能写 <code>Dataset</code>、<code>DataLoader</code>、<code>nn.Module</code>、训练和验证循环。</li>
+<li><input disabled="" type="checkbox"/> 能处理 <code>[B,C,H,W]</code> 与 <code>[B,N,D]</code> 的形状变化和设备切换。</li>
+<li><input disabled="" type="checkbox"/> 能正确使用 <code>train/eval</code>、<code>inference_mode</code>、<code>zero_grad/backward/step</code>。</li>
+<li><input disabled="" type="checkbox"/> 能保存/加载 <code>state_dict</code>，记录随机种子与超参数。</li>
+<li><input disabled="" type="checkbox"/> 能排查 NaN、显存不足、数据泄漏和训练/验证指标不一致。</li>
+</ul>
+<h3 id="_3">计算机视觉与论文</h3>
+<ul>
+<li><input disabled="" type="checkbox"/> 能区分分类、检测、语义/实例/提示分割、检索和生成。</li>
+<li><input disabled="" type="checkbox"/> 能手算 IoU，理解 accuracy、F1、AP/mAP、mIoU、Recall@K 的适用范围。</li>
+<li><input disabled="" type="checkbox"/> 能说明 CNN、U-Net、ViT、Swin 的信息流和计算差异。</li>
+<li><input disabled="" type="checkbox"/> 能区分 VAE、MAE、VQ-VAE、VQGAN 和潜空间扩散。</li>
+<li><input disabled="" type="checkbox"/> 能区分自监督 DINO 与目标检测 DINO。</li>
+<li><input disabled="" type="checkbox"/> 能为一篇论文设计可复现的最小实验、基线和消融。</li>
+</ul>
+<p><strong>完成标准</strong>：上述大部分问题能脱离资料清楚回答，独立运行一个真实数据集实验，写出结果与局限。达到此程度就有进入视觉算法研究/项目实践的基础；深度仍取决于你选择的细分方向和实验经验。</p>
+<hr/>
+<h2 id="7">7. 可靠的后续学习入口</h2>
+<p>以下为官方资料，代码细节以你实际安装版本的文档为准：</p>
+<ol>
+<li><a href="https://docs.pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html" rel="noopener noreferrer" target="_blank">PyTorch 官方 Quickstart</a>：Dataset/DataLoader、模型、训练和保存的总览。</li>
+<li><a href="https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html" rel="noopener noreferrer" target="_blank">PyTorch 优化教程</a>：训练循环、优化器和损失。</li>
+<li><a href="https://docs.pytorch.org/docs/stable/notes/autograd.html" rel="noopener noreferrer" target="_blank">PyTorch Autograd 机制</a>：梯度、<code>no_grad</code>、<code>inference_mode</code> 与 <code>eval</code> 的区别。</li>
+<li><a href="https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html" rel="noopener noreferrer" target="_blank">PyTorch 模型保存与加载</a>：<code>state_dict</code>、检查点和跨设备加载。</li>
+<li><a href="https://docs.pytorch.org/docs/stable/notes/amp_examples.html" rel="noopener noreferrer" target="_blank">PyTorch 混合精度示例</a>：<code>torch.autocast</code> 和 <code>torch.amp.GradScaler</code>。</li>
+<li><a href="https://docs.pytorch.org/vision/stable/transforms.html" rel="noopener noreferrer" target="_blank">TorchVision 数据增强文档</a>：图像以及检测/分割标注的变换。</li>
+<li>本资料夹的<a href="guide.html">30 篇论文清单</a>：每篇的原始论文入口及主题说明。</li>
+</ol><p><a href="tutorial.md">下载本页 Markdown 源文</a></p></main></div><a class="back" href="#top" aria-label="返回顶部">↑ 返回顶部</a>
+<script>
+document.body.id='top';
+document.querySelectorAll('.content table').forEach(t=>{const w=document.createElement('div');w.className='table-wrap';t.parentNode.insertBefore(w,t);w.appendChild(t)});
+const tocLinks=[...document.querySelectorAll('.side li')];
+document.querySelector('#toc-search').addEventListener('input',e=>{const q=e.target.value.trim().toLowerCase();tocLinks.forEach(li=>{li.hidden=!!q && !li.textContent.toLowerCase().includes(q)})});
+const anchors=[...document.querySelectorAll('.side a[href^="#"]')];
+const byId=new Map(anchors.map(a=>[a.getAttribute('href').slice(1),a]));
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){anchors.forEach(a=>a.classList.remove('active'));byId.get(e.target.id)?.classList.add('active')}})},{rootMargin:'-10% 0px -75% 0px'});
+document.querySelectorAll('.content h1[id],.content h2[id],.content h3[id]').forEach(h=>obs.observe(h));
+</script>
+</body></html>

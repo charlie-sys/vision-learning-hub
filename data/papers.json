@@ -1,0 +1,831 @@
+[
+  {
+    "id": 1,
+    "group": "01_扩散与流匹配",
+    "short": "DDPM",
+    "title": "Denoising Diffusion Probabilistic Models",
+    "authors": [
+      "Jonathan Ho",
+      "Ajay Jain",
+      "Pieter Abbeel"
+    ],
+    "year": 2020,
+    "venue": "NeurIPS 2020",
+    "level": "必读",
+    "note": "扩散生成基础：前向加噪、反向去噪与噪声预测训练目标。",
+    "arxiv": "2006.11239",
+    "doi": "",
+    "first_submitted": "2020-06-19T17:24:44Z",
+    "source": "https://arxiv.org/abs/2006.11239",
+    "pdf_urls": [
+      "https://arxiv.org/pdf/2006.11239.pdf",
+      "https://arxiv.org/pdf/2006.11239",
+      "https://hojonathanho.github.io/diffusion/assets/denoising_diffusion20.pdf"
+    ],
+    "filename": "01_DDPM.pdf"
+  },
+  {
+    "id": 2,
+    "group": "01_扩散与流匹配",
+    "short": "DDIM",
+    "title": "Denoising Diffusion Implicit Models",
+    "authors": [
+      "Jiaming Song",
+      "Chenlin Meng",
+      "Stefano Ermon"
+    ],
+    "year": 2021,
+    "venue": "ICLR 2021",
+    "level": "必读",
+    "note": "理解非马尔可夫采样，以及少步生成与采样轨迹。",
+    "arxiv": "2010.02502",
+    "doi": "",
+    "first_submitted": "2020-10-06T06:15:51Z",
+    "source": "https://arxiv.org/abs/2010.02502",
+    "pdf_urls": [
+      "https://arxiv.org/pdf/2010.02502v4",
+      "https://arxiv.org/pdf/2010.02502"
+    ],
+    "filename": "02_DDIM.pdf"
+  },
+  {
+    "id": 3,
+    "group": "01_扩散与流匹配",
+    "short": "Score-SDE",
+    "title": "Score-Based Generative Modeling through Stochastic Differential Equations",
+    "authors": [
+      "Yang Song",
+      "Jascha Sohl-Dickstein",
+      "Diederik P. Kingma",
+      "Abhishek Kumar",
+      "Stefano Ermon",
+      "Ben Poole"
+    ],
+    "year": 2021,
+    "venue": "ICLR 2021",
+    "level": "进阶",
+    "note": "用随机微分方程统一得分模型与扩散模型，连接概率流ODE。",
+    "arxiv": "2011.13456",
+    "doi": "",
+    "first_submitted": "2020-11-26T19:39:10Z",
+    "source": "https://arxiv.org/abs/2011.13456",
+    "pdf_urls": [
+      "https://arxiv.org/pdf/2011.13456v2",
+      "https://arxiv.org/pdf/2011.13456"
+    ],
+    "filename": "03_Score-SDE.pdf"
+  },
+  {
+    "id": 4,
+    "group": "01_扩散与流匹配",
+    "short": "CFG",
+    "title": "Classifier-Free Diffusion Guidance",
+    "authors": [
+      "Jonathan Ho",
+      "Tim Salimans"
+    ],
+    "year": 2022,
+    "venue": "arXiv / NeurIPS 2021 Workshop",
+    "level": "必读",
+    "note": "无分类器引导：条件与无条件预测结合，控制条件遵循程度。",
+    "arxiv": "2207.12598",
+    "doi": "",
+    "first_submitted": "2022-07-26T01:42:07Z",
+    "source": "https://arxiv.org/abs/2207.12598",
+    "pdf_urls": [
+      "https://arxiv.org/pdf/2207.12598"
+    ],
+    "filename": "04_CFG.pdf"
+  },
+  {
+    "id": 5,
+    "group": "01_扩散与流匹配",
+    "short": "Latent-Diffusion",
+    "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+    "authors": [
+      "Robin Rombach",
+      "Andreas Blattmann",
+      "Dominik Lorenz",
+      "Patrick Esser",
+      "Björn Ommer"
+    ],
+    "year": 2022,
+    "venue": "CVPR 2022",
+    "level": "必读",
+    "note": "将扩散放入压缩潜空间；理解自编码器、交叉注意力与文本条件生成。",
+    "arxiv": "2112.10752",
+    "doi": "",
+    "first_submitted": "2021-12-20T18:55:25Z",
+    "source": "https://arxiv.org/abs/2112.10752",
+    "pdf_urls": [
+      "https://openaccess.thecvf.com/content/CVPR2022/papers/Rombach_High-Resolution_Image_Synthesis_With_Latent_Diffusion_Models_CVPR_2022_paper.pdf",
+      "https://arxiv.org/pdf/2112.10752"
+    ],
+    "filename": "05_Latent-Diffusion.pdf"
+  },
+  {
+    "id": 6,
+    "group": "01_扩散与流匹配",
+    "short": "DiT",
+    "title": "Scalable Diffusion Models with Transformers",
+    "authors": [
+      "William Peebles",
+      "Saining Xie"
+    ],
+    "year": 2023,
+    "venue": "ICCV 2023",
+    "level": "必读",
+    "note": "用Transformer替代U-Net，连接视觉Transformer与潜空间扩散。",
+    "arxiv": "2212.09748",
+    "doi": "",
+    "first_submitted": "2022-12-19T18:59:58Z",
+    "source": "https://arxiv.org/abs/2212.09748",
+    "pdf_urls": [
+      "https://openaccess.thecvf.com/content/ICCV2023/papers/Peebles_Scalable_Diffusion_Models_with_Transformers_ICCV_2023_paper.pdf",
+      "https://arxiv.org/pdf/2212.09748"
+    ],
+    "filename": "06_DiT.pdf"
+  },
+  {
+    "id": 7,
+    "group": "01_扩散与流匹配",
+    "short": "Consistency-Models",
+    "title": "Consistency Models",
+    "authors": [
+      "Yang Song",
+      "Prafulla Dhariwal",
+      "Mark Chen",
+      "Ilya Sutskever"
+    ],
+    "year": 2023,
+    "venue": "ICML 2023",
+    "level": "进阶",
+    "note": "通过一致性映射实现一步或少步生成；可与扩散蒸馏对照。",
+    "arxiv": "2303.01469",
+    "doi": "",
+    "first_submitted": "2023-03-02T18:30:16Z",
+    "source": "https://arxiv.org/abs/2303.01469",
+    "pdf_urls": [
+      "https://proceedings.mlr.press/v202/song23a/song23a.pdf",
+      "https://arxiv.org/pdf/2303.01469"
+    ],
+    "filename": "07_Consistency-Models.pdf"
+  },
+  {
+    "id": 8,
+    "group": "01_扩散与流匹配",
+    "short": "Flow-Matching",
+    "title": "Flow Matching for Generative Modeling",
+    "authors": [
+      "Yaron Lipman",
+      "Ricky T. Q. Chen",
+      "Heli Ben-Hamu",
+      "Maximilian Nickel",
+      "Matt Le"
+    ],
+    "year": 2023,
+    "venue": "ICLR 2023",
+    "level": "进阶",
+    "note": "学习连续流的速度场；属于相邻生成路线，并不等同于DDPM。",
+    "arxiv": "2210.02747",
+    "doi": "",
+    "first_submitted": "2022-10-06T08:32:20Z",
+    "source": "https://arxiv.org/abs/2210.02747",
+    "pdf_urls": [
+      "https://arxiv.org/pdf/2210.02747v2",
+      "https://arxiv.org/pdf/2210.02747"
+    ],
+    "filename": "08_Flow-Matching.pdf"
+  },
+  {
+    "id": 9,
+    "group": "02_视觉Transformer",
+    "short": "Transformer",
+    "title": "Attention Is All You Need",
+    "authors": [
+      "Ashish Vaswani",
+      "Noam Shazeer",
+      "Niki Parmar",
+      "Jakob Uszkoreit",
+      "Llion Jones",
+      "Aidan N. Gomez",
+      "Lukasz Kaiser",
+      "Illia Polosukhin"
+    ],
+    "year": 2017,
+    "venue": "NeurIPS 2017",
+    "level": "必读",
+    "note": "自注意力与Transformer原始论文；任务是机器翻译，作为视觉Transformer前置基础。",
+    "arxiv": "1706.03762",
+    "doi": "",
+    "first_submitted": "2017-06-12T17:57:34Z",
+    "source": "https://arxiv.org/abs/1706.03762",
+    "pdf_urls": [
+      "https://arxiv.org/pdf/1706.03762"
+    ],
+    "filename": "09_Transformer.pdf"
+  },
+  {
+    "id": 10,
+    "group": "02_视觉Transformer",
+    "short": "ViT",
+    "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+    "authors": [
+      "Alexey Dosovitskiy",
+      "Lucas Beyer",
+      "Alexander Kolesnikov",
+      "Dirk Weissenborn",
+      "Xiaohua Zhai",
+      "Thomas Unterthiner",
+      "Mostafa Dehghani",
+      "Matthias Minderer",
+      "Georg Heigold",
+      "Sylvain Gelly",
+      "Jakob Uszkoreit",
+      "Neil Houlsby"
+    ],
+    "year": 2021,
+    "venue": "ICLR 2021",
+    "level": "必读",
+    "note": "图像切成patch token，再用Transformer进行图像分类。",
+    "arxiv": "2010.11929",
+    "doi": "",
+    "first_submitted": "2020-10-22T17:55:59Z",
+    "source": "https://arxiv.org/abs/2010.11929",
+    "pdf_urls": [
+      "https://arxiv.org/pdf/2010.11929"
+    ],
+    "filename": "10_ViT.pdf"
+  },
+  {
+    "id": 11,
+    "group": "02_视觉Transformer",
+    "short": "DeiT",
+    "title": "Training data-efficient image transformers & distillation through attention",
+    "authors": [
+      "Hugo Touvron",
+      "Matthieu Cord",
+      "Matthijs Douze",
+      "Francisco Massa",
+      "Alexandre Sablayrolles",
+      "Hervé Jégou"
+    ],
+    "year": 2021,
+    "venue": "ICML 2021",
+    "level": "拓展",
+    "note": "数据高效训练与蒸馏token，理解ViT训练策略。",
+    "arxiv": "2012.12877",
+    "doi": "",
+    "first_submitted": "2020-12-23T18:42:10Z",
+    "source": "https://arxiv.org/abs/2012.12877",
+    "pdf_urls": [
+      "https://arxiv.org/pdf/2012.12877"
+    ],
+    "filename": "11_DeiT.pdf"
+  },
+  {
+    "id": 12,
+    "group": "02_视觉Transformer",
+    "short": "Swin",
+    "title": "Swin Transformer: Hierarchical Vision Transformer using Shifted Windows",
+    "authors": [
+      "Ze Liu",
+      "Yutong Lin",
+      "Yue Cao",
+      "Han Hu",
+      "Yixuan Wei",
+      "Zheng Zhang",
+      "Stephen Lin",
+      "Baining Guo"
+    ],
+    "year": 2021,
+    "venue": "ICCV 2021",
+    "level": "必读",
+    "note": "分层表示与移位窗口注意力，面向检测和分割的通用视觉骨干。",
+    "arxiv": "2103.14030",
+    "doi": "",
+    "first_submitted": "2021-03-25T17:59:31Z",
+    "source": "https://arxiv.org/abs/2103.14030",
+    "pdf_urls": [
+      "https://arxiv.org/pdf/2103.14030"
+    ],
+    "filename": "12_Swin.pdf"
+  },
+  {
+    "id": 13,
+    "group": "02_视觉Transformer",
+    "short": "DETR",
+    "title": "End-to-End Object Detection with Transformers",
+    "authors": [
+      "Nicolas Carion",
+      "Francisco Massa",
+      "Gabriel Synnaeve",
+      "Nicolas Usunier",
+      "Alexander Kirillov",
+      "Sergey Zagoruyko"
+    ],
+    "year": 2020,
+    "venue": "ECCV 2020",
+    "level": "必读",
+    "note": "集合预测、object query与二分图匹配，建立端到端目标检测框架。",
+    "arxiv": "2005.12872",
+    "doi": "",
+    "first_submitted": "2020-05-26T17:06:38Z",
+    "source": "https://arxiv.org/abs/2005.12872",
+    "pdf_urls": [
+      "https://arxiv.org/pdf/2005.12872v3",
+      "https://arxiv.org/pdf/2005.12872"
+    ],
+    "filename": "13_DETR.pdf"
+  },
+  {
+    "id": 14,
+    "group": "02_视觉Transformer",
+    "short": "MAE",
+    "title": "Masked Autoencoders Are Scalable Vision Learners",
+    "authors": [
+      "Kaiming He",
+      "Xinlei Chen",
+      "Saining Xie",
+      "Yanghao Li",
+      "Piotr Dollár",
+      "Ross Girshick"
+    ],
+    "year": 2022,
+    "venue": "CVPR 2022",
+    "level": "必读",
+    "note": "高比例掩码与像素重建，理解视觉自监督预训练；MAE不是VAE。",
+    "arxiv": "2111.06377",
+    "doi": "",
+    "first_submitted": "2021-11-11T18:46:40Z",
+    "source": "https://arxiv.org/abs/2111.06377",
+    "pdf_urls": [
+      "https://openaccess.thecvf.com/content/CVPR2022/papers/He_Masked_Autoencoders_Are_Scalable_Vision_Learners_CVPR_2022_paper.pdf",
+      "https://arxiv.org/pdf/2111.06377"
+    ],
+    "filename": "14_MAE.pdf"
+  },
+  {
+    "id": 15,
+    "group": "03_VAE与视觉编码",
+    "short": "VAE",
+    "title": "Auto-Encoding Variational Bayes",
+    "authors": [
+      "Diederik P Kingma",
+      "Max Welling"
+    ],
+    "year": 2014,
+    "venue": "ICLR 2014",
+    "level": "必读",
+    "note": "ELBO、重参数化技巧和连续潜变量生成模型的基础。",
+    "arxiv": "1312.6114",
+    "doi": "",
+    "first_submitted": "2013-12-20T20:58:10Z",
+    "source": "https://arxiv.org/abs/1312.6114",
+    "pdf_urls": [
+      "https://www.cs.columbia.edu/~blei/fogm/2020F/readings/KingmaWelling2013.pdf",
+      "https://arxiv.org/pdf/1312.6114"
+    ],
+    "filename": "15_VAE.pdf"
+  },
+  {
+    "id": 16,
+    "group": "03_VAE与视觉编码",
+    "short": "beta-VAE",
+    "title": "beta-VAE: Learning Basic Visual Concepts with a Constrained Variational Framework",
+    "authors": [
+      "Irina Higgins",
+      "Loic Matthey",
+      "Arka Pal",
+      "Christopher Burgess",
+      "Xavier Glorot",
+      "Matthew Botvinick",
+      "Shakir Mohamed",
+      "Alexander Lerchner"
+    ],
+    "year": 2017,
+    "venue": "ICLR 2017",
+    "level": "必读",
+    "note": "调整KL项权重探索解耦表征；不能保证在任意数据上自动得到真实生成因素。",
+    "arxiv": "",
+    "doi": "",
+    "first_submitted": "",
+    "source": "https://www.matthey.me/publication/beta_vae/",
+    "pdf_urls": [
+      "https://papers.baulab.info/papers/also/Higgins-2017.pdf",
+      "https://openreview.net/pdf?id=Sy2fzU9gl"
+    ],
+    "filename": "16_beta-VAE.pdf"
+  },
+  {
+    "id": 17,
+    "group": "03_VAE与视觉编码",
+    "short": "VQ-VAE",
+    "title": "Neural Discrete Representation Learning",
+    "authors": [
+      "Aaron van den Oord",
+      "Oriol Vinyals",
+      "Koray Kavukcuoglu"
+    ],
+    "year": 2017,
+    "venue": "NeurIPS 2017",
+    "level": "必读",
+    "note": "向量量化和离散码本，将图像转成可供生成模型使用的离散潜变量。",
+    "arxiv": "1711.00937",
+    "doi": "",
+    "first_submitted": "2017-11-02T21:14:44Z",
+    "source": "https://arxiv.org/abs/1711.00937",
+    "pdf_urls": [
+      "https://proceedings.neurips.cc/paper/2017/file/7a98af17e63a0ac09ce2e96d03992fbc-Paper.pdf",
+      "https://arxiv.org/pdf/1711.00937"
+    ],
+    "filename": "17_VQ-VAE.pdf"
+  },
+  {
+    "id": 18,
+    "group": "03_VAE与视觉编码",
+    "short": "VQ-VAE-2",
+    "title": "Generating Diverse High-Fidelity Images with VQ-VAE-2",
+    "authors": [
+      "Ali Razavi",
+      "Aaron van den Oord",
+      "Oriol Vinyals"
+    ],
+    "year": 2019,
+    "venue": "NeurIPS 2019",
+    "level": "拓展",
+    "note": "分层离散潜表示与高保真图像生成，接续VQ-VAE阅读。",
+    "arxiv": "1906.00446",
+    "doi": "",
+    "first_submitted": "2019-06-02T16:46:42Z",
+    "source": "https://arxiv.org/abs/1906.00446",
+    "pdf_urls": [
+      "https://papers.nips.cc/paper/2019/file/5f8e2fa1718d1bbcadf1cd9c7a54fb8c-Paper.pdf",
+      "https://arxiv.org/pdf/1906.00446"
+    ],
+    "filename": "18_VQ-VAE-2.pdf"
+  },
+  {
+    "id": 19,
+    "group": "03_VAE与视觉编码",
+    "short": "NVAE",
+    "title": "NVAE: A Deep Hierarchical Variational Autoencoder",
+    "authors": [
+      "Arash Vahdat",
+      "Jan Kautz"
+    ],
+    "year": 2020,
+    "venue": "NeurIPS 2020",
+    "level": "进阶",
+    "note": "深层分层VAE及其训练和架构设计，研究高分辨率图像建模。",
+    "arxiv": "2007.03898",
+    "doi": "",
+    "first_submitted": "2020-07-08T04:56:56Z",
+    "source": "https://arxiv.org/abs/2007.03898",
+    "pdf_urls": [
+      "https://proceedings.neurips.cc/paper/2020/file/e3b21256183cf7c2c7a66be163579d37-Paper.pdf",
+      "https://arxiv.org/pdf/2007.03898"
+    ],
+    "filename": "19_NVAE.pdf"
+  },
+  {
+    "id": 20,
+    "group": "03_VAE与视觉编码",
+    "short": "VQGAN",
+    "title": "Taming Transformers for High-Resolution Image Synthesis",
+    "authors": [
+      "Patrick Esser",
+      "Robin Rombach",
+      "Björn Ommer"
+    ],
+    "year": 2021,
+    "venue": "CVPR 2021",
+    "level": "必读",
+    "note": "融合感知压缩、对抗训练与Transformer先验；属于离散视觉编码与生成路线。",
+    "arxiv": "2012.09841",
+    "doi": "",
+    "first_submitted": "2020-12-17T18:57:28Z",
+    "source": "https://arxiv.org/abs/2012.09841",
+    "pdf_urls": [
+      "https://openaccess.thecvf.com/content/CVPR2021/papers/Esser_Taming_Transformers_for_High-Resolution_Image_Synthesis_CVPR_2021_paper.pdf",
+      "https://arxiv.org/pdf/2012.09841"
+    ],
+    "filename": "20_VQGAN.pdf"
+  },
+  {
+    "id": 21,
+    "group": "04_自监督DINO",
+    "short": "DINO-SSL",
+    "title": "Emerging Properties in Self-Supervised Vision Transformers",
+    "authors": [
+      "Mathilde Caron",
+      "Hugo Touvron",
+      "Ishan Misra",
+      "Hervé Jégou",
+      "Julien Mairal",
+      "Piotr Bojanowski",
+      "Armand Joulin"
+    ],
+    "year": 2021,
+    "venue": "ICCV 2021",
+    "level": "必读",
+    "note": "无标签自蒸馏、teacher-student和多裁剪训练，观察ViT的语义特征。",
+    "arxiv": "2104.14294",
+    "doi": "",
+    "first_submitted": "2021-04-29T12:28:51Z",
+    "source": "https://arxiv.org/abs/2104.14294",
+    "pdf_urls": [
+      "https://openaccess.thecvf.com/content/ICCV2021/papers/Caron_Emerging_Properties_in_Self-Supervised_Vision_Transformers_ICCV_2021_paper.pdf",
+      "https://arxiv.org/pdf/2104.14294"
+    ],
+    "filename": "21_DINO-SSL.pdf"
+  },
+  {
+    "id": 22,
+    "group": "04_自监督DINO",
+    "short": "DINOv2",
+    "title": "DINOv2: Learning Robust Visual Features without Supervision",
+    "authors": [
+      "Maxime Oquab",
+      "Timothée Darcet",
+      "Théo Moutakanni",
+      "Huy Vo",
+      "Marc Szafraniec",
+      "Vasil Khalidov",
+      "Pierre Fernandez",
+      "Daniel Haziza",
+      "Francisco Massa",
+      "Alaaeldin El-Nouby",
+      "Mahmoud Assran",
+      "Nicolas Ballas",
+      "Wojciech Galuba",
+      "Russell Howes",
+      "Po-Yao Huang",
+      "Shang-Wen Li",
+      "Ishan Misra",
+      "Michael Rabbat",
+      "Vasu Sharma",
+      "Gabriel Synnaeve",
+      "Hu Xu",
+      "Hervé Jegou",
+      "Julien Mairal",
+      "Patrick Labatut",
+      "Armand Joulin",
+      "Piotr Bojanowski"
+    ],
+    "year": 2023,
+    "venue": "arXiv 2023 / TMLR 2024",
+    "level": "必读",
+    "note": "规模化数据整理和自监督训练，获得可迁移的视觉通用特征。",
+    "arxiv": "2304.07193",
+    "doi": "",
+    "first_submitted": "2023-04-14T15:12:19Z",
+    "source": "https://arxiv.org/abs/2304.07193",
+    "pdf_urls": [
+      "https://pierrefdz.github.io/assets/publis/dinov2/paper.pdf",
+      "https://arxiv.org/pdf/2304.07193"
+    ],
+    "filename": "22_DINOv2.pdf"
+  },
+  {
+    "id": 23,
+    "group": "04_自监督DINO",
+    "short": "Registers",
+    "title": "Vision Transformers Need Registers",
+    "authors": [
+      "Timothée Darcet",
+      "Maxime Oquab",
+      "Julien Mairal",
+      "Piotr Bojanowski"
+    ],
+    "year": 2024,
+    "venue": "ICLR 2024",
+    "level": "进阶",
+    "note": "用register token改善ViT特征图中的伪影，关联DINOv2的稠密特征。",
+    "arxiv": "2309.16588",
+    "doi": "",
+    "first_submitted": "2023-09-28T16:45:46Z",
+    "source": "https://arxiv.org/abs/2309.16588",
+    "pdf_urls": [
+      "https://arxiv.org/pdf/2309.16588"
+    ],
+    "filename": "23_Registers.pdf"
+  },
+  {
+    "id": 24,
+    "group": "04_自监督DINO",
+    "short": "DINOv3",
+    "title": "DINOv3",
+    "authors": [
+      "Oriane Siméoni",
+      "Huy V. Vo",
+      "Maximilian Seitzer",
+      "Federico Baldassarre",
+      "Maxime Oquab",
+      "Cijo Jose",
+      "Vasil Khalidov",
+      "Marc Szafraniec",
+      "Seungeun Yi",
+      "Michaël Ramamonjisoa",
+      "Francisco Massa",
+      "Daniel Haziza",
+      "Luca Wehrstedt",
+      "Jianyuan Wang",
+      "Timothée Darcet",
+      "Théo Moutakanni",
+      "Leonel Sentana",
+      "Claire Roberts",
+      "Andrea Vedaldi",
+      "Jamie Tolan",
+      "John Brandt",
+      "Camille Couprie",
+      "Julien Mairal",
+      "Hervé Jégou",
+      "Patrick Labatut",
+      "Piotr Bojanowski"
+    ],
+    "year": 2025,
+    "venue": "arXiv 2025",
+    "level": "进阶",
+    "note": "研究更大规模自监督视觉特征与稠密表示；与DINO、DINOv2形成演进线。",
+    "arxiv": "2508.10104",
+    "doi": "",
+    "first_submitted": "2025-08-13T18:00:55Z",
+    "source": "https://arxiv.org/abs/2508.10104",
+    "pdf_urls": [
+      "https://www.robots.ox.ac.uk/~vedaldi/assets/pubs/simeoni25dinov3.pdf",
+      "https://arxiv.org/pdf/2508.10104"
+    ],
+    "filename": "24_DINOv3.pdf"
+  },
+  {
+    "id": 25,
+    "group": "04_自监督DINO",
+    "short": "iBOT",
+    "title": "iBOT: Image BERT Pre-Training with Online Tokenizer",
+    "authors": [
+      "Jinghao Zhou",
+      "Chen Wei",
+      "Huiyu Wang",
+      "Wei Shen",
+      "Cihang Xie",
+      "Alan Yuille",
+      "Tao Kong"
+    ],
+    "year": 2022,
+    "venue": "ICLR 2022",
+    "level": "进阶",
+    "note": "在线视觉tokenizer与掩码预测，连接DINO式自蒸馏和局部patch表征。",
+    "arxiv": "2111.07832",
+    "doi": "",
+    "first_submitted": "2021-11-15T15:18:05Z",
+    "source": "https://arxiv.org/abs/2111.07832",
+    "pdf_urls": [
+      "https://arxiv.org/pdf/2111.07832v3",
+      "https://arxiv.org/pdf/2111.07832"
+    ],
+    "filename": "25_iBOT.pdf"
+  },
+  {
+    "id": 26,
+    "group": "05_其他视觉基础",
+    "short": "CLIP",
+    "title": "Learning Transferable Visual Models From Natural Language Supervision",
+    "authors": [
+      "Alec Radford",
+      "Jong Wook Kim",
+      "Chris Hallacy",
+      "Aditya Ramesh",
+      "Gabriel Goh",
+      "Sandhini Agarwal",
+      "Girish Sastry",
+      "Amanda Askell",
+      "Pamela Mishkin",
+      "Jack Clark",
+      "Gretchen Krueger",
+      "Ilya Sutskever"
+    ],
+    "year": 2021,
+    "venue": "ICML 2021",
+    "level": "必读",
+    "note": "图像与文本对比学习及零样本迁移，连接视觉表征和语言条件生成。",
+    "arxiv": "2103.00020",
+    "doi": "",
+    "first_submitted": "2021-02-26T19:04:58Z",
+    "source": "https://arxiv.org/abs/2103.00020",
+    "pdf_urls": [
+      "https://arxiv.org/pdf/2103.00020"
+    ],
+    "filename": "26_CLIP.pdf"
+  },
+  {
+    "id": 27,
+    "group": "05_其他视觉基础",
+    "short": "SAM",
+    "title": "Segment Anything",
+    "authors": [
+      "Alexander Kirillov",
+      "Eric Mintun",
+      "Nikhila Ravi",
+      "Hanzi Mao",
+      "Chloe Rolland",
+      "Laura Gustafson",
+      "Tete Xiao",
+      "Spencer Whitehead",
+      "Alexander C. Berg",
+      "Wan-Yen Lo",
+      "Piotr Dollár",
+      "Ross Girshick"
+    ],
+    "year": 2023,
+    "venue": "ICCV 2023",
+    "level": "必读",
+    "note": "提示驱动的通用分割基础模型，关注点、框和掩码提示。",
+    "arxiv": "2304.02643",
+    "doi": "",
+    "first_submitted": "2023-04-05T17:59:46Z",
+    "source": "https://arxiv.org/abs/2304.02643",
+    "pdf_urls": [
+      "https://openaccess.thecvf.com/content/ICCV2023/papers/Kirillov_Segment_Anything_ICCV_2023_paper.pdf",
+      "https://arxiv.org/pdf/2304.02643"
+    ],
+    "filename": "27_SAM.pdf"
+  },
+  {
+    "id": 28,
+    "group": "05_其他视觉基础",
+    "short": "SimCLR",
+    "title": "A Simple Framework for Contrastive Learning of Visual Representations",
+    "authors": [
+      "Ting Chen",
+      "Simon Kornblith",
+      "Mohammad Norouzi",
+      "Geoffrey Hinton"
+    ],
+    "year": 2020,
+    "venue": "ICML 2020",
+    "level": "拓展",
+    "note": "对比学习中的数据增强、投影头与批量大小，作为自监督基础对照。",
+    "arxiv": "2002.05709",
+    "doi": "",
+    "first_submitted": "2020-02-13T18:50:45Z",
+    "source": "https://arxiv.org/abs/2002.05709",
+    "pdf_urls": [
+      "https://arxiv.org/pdf/2002.05709"
+    ],
+    "filename": "28_SimCLR.pdf"
+  },
+  {
+    "id": 29,
+    "group": "05_其他视觉基础",
+    "short": "MoCo",
+    "title": "Momentum Contrast for Unsupervised Visual Representation Learning",
+    "authors": [
+      "Kaiming He",
+      "Haoqi Fan",
+      "Yuxin Wu",
+      "Saining Xie",
+      "Ross Girshick"
+    ],
+    "year": 2020,
+    "venue": "CVPR 2020",
+    "level": "拓展",
+    "note": "动量编码器与队列字典，理解视觉对比学习如何构造负样本。",
+    "arxiv": "1911.05722",
+    "doi": "",
+    "first_submitted": "2019-11-13T18:53:26Z",
+    "source": "https://arxiv.org/abs/1911.05722",
+    "pdf_urls": [
+      "https://arxiv.org/pdf/1911.05722"
+    ],
+    "filename": "29_MoCo.pdf"
+  },
+  {
+    "id": 30,
+    "group": "05_其他视觉基础",
+    "short": "DINO-Detection",
+    "title": "DINO: DETR with Improved DeNoising Anchor Boxes for End-to-End Object Detection",
+    "authors": [
+      "Hao Zhang",
+      "Feng Li",
+      "Shilong Liu",
+      "Lei Zhang",
+      "Hang Su",
+      "Jun Zhu",
+      "Lionel M. Ni",
+      "Heung-Yeung Shum"
+    ],
+    "year": 2023,
+    "venue": "ICLR 2023",
+    "level": "拓展",
+    "note": "改进去噪anchor query的DETR检测器；与Meta的自监督DINO系列不同。",
+    "arxiv": "2203.03605",
+    "doi": "",
+    "first_submitted": "2022-03-07T18:55:26Z",
+    "source": "https://arxiv.org/abs/2203.03605",
+    "pdf_urls": [
+      "https://arxiv.org/pdf/2203.03605"
+    ],
+    "filename": "30_DINO-Detection.pdf"
+  }
+]

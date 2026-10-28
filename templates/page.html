@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>{{title}}</title>
+<style>
+:root{--ink:#182536;--muted:#607185;--accent:#176e76;--paper:#fff;--bg:#f3f6f9;--line:#dce4eb}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.8 system-ui,"Microsoft YaHei",sans-serif}
+a{color:var(--accent);text-underline-offset:3px}a:hover{color:#0e4b53}
+.top{background:#14273d;color:#fff;padding:14px max(4vw,24px);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.top a{color:#e8f5f5;text-decoration:none}.top strong{letter-spacing:.02em}.top nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}
+.layout{max-width:1500px;margin:auto;display:grid;grid-template-columns:280px minmax(0,1fr);gap:26px;padding:28px 4vw 64px}
+.side{align-self:start;position:sticky;top:20px;max-height:calc(100vh - 40px);overflow:auto;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px 16px;box-shadow:0 4px 18px #17233708}
+.side label{display:block;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.12em;margin:0 0 10px}
+.side input{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:14px;margin-bottom:10px}
+.side ul{list-style:none;padding-left:0;margin:0}.side ul ul{padding-left:14px;border-left:1px solid var(--line);margin-left:5px}
+.side li{margin:3px 0}.side a{display:block;text-decoration:none;padding:3px 6px;border-radius:6px;color:#31475e;font-size:13px;line-height:1.45}
+.side li.level-3{padding-left:15px}
+.side a:hover,.side a.active{background:#e8f3f2;color:#0e6167}.side li[hidden]{display:none}
+.content{min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:clamp(22px,4vw,60px);box-shadow:0 8px 28px #17233708}
+.content h1{font-size:clamp(28px,3vw,40px);line-height:1.3;margin-top:0;color:#14273d}
+.content h2{font-size:26px;border-top:1px solid var(--line);padding-top:32px;margin-top:48px;color:#154f62}
+.content h3{font-size:20px;margin-top:28px;color:#1e6672}.content h1,.content h2,.content h3{scroll-margin-top:20px}
+.content p{margin:13px 0}.content li{margin:5px 0}.content blockquote{margin:20px 0;padding:10px 20px;border-left:4px solid #31868a;background:#eff7f7;color:#385b60}
+.content table{border-collapse:collapse;width:100%;min-width:0;font-size:14px;line-height:1.55;table-layout:auto}
+.content th,.content td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+.content th,.content td{overflow-wrap:anywhere}
+.content th{background:#edf3f6}.content tr:nth-child(even){background:#fafcfd}
+.content .resource-table th{background:#e7f1f0;color:#135d63}.content .resource-table td:nth-child(2){font-weight:600}
+.content .cols-5{table-layout:fixed}.content .cols-5 th:nth-child(1){width:6%}.content .cols-5 th:nth-child(2){width:41%}.content .cols-5 th:nth-child(3){width:19%}.content .cols-5 th:nth-child(4){width:9%}.content .cols-5 th:nth-child(5){width:25%}
+.content .cols-5 td:nth-child(4),.content .cols-5 th:nth-child(4){white-space:nowrap}
+.content .table-wrap{overflow:auto;margin:18px 0;border-radius:8px}
+code{font-family:Consolas,"Cascadia Code",monospace;font-size:.88em;background:#eef3f6;border-radius:4px;padding:2px 5px;overflow-wrap:anywhere}
+pre{background:#15283d;color:#e8f1f6;border-radius:9px;padding:16px 19px;overflow:auto;line-height:1.55}pre code{background:transparent;color:inherit;padding:0;white-space:pre;overflow-wrap:normal}
+.content input[type=checkbox]{margin-right:8px;accent-color:var(--accent)}
+.back{position:fixed;right:22px;bottom:22px;background:#176e76;color:white;padding:8px 14px;border-radius:999px;text-decoration:none;box-shadow:0 4px 15px #0002;font-size:13px}
+@media(max-width:1150px){.layout{display:block;padding:14px}.side{position:relative;max-height:260px;margin-bottom:14px}.content{padding:22px}}
+@media(min-width:761px) and (max-width:1300px){.content .wide-table,.content .wide-table tbody,.content .wide-table tr,.content .wide-table td{display:block;width:100%}.content .wide-table thead{display:none}.content .wide-table tr{border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:13px 0;background:#fff;box-shadow:0 2px 9px #1723370a}.content .wide-table td{border:0;border-bottom:1px solid var(--line);padding:9px 12px;white-space:normal}.content .wide-table td:last-child{border-bottom:0}.content .wide-table td::before{content:attr(data-label);display:inline-block;min-width:115px;font-size:12px;font-weight:700;color:#397a7e;margin-right:12px;vertical-align:top}}
+@media(max-width:760px){.content{padding:18px}.content h2{font-size:22px}.content h3{font-size:18px}.content .table-wrap{overflow:visible}.content table,.content tbody,.content tr,.content td{display:block;width:100%}.content thead{display:none}.content tr{border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:13px 0;background:#fff;box-shadow:0 2px 9px #1723370a}.content td{border:0;border-bottom:1px solid var(--line);padding:9px 12px}.content td:last-child{border-bottom:0}.content td::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;color:#397a7e;margin-bottom:3px}.content .resource-table{min-width:0}}
+@media print{.top,.side,.back{display:none}.layout{display:block;padding:0}.content{border:0;box-shadow:none;padding:0}body{background:#fff}.content h2{break-before:page}pre,table{break-inside:avoid}}
+{{extra_css}}</style>
+</head>
+<body id="top">
+<header class="top"><strong>视觉论文学习库</strong><nav><a href="index.html">30 篇论文目录</a><a href="guide.html">完整指南</a><a href="lab.html">PyTorch 小实验</a></nav></header>
+<div class="layout"><aside class="side"><label for="toc-search">章节目录</label><input id="toc-search" type="search" placeholder="搜索章节…" aria-label="搜索章节">{{toc}}</aside>
+<main class="content">{{body}}</main></div><a class="back" href="#top" aria-label="返回顶部">↑ 返回顶部</a>
+<script>
+document.body.id='top';
+document.querySelectorAll('.content table').forEach(t=>{const w=document.createElement('div');w.className='table-wrap';t.parentNode.insertBefore(w,t);w.appendChild(t)});
+const tocLinks=[...document.querySelectorAll('.side li')];
+document.querySelector('#toc-search').addEventListener('input',e=>{const q=e.target.value.trim().toLowerCase();tocLinks.forEach(li=>{li.hidden=!!q && !li.textContent.toLowerCase().includes(q)})});
+const anchors=[...document.querySelectorAll('.side a[href^="#"]')];
+const byId=new Map(anchors.map(a=>[a.getAttribute('href').slice(1),a]));
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){anchors.forEach(a=>a.classList.remove('active'));byId.get(e.target.id)?.classList.add('active')}})},{rootMargin:'-10% 0px -75% 0px'});
+document.querySelectorAll('.content h1[id],.content h2[id],.content h3[id]').forEach(h=>obs.observe(h));
+</script>
+</body></html>

@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>PyTorch 视觉基础小实验</title>
+<style>
+:root{--ink:#182536;--muted:#607185;--accent:#176e76;--paper:#fff;--bg:#f3f6f9;--line:#dce4eb}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.8 system-ui,"Microsoft YaHei",sans-serif}
+a{color:var(--accent);text-underline-offset:3px}a:hover{color:#0e4b53}
+.top{background:#14273d;color:#fff;padding:14px max(4vw,24px);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.top a{color:#e8f5f5;text-decoration:none}.top strong{letter-spacing:.02em}.top nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}
+.layout{max-width:1500px;margin:auto;display:grid;grid-template-columns:280px minmax(0,1fr);gap:26px;padding:28px 4vw 64px}
+.side{align-self:start;position:sticky;top:20px;max-height:calc(100vh - 40px);overflow:auto;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px 16px;box-shadow:0 4px 18px #17233708}
+.side label{display:block;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.12em;margin:0 0 10px}
+.side input{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:14px;margin-bottom:10px}
+.side ul{list-style:none;padding-left:0;margin:0}.side ul ul{padding-left:14px;border-left:1px solid var(--line);margin-left:5px}
+.side li{margin:3px 0}.side a{display:block;text-decoration:none;padding:3px 6px;border-radius:6px;color:#31475e;font-size:13px;line-height:1.45}
+.side li.level-3{padding-left:15px}
+.side a:hover,.side a.active{background:#e8f3f2;color:#0e6167}.side li[hidden]{display:none}
+.content{min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:clamp(22px,4vw,60px);box-shadow:0 8px 28px #17233708}
+.content h1{font-size:clamp(28px,3vw,40px);line-height:1.3;margin-top:0;color:#14273d}
+.content h2{font-size:26px;border-top:1px solid var(--line);padding-top:32px;margin-top:48px;color:#154f62}
+.content h3{font-size:20px;margin-top:28px;color:#1e6672}.content h1,.content h2,.content h3{scroll-margin-top:20px}
+.content p{margin:13px 0}.content li{margin:5px 0}.content blockquote{margin:20px 0;padding:10px 20px;border-left:4px solid #31868a;background:#eff7f7;color:#385b60}
+.content table{border-collapse:collapse;width:100%;min-width:0;font-size:14px;line-height:1.55;table-layout:auto}
+.content th,.content td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+.content th,.content td{overflow-wrap:anywhere}
+.content th{background:#edf3f6}.content tr:nth-child(even){background:#fafcfd}
+.content .resource-table th{background:#e7f1f0;color:#135d63}.content .resource-table td:nth-child(2){font-weight:600}
+.content .cols-5{table-layout:fixed}.content .cols-5 th:nth-child(1){width:6%}.content .cols-5 th:nth-child(2){width:41%}.content .cols-5 th:nth-child(3){width:19%}.content .cols-5 th:nth-child(4){width:9%}.content .cols-5 th:nth-child(5){width:25%}
+.content .cols-5 td:nth-child(4),.content .cols-5 th:nth-child(4){white-space:nowrap}
+.content .table-wrap{overflow:auto;margin:18px 0;border-radius:8px}
+code{font-family:Consolas,"Cascadia Code",monospace;font-size:.88em;background:#eef3f6;border-radius:4px;padding:2px 5px;overflow-wrap:anywhere}
+pre{background:#15283d;color:#e8f1f6;border-radius:9px;padding:16px 19px;overflow:auto;line-height:1.55}pre code{background:transparent;color:inherit;padding:0;white-space:pre;overflow-wrap:normal}
+.content input[type=checkbox]{margin-right:8px;accent-color:var(--accent)}
+.back{position:fixed;right:22px;bottom:22px;background:#176e76;color:white;padding:8px 14px;border-radius:999px;text-decoration:none;box-shadow:0 4px 15px #0002;font-size:13px}
+@media(max-width:1150px){.layout{display:block;padding:14px}.side{position:relative;max-height:260px;margin-bottom:14px}.content{padding:22px}}
+@media(min-width:761px) and (max-width:1300px){.content .wide-table,.content .wide-table tbody,.content .wide-table tr,.content .wide-table td{display:block;width:100%}.content .wide-table thead{display:none}.content .wide-table tr{border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:13px 0;background:#fff;box-shadow:0 2px 9px #1723370a}.content .wide-table td{border:0;border-bottom:1px solid var(--line);padding:9px 12px;white-space:normal}.content .wide-table td:last-child{border-bottom:0}.content .wide-table td::before{content:attr(data-label);display:inline-block;min-width:115px;font-size:12px;font-weight:700;color:#397a7e;margin-right:12px;vertical-align:top}}
+@media(max-width:760px){.content{padding:18px}.content h2{font-size:22px}.content h3{font-size:18px}.content .table-wrap{overflow:visible}.content table,.content tbody,.content tr,.content td{display:block;width:100%}.content thead{display:none}.content tr{border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:13px 0;background:#fff;box-shadow:0 2px 9px #1723370a}.content td{border:0;border-bottom:1px solid var(--line);padding:9px 12px}.content td:last-child{border-bottom:0}.content td::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;color:#397a7e;margin-bottom:3px}.content .resource-table{min-width:0}}
+@media print{.top,.side,.back{display:none}.layout{display:block;padding:0}.content{border:0;box-shadow:none;padding:0}body{background:#fff}.content h2{break-before:page}pre,table{break-inside:avoid}}
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.highlight .hll { background-color: #49483e }
+.highlight { background: #272822; color: #f8f8f2 }
+.highlight .c { color: #75715e } /* Comment */
+.highlight .err { color: #960050; background-color: #1e0010 } /* Error */
+.highlight .esc { color: #f8f8f2 } /* Escape */
+.highlight .g { color: #f8f8f2 } /* Generic */
+.highlight .k { color: #66d9ef } /* Keyword */
+.highlight .l { color: #ae81ff } /* Literal */
+.highlight .n { color: #f8f8f2 } /* Name */
+.highlight .o { color: #f92672 } /* Operator */
+.highlight .x { color: #f8f8f2 } /* Other */
+.highlight .p { color: #f8f8f2 } /* Punctuation */
+.highlight .ch { color: #75715e } /* Comment.Hashbang */
+.highlight .cm { color: #75715e } /* Comment.Multiline */
+.highlight .cp { color: #75715e } /* Comment.Preproc */
+.highlight .cpf { color: #75715e } /* Comment.PreprocFile */
+.highlight .c1 { color: #75715e } /* Comment.Single */
+.highlight .cs { color: #75715e } /* Comment.Special */
+.highlight .gd { color: #f92672 } /* Generic.Deleted */
+.highlight .ge { color: #f8f8f2; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #f8f8f2 } /* Generic.Error */
+.highlight .gh { color: #f8f8f2 } /* Generic.Heading */
+.highlight .gi { color: #a6e22e } /* Generic.Inserted */
+.highlight .go { color: #66d9ef } /* Generic.Output */
+.highlight .gp { color: #f92672; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { color: #f8f8f2; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #75715e } /* Generic.Subheading */
+.highlight .gt { color: #f8f8f2 } /* Generic.Traceback */
+.highlight .kc { color: #66d9ef } /* Keyword.Constant */
+.highlight .kd { color: #66d9ef } /* Keyword.Declaration */
+.highlight .kn { color: #f92672 } /* Keyword.Namespace */
+.highlight .kp { color: #66d9ef } /* Keyword.Pseudo */
+.highlight .kr { color: #66d9ef } /* Keyword.Reserved */
+.highlight .kt { color: #66d9ef } /* Keyword.Type */
+.highlight .ld { color: #e6db74 } /* Literal.Date */
+.highlight .m { color: #ae81ff } /* Literal.Number */
+.highlight .s { color: #e6db74 } /* Literal.String */
+.highlight .na { color: #a6e22e } /* Name.Attribute */
+.highlight .nb { color: #f8f8f2 } /* Name.Builtin */
+.highlight .nc { color: #a6e22e } /* Name.Class */
+.highlight .no { color: #66d9ef } /* Name.Constant */
+.highlight .nd { color: #a6e22e } /* Name.Decorator */
+.highlight .ni { color: #f8f8f2 } /* Name.Entity */
+.highlight .ne { color: #a6e22e } /* Name.Exception */
+.highlight .nf { color: #a6e22e } /* Name.Function */
+.highlight .nl { color: #f8f8f2 } /* Name.Label */
+.highlight .nn { color: #f8f8f2 } /* Name.Namespace */
+.highlight .nx { color: #a6e22e } /* Name.Other */
+.highlight .py { color: #f8f8f2 } /* Name.Property */
+.highlight .nt { color: #f92672 } /* Name.Tag */
+.highlight .nv { color: #f8f8f2 } /* Name.Variable */
+.highlight .ow { color: #f92672 } /* Operator.Word */
+.highlight .pm { color: #f8f8f2 } /* Punctuation.Marker */
+.highlight .w { color: #f8f8f2 } /* Text.Whitespace */
+.highlight .mb { color: #ae81ff } /* Literal.Number.Bin */
+.highlight .mf { color: #ae81ff } /* Literal.Number.Float */
+.highlight .mh { color: #ae81ff } /* Literal.Number.Hex */
+.highlight .mi { color: #ae81ff } /* Literal.Number.Integer */
+.highlight .mo { color: #ae81ff } /* Literal.Number.Oct */
+.highlight .sa { color: #e6db74 } /* Literal.String.Affix */
+.highlight .sb { color: #e6db74 } /* Literal.String.Backtick */
+.highlight .sc { color: #e6db74 } /* Literal.String.Char */
+.highlight .dl { color: #e6db74 } /* Literal.String.Delimiter */
+.highlight .sd { color: #e6db74 } /* Literal.String.Doc */
+.highlight .s2 { color: #e6db74 } /* Literal.String.Double */
+.highlight .se { color: #ae81ff } /* Literal.String.Escape */
+.highlight .sh { color: #e6db74 } /* Literal.String.Heredoc */
+.highlight .si { color: #e6db74 } /* Literal.String.Interpol */
+.highlight .sx { color: #e6db74 } /* Literal.String.Other */
+.highlight .sr { color: #e6db74 } /* Literal.String.Regex */
+.highlight .s1 { color: #e6db74 } /* Literal.String.Single */
+.highlight .ss { color: #e6db74 } /* Literal.String.Symbol */
+.highlight .bp { color: #f8f8f2 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #a6e22e } /* Name.Function.Magic */
+.highlight .vc { color: #f8f8f2 } /* Name.Variable.Class */
+.highlight .vg { color: #f8f8f2 } /* Name.Variable.Global */
+.highlight .vi { color: #f8f8f2 } /* Name.Variable.Instance */
+.highlight .vm { color: #f8f8f2 } /* Name.Variable.Magic */
+.highlight .il { color: #ae81ff } /* Literal.Number.Integer.Long */
+.highlight{overflow:auto;border-radius:9px}.highlight pre{min-width:max-content;margin:0}.highlight .linenos{color:#91a0a8;margin-right:12px;user-select:none}</style>
+</head>
+<body id="top">
+<header class="top"><strong>视觉论文学习库</strong><nav><a href="index.html">30 篇论文目录</a><a href="guide.html">完整指南</a><a href="lab.html">PyTorch 小实验</a></nav></header>
+<div class="layout"><aside class="side"><label for="toc-search">章节目录</label><input id="toc-search" type="search" placeholder="搜索章节…" aria-label="搜索章节"><div class="toc"><ul><li class="level-2"><a href="#1">1. 运行方法</a></li><li class="level-2"><a href="#2">2. 结构导读</a></li><li class="level-2"><a href="#3">3. 完整代码</a></li><li class="level-2"><a href="#4">4. 练习与验收</a></li></ul></div></aside>
+<main class="content"><h1 id="pytorch">PyTorch 视觉基础小实验</h1>
+<p>本实验用程序生成“亮方块在左/右”的图像做二分类，并演示注意力、VAE 重参数化和扩散加噪。无需外部数据集或预训练权重。它用于学习代码流程，不能代表真实视觉任务性能。</p>
+<h2 id="1">1. 运行方法</h2>
+<p>安装适合本机的 <a href="https://pytorch.org/get-started/locally/" rel="noopener noreferrer" target="_blank">PyTorch</a>，然后在项目根目录运行：</p>
+<pre><code class="language-bash">python examples/vision_basics_lab.py
+</code></pre>
+<p>也可以<a href="vision_basics_lab.py">下载完整 Python 文件</a>。脚本自动选择可用 CUDA 或 CPU；输出各项检查结果、训练损失和验证准确率。</p>
+<h2 id="2">2. 结构导读</h2>
+<table>
+<thead>
+<tr>
+<th>函数或类</th>
+<th>学习内容</th>
+<th>检查点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="函数或类"><code>make_data</code></td>
+<td data-label="学习内容">合成图像、标签与独立划分</td>
+<td data-label="检查点">图像 <code>[N,1,28,28]</code>，标签 <code>[N]</code></td>
+</tr>
+<tr>
+<td data-label="函数或类"><code>TinyCNN</code></td>
+<td data-label="学习内容">卷积、池化和全连接</td>
+<td data-label="检查点">两次池化后为 <code>7×7</code></td>
+</tr>
+<tr>
+<td data-label="函数或类"><code>train_demo</code></td>
+<td data-label="学习内容">DataLoader、训练、验证、检查点</td>
+<td data-label="检查点">清梯度→前向→反向→更新，评估时关闭梯度</td>
+</tr>
+<tr>
+<td data-label="函数或类"><code>concepts_demo</code></td>
+<td data-label="学习内容">注意力、重参数化、扩散</td>
+<td data-label="检查点">权重归一化、梯度存在、张量形状正确</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3">3. 完整代码</h2>
+<div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="sd">"""Self-contained PyTorch lab for the companion Chinese vision tutorial.</span>
+<span class="linenos">  2</span>
+<span class="linenos">  3</span><span class="sd">Run: python vision_basics_lab.py</span>
+<span class="linenos">  4</span><span class="sd">No external dataset or pretrained weights are required.</span>
+<span class="linenos">  5</span><span class="sd">"""</span>
+<span class="linenos">  6</span>
+<span class="linenos">  7</span><span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="linenos">  8</span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="linenos">  9</span>
+<span class="linenos"> 10</span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="linenos"> 11</span><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="linenos"> 12</span><span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span><span class="p">,</span> <span class="n">TensorDataset</span>
+<span class="linenos"> 13</span>
+<span class="linenos"> 14</span>
+<span class="linenos"> 15</span><span class="k">def</span> <span class="nf">make_data</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TensorDataset</span><span class="p">:</span>
+<span class="linenos"> 16</span><span class="w">    </span><span class="sd">"""Classify whether a bright square is on the left or right."""</span>
+<span class="linenos"> 17</span>    <span class="n">g</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Generator</span><span class="p">()</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="linenos"> 18</span>    <span class="n">x</span> <span class="o">=</span> <span class="mf">0.15</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="n">generator</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
+<span class="linenos"> 19</span>    <span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="p">,),</span> <span class="n">generator</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
+<span class="linenos"> 20</span>    <span class="n">row</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="p">,),</span> <span class="n">generator</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
+<span class="linenos"> 21</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="linenos"> 22</span>        <span class="n">col</span> <span class="o">=</span> <span class="mi">4</span> <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">18</span>
+<span class="linenos"> 23</span>        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="mi">6</span><span class="p">,</span> <span class="n">col</span> <span class="p">:</span> <span class="n">col</span> <span class="o">+</span> <span class="mi">6</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">1.0</span>
+<span class="linenos"> 24</span>    <span class="k">return</span> <span class="n">TensorDataset</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+<span class="linenos"> 25</span>
+<span class="linenos"> 26</span>
+<span class="linenos"> 27</span><span class="k">class</span> <span class="nc">TinyCNN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="linenos"> 28</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos"> 29</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<span class="linenos"> 30</span>        <span class="bp">self</span><span class="o">.</span><span class="n">net</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+<span class="linenos"> 31</span>            <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span> <span class="n">nn</span><span class="o">.</span><span class="n">MaxPool2d</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+<span class="linenos"> 32</span>            <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span> <span class="n">nn</span><span class="o">.</span><span class="n">MaxPool2d</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+<span class="linenos"> 33</span>            <span class="n">nn</span><span class="o">.</span><span class="n">Flatten</span><span class="p">(),</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">32</span> <span class="o">*</span> <span class="mi">7</span> <span class="o">*</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+<span class="linenos"> 34</span>        <span class="p">)</span>
+<span class="linenos"> 35</span>
+<span class="linenos"> 36</span>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="linenos"> 37</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="linenos"> 38</span>
+<span class="linenos"> 39</span>
+<span class="linenos"> 40</span><span class="k">def</span> <span class="nf">train_demo</span><span class="p">():</span>
+<span class="linenos"> 41</span>    <span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="linenos"> 42</span>    <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">"cuda"</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">"cpu"</span><span class="p">)</span>
+<span class="linenos"> 43</span>    <span class="n">train</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">make_data</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos"> 44</span>    <span class="n">val</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">make_data</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">22</span><span class="p">),</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">)</span>
+<span class="linenos"> 45</span>    <span class="n">model</span> <span class="o">=</span> <span class="n">TinyCNN</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="linenos"> 46</span>    <span class="n">opt</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">AdamW</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+<span class="linenos"> 47</span>    <span class="n">loss_fn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+<span class="linenos"> 48</span>    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+<span class="linenos"> 49</span>        <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+<span class="linenos"> 50</span>        <span class="n">loss_sum</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="linenos"> 51</span>        <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">train</span><span class="p">:</span>
+<span class="linenos"> 52</span>            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">y</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="linenos"> 53</span>            <span class="n">opt</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">(</span><span class="n">set_to_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos"> 54</span>            <span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="linenos"> 55</span>            <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="linenos"> 56</span>            <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+<span class="linenos"> 57</span>            <span class="n">opt</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+<span class="linenos"> 58</span>            <span class="n">loss_sum</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="linenos"> 59</span>        <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="linenos"> 60</span>        <span class="n">correct</span> <span class="o">=</span> <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 61</span>        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">inference_mode</span><span class="p">():</span>
+<span class="linenos"> 62</span>            <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">val</span><span class="p">:</span>
+<span class="linenos"> 63</span>                <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">))</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span>
+<span class="linenos"> 64</span>                <span class="n">correct</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">((</span><span class="n">pred</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="linenos"> 65</span>                <span class="n">total</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="linenos"> 66</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"epoch=</span><span class="si">{</span><span class="n">epoch</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> train_loss=</span><span class="si">{</span><span class="n">loss_sum</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">800</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> val_acc=</span><span class="si">{</span><span class="n">correct</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">total</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="linenos"> 67</span>    <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">temp_dir</span><span class="p">:</span>
+<span class="linenos"> 68</span>        <span class="n">out</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">temp_dir</span><span class="p">)</span> <span class="o">/</span> <span class="s2">"tinycnn_state.pt"</span>
+<span class="linenos"> 69</span>        <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="n">out</span><span class="p">)</span>
+<span class="linenos"> 70</span>        <span class="n">restored</span> <span class="o">=</span> <span class="n">TinyCNN</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="linenos"> 71</span>        <span class="n">restored</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">map_location</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">weights_only</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="linenos"> 72</span>        <span class="n">restored</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="linenos"> 73</span>        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">inference_mode</span><span class="p">():</span>
+<span class="linenos"> 74</span>            <span class="n">probe</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">val</span><span class="p">))[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="linenos"> 75</span>            <span class="k">assert</span> <span class="n">torch</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">probe</span><span class="p">),</span> <span class="n">restored</span><span class="p">(</span><span class="n">probe</span><span class="p">))</span>
+<span class="linenos"> 76</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"checkpoint round-trip passed; device=</span><span class="si">{</span><span class="n">device</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="linenos"> 77</span>
+<span class="linenos"> 78</span>
+<span class="linenos"> 79</span><span class="k">def</span> <span class="nf">concepts_demo</span><span class="p">():</span>
+<span class="linenos"> 80</span>    <span class="c1"># Q, K, V: [batch, tokens, channels]. Attention output has the same shape.</span>
+<span class="linenos"> 81</span>    <span class="n">tokens</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="linenos"> 82</span>    <span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">,</span> <span class="n">tokens</span><span class="p">,</span> <span class="n">tokens</span>
+<span class="linenos"> 83</span>    <span class="n">weights</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">((</span><span class="n">q</span> <span class="o">@</span> <span class="n">k</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">8</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos"> 84</span>    <span class="n">attended</span> <span class="o">=</span> <span class="n">weights</span> <span class="o">@</span> <span class="n">v</span>
+<span class="linenos"> 85</span>    <span class="k">assert</span> <span class="n">weights</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="ow">and</span> <span class="n">attended</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">tokens</span><span class="o">.</span><span class="n">shape</span>
+<span class="linenos"> 86</span>    <span class="k">assert</span> <span class="n">torch</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="linenos"> 87</span>
+<span class="linenos"> 88</span>    <span class="c1"># VAE: sample a latent variable while retaining gradients to mu and logvar.</span>
+<span class="linenos"> 89</span>    <span class="n">mu</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos"> 90</span>    <span class="n">logvar</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos"> 91</span>    <span class="n">z</span> <span class="o">=</span> <span class="n">mu</span> <span class="o">+</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">logvar</span><span class="p">)</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn_like</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
+<span class="linenos"> 92</span>    <span class="n">kl</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">logvar</span> <span class="o">-</span> <span class="n">mu</span><span class="o">.</span><span class="n">square</span><span class="p">()</span> <span class="o">-</span> <span class="n">logvar</span><span class="o">.</span><span class="n">exp</span><span class="p">())</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="linenos"> 93</span>    <span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">square</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="n">kl</span><span class="p">)</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+<span class="linenos"> 94</span>    <span class="k">assert</span> <span class="n">mu</span><span class="o">.</span><span class="n">grad</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">logvar</span><span class="o">.</span><span class="n">grad</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="linenos"> 95</span>
+<span class="linenos"> 96</span>    <span class="c1"># DDPM forward process at an arbitrary timestep; not a full diffusion trainer.</span>
+<span class="linenos"> 97</span>    <span class="n">x0</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span>
+<span class="linenos"> 98</span>    <span class="n">alpha_bar_t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">0.99</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos"> 99</span>    <span class="n">eps</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn_like</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+<span class="linenos">100</span>    <span class="n">xt</span> <span class="o">=</span> <span class="n">alpha_bar_t</span><span class="o">.</span><span class="n">sqrt</span><span class="p">()</span> <span class="o">*</span> <span class="n">x0</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha_bar_t</span><span class="p">)</span><span class="o">.</span><span class="n">sqrt</span><span class="p">()</span> <span class="o">*</span> <span class="n">eps</span>
+<span class="linenos">101</span>    <span class="k">assert</span> <span class="n">xt</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">x0</span><span class="o">.</span><span class="n">shape</span>
+<span class="linenos">102</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">"attention, VAE reparameterization, DDPM noising: shape/gradient checks passed"</span><span class="p">)</span>
+<span class="linenos">103</span>
+<span class="linenos">104</span>
+<span class="linenos">105</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+<span class="linenos">106</span>    <span class="n">concepts_demo</span><span class="p">()</span>
+<span class="linenos">107</span>    <span class="n">train_demo</span><span class="p">()</span>
+</pre></div>
+<h2 id="4">4. 练习与验收</h2>
+<ol>
+<li>分别使用 <code>1e-4</code>、<code>1e-3</code>、<code>1e-1</code> 学习率，解释损失曲线差别。</li>
+<li>删除一个池化层，先算出全连接输入维度再修改代码。</li>
+<li>将训练样本减至 50，观察训练和验证差距。</li>
+<li>将 <code>alpha_bar_t</code> 改成接近 0 或 1 的值，解释噪声占比。</li>
+<li>解释为什么保存/恢复后同一输入应产生一致输出。</li>
+</ol>
+<p>完成后回到<a href="tutorial.html">前置知识教程</a>，继续阅读 ViT、VAE、DDPM 和 DINO。</p><p><a href="lab.md">下载本页 Markdown 源文</a></p></main></div><a class="back" href="#top" aria-label="返回顶部">↑ 返回顶部</a>
+<script>
+document.body.id='top';
+document.querySelectorAll('.content table').forEach(t=>{const w=document.createElement('div');w.className='table-wrap';t.parentNode.insertBefore(w,t);w.appendChild(t)});
+const tocLinks=[...document.querySelectorAll('.side li')];
+document.querySelector('#toc-search').addEventListener('input',e=>{const q=e.target.value.trim().toLowerCase();tocLinks.forEach(li=>{li.hidden=!!q && !li.textContent.toLowerCase().includes(q)})});
+const anchors=[...document.querySelectorAll('.side a[href^="#"]')];
+const byId=new Map(anchors.map(a=>[a.getAttribute('href').slice(1),a]));
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){anchors.forEach(a=>a.classList.remove('active'));byId.get(e.target.id)?.classList.add('active')}})},{rootMargin:'-10% 0px -75% 0px'});
+document.querySelectorAll('.content h1[id],.content h2[id],.content h3[id]').forEach(h=>obs.observe(h));
+</script>
+</body></html>
