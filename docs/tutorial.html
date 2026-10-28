@@ -626,14 +626,47 @@ print(patches.shape)  # [8, 768, 196]
 </tbody>
 </table>
 <h3 id="26">2.6 最小实现关卡</h3>
-<p>| 关卡 | 实现内容 | 检查点 |
-|---|---|
-| P1 | NumPy/torch 实现线性回归 | 手算梯度与 autograd 相符 |
-| P2 | CNN 分类 | 正确区分训练/验证、保存最佳模型 |
-| P3 | 单头注意力和 patchify | 权重每行求和为 1，形状正确 |
-| P4 | 简化 VAE | 重建、KL 和总损失均有记录 |
-| P5 | DDPM 前向加噪 | <code>t</code> 增大时图像逐渐接近噪声 |
-| P6 | 用现成骨干提取特征 | 冻结与微调的评价协议相同 |</p>
+<table>
+<thead>
+<tr>
+<th>关卡</th>
+<th>实现内容</th>
+<th>检查点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="关卡">P1</td>
+<td data-label="实现内容">NumPy/torch 实现线性回归</td>
+<td data-label="检查点">手算梯度与 autograd 相符</td>
+</tr>
+<tr>
+<td data-label="关卡">P2</td>
+<td data-label="实现内容">CNN 分类</td>
+<td data-label="检查点">正确区分训练/验证、保存最佳模型</td>
+</tr>
+<tr>
+<td data-label="关卡">P3</td>
+<td data-label="实现内容">单头注意力和 patchify</td>
+<td data-label="检查点">权重每行求和为 1，形状正确</td>
+</tr>
+<tr>
+<td data-label="关卡">P4</td>
+<td data-label="实现内容">简化 VAE</td>
+<td data-label="检查点">重建、KL 和总损失均有记录</td>
+</tr>
+<tr>
+<td data-label="关卡">P5</td>
+<td data-label="实现内容">DDPM 前向加噪</td>
+<td data-label="检查点"><code>t</code> 增大时图像逐渐接近噪声</td>
+</tr>
+<tr>
+<td data-label="关卡">P6</td>
+<td data-label="实现内容">用现成骨干提取特征</td>
+<td data-label="检查点">冻结与微调的评价协议相同</td>
+</tr>
+</tbody>
+</table>
 <hr/>
 <p><strong>逐项学习链接</strong>（推荐按表内顺序学习；“官方”指原项目/课程提供者，论文原文用于进阶对照）：</p>
 <table class="resource-table">
