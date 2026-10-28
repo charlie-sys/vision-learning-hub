@@ -72,7 +72,7 @@ def render(name, title, code_html="", extra_css=""):
         for row in table.select("tbody tr"):
             for i, cell in enumerate(row.find_all("td", recursive=False)):
                 cell["data-label"] = labels[i] if i < len(labels) else ""
-    body = str(soup) + f'<p><a href="{name}.md">下载本页 Markdown 源文</a></p>'
+    body = str(soup) + f'<p><a href="{name}.md" download="{name}.md">下载本页 Markdown 源文</a></p>'
     template = (ROOT / "templates" / "page.html").read_text(encoding="utf-8")
     page = template.replace("{{title}}", html.escape(title)).replace("{{toc}}", '<div class="toc"><ul>' + ''.join(items) + '</ul></div>').replace("{{body}}", body).replace("{{extra_css}}", extra_css)
     (DOCS / f"{name}.html").write_text(page, encoding="utf-8")
