@@ -15,3 +15,5 @@ DINOv2实验从Meta官方仓库与服务器加载标准ViT-S/14模型，固定�
 新增教学入口来自MIT Diffusion/Flow Matching 2025、UvA Deep Learning Tutorials、Peyré/Cuturi的Computational Optimal Transport、SciPy官方文档。本站提供原创中文解释和链接，不复制这些课程全文或Notebook。
 
 网页Python运行器使用Pyodide 0.27.7（MPL-2.0），由jsDelivr公开CDN在用户点击运行后加载，来源 https://github.com/pyodide/pyodide 。运行时与其依赖包未随项目重新分发；NumPy、SciPy、SymPy、Matplotlib及其传递依赖遵守各自许可。运行器和Notebook教学代码为本项目原创。Colab是Google提供的外部服务，其账号、计算资源与条款由服务方管理；项目不转售或代理其计算资源。
+
+视觉幻觉专题的79篇题录、中文译写、摘要和分类来自用户提供的Excel清单，2026-11-14导入。字段导出见 `data/hallucination_source.csv`，逐条来源与版本见 `data/papers.json`，本地文件核对记录见 `data/hallucination_import_report.json`。论文全文与代码通过arXiv及原表提供的项目链接访问，未将用户本地PDF纳入Git历史；各论文与项目遵守其原始许可。发表/分区元数据保留原表说明，并非本站此次重新核验的评级。

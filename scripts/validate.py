@@ -1,6 +1,6 @@
 """Validate generated local links, paper records, and responsive table markup."""
 from pathlib import Path
-from urllib.parse import unquote
+from urllib.parse import unquote, urlsplit
 import json
 
 from bs4 import BeautifulSoup
@@ -8,7 +8,9 @@ from bs4 import BeautifulSoup
 ROOT = Path(__file__).resolve().parents[1]
 docs = ROOT / "docs"
 papers = json.loads((ROOT / "data/papers.json").read_text(encoding="utf-8"))
-assert len(papers) == 30 and len({p["id"] for p in papers}) == 30
+assert len(papers) == 109 and len({p["id"] for p in papers}) == 109
+assert sum(p.get('collection') == 'foundation' for p in papers) == 30
+assert sum(p.get('collection') == 'hallucination' for p in papers) == 79
 assert all(p["pdf_urls"] and p["source"].startswith("https://") for p in papers)
 for path in docs.glob("*.html"):
     text = path.read_text(encoding="utf-8")
@@ -25,9 +27,10 @@ for path in docs.glob("*.html"):
         if href.startswith("#"):
             assert href[1:] in ids, (path.name, href)
         else:
-            assert (path.parent / href.split("#")[0]).exists(), (path.name, href)
-            if "#" in href:
-                target, anchor = href.split("#", 1)
+            parts = urlsplit(href)
+            assert (path.parent / parts.path).exists(), (path.name, href)
+            if parts.fragment:
+                target, anchor = parts.path, parts.fragment
                 other = BeautifulSoup((path.parent / target).read_text(encoding="utf-8"), "html.parser")
                 assert other.find(id=anchor), (path.name, href)
     for img in soup.select("img[src]"):
@@ -45,10 +48,10 @@ for path in docs.glob("*.html"):
             cells = row.find_all("td", recursive=False)
             assert len(cells) == n and all("data-label" in c.attrs for c in cells)
     print(f"{path.name}: OK")
-assert len(BeautifulSoup((docs / "index.html").read_text(encoding="utf-8"), "html.parser").select("article")) == 30
+assert len(BeautifulSoup((docs / "index.html").read_text(encoding="utf-8"), "html.parser").select("article")) == len(papers)
 catalog = BeautifulSoup((docs / "index.html").read_text(encoding="utf-8"), "html.parser")
 translation_buttons = catalog.select("button.translation-trigger")
-assert len(translation_buttons) == 30
+assert len(translation_buttons) == len(papers)
 expected_pdfs = {str(p["id"]): p["pdf_urls"][0] for p in papers}
 assert all(button["data-pdf"] == expected_pdfs[button["data-paper-id"]] for button in translation_buttons)
 assert catalog.select_one("dialog#translation-dialog") is not None
@@ -56,4 +59,4 @@ math_page = BeautifulSoup((docs / "tutorial.html").read_text(encoding="utf-8"), 
 assert len(math_page.select("[data-tex]")) >= 40, "Mathematical expressions were not preserved"
 assert len(math_page.select(".math-display")) >= 10, "Missing display equations"
 assert "MATHPLACEHOLDER" not in str(math_page), "Unrestored equation placeholder"
-print("30 paper records, all generated pages, translation entries, internal links and table labels: OK")
+print(f"{len(papers)} paper records, all generated pages, translation entries, internal links and table labels: OK")

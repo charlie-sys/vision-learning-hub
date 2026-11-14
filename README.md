@@ -1,12 +1,14 @@
 # Vision Learning Hub · 视觉论文学习库
 
-面向扩散模型、视觉 Transformer、VAE 和 DINO 的中文学习项目：30 篇代表性论文、数学/PyTorch/视觉前置教程、逐步推导与数值例题、四项完整训练/评价实验、练习答案与公开考核量表。v2.1新增网页Python数学运行器和7份可在Colab运行的教学Notebook。
+面向扩散模型、视觉 Transformer、VAE、DINO与多模态视觉幻觉的中文学习项目：30篇视觉基础论文＋79篇视觉幻觉论文，共109篇；包含数学/PyTorch/视觉前置教程、逐步推导与数值例题、四项完整训练/评价实验、练习答案与公开考核量表。提供网页Python数学运行器和7份可在Colab运行的教学Notebook。
 
 在线阅读：**[https://charlie-sys.github.io/vision-learning-hub/](https://charlie-sys.github.io/vision-learning-hub/)** · [Fork 仓库](https://github.com/charlie-sys/vision-learning-hub/fork)
 
 ## 阅读入口
 
 - [可搜索论文目录](docs/index.html)
+- [视觉幻觉专题](https://charlie-sys.github.io/vision-learning-hub/index.html?group=06_%E8%A7%86%E8%A7%89%E5%B9%BB%E8%A7%89)：按用户Excel导入79篇，支持9个研究方向筛选、中英文摘要、关键词、发表信息和代码/项目入口
+- [专题说明](docs/hallucination.html) · [完整21字段表格CSV](docs/hallucination.csv) · [PDF核对记录](data/hallucination_import_report.json)
 - [在线代码实验室](https://charlie-sys.github.io/vision-learning-hub/playground.html)：直接运行NumPy/SciPy/SymPy/Matplotlib，或打开PyTorch/TensorFlow的Colab实验
 - [前置知识完整教程](docs/tutorial.html) · [Markdown 源文](content/tutorial.md)
 - [论文阅读完整指南](docs/guide.html) · [Markdown 源文](content/guide.md)
@@ -62,11 +64,12 @@ python examples/course_labs.py probe --train-size 1024 --val-size 256 --epochs 2
 
 ## 获取论文全文与离线阅读
 
-目录的 PDF 按钮可直接打开原始公开全文。也可下载到本地；共 30 篇，可能需要较长时间和数百 MB 空间：
+目录的PDF按钮可直接打开原始公开全文，也可下载到本地。目前共109篇，全部下载可能需要较长时间和较多磁盘空间；可以先按网站编号选择：
 
 ```bash
 python scripts/download_papers.py --list
 python scripts/download_papers.py --ids 1,2,15
+python scripts/download_papers.py --ids 31,76,109
 python scripts/download_papers.py
 python scripts/build.py --local-pdfs
 ```
@@ -100,6 +103,8 @@ Fork 后在仓库 Settings → Pages 中选择从分支部署，分支 `main`、
 
 ## 内容范围
 
-这是一份以经典方法和代表性演进为主的学习课程，涵盖2013–2025年论文，不是穷尽综述或2026年前沿排名。真实实验采用教学规模，DINO使用官方预训练骨干做迁移评价，未从头复现DINO大规模训练。检测、分割、Flow Matching等提供教学与进一步学习入口，尚未提供全模型训练。100分量表需要学习者提交证据，不是对所有读者或课程的成绩保证。欢迎通过Issue/PR修正和扩充。
+基础学习部分以2013–2025年的经典方法和代表性演进为主。真实实验采用教学规模，DINO使用官方预训练骨干做迁移评价，未从头复现DINO大规模训练。检测、分割、Flow Matching等提供教学与进一步学习入口，尚未提供全模型训练。100分量表需要学习者提交证据，不是对所有读者或课程的成绩保证。欢迎通过Issue/PR修正和扩充。
+
+视觉幻觉专题另收录用户表格中的2023–2026年文献；保留表格分类、中文译写、摘要及发表/分区说明。网站编号31–109对应原表序号1–79，没有另行评定阅读优先级。题录与PDF逐项核对，评级及最新录用状态以原表口径和原始来源为准。维护者可修改 `data/hallucination_source.csv`，运行 `python scripts/import_hallucination.py`、`python scripts/build.py`、`python scripts/check_hallucination.py` 更新并核查。
 
 原创内容与代码采用 [MIT 许可证](LICENSE)。第三方论文与课程遵循各自许可。

@@ -1,0 +1,1363 @@
+{
+  "imported_on": "2026-11-14",
+  "worksheet": "幻觉与多模态理解论文清单",
+  "workbook_filename": "视觉幻觉视角下多模态大模型图像视频理解提升_论文清单.xlsx",
+  "workbook_sha256": "ada73c4148a27c214300684a3ffeb4273dc0ecd175888e49f9a5f7b9c123df9c",
+  "paper_count": 79,
+  "pdf_count": 79,
+  "categories": {
+    "综述与理论": 6,
+    "幻觉机理与检测": 8,
+    "图像幻觉基准与评测": 8,
+    "视频幻觉基准与评测": 11,
+    "偏好对齐与训练缓解": 10,
+    "解码与推理时干预": 12,
+    "注意力与表征干预": 8,
+    "视频理解增强": 10,
+    "多模态与垂域扩展": 6
+  },
+  "checks": "Spreadsheet titles and arXiv identifiers matched to the supplied manifest; all local PDFs opened and first pages extracted. Source PDF files are not redistributed.",
+  "records": [
+    {
+      "sheet_row": 2,
+      "sheet_id": 1,
+      "arxiv": "2402.00253",
+      "title": "A Survey on Hallucination in Large Vision-Language Models",
+      "filename": "A Survey on Hallucination in Large Vision-Language Models.pdf",
+      "pages": 10,
+      "bytes": 1510192,
+      "sha256": "d63e9c580c3458ca1b8f76544fb1db5f3fd43b4dc51881626b914a9e3c2bdadb",
+      "first_page_arxiv": [
+        "2402.00253v2"
+      ],
+      "pdf_version": "2402.00253v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 3,
+      "sheet_id": 2,
+      "arxiv": "2403.17306",
+      "title": "Visual Hallucination: Definition, Quantification, and Prescriptive Remediations",
+      "filename": "Visual Hallucination： Definition, Quantification, and Prescriptive Remediations.pdf",
+      "pages": 17,
+      "bytes": 20941605,
+      "sha256": "99fea5fe3e999d10665acbb7a21aa2b20bf2eab650fd4c2a5e52f3c167912155",
+      "first_page_arxiv": [
+        "2403.17306v2"
+      ],
+      "pdf_version": "2403.17306v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 4,
+      "sheet_id": 3,
+      "arxiv": "2404.18930",
+      "title": "Hallucination of Multimodal Large Language Models: A Survey",
+      "filename": "Hallucination of Multimodal Large Language Models： A Survey.pdf",
+      "pages": 40,
+      "bytes": 1091536,
+      "sha256": "e99d86d4722b091c73bc0094b95a8edc856c8bcff1d611a0c0f9463e419aa0d6",
+      "first_page_arxiv": [
+        "2404.18930v2"
+      ],
+      "pdf_version": "2404.18930v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 5,
+      "sheet_id": 4,
+      "arxiv": "2405.09589",
+      "title": "A Comprehensive Survey of Hallucination in Large Language, Image, Video and Audio Foundation Models",
+      "filename": "A Comprehensive Survey of Hallucination in Large Language, Image, Video and Audio Foundation Models.pdf",
+      "pages": 16,
+      "bytes": 1867769,
+      "sha256": "8f697aac78807f41e6c640bb140c26990c034b4ea09c83196debc372ee4a86bf",
+      "first_page_arxiv": [
+        "2405.09589v4"
+      ],
+      "pdf_version": "2405.09589v4",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 6,
+      "sheet_id": 5,
+      "arxiv": "2410.15359",
+      "title": "Hallucination in Multimodal Foundation Models: A Survey on Causes, Corrections, and Evaluations",
+      "filename": "Hallucination in Multimodal Foundation Models： A Survey on Causes, Corrections, and Evaluations.pdf",
+      "pages": 27,
+      "bytes": 59100647,
+      "sha256": "dd26521a8015fc8f22143ee95505430995097ab6f63ef59bfe99799ee39b32f3",
+      "first_page_arxiv": [
+        "2410.15359v2"
+      ],
+      "pdf_version": "2410.15359v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 7,
+      "sheet_id": 6,
+      "arxiv": "2604.12944",
+      "title": "Distorted or Fabricated? A Survey on Hallucination in Video LLMs",
+      "filename": "Distorted or Fabricated？ A Survey on Hallucination in Video LLMs.pdf",
+      "pages": 13,
+      "bytes": 1280425,
+      "sha256": "9f4bda4458e1365872eceb428eee71bab9a361057866b13014b7c450191e7996",
+      "first_page_arxiv": [
+        "2604.12944v1"
+      ],
+      "pdf_version": "2604.12944v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 8,
+      "sheet_id": 7,
+      "arxiv": "2310.00754",
+      "title": "Analyzing and Mitigating Object Hallucination in Large Vision-Language Models",
+      "filename": "Analyzing and Mitigating Object Hallucination in Large Vision-Language Models.pdf",
+      "pages": 30,
+      "bytes": 3013049,
+      "sha256": "70757990b1bd466612d6c5311ed8410b7b1f9cbeb4f26dcd09017940acb7d503",
+      "first_page_arxiv": [
+        "2310.00754v2"
+      ],
+      "pdf_version": "2310.00754v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 9,
+      "sheet_id": 8,
+      "arxiv": "2402.11622",
+      "title": "Logical Closed Loop: Uncovering Object Hallucinations in Large Vision-Language Models",
+      "filename": "Logical Closed Loop： Uncovering Object Hallucinations in Large Vision-Language Models.pdf",
+      "pages": 19,
+      "bytes": 2611120,
+      "sha256": "a5e8cc6462bc0f40aaf569da34f52a575b2145c59e8bbb706147ef2ddfda0940",
+      "first_page_arxiv": [
+        "2402.11622v2"
+      ],
+      "pdf_version": "2402.11622v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 10,
+      "sheet_id": 9,
+      "arxiv": "2406.14492",
+      "title": "Does Object Grounding Really Reduce Hallucination of Large Vision-Language Models?",
+      "filename": "Does Object Grounding Really Reduce Hallucination of Large Vision-Language Models？.pdf",
+      "pages": 15,
+      "bytes": 1951219,
+      "sha256": "d9c67a6cfe049da1cbb8207f531bd982b97953a91367aa81bab94eb22c2e2b2d",
+      "first_page_arxiv": [
+        "2406.14492v1"
+      ],
+      "pdf_version": "2406.14492v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 11,
+      "sheet_id": 10,
+      "arxiv": "2407.00569",
+      "title": "Investigating and Mitigating the Multimodal Hallucination Snowballing in Large Vision-Language Models",
+      "filename": "Investigating and Mitigating the Multimodal Hallucination Snowballing in Large Vision-Language Models.pdf",
+      "pages": 22,
+      "bytes": 4814956,
+      "sha256": "7178fcc882d5393238d7449df60f145a2e0af119d0e99ce38a585f53018d1577",
+      "first_page_arxiv": [
+        "2407.00569v4"
+      ],
+      "pdf_version": "2407.00569v4",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 12,
+      "sheet_id": 11,
+      "arxiv": "2504.10020",
+      "title": "The Mirage of Performance Gains: Why Contrastive Decoding Fails to Mitigate Object Hallucinations in MLLMs?",
+      "filename": "The Mirage of Performance Gains： Why Contrastive Decoding Fails to Mitigate Object Hallucinations in MLLMs？.pdf",
+      "pages": 17,
+      "bytes": 1054924,
+      "sha256": "0998ac58273f561ea46ab91532f372f659500a96f530b7165587f9571d7adabc",
+      "first_page_arxiv": [
+        "2504.10020v4"
+      ],
+      "pdf_version": "2504.10020v4",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 13,
+      "sheet_id": 12,
+      "arxiv": "2505.01958",
+      "title": "A Comprehensive Analysis for Visual Object Hallucination in Large Vision-Language Models",
+      "filename": "A Comprehensive Analysis for Visual Object Hallucination in Large Vision-Language Models.pdf",
+      "pages": 14,
+      "bytes": 5940338,
+      "sha256": "e39ee401a45e960c42ada3573f18199d12bbb5438af35be3a521b15aec64ee88",
+      "first_page_arxiv": [
+        "2505.01958v1"
+      ],
+      "pdf_version": "2505.01958v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 14,
+      "sheet_id": 13,
+      "arxiv": "2507.03123",
+      "title": "Investigating VLM Hallucination from a Cognitive Psychology Perspective: A First Step Toward Interpretation with Intriguing Observations",
+      "filename": "Investigating VLM Hallucination from a Cognitive Psychology Perspective： A First Step Toward Interpretation with Intriguing Observations.pdf",
+      "pages": 26,
+      "bytes": 7443062,
+      "sha256": "aa91d493809b3a49f5d8992f892f6e61f501ee8caf12e20a9c4425e3bb8248a6",
+      "first_page_arxiv": [
+        "2507.03123v2"
+      ],
+      "pdf_version": "2507.03123v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 15,
+      "sheet_id": 14,
+      "arxiv": "2609.16646",
+      "title": "What Do Hallucinations Reveal About Multimodal Reasoning? Diagnosing Visual Grounding Failures via Contrastive Decoding Probes",
+      "filename": "What Do Hallucinations Reveal About Multimodal Reasoning？ Diagnosing Visual Grounding Failures via Contrastive Decoding Probes.pdf",
+      "pages": 24,
+      "bytes": 6863184,
+      "sha256": "909e754f9b254dd5a560e4d1fe2da6a6605564b47dda9d36f3ae3f645c33f6e5",
+      "first_page_arxiv": [
+        "2609.16646v1"
+      ],
+      "pdf_version": "2609.16646v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 16,
+      "sheet_id": 15,
+      "arxiv": "2310.14566",
+      "title": "HallusionBench: An Advanced Diagnostic Suite for Entangled Language Hallucination and Visual Illusion in Large Vision-Language Models",
+      "filename": "HallusionBench： An Advanced Diagnostic Suite for Entangled Language Hallucination and Visual Illusion in Large Vision-Language Models.pdf",
+      "pages": 45,
+      "bytes": 8201496,
+      "sha256": "e36e0ac1e6ffb212f7d90399161f7d7538568f040167d38b83d838b8858463c7",
+      "first_page_arxiv": [
+        "2310.14566v5"
+      ],
+      "pdf_version": "2310.14566v5",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 17,
+      "sheet_id": 16,
+      "arxiv": "2311.07397",
+      "title": "AMBER: An LLM-free Multi-dimensional Benchmark for MLLMs Hallucination Evaluation",
+      "filename": "AMBER： An LLM-free Multi-dimensional Benchmark for MLLMs Hallucination Evaluation.pdf",
+      "pages": 14,
+      "bytes": 11837911,
+      "sha256": "0b001bf76c3662ea84f124602b952ac7649526694054292ff9bf7eaed5cc4c03",
+      "first_page_arxiv": [
+        "2311.07397v2"
+      ],
+      "pdf_version": "2311.07397v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 18,
+      "sheet_id": 17,
+      "arxiv": "2405.05256",
+      "title": "THRONE: An Object-based Hallucination Benchmark for the Free-form Generations of Large Vision-Language Models",
+      "filename": "THRONE： An Object-based Hallucination Benchmark for the Free-form Generations of Large Vision-Language Models.pdf",
+      "pages": 17,
+      "bytes": 1752559,
+      "sha256": "892871994dda4dae184dd73f9fbc48ce141f530a00d5aeffeca2177386fc5bfc",
+      "first_page_arxiv": [
+        "2405.05256v2"
+      ],
+      "pdf_version": "2405.05256v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 19,
+      "sheet_id": 18,
+      "arxiv": "2406.16449",
+      "title": "Evaluating and Analyzing Relationship Hallucinations in Large Vision-Language Models",
+      "filename": "Evaluating and Analyzing Relationship Hallucinations in Large Vision-Language Models.pdf",
+      "pages": 18,
+      "bytes": 2010143,
+      "sha256": "2c368de9e3b98a7b67a55e544aee9d11583602d2a557c84b52d1198d375a5987",
+      "first_page_arxiv": [
+        "2406.16449v4"
+      ],
+      "pdf_version": "2406.16449v4",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 20,
+      "sheet_id": 19,
+      "arxiv": "2407.06192",
+      "title": "Multi-Object Hallucination in Vision-Language Models",
+      "filename": "Multi-Object Hallucination in Vision-Language Models.pdf",
+      "pages": 21,
+      "bytes": 6276774,
+      "sha256": "dca74c5cc25c3da43286ba43d079040f2bcbf74bc5755f76030ff38cb1847173",
+      "first_page_arxiv": [
+        "2407.06192v2"
+      ],
+      "pdf_version": "2407.06192v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 21,
+      "sheet_id": 20,
+      "arxiv": "2407.15680",
+      "title": "HaloQuest: A Visual Hallucination Dataset for Advancing Multimodal Reasoning",
+      "filename": "HaloQuest： A Visual Hallucination Dataset for Advancing Multimodal Reasoning.pdf",
+      "pages": 25,
+      "bytes": 4446442,
+      "sha256": "8b5bbc3fdc6eff2d2de0c9e674f141c25a2f8400ec7b9f007207422a43f2d63c",
+      "first_page_arxiv": [
+        "2407.15680v1"
+      ],
+      "pdf_version": "2407.15680v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 22,
+      "sheet_id": 21,
+      "arxiv": "2409.09318",
+      "title": "ODE: Open-Set Evaluation of Hallucinations in Multimodal Large Language Models",
+      "filename": "ODE： Open-Set Evaluation of Hallucinations in Multimodal Large Language Models.pdf",
+      "pages": 13,
+      "bytes": 3791012,
+      "sha256": "014e13f1602daa3ec136e47c18c540745d959427176d04b600d7fa517bdd9694",
+      "first_page_arxiv": [
+        "2409.09318v4"
+      ],
+      "pdf_version": "2409.09318v4",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 23,
+      "sheet_id": 22,
+      "arxiv": "2410.23114",
+      "title": "Unified Triplet-Level Hallucination Evaluation for Large Vision-Language Models",
+      "filename": "Unified Triplet-Level Hallucination Evaluation for Large Vision-Language Models.pdf",
+      "pages": 22,
+      "bytes": 9780058,
+      "sha256": "6ccb362bc82d40c2a3b1f9cd13723de9713a7def8f3bd7d304ef8c7190be2908",
+      "first_page_arxiv": [
+        "2410.23114v4"
+      ],
+      "pdf_version": "2410.23114v4",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 24,
+      "sheet_id": 23,
+      "arxiv": "2406.16338",
+      "title": "VideoHallucer: Evaluating Intrinsic and Extrinsic Hallucinations in Large Video-Language Models",
+      "filename": "VideoHallucer： Evaluating Intrinsic and Extrinsic Hallucinations in Large Video-Language Models.pdf",
+      "pages": 34,
+      "bytes": 35019750,
+      "sha256": "380eea5cc9a845b55ab216f1aac6076a9fd0b43fdd73b2ad0dc1c8dc63099f2a",
+      "first_page_arxiv": [
+        "2406.16338v1"
+      ],
+      "pdf_version": "2406.16338v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 25,
+      "sheet_id": 24,
+      "arxiv": "2409.16597",
+      "title": "EventHallusion: Diagnosing Event Hallucinations in Video LLMs",
+      "filename": "EventHallusion： Diagnosing Event Hallucinations in Video LLMs.pdf",
+      "pages": 20,
+      "bytes": 20819360,
+      "sha256": "78c7aa283a8d31d7ac0f683494cbbcae67bfd62cc3a25e090b128e3553ada137",
+      "first_page_arxiv": [
+        "2409.16597v6"
+      ],
+      "pdf_version": "2409.16597v6",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 26,
+      "sheet_id": 25,
+      "arxiv": "2411.16771",
+      "title": "VidHal: Benchmarking Temporal Hallucinations in Vision LLMs",
+      "filename": "VidHal： Benchmarking Temporal Hallucinations in Vision LLMs.pdf",
+      "pages": 36,
+      "bytes": 10912745,
+      "sha256": "55f1f883be4b5a70e1b143c08b13e5bf717edff25a97fff12a91a83469a236c2",
+      "first_page_arxiv": [
+        "2411.16771v3"
+      ],
+      "pdf_version": "2411.16771v3",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 27,
+      "sheet_id": 26,
+      "arxiv": "2412.03735",
+      "title": "VidHalluc: Evaluating Temporal Hallucinations in Multimodal Large Language Models for Video Understanding",
+      "filename": "VidHalluc： Evaluating Temporal Hallucinations in Multimodal Large Language Models for Video Understanding.pdf",
+      "pages": 22,
+      "bytes": 39280232,
+      "sha256": "0dfc87597b757945891c78a40f0a5e81ed43c31f2e5958399163ca1efa2fe5a3",
+      "first_page_arxiv": [
+        "2412.03735v2"
+      ],
+      "pdf_version": "2412.03735v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 28,
+      "sheet_id": 27,
+      "arxiv": "2503.19622",
+      "title": "Exploring Hallucination of Large Multimodal Models in Video Understanding: Benchmark, Analysis and Mitigation",
+      "filename": "Exploring Hallucination of Large Multimodal Models in Video Understanding： Benchmark, Analysis and Mitigation.pdf",
+      "pages": 20,
+      "bytes": 4045380,
+      "sha256": "dadc2218a7d9a79e55dfa57dc23902bd0efdc391c07a1e2d83857aac8068074f",
+      "first_page_arxiv": [
+        "2503.19622v1"
+      ],
+      "pdf_version": "2503.19622v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 29,
+      "sheet_id": 28,
+      "arxiv": "2506.07371",
+      "title": "ARGUS: Hallucination and Omission Evaluation in Video-LLMs",
+      "filename": "ARGUS： Hallucination and Omission Evaluation in Video-LLMs.pdf",
+      "pages": 26,
+      "bytes": 12644984,
+      "sha256": "2bed110739a3036e4a5c95eb4e23a15dc651de3451adf618810c497000882db6",
+      "first_page_arxiv": [
+        "2506.07371v2"
+      ],
+      "pdf_version": "2506.07371v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 30,
+      "sheet_id": 29,
+      "arxiv": "2508.12687",
+      "title": "EGOILLUSION: Benchmarking Hallucinations in Egocentric Video Understanding",
+      "filename": "EGOILLUSION： Benchmarking Hallucinations in Egocentric Video Understanding.pdf",
+      "pages": 20,
+      "bytes": 4300016,
+      "sha256": "361deb09fb1d360bc00be687f632a64f60617ba39b8d0545791497fb750c026a",
+      "first_page_arxiv": [
+        "2508.12687v2"
+      ],
+      "pdf_version": "2508.12687v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 31,
+      "sheet_id": 30,
+      "arxiv": "2508.21496",
+      "title": "ELV-Halluc: Benchmarking Semantic Aggregation Hallucinations in Long Video Understanding",
+      "filename": "ELV-Halluc： Benchmarking Semantic Aggregation Hallucinations in Long Video Understanding.pdf",
+      "pages": 22,
+      "bytes": 3033462,
+      "sha256": "bcb96e858773dd242e08a4242886b65e702bbb56c02f3c5afa27a444a78bf14e",
+      "first_page_arxiv": [
+        "2508.21496v2"
+      ],
+      "pdf_version": "2508.21496v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 32,
+      "sheet_id": 31,
+      "arxiv": "2509.08538",
+      "title": "MESH -- Understanding Videos Like Human: Measuring Hallucinations in Large Video Models",
+      "filename": "MESH -- Understanding Videos Like Human： Measuring Hallucinations in Large Video Models.pdf",
+      "pages": 41,
+      "bytes": 10140642,
+      "sha256": "92e893c149dc00c1fa04bff65e0856aa9c60c7af8ecb3002e5fe1dab1bcb07f8",
+      "first_page_arxiv": [
+        "2509.08538v2"
+      ],
+      "pdf_version": "2509.08538v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 33,
+      "sheet_id": 32,
+      "arxiv": "2601.10010",
+      "title": "VERHallu: Evaluating and Mitigating Event Relation Hallucination in Video Large Language Models",
+      "filename": "VERHallu： Evaluating and Mitigating Event Relation Hallucination in Video Large Language Models.pdf",
+      "pages": 11,
+      "bytes": 1451791,
+      "sha256": "d13e4e6df679519f5796e3b4b7d0f8c49bb9fd26530b481fbe7d65f93ac35b2a",
+      "first_page_arxiv": [
+        "2601.10010v1"
+      ],
+      "pdf_version": "2601.10010v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 34,
+      "sheet_id": 33,
+      "arxiv": "2607.01117",
+      "title": "MoHallBench: A Benchmark for Motion Hallucination in Video Large Language Models",
+      "filename": "MoHallBench： A Benchmark for Motion Hallucination in Video Large Language Models.pdf",
+      "pages": 19,
+      "bytes": 12351746,
+      "sha256": "215d8e671ef930e0f8b27e6d822a73fb0fc01fc0009bea26d50ae36cc9ea7aa0",
+      "first_page_arxiv": [
+        "2607.01117v2"
+      ],
+      "pdf_version": "2607.01117v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 35,
+      "sheet_id": 34,
+      "arxiv": "2311.13614",
+      "title": "HalluciDoctor: Mitigating Hallucinatory Toxicity in Visual Instruction Data",
+      "filename": "HalluciDoctor： Mitigating Hallucinatory Toxicity in Visual Instruction Data.pdf",
+      "pages": 17,
+      "bytes": 2701708,
+      "sha256": "5390a4befb185ff97d60a6f5b243e86fbaae080607d10bfbd30ee17076c39b7f",
+      "first_page_arxiv": [
+        "2311.13614v2"
+      ],
+      "pdf_version": "2311.13614v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 36,
+      "sheet_id": 35,
+      "arxiv": "2311.16839",
+      "title": "Beyond Hallucinations: Enhancing LVLMs through Hallucination-Aware Direct Preference Optimization",
+      "filename": "Beyond Hallucinations： Enhancing LVLMs through Hallucination-Aware Direct Preference Optimization.pdf",
+      "pages": 20,
+      "bytes": 4140510,
+      "sha256": "402e599beee3a50174d5f5f4474978be0fde94de0d652393cfe2dd23451154e8",
+      "first_page_arxiv": [
+        "2311.16839v2"
+      ],
+      "pdf_version": "2311.16839v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 37,
+      "sheet_id": 36,
+      "arxiv": "2312.00849",
+      "title": "RLHF-V: Towards Trustworthy MLLMs via Behavior Alignment from Fine-grained Correctional Human Feedback",
+      "filename": "RLHF-V： Towards Trustworthy MLLMs via Behavior Alignment from Fine-grained Correctional Human Feedback.pdf",
+      "pages": 21,
+      "bytes": 1878472,
+      "sha256": "71e068b0ea798358b2e5385e69d901f0412c4199a5b83f405994b1ced2c6d9ea",
+      "first_page_arxiv": [
+        "2312.00849v2"
+      ],
+      "pdf_version": "2312.00849v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 38,
+      "sheet_id": 37,
+      "arxiv": "2405.15356",
+      "title": "Alleviating Hallucinations in Large Vision-Language Models through Hallucination-Induced Optimization",
+      "filename": "Alleviating Hallucinations in Large Vision-Language Models through Hallucination-Induced Optimization.pdf",
+      "pages": 22,
+      "bytes": 1573891,
+      "sha256": "5fd9f1a4fa9af33123b25c0b12f87c2b5f9a8b7e953b995a74b18f9e4bd323e8",
+      "first_page_arxiv": [
+        "2405.15356v3"
+      ],
+      "pdf_version": "2405.15356v3",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 39,
+      "sheet_id": 38,
+      "arxiv": "2405.18654",
+      "title": "Mitigating Object Hallucination in MLLMs via Data-augmented Phrase-level Alignment",
+      "filename": "Mitigating Object Hallucination in MLLMs via Data-augmented Phrase-level Alignment.pdf",
+      "pages": 51,
+      "bytes": 7541776,
+      "sha256": "3e93e3cd196bd5f9ec6a8f1e84ebf01b44549700b2ed185f6a61c2564a23c0e7",
+      "first_page_arxiv": [
+        "2405.18654v3"
+      ],
+      "pdf_version": "2405.18654v3",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 40,
+      "sheet_id": 39,
+      "arxiv": "2411.02712",
+      "title": "V-DPO: Mitigating Hallucination in Large Vision Language Models via Vision-Guided Direct Preference Optimization",
+      "filename": "V-DPO： Mitigating Hallucination in Large Vision Language Models via Vision-Guided Direct Preference Optimization.pdf",
+      "pages": 16,
+      "bytes": 2441124,
+      "sha256": "52deca70bb34eb07bcdd3d938f044069f210e2e490e24971c86dd8104da1c5af",
+      "first_page_arxiv": [
+        "2411.02712v1"
+      ],
+      "pdf_version": "2411.02712v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 41,
+      "sheet_id": 40,
+      "arxiv": "2411.10436",
+      "title": "Mitigating Hallucination in Multimodal Large Language Model via Hallucination-targeted Direct Preference Optimization",
+      "filename": "Mitigating Hallucination in Multimodal Large Language Model via Hallucination-targeted Direct Preference Optimization.pdf",
+      "pages": 13,
+      "bytes": 789914,
+      "sha256": "1da7c80ff7bceba027a6d468f87948f512ec4ad9d094c2d636db43eccebce26f",
+      "first_page_arxiv": [
+        "2411.10436v1"
+      ],
+      "pdf_version": "2411.10436v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 42,
+      "sheet_id": 41,
+      "arxiv": "2412.14487",
+      "title": "Token Preference Optimization with Self-Calibrated Visual-Anchored Rewards for Hallucination Mitigation",
+      "filename": "Token Preference Optimization with Self-Calibrated Visual-Anchored Rewards for Hallucination Mitigation.pdf",
+      "pages": 14,
+      "bytes": 7369216,
+      "sha256": "3179718f89af88f2e3ae35d9fb453289a5e9933569706d456b3019cf289e5f3e",
+      "first_page_arxiv": [
+        "2412.14487v4"
+      ],
+      "pdf_version": "2412.14487v4",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 43,
+      "sheet_id": 42,
+      "arxiv": "2504.05810",
+      "title": "PaMi-VDPO: Mitigating Video Hallucinations by Prompt-Aware Multi-Instance Video Preference Learning",
+      "filename": "PaMi-VDPO： Mitigating Video Hallucinations by Prompt-Aware Multi-Instance Video Preference Learning.pdf",
+      "pages": 13,
+      "bytes": 3519748,
+      "sha256": "bd5cba56750cd3ecb1bda73eb4afaaa3d4d8b74117d8b319fcd4358045d0f442",
+      "first_page_arxiv": [
+        "2504.05810v2"
+      ],
+      "pdf_version": "2504.05810v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 44,
+      "sheet_id": 43,
+      "arxiv": "2506.11712",
+      "title": "Mitigating Hallucination Through Theory-Consistent Symmetric Multimodal Preference Optimization",
+      "filename": "Mitigating Hallucination Through Theory-Consistent Symmetric Multimodal Preference Optimization.pdf",
+      "pages": 19,
+      "bytes": 4523099,
+      "sha256": "d8ab809364ec43c4ec3e332dc2fdb4775e5f2b1c175a5b1bee024158c433408f",
+      "first_page_arxiv": [
+        "2506.11712v3"
+      ],
+      "pdf_version": "2506.11712v3",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 45,
+      "sheet_id": 44,
+      "arxiv": "2310.16045",
+      "title": "Woodpecker: Hallucination Correction for Multimodal Large Language Models",
+      "filename": "Woodpecker： Hallucination Correction for Multimodal Large Language Models.pdf",
+      "pages": 16,
+      "bytes": 2464668,
+      "sha256": "f43babb691914b3e36e0ccb9da0738a21a5eca537ae5811eb3e2ef0591d71106",
+      "first_page_arxiv": [
+        "2310.16045v2"
+      ],
+      "pdf_version": "2310.16045v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 46,
+      "sheet_id": 45,
+      "arxiv": "2311.16922",
+      "title": "Mitigating Object Hallucinations in Large Vision-Language Models through Visual Contrastive Decoding",
+      "filename": "Mitigating Object Hallucinations in Large Vision-Language Models through Visual Contrastive Decoding.pdf",
+      "pages": 18,
+      "bytes": 3285961,
+      "sha256": "b945dc4a315d8a2dd14e6d5831223422ca11b27d351b7b2df45ab011e62bde3d",
+      "first_page_arxiv": [
+        "2311.16922v1"
+      ],
+      "pdf_version": "2311.16922v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 47,
+      "sheet_id": 46,
+      "arxiv": "2311.17911",
+      "title": "OPERA: Alleviating Hallucination in Multi-Modal Large Language Models via Over-Trust Penalty and Retrospection-Allocation",
+      "filename": "OPERA： Alleviating Hallucination in Multi-Modal Large Language Models via Over-Trust Penalty and Retrospection-Allocation.pdf",
+      "pages": 18,
+      "bytes": 3094623,
+      "sha256": "c75812c24ffdd1e5434d218190ea5302675abcbb3fc92e223965467e37bfecb3",
+      "first_page_arxiv": [
+        "2311.17911v3"
+      ],
+      "pdf_version": "2311.17911v3",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 48,
+      "sheet_id": 47,
+      "arxiv": "2403.00425",
+      "title": "HALC: Object Hallucination Reduction via Adaptive Focal-Contrast Decoding",
+      "filename": "HALC： Object Hallucination Reduction via Adaptive Focal-Contrast Decoding.pdf",
+      "pages": 23,
+      "bytes": 3403009,
+      "sha256": "e4017cdd023af213c233ddf0c5553de56a313c72bdc2176eee7157b35c67bfac",
+      "first_page_arxiv": [
+        "2403.00425v2"
+      ],
+      "pdf_version": "2403.00425v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 49,
+      "sheet_id": 48,
+      "arxiv": "2403.14003",
+      "title": "Multi-Modal Hallucination Control by Visual Information Grounding",
+      "filename": "Multi-Modal Hallucination Control by Visual Information Grounding.pdf",
+      "pages": 17,
+      "bytes": 4466856,
+      "sha256": "fbaf559cd744ae3044f94c1b676f53fa01f6721e946cb21c7b3788f9a18cf687",
+      "first_page_arxiv": [
+        "2403.14003v1"
+      ],
+      "pdf_version": "2403.14003v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 50,
+      "sheet_id": 49,
+      "arxiv": "2405.17821",
+      "title": "RITUAL: Random Image Transformations as a Universal Anti-hallucination Lever in Large Vision Language Models",
+      "filename": "RITUAL： Random Image Transformations as a Universal Anti-hallucination Lever in Large Vision Language Models.pdf",
+      "pages": 23,
+      "bytes": 3706432,
+      "sha256": "3f6ce02a64488e0264c78738e6c54c0c52f06dcad274ab63ac69c5a54c2495f3",
+      "first_page_arxiv": [
+        "2405.17821v2"
+      ],
+      "pdf_version": "2405.17821v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 51,
+      "sheet_id": 50,
+      "arxiv": "2405.20081",
+      "title": "NoiseBoost: Alleviating Hallucination with Noise Perturbation for Multimodal Large Language Models",
+      "filename": "NoiseBoost： Alleviating Hallucination with Noise Perturbation for Multimodal Large Language Models.pdf",
+      "pages": 14,
+      "bytes": 16973128,
+      "sha256": "786742b704f39ef0118ae49ea210b2ef8cdbab713ae5a795313c388c6f1bd979",
+      "first_page_arxiv": [
+        "2405.20081v2"
+      ],
+      "pdf_version": "2405.20081v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 52,
+      "sheet_id": 51,
+      "arxiv": "2406.01920",
+      "title": "CODE: Contrasting Self-generated Description to Combat Hallucination in Large Multi-modal Models",
+      "filename": "CODE： Contrasting Self-generated Description to Combat Hallucination in Large Multi-modal Models.pdf",
+      "pages": 22,
+      "bytes": 6993528,
+      "sha256": "a977474439cb19f701635a5012ebe669d1c067285d9354df04f84a1ae4518c5c",
+      "first_page_arxiv": [
+        "2406.01920v1"
+      ],
+      "pdf_version": "2406.01920v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 53,
+      "sheet_id": 52,
+      "arxiv": "2410.11779",
+      "title": "MLLM can see? Dynamic Correction Decoding for Hallucination Mitigation",
+      "filename": "MLLM can see？ Dynamic Correction Decoding for Hallucination Mitigation.pdf",
+      "pages": 25,
+      "bytes": 32629411,
+      "sha256": "20ed2b353eeb09cac8fbd9bffb88cf4fcca59e0e82af8657f528697a540c185e",
+      "first_page_arxiv": [
+        "2410.11779v2"
+      ],
+      "pdf_version": "2410.11779v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 54,
+      "sheet_id": 53,
+      "arxiv": "2412.06775",
+      "title": "Delve into Visual Contrastive Decoding for Hallucination Mitigation of Large Vision-Language Models",
+      "filename": "Delve into Visual Contrastive Decoding for Hallucination Mitigation of Large Vision-Language Models.pdf",
+      "pages": 25,
+      "bytes": 15115438,
+      "sha256": "8daea0d0c891a36f13687a1f031ae118e84f1e1ac1d7c2a6ede1f05b2264b3aa",
+      "first_page_arxiv": [
+        "2412.06775v1"
+      ],
+      "pdf_version": "2412.06775v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 55,
+      "sheet_id": 54,
+      "arxiv": "2503.00361",
+      "title": "Octopus: Alleviating Hallucination via Dynamic Contrastive Decoding",
+      "filename": "Octopus： Alleviating Hallucination via Dynamic Contrastive Decoding.pdf",
+      "pages": 11,
+      "bytes": 3189744,
+      "sha256": "42c1b2c35e84fc7f74dea378038b86e7fc584a3379d44b081f0edb18893c4a2a",
+      "first_page_arxiv": [
+        "2503.00361v1"
+      ],
+      "pdf_version": "2503.00361v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 56,
+      "sheet_id": 55,
+      "arxiv": "2504.13169",
+      "title": "Generate, but Verify: Reducing Hallucination in Vision-Language Models with Retrospective Resampling",
+      "filename": "Generate, but Verify： Reducing Hallucination in Vision-Language Models with Retrospective Resampling.pdf",
+      "pages": 29,
+      "bytes": 5113083,
+      "sha256": "3f0521f4f06557737a8faff2df8ff068c662a815b8bcb62c0913505b814513e1",
+      "first_page_arxiv": [
+        "2504.13169v3"
+      ],
+      "pdf_version": "2504.13169v3",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 57,
+      "sheet_id": 56,
+      "arxiv": "2410.02762",
+      "title": "Interpreting and Editing Vision-Language Representations to Mitigate Hallucinations",
+      "filename": "Interpreting and Editing Vision-Language Representations to Mitigate Hallucinations.pdf",
+      "pages": 24,
+      "bytes": 16413657,
+      "sha256": "b2a79db138724b1cfeccac34d48cf444850432d09b7e73e9f631ef57891d1fd1",
+      "first_page_arxiv": [
+        "2410.02762v2"
+      ],
+      "pdf_version": "2410.02762v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 58,
+      "sheet_id": 57,
+      "arxiv": "2410.04514",
+      "title": "DAMRO: Dive into the Attention Mechanism of LVLM to Reduce Object Hallucination",
+      "filename": "DAMRO： Dive into the Attention Mechanism of LVLM to Reduce Object Hallucination.pdf",
+      "pages": 17,
+      "bytes": 8276596,
+      "sha256": "4ec003662731378259b64c9333d90fff4a474487cdd7e21fb6ff52370da093db",
+      "first_page_arxiv": [
+        "2410.04514v2"
+      ],
+      "pdf_version": "2410.04514v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 59,
+      "sheet_id": 58,
+      "arxiv": "2410.15926",
+      "title": "Mitigating Object Hallucination via Concentric Causal Attention",
+      "filename": "Mitigating Object Hallucination via Concentric Causal Attention.pdf",
+      "pages": 24,
+      "bytes": 2014743,
+      "sha256": "fa8c1d329f7d3810164b7a5ac412ab61f5ce070eba8f053915612b0db8634630",
+      "first_page_arxiv": [
+        "2410.15926v1"
+      ],
+      "pdf_version": "2410.15926v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 60,
+      "sheet_id": 59,
+      "arxiv": "2412.13817",
+      "title": "Nullu: Mitigating Object Hallucinations in Large Vision-Language Models via HalluSpace Projection",
+      "filename": "Nullu： Mitigating Object Hallucinations in Large Vision-Language Models via HalluSpace Projection.pdf",
+      "pages": 22,
+      "bytes": 7505810,
+      "sha256": "ec316f480f2c1b91ee92bb3f3fd008ca3c7221a418e715938a51535642004cd8",
+      "first_page_arxiv": [
+        "2412.13817v3"
+      ],
+      "pdf_version": "2412.13817v3",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 61,
+      "sheet_id": 60,
+      "arxiv": "2505.16411",
+      "title": "Mitigating Hallucinations in Vision-Language Models through Image-Guided Head Suppression",
+      "filename": "Mitigating Hallucinations in Vision-Language Models through Image-Guided Head Suppression.pdf",
+      "pages": 20,
+      "bytes": 5947783,
+      "sha256": "fc17056994586cc53593661250b89dd7653a15206e7d47da1d10cc99ec865545",
+      "first_page_arxiv": [
+        "2505.16411v2"
+      ],
+      "pdf_version": "2505.16411v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 62,
+      "sheet_id": 61,
+      "arxiv": "2507.00898",
+      "title": "ONLY: One-Layer Intervention Sufficiently Mitigates Hallucinations in Large Vision-Language Models",
+      "filename": "ONLY： One-Layer Intervention Sufficiently Mitigates Hallucinations in Large Vision-Language Models.pdf",
+      "pages": 17,
+      "bytes": 6917423,
+      "sha256": "7ba9ce1d4919217dc8cc53b144d1d57953a8182cd01f324ef87722d36c25d532",
+      "first_page_arxiv": [
+        "2507.00898v1"
+      ],
+      "pdf_version": "2507.00898v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 63,
+      "sheet_id": 62,
+      "arxiv": "2507.15652",
+      "title": "Extracting Visual Facts from Intermediate Layers for Mitigating Hallucinations in Multimodal Large Language Models",
+      "filename": "Extracting Visual Facts from Intermediate Layers for Mitigating Hallucinations in Multimodal Large Language Models.pdf",
+      "pages": 17,
+      "bytes": 2311889,
+      "sha256": "d6ee98f1177c8633bb9887fd33c972ed808945d632d008cdf587fbb47ec68997",
+      "first_page_arxiv": [
+        "2507.15652v1"
+      ],
+      "pdf_version": "2507.15652v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 64,
+      "sheet_id": 63,
+      "arxiv": "2508.02419",
+      "title": "Modality Bias in LVLMs: Analyzing and Mitigating Object Hallucination via Attention Lens",
+      "filename": "Modality Bias in LVLMs： Analyzing and Mitigating Object Hallucination via Attention Lens.pdf",
+      "pages": 15,
+      "bytes": 1752176,
+      "sha256": "2bb966f9b2b2ab025d804537ae01920d266dcd3b60c4c20f0283c597b0a3177f",
+      "first_page_arxiv": [
+        "2508.02419v1"
+      ],
+      "pdf_version": "2508.02419v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 65,
+      "sheet_id": 64,
+      "arxiv": "2312.08870",
+      "title": "Vista-LLaMA: Reducing Hallucination in Video Language Models via Equal Distance to Visual Tokens",
+      "filename": "Vista-LLaMA： Reducing Hallucination in Video Language Models via Equal Distance to Visual Tokens.pdf",
+      "pages": 18,
+      "bytes": 23537467,
+      "sha256": "a9e9722420b5a3cd5c7f466ed1b8c20e7f6ce1d10209e5b742d4ce80e123a103",
+      "first_page_arxiv": [
+        "2312.08870v2"
+      ],
+      "pdf_version": "2312.08870v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 66,
+      "sheet_id": 65,
+      "arxiv": "2401.09861",
+      "title": "Temporal Insight Enhancement: Mitigating Temporal Hallucination in Multimodal Large Language Models",
+      "filename": "Temporal Insight Enhancement： Mitigating Temporal Hallucination in Multimodal Large Language Models.pdf",
+      "pages": 7,
+      "bytes": 5573839,
+      "sha256": "9be445f1515a97c1a24604d810ce082f9bb44f29f6c6186bc0dd30806652eed8",
+      "first_page_arxiv": [
+        "2401.09861v1"
+      ],
+      "pdf_version": "2401.09861v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 67,
+      "sheet_id": 66,
+      "arxiv": "2406.11333",
+      "title": "Hallucination Mitigation Prompts Long-term Video Understanding",
+      "filename": "Hallucination Mitigation Prompts Long-term Video Understanding.pdf",
+      "pages": 4,
+      "bytes": 1652475,
+      "sha256": "02dc368f3c1952eaadd33eac0122643ba8c1c584b7282ac531b11e604aff6c34",
+      "first_page_arxiv": [
+        "2406.11333v1"
+      ],
+      "pdf_version": "2406.11333v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 68,
+      "sheet_id": 67,
+      "arxiv": "2502.15079",
+      "title": "Can Hallucination Correction Improve Video-Language Alignment?",
+      "filename": "Can Hallucination Correction Improve Video-Language Alignment？.pdf",
+      "pages": 11,
+      "bytes": 1364990,
+      "sha256": "06a63d5f0fd041052f2eec5695fdc4f06c50437e32d32782da01b7b465f54514",
+      "first_page_arxiv": [
+        "2502.15079v1"
+      ],
+      "pdf_version": "2502.15079v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 69,
+      "sheet_id": 68,
+      "arxiv": "2503.15871",
+      "title": "MASH-VLM: Mitigating Action-Scene Hallucination in Video-LLMs through Disentangled Spatial-Temporal Representations",
+      "filename": "MASH-VLM： Mitigating Action-Scene Hallucination in Video-LLMs through Disentangled Spatial-Temporal Representations.pdf",
+      "pages": 16,
+      "bytes": 14681078,
+      "sha256": "f3c2978f8967c3f15233325196cfeadee5e8ae37bfbefdc68b29ab0bdce23032",
+      "first_page_arxiv": [
+        "2503.15871v1"
+      ],
+      "pdf_version": "2503.15871v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 70,
+      "sheet_id": 69,
+      "arxiv": "2505.01481",
+      "title": "VideoHallu: Evaluating and Mitigating Multi-modal Hallucinations on Synthetic Video Understanding",
+      "filename": "VideoHallu： Evaluating and Mitigating Multi-modal Hallucinations on Synthetic Video Understanding.pdf",
+      "pages": 26,
+      "bytes": 13261639,
+      "sha256": "1c210cc2f440a806ac18d0e0dda4b67946e4c1a50f40def1ead81733cfab7b78",
+      "first_page_arxiv": [],
+      "pdf_version": "2505.01481v4",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "normalized_first_page_title_and_manifest"
+    },
+    {
+      "sheet_row": 71,
+      "sheet_id": 70,
+      "arxiv": "2505.12826",
+      "title": "Mitigating Hallucination in VideoLLMs via Temporal-Aware Activation Engineering",
+      "filename": "Mitigating Hallucination in VideoLLMs via Temporal-Aware Activation Engineering.pdf",
+      "pages": 21,
+      "bytes": 896122,
+      "sha256": "96833f3f93732d2d69bdfb019f4e0ab5b7cc0daffb0e6f7171ad5f144923c045",
+      "first_page_arxiv": [
+        "2505.12826v1"
+      ],
+      "pdf_version": "2505.12826v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 72,
+      "sheet_id": 71,
+      "arxiv": "2511.18463",
+      "title": "Decoupling Perception from Reasoning for Hallucination-Resistant Video Understanding",
+      "filename": "Decoupling Perception from Reasoning for Hallucination-Resistant Video Understanding.pdf",
+      "pages": 17,
+      "bytes": 3392374,
+      "sha256": "89164e1bcc38871f2edeed657c6d258b8df89abb205a289169ffab5f9038aebe",
+      "first_page_arxiv": [
+        "2511.18463v3"
+      ],
+      "pdf_version": "2511.18463v3",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 73,
+      "sheet_id": 72,
+      "arxiv": "2512.18671",
+      "title": "SmartSight: Mitigating Hallucination in Video-LLMs Without Compromising Video Understanding via Temporal Attention Collapse",
+      "filename": "SmartSight： Mitigating Hallucination in Video-LLMs Without Compromising Video Understanding via Temporal Attention Collapse.pdf",
+      "pages": 9,
+      "bytes": 1202723,
+      "sha256": "9fcc5825ca0230b51c6ba75f5c53e7e0331221a681ff7231c800fe959c52f5e4",
+      "first_page_arxiv": [
+        "2512.18671v1"
+      ],
+      "pdf_version": "2512.18671v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 74,
+      "sheet_id": 73,
+      "arxiv": "2512.24271",
+      "title": "Taming Hallucinations: Boosting MLLMs' Video Understanding via Counterfactual Video Generation",
+      "filename": "Taming Hallucinations： Boosting MLLMs' Video Understanding via Counterfactual Video Generation.pdf",
+      "pages": 18,
+      "bytes": 11828548,
+      "sha256": "b30c981018bb592e3e06c76b32ba2e7c520f3a9f96e876e05102c0aaa2f893ce",
+      "first_page_arxiv": [
+        "2512.24271v1"
+      ],
+      "pdf_version": "2512.24271v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 75,
+      "sheet_id": 74,
+      "arxiv": "2410.12787",
+      "title": "The Curse of Multi-Modalities: Evaluating Hallucinations of Large Multimodal Models across Language, Visual, and Audio",
+      "filename": "The Curse of Multi-Modalities： Evaluating Hallucinations of Large Multimodal Models across Language, Visual, and Audio.pdf",
+      "pages": 20,
+      "bytes": 1667986,
+      "sha256": "a8d44eda46a8e1a8a1613f60827d99fbcc859c5dca29ad357a2304d7c18fc7d9",
+      "first_page_arxiv": [
+        "2410.12787v1"
+      ],
+      "pdf_version": "2410.12787v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 76,
+      "sheet_id": 75,
+      "arxiv": "2505.20862",
+      "title": "AVCD: Mitigating Hallucinations in Audio-Visual Large Language Models through Contrastive Decoding",
+      "filename": "AVCD： Mitigating Hallucinations in Audio-Visual Large Language Models through Contrastive Decoding.pdf",
+      "pages": 25,
+      "bytes": 3155065,
+      "sha256": "b9dcce43a4f200bd4141b490efa290d33f5bb2ba8bad8996b59192276d6e8898",
+      "first_page_arxiv": [
+        "2505.20862v2"
+      ],
+      "pdf_version": "2505.20862v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 77,
+      "sheet_id": 76,
+      "arxiv": "2506.20168",
+      "title": "Seeing is Believing? Mitigating OCR Hallucinations in Multimodal Large Language Models",
+      "filename": "Seeing is Believing？ Mitigating OCR Hallucinations in Multimodal Large Language Models.pdf",
+      "pages": 12,
+      "bytes": 5560607,
+      "sha256": "cac25a9570a3390a10b9e57d1eb52143d57d3f7314eed9de79b89a7c70ebd573",
+      "first_page_arxiv": [
+        "2506.20168v2"
+      ],
+      "pdf_version": "2506.20168v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 78,
+      "sheet_id": 77,
+      "arxiv": "2509.00723",
+      "title": "OmniDPO: A Preference Optimization Framework to Address Omni-Modal Hallucination",
+      "filename": "OmniDPO： A Preference Optimization Framework to Address Omni-Modal Hallucination.pdf",
+      "pages": 17,
+      "bytes": 10089039,
+      "sha256": "eb690cf5acc15360e49d36c7bf00b4806d7eb9032514d29a71d58f13f4372046",
+      "first_page_arxiv": [
+        "2509.00723v1"
+      ],
+      "pdf_version": "2509.00723v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 79,
+      "sheet_id": 78,
+      "arxiv": "2604.10506",
+      "title": "A Progressive Training Strategy for Embodied Vision-Language Models to Mitigate Spatio-Temporal Hallucinations",
+      "filename": "A Progressive Training Strategy for Embodied Vision-Language Models to Mitigate Spatio-Temporal Hallucinations.pdf",
+      "pages": 23,
+      "bytes": 2725936,
+      "sha256": "ad962e9b4031c11b15d4599d0691019958ae6ce44da51aa8d19074d72139724e",
+      "first_page_arxiv": [
+        "2604.10506v2"
+      ],
+      "pdf_version": "2604.10506v2",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    },
+    {
+      "sheet_row": 80,
+      "sheet_id": 79,
+      "arxiv": "2605.20469",
+      "title": "HalluCXR: Benchmarking and Mitigating Hallucinations in Medical Vision-Language Models for Chest Radiograph Interpretation",
+      "filename": "HalluCXR： Benchmarking and Mitigating Hallucinations in Medical Vision-Language Models for Chest Radiograph Interpretation.pdf",
+      "pages": 9,
+      "bytes": 404474,
+      "sha256": "aa72676d5e237e3ed1284ead3e49aca86ed7b666de0d7b2a1e86d91362bb4c6a",
+      "first_page_arxiv": [
+        "2605.20469v1"
+      ],
+      "pdf_version": "2605.20469v1",
+      "title_manifest_match": true,
+      "readable_pdf": true,
+      "match_method": "first_page_arxiv"
+    }
+  ]
+}

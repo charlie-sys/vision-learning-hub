@@ -12,6 +12,7 @@ import markdown
 from pygments import highlight
 from pygments.formatters import HtmlFormatter
 from pygments.lexers import PythonLexer
+from catalog import render_card, render_options, topic_links
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
@@ -54,6 +55,9 @@ def protect_math(text):
 
 def render(name, title, code_html="", extra_css=""):
     text = (ROOT / "content" / f"{name}.md").read_text(encoding="utf-8")
+    if name == 'hallucination':
+        papers = json.loads((ROOT / 'data/papers.json').read_text(encoding='utf-8'))
+        text = text.replace('<!-- HALLUCINATION_TOPICS -->', topic_links(papers))
     examples = {item["id"]: item for item in json.loads((ROOT / "data/runner_examples.json").read_text(encoding="utf-8"))}
     protected, expressions = protect_math(text)
     body = markdown.markdown(protected, extensions=["tables", "fenced_code", "toc", "sane_lists"])
@@ -117,9 +121,10 @@ def build(local_pdfs=False):
     render("translation", "英文论文翻译阅读指南")
     for name, title in [("playground", "在线代码实验室"), ("math", "数学推导与数值例题"), ("practice", "四项完整视觉实验"),
                         ("answers", "练习答案与纠错"), ("resources", "可靠课程与知识映射"),
-                        ("assessment", "学习路线与考核标准"), ("evidence", "实验实测记录")]:
+                        ("assessment", "学习路线与考核标准"), ("evidence", "实验实测记录"),
+                        ("hallucination", "视觉幻觉论文专题")]:
         render(name, title)
-    for asset in ("runner.js", "runner-worker.js", "runner.css"):
+    for asset in ("runner.js", "runner-worker.js", "runner.css", "catalog.js"):
         shutil.copy2(ROOT / "assets" / asset, DOCS / "assets" / asset)
     shutil.copytree(ROOT / "notebooks", DOCS / "notebooks", dirs_exist_ok=True)
     for name in ("course_labs.py", "solutions.py", "exercises.py"):
@@ -133,18 +138,20 @@ def build(local_pdfs=False):
     shutil.copy2(ROOT / "examples" / "vision_basics_lab.py", DOCS / "vision_basics_lab.py")
     papers = json.loads((ROOT / "data" / "papers.json").read_text(encoding="utf-8"))
     cards = []
-    esc = lambda value: html.escape(str(value), quote=True)
     for p in papers:
         pdf = p["pdf_urls"][0]
         if local_pdfs and (DOCS / "PDFs" / p["filename"]).is_file():
             pdf = "PDFs/" + p["filename"]
-        authors = ', '.join(p["authors"][:3]) + (' et al.' if len(p["authors"]) > 3 else '')
-        haystack = ' '.join([p["short"], p["title"], p["note"], ' '.join(p["authors"])]).lower()
-        cards.append(f'<article data-group="{esc(p["group"])}" data-level="{esc(p["level"])}" data-search="{esc(haystack)}"><div class="meta">{p["id"]:02d} · {p["year"]} <span>{esc(p["level"])}</span></div><h2>{esc(p["short"])}</h2><h3>{esc(p["title"])}</h3><p class="authors">{esc(authors)}<br>{esc(p["venue"])}</p><p>{esc(p["note"])}</p><footer><button type="button" class="translation-trigger" data-paper-id="{p["id"]}" data-title="{esc(p["title"])}" data-pdf="{esc(p["pdf_urls"][0])}">翻译阅读</button><a class="download" href="{esc(pdf)}" target="_blank" rel="noopener noreferrer">英文 PDF ↗</a><a href="{esc(p["source"])}" target="_blank" rel="noopener noreferrer">原始来源 ↗</a></footer></article>')
+        cards.append(render_card(p, pdf))
     catalog = (ROOT / "templates" / "catalog.html").read_text(encoding="utf-8").replace("{{cards}}", ''.join(cards))
+    replacements = {'paper_count':len(papers), 'topic_count':len({p['group'] for p in papers}),
+                    'hallucination_count':sum(p.get('collection')=='hallucination' for p in papers),
+                    'hallucination_options':render_options(papers), 'catalog_date':'2026-11-14'}
+    for key,value in replacements.items():
+        catalog = catalog.replace('{{'+key+'}}',str(value))
     (DOCS / "index.html").write_text(catalog, encoding="utf-8")
     with (DOCS / "papers.csv").open("w", encoding="utf-8-sig", newline="") as f:
-        fields = ["id", "group", "short", "title", "authors", "year", "venue", "level", "note", "source", "pdf_url"]
+        fields = ["id", "group", "subcategory", "spreadsheet_id", "short", "title", "title_zh", "authors", "year", "venue", "level", "note", "keywords", "source", "pdf_url"]
         writer = csv.DictWriter(f, fieldnames=fields)
         writer.writeheader()
         for p in papers:
@@ -154,6 +161,8 @@ def build(local_pdfs=False):
             writer.writerow(row)
     shutil.copy2(ROOT / "data" / "references.bib", DOCS / "references.bib")
     shutil.copy2(ROOT / "data" / "papers.json", DOCS / "papers.json")
+    shutil.copy2(ROOT / 'data/hallucination_source.csv', DOCS / 'hallucination.csv')
+    shutil.copy2(ROOT / 'data/hallucination_import_report.json', DOCS / 'hallucination_import_report.json')
     (DOCS / ".nojekyll").touch()
     print(f"Built {len(list(DOCS.glob('*.html')))} HTML pages and {len(papers)} paper records in docs/")
 
