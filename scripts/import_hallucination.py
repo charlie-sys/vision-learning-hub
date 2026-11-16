@@ -16,7 +16,9 @@ def main():
     supplement = json.loads((ROOT / "data/hallucination_source_metadata.json").read_text(encoding="utf-8"))
     assert len(rows) == 79 and [int(r['序号']) for r in rows] == list(range(1,80))
     catalog = json.loads((ROOT / "data/papers.json").read_text(encoding="utf-8"))
-    foundation = [p for p in catalog if p.get('collection') != 'hallucination' and p['group'] != GROUP]
+    foundation = [p for p in catalog if p.get('collection') == 'foundation' or p['id'] <= 30]
+    extras = [p for p in catalog if p.get('collection') == 'proposal']
+    memberships = {p['arxiv']:p['proposal_entry'] for p in catalog if p.get('arxiv') and p.get('proposal_entry')}
     assert len(foundation) == 30
     for p in foundation:
         p['collection'] = 'foundation'
@@ -43,19 +45,23 @@ def main():
             'arxiv_acceptance_note':row['arXiv 录用备注（原始）'], 'arxiv_category':row['arXiv 主分类'],
             'metadata_provenance':'用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14',
         })
-    papers = foundation + added
+    for p in added:
+        if p['arxiv'] in memberships: p['proposal_entry']=memberships[p['arxiv']]
+    papers = foundation + added + extras
     assert len({p['id'] for p in papers}) == len(papers)
     assert len({p['arxiv'] for p in papers if p.get('arxiv')}) == sum(bool(p.get('arxiv')) for p in papers)
     (ROOT / 'data/papers.json').write_text(json.dumps(papers,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     bibfile = ROOT / 'data/references.bib'
-    bib = bibfile.read_text(encoding='utf-8').split('% BEGIN HALLUCINATION CATALOG')[0].rstrip()+'\n\n% BEGIN HALLUCINATION CATALOG\n'
+    previous_bib = bibfile.read_text(encoding='utf-8')
+    proposal_bib = ('% BEGIN PROPOSAL CATALOG'+previous_bib.split('% BEGIN PROPOSAL CATALOG',1)[1]) if '% BEGIN PROPOSAL CATALOG' in previous_bib else ''
+    bib = previous_bib.split('% BEGIN HALLUCINATION CATALOG')[0].rstrip()+'\n\n% BEGIN HALLUCINATION CATALOG\n'
     escape = lambda s: str(s).replace('\\',r'\textbackslash{}').replace('&',r'\&').replace('%',r'\%').replace('_',r'\_')
     for p in added:
         fields = {'title':p['title'], 'author':' and '.join(p['authors']), 'year':p['year'],
                   'eprint':p['arxiv'], 'archivePrefix':'arXiv', 'primaryClass':p['arxiv_category'], 'url':p['source']}
         if p['doi']: fields['doi'] = p['doi']
         bib += '@misc{Hallucination'+p['arxiv'].replace('.','_')+',\n'+''.join(f'  {k} = {{{escape(v)}}},\n' for k,v in fields.items())+'}\n\n'
-    bibfile.write_text(bib.rstrip()+'\n',encoding='utf-8')
+    bibfile.write_text((bib+proposal_bib).rstrip()+'\n',encoding='utf-8')
     print(f'Imported {len(added)} spreadsheet papers; retained {len(foundation)} foundation papers; total {len(papers)}')
 
 

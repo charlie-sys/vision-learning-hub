@@ -12,7 +12,7 @@ import markdown
 from pygments import highlight
 from pygments.formatters import HtmlFormatter
 from pygments.lexers import PythonLexer
-from catalog import render_card, render_options, topic_links
+from catalog import render_card, render_options, topic_links, proposal_options, proposal_sections
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
@@ -58,6 +58,10 @@ def render(name, title, code_html="", extra_css=""):
     if name == 'hallucination':
         papers = json.loads((ROOT / 'data/papers.json').read_text(encoding='utf-8'))
         text = text.replace('<!-- HALLUCINATION_TOPICS -->', topic_links(papers))
+    if name == 'proposal':
+        papers=json.loads((ROOT/'data/papers.json').read_text(encoding='utf-8'))
+        source=json.loads((ROOT/'data/proposal_source.json').read_text(encoding='utf-8'))
+        for key,value in proposal_sections(papers,source).items(): text=text.replace('<!-- '+key+' -->',value)
     examples = {item["id"]: item for item in json.loads((ROOT / "data/runner_examples.json").read_text(encoding="utf-8"))}
     protected, expressions = protect_math(text)
     body = markdown.markdown(protected, extensions=["tables", "fenced_code", "toc", "sane_lists"])
@@ -122,7 +126,7 @@ def build(local_pdfs=False):
     for name, title in [("playground", "在线代码实验室"), ("math", "数学推导与数值例题"), ("practice", "四项完整视觉实验"),
                         ("answers", "练习答案与纠错"), ("resources", "可靠课程与知识映射"),
                         ("assessment", "学习路线与考核标准"), ("evidence", "实验实测记录"),
-                        ("hallucination", "视觉幻觉论文专题")]:
+                        ("hallucination", "视觉幻觉论文专题"), ("proposal", "申博研究计划书文献与资源")]:
         render(name, title)
     for asset in ("runner.js", "runner-worker.js", "runner.css", "catalog.js"):
         shutil.copy2(ROOT / "assets" / asset, DOCS / "assets" / asset)
@@ -139,32 +143,38 @@ def build(local_pdfs=False):
     papers = json.loads((ROOT / "data" / "papers.json").read_text(encoding="utf-8"))
     cards = []
     for p in papers:
-        pdf = p["pdf_urls"][0]
+        pdf = (p.get('pdf_urls') or [p['source']])[0]
         if local_pdfs and (DOCS / "PDFs" / p["filename"]).is_file():
             pdf = "PDFs/" + p["filename"]
         cards.append(render_card(p, pdf))
     catalog = (ROOT / "templates" / "catalog.html").read_text(encoding="utf-8").replace("{{cards}}", ''.join(cards))
-    replacements = {'paper_count':len(papers), 'topic_count':len({p['group'] for p in papers}),
+    replacements = {'paper_count':sum(p.get('record_type')!='resource' for p in papers), 'entry_count':len(papers),
+                    'resource_count':sum(p.get('record_type')=='resource' for p in papers),'topic_count':len({p['group'] for p in papers}),
                     'hallucination_count':sum(p.get('collection')=='hallucination' for p in papers),
-                    'hallucination_options':render_options(papers), 'catalog_date':'2026-11-14'}
+                    'hallucination_options':render_options(papers), 'proposal_options':proposal_options(papers), 'catalog_date':'2026-11-16'}
     for key,value in replacements.items():
         catalog = catalog.replace('{{'+key+'}}',str(value))
     (DOCS / "index.html").write_text(catalog, encoding="utf-8")
     with (DOCS / "papers.csv").open("w", encoding="utf-8-sig", newline="") as f:
-        fields = ["id", "group", "subcategory", "spreadsheet_id", "short", "title", "title_zh", "authors", "year", "venue", "level", "note", "keywords", "source", "pdf_url"]
+        fields = ["id", "record_type", "group", "subcategory", "spreadsheet_id", "short", "title", "title_zh", "authors", "year", "venue", "level", "note", "keywords", "source", "pdf_url", "proposal_row", "proposal_category", "proposal_relevance"]
         writer = csv.DictWriter(f, fieldnames=fields)
         writer.writeheader()
         for p in papers:
             row = {key: p.get(key, "") for key in fields}
             row["authors"] = '; '.join(p["authors"])
-            row["pdf_url"] = p["pdf_urls"][0]
+            row["pdf_url"] = p['pdf_urls'][0] if p.get('pdf_urls') else ''
+            row['record_type']=p.get('record_type','paper')
+            if p.get('proposal_entry'):
+                row.update(proposal_row=p['proposal_entry']['row_id'],proposal_category=p['proposal_entry']['category'],proposal_relevance=p['proposal_entry']['relevance'])
             writer.writerow(row)
     shutil.copy2(ROOT / "data" / "references.bib", DOCS / "references.bib")
     shutil.copy2(ROOT / "data" / "papers.json", DOCS / "papers.json")
     shutil.copy2(ROOT / 'data/hallucination_source.csv', DOCS / 'hallucination.csv')
     shutil.copy2(ROOT / 'data/hallucination_import_report.json', DOCS / 'hallucination_import_report.json')
+    for name in ('proposal_source.csv','proposal_source.json','proposal_import_report.json'):
+        shutil.copy2(ROOT/'data'/name,DOCS/name)
     (DOCS / ".nojekyll").touch()
-    print(f"Built {len(list(DOCS.glob('*.html')))} HTML pages and {len(papers)} paper records in docs/")
+    print(f"Built {len(list(DOCS.glob('*.html')))} HTML pages and {len(papers)} catalog entries in docs/")
 
 
 if __name__ == "__main__":

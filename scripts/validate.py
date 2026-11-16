@@ -8,10 +8,13 @@ from bs4 import BeautifulSoup
 ROOT = Path(__file__).resolve().parents[1]
 docs = ROOT / "docs"
 papers = json.loads((ROOT / "data/papers.json").read_text(encoding="utf-8"))
-assert len(papers) == 109 and len({p["id"] for p in papers}) == 109
+assert len(papers) == 121 and len({p["id"] for p in papers}) == 121
+assert sum(p.get('record_type') == 'resource' for p in papers) == 1
+assert sum(bool(p.get('proposal_entry')) for p in papers) == 25
 assert sum(p.get('collection') == 'foundation' for p in papers) == 30
 assert sum(p.get('collection') == 'hallucination' for p in papers) == 79
-assert all(p["pdf_urls"] and p["source"].startswith("https://") for p in papers)
+assert all(p["source"].startswith("https://") for p in papers)
+assert all(all(url.startswith('https://') for url in p.get('pdf_urls',[])) for p in papers)
 for path in docs.glob("*.html"):
     text = path.read_text(encoding="utf-8")
     assert "{{" not in text, f"Unexpanded template in {path.name}"
@@ -51,12 +54,12 @@ for path in docs.glob("*.html"):
 assert len(BeautifulSoup((docs / "index.html").read_text(encoding="utf-8"), "html.parser").select("article")) == len(papers)
 catalog = BeautifulSoup((docs / "index.html").read_text(encoding="utf-8"), "html.parser")
 translation_buttons = catalog.select("button.translation-trigger")
-assert len(translation_buttons) == len(papers)
-expected_pdfs = {str(p["id"]): p["pdf_urls"][0] for p in papers}
+assert len(translation_buttons) == sum(bool(p.get('pdf_urls')) for p in papers)
+expected_pdfs = {str(p["id"]): p["pdf_urls"][0] for p in papers if p.get('pdf_urls')}
 assert all(button["data-pdf"] == expected_pdfs[button["data-paper-id"]] for button in translation_buttons)
 assert catalog.select_one("dialog#translation-dialog") is not None
 math_page = BeautifulSoup((docs / "tutorial.html").read_text(encoding="utf-8"), "html.parser")
 assert len(math_page.select("[data-tex]")) >= 40, "Mathematical expressions were not preserved"
 assert len(math_page.select(".math-display")) >= 10, "Missing display equations"
 assert "MATHPLACEHOLDER" not in str(math_page), "Unrestored equation placeholder"
-print(f"{len(papers)} paper records, all generated pages, translation entries, internal links and table labels: OK")
+print(f"{len(papers)} catalog entries, all generated pages, translation entries, internal links and table labels: OK")

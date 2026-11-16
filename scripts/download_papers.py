@@ -31,6 +31,9 @@ def main():
     client.headers["User-Agent"] = "vision-learning-hub/1.0 (public academic sources)"
     failed = []
     for p in papers:
+        if not p.get('pdf_urls'):
+            print(f'{p["id"]:02d} no public PDF recorded; open source: {p["source"]}')
+            continue
         target = output / p["filename"]
         if target.is_file() and target.stat().st_size > 1000:
             with target.open("rb") as f:

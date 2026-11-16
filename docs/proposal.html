@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>申博研究计划书文献与资源</title>
+<link rel="stylesheet" href="assets/katex/katex.min.css">
+<script defer src="assets/katex/katex.min.js"></script>
+<script defer src="assets/math.js"></script>
+<link rel="stylesheet" href="assets/runner.css">
+<script defer src="assets/runner.js"></script>
+<style>
+:root{--ink:#182536;--muted:#607185;--accent:#176e76;--paper:#fff;--bg:#f3f6f9;--line:#dce4eb}
+.math-inline{display:inline-block;max-width:100%;vertical-align:middle;overflow-x:auto;overflow-y:hidden;padding:2px 3px;scrollbar-width:none}.math-inline::-webkit-scrollbar{display:none}.math-display{max-width:100%;overflow-x:auto;overflow-y:hidden;padding:10px 0;margin:16px 0}.math-display .katex-display{margin:.5em 0}.math-error{color:#a32828;background:#fff0f0}.content .katex{font-size:1.08em}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.8 system-ui,"Microsoft YaHei",sans-serif}
+a{color:var(--accent);text-underline-offset:3px}a:hover{color:#0e4b53}
+.top{background:#14273d;color:#fff;padding:14px max(4vw,24px);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.top a{color:#e8f5f5;text-decoration:none}.top strong{letter-spacing:.02em}.top nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}
+.layout{max-width:1500px;margin:auto;display:grid;grid-template-columns:280px minmax(0,1fr);gap:26px;padding:28px 4vw 64px}
+.side{align-self:start;position:sticky;top:20px;max-height:calc(100vh - 40px);overflow:auto;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px 16px;box-shadow:0 4px 18px #17233708}
+.side label{display:block;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.12em;margin:0 0 10px}
+.side input{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:14px;margin-bottom:10px}
+.side ul{list-style:none;padding-left:0;margin:0}.side ul ul{padding-left:14px;border-left:1px solid var(--line);margin-left:5px}
+.side li{margin:3px 0}.side a{display:block;text-decoration:none;padding:3px 6px;border-radius:6px;color:#31475e;font-size:13px;line-height:1.45}
+.side li.level-3{padding-left:15px}
+.side a:hover,.side a.active{background:#e8f3f2;color:#0e6167}.side li[hidden]{display:none}
+.content{min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:clamp(22px,4vw,60px);box-shadow:0 8px 28px #17233708}
+.content h1{font-size:clamp(28px,3vw,40px);line-height:1.3;margin-top:0;color:#14273d}
+.content h2{font-size:26px;border-top:1px solid var(--line);padding-top:32px;margin-top:48px;color:#154f62}
+.content h3{font-size:20px;margin-top:28px;color:#1e6672}.content h1,.content h2,.content h3{scroll-margin-top:20px}
+.content p{margin:13px 0}.content li{margin:5px 0}.content blockquote{margin:20px 0;padding:10px 20px;border-left:4px solid #31868a;background:#eff7f7;color:#385b60}
+.content table{border-collapse:collapse;width:100%;min-width:0;font-size:14px;line-height:1.55;table-layout:auto}
+.content th,.content td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+.content th,.content td{overflow-wrap:anywhere}
+.content th{background:#edf3f6}.content tr:nth-child(even){background:#fafcfd}
+.content .resource-table th{background:#e7f1f0;color:#135d63}.content .resource-table td:nth-child(2){font-weight:600}
+.content .cols-5{table-layout:fixed}.content .cols-5 th:nth-child(1){width:6%}.content .cols-5 th:nth-child(2){width:41%}.content .cols-5 th:nth-child(3){width:19%}.content .cols-5 th:nth-child(4){width:9%}.content .cols-5 th:nth-child(5){width:25%}
+.content .cols-5 td:nth-child(4),.content .cols-5 th:nth-child(4){white-space:nowrap}
+.content .table-wrap{overflow:auto;margin:18px 0;border-radius:8px}
+code{font-family:Consolas,"Cascadia Code",monospace;font-size:.88em;background:#eef3f6;border-radius:4px;padding:2px 5px;overflow-wrap:anywhere}
+.content img{display:block;max-width:100%;height:auto;margin:20px auto;border:1px solid var(--line);border-radius:8px}.content p:has(img){overflow:hidden}
+pre{background:#15283d;color:#e8f1f6;border-radius:9px;padding:16px 19px;overflow:auto;line-height:1.55}pre code{background:transparent;color:inherit;padding:0;white-space:pre;overflow-wrap:normal}
+.content input[type=checkbox]{margin-right:8px;accent-color:var(--accent)}
+.back{position:fixed;right:22px;bottom:22px;background:#176e76;color:white;padding:8px 14px;border-radius:999px;text-decoration:none;box-shadow:0 4px 15px #0002;font-size:13px}
+@media(max-width:1150px){.layout{display:block;padding:14px}.side{position:relative;max-height:260px;margin-bottom:14px}.content{padding:22px}}
+@media(min-width:761px) and (max-width:1300px){.content .wide-table,.content .wide-table tbody,.content .wide-table tr,.content .wide-table td{display:block;width:100%}.content .wide-table thead{display:none}.content .wide-table tr{border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:13px 0;background:#fff;box-shadow:0 2px 9px #1723370a}.content .wide-table td{border:0;border-bottom:1px solid var(--line);padding:9px 12px;white-space:normal}.content .wide-table td:last-child{border-bottom:0}.content .wide-table td::before{content:attr(data-label);display:inline-block;min-width:115px;font-size:12px;font-weight:700;color:#397a7e;margin-right:12px;vertical-align:top}}
+@media(max-width:760px){.content{padding:18px}.content h2{font-size:22px}.content h3{font-size:18px}.content .table-wrap{overflow:visible}.content table,.content tbody,.content tr,.content td{display:block;width:100%}.content thead{display:none}.content tr{border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:13px 0;background:#fff;box-shadow:0 2px 9px #1723370a}.content td{border:0;border-bottom:1px solid var(--line);padding:9px 12px}.content td:last-child{border-bottom:0}.content td::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;color:#397a7e;margin-bottom:3px}.content .resource-table{min-width:0}}
+@media print{.top,.side,.back{display:none}.layout{display:block;padding:0}.content{border:0;box-shadow:none;padding:0}body{background:#fff}.content h2{break-before:page}pre,table{break-inside:avoid}}
+</style>
+</head>
+<body id="top">
+<header class="top"><strong>视觉论文学习库</strong><nav><a href="index.html">论文目录</a><a href="hallucination.html">视觉幻觉专题</a><a href="proposal.html">申博专题</a><a href="tutorial.html">知识总览</a><a href="math.html">数学推导</a><a href="playground.html">在线运行代码</a><a href="practice.html">四项实验</a><a href="answers.html">练习答案</a><a href="assessment.html">学习考核</a><a href="resources.html">课程来源</a><a href="evidence.html">实测记录</a></nav></header>
+<div class="layout"><aside class="side"><label for="toc-search">章节目录</label><input id="toc-search" type="search" placeholder="搜索章节…" aria-label="搜索章节"><div class="toc"><ul><li class="level-2"><a href="#1">1. 新增选项与重复论文</a></li><li class="level-2"><a href="#2">2. 论文、资源与研究关联</a></li><li class="level-2"><a href="#3">3. 研究计划书写作指南</a></li><li class="level-2"><a href="#4">4. 原表写作框架与引用映射</a></li><li class="level-2"><a href="#5">5. 维护与文件说明</a></li></ul></div></aside>
+<main class="content"><h1 id="_1">申博研究计划书：多模态幻觉与图像/视频理解</h1>
+<p>本专题按用户提供的《申博研究计划书_多模态大模型幻觉与图像视频理解_检索清单》导入，日期为2026-11-16。收录24篇论文和1个文献资源仓库，另提供原表中的6个写作指南及10节写作框架。</p>
+<p><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92">进入25项专题目录</a> · <a href="proposal_source.csv">下载文献清单CSV</a> · <a href="proposal_source.json">下载完整四工作表JSON</a> · <a href="proposal_import_report.json">查看逐条导入映射</a></p>
+<h2 id="1">1. 新增选项与重复论文</h2>
+<p>在首页“分类”选择“申博研究计划书”，即可查看全部25项；“申博清单分类”可以按原表的综述、图像/视频评测、解码与偏好对齐等类别进一步筛选。搜索同时覆盖原表标题及研究关联说明，筛选网址可以收藏或分享。</p>
+<p>13篇论文已经在视觉幻觉专题中，复用原有编号和题录，并同时出现在两个专题。新增11篇论文和1个资源仓库，全站为120篇不同论文与1个资源仓库。每张收录卡片标明“申博清单 #”，对应原表序号，展开“与申博研究计划的关联”可查看原表分类、年份/来源、说明和链接。</p>
+<p>原有题录不因新表中的年份或别名而覆盖；“年份 / 来源（原表）”单独保留。例如arXiv首次提交时间与原表标注的会议/版本年份可能不同，可分别查看。新增条目中，6篇取得arXiv结构化题录，INFACT取得ACL题录与PDF链接；其余出版方条目保留原表信息及页面入口，未补写未提供的作者或公开PDF地址。</p>
+<h2 id="2">2. 论文、资源与研究关联</h2>
+<p>下表分类和关联说明来自原表，属于其写作参考意见。点击题名可跳到目录中的对应卡片；论文正文、资源仓库和出版方页面按各自类型提供入口。</p>
+<table class="wide-table cols-4">
+<thead>
+<tr>
+<th>原表序号</th>
+<th>论文或资源</th>
+<th>原表分类</th>
+<th>与研究计划书的关联（原表）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="原表序号">1</td>
+<td data-label="论文或资源"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-33">Hallucination of Multimodal Large Language Models: A Survey</a></td>
+<td data-label="原表分类">综述 / 问题定义</td>
+<td data-label="与研究计划书的关联（原表）">MLLM 幻觉的奠基性综述，提出“成因—评测基准—缓解方法”的完整分类，可直接作为研究计划书第一章问题界定与国内外研究现状的骨架。</td>
+</tr>
+<tr>
+<td data-label="原表序号">2</td>
+<td data-label="论文或资源"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-35">Hallucination in Multimodal Foundation Models: A Survey on Causes, Corrections, and Evaluations</a></td>
+<td data-label="原表分类">综述 / 问题定义</td>
+<td data-label="与研究计划书的关联（原表）">最新综述，按“成因—纠正—评测”组织，适合用来论证当前研究空白（尤其视频侧与因果一致性）。</td>
+</tr>
+<tr>
+<td data-label="原表序号">3</td>
+<td data-label="论文或资源"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-110">Understanding Hallucinations in Large Visual and Language Models</a></td>
+<td data-label="原表分类">综述 / 期刊</td>
+<td data-label="与研究计划书的关联（原表）">期刊级综述，适合作为计划书文献综述部分的高权重引用，提升选题的学术定位。</td>
+</tr>
+<tr>
+<td data-label="原表序号">4</td>
+<td data-label="论文或资源"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-111">Awesome-MLLM-Hallucination（论文与资源仓库）</a></td>
+<td data-label="原表分类">资源仓库</td>
+<td data-label="与研究计划书的关联（原表）">上述综述配套的开源文献库，可在同一入口持续追踪评测基准、数据集与代码，写文献综述时效率最高。</td>
+</tr>
+<tr>
+<td data-label="原表序号">5</td>
+<td data-label="论文或资源"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-112">Evaluating Object Hallucination in Large Vision-Language Models（POPE）</a></td>
+<td data-label="原表分类">图像侧评测基准</td>
+<td data-label="与研究计划书的关联（原表）">图像对象幻觉评测的事实标准（polling-based query），计划书里作为“我们如何度量幻觉”的第一个基线指标。</td>
+</tr>
+<tr>
+<td data-label="原表序号">6</td>
+<td data-label="论文或资源"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-45">HallusionBench: An Advanced Diagnostic Suite for Entangled Language Hallucination and Visual Illusion in Large Vision-Language Models</a></td>
+<td data-label="原表分类">图像侧评测基准</td>
+<td data-label="与研究计划书的关联（原表）">区分“语言先验幻觉”与“视觉错觉”的诊断式基准，支撑计划书中“幻觉需要细分归因、不能只用一个分数”的论点。</td>
+</tr>
+<tr>
+<td data-label="原表序号">7</td>
+<td data-label="论文或资源"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-46">AMBER: An LLM-free Multi-dimensional Benchmark for MLLMs Hallucination Evaluation</a></td>
+<td data-label="原表分类">图像侧评测基准</td>
+<td data-label="与研究计划书的关联（原表）">无需 LLM 裁判的多维幻觉基准，评测成本低、可复现性好，适合作为实验章节的主力评测。</td>
+</tr>
+<tr>
+<td data-label="原表序号">8</td>
+<td data-label="论文或资源"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-113">MME: A Comprehensive Evaluation Benchmark for Multimodal Large Language Models</a></td>
+<td data-label="原表分类">图像侧 综合能力基准</td>
+<td data-label="与研究计划书的关联（原表）">通用感知/认知能力基准，用于回答“缓解幻觉后理解能力是否下降”这一关键反驳。</td>
+</tr>
+<tr>
+<td data-label="原表序号">9</td>
+<td data-label="论文或资源"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-114">MMMU: A Massive Multi-discipline Multimodal Understanding and Reasoning Benchmark for Expert AGI</a></td>
+<td data-label="原表分类">图像侧 综合能力基准</td>
+<td data-label="与研究计划书的关联（原表）">专家级多学科理解与推理基准，用来证明方法在“深度理解”而非“浅层描述”上同样有效。</td>
+</tr>
+<tr>
+<td data-label="原表序号">10</td>
+<td data-label="论文或资源"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-53">VideoHallucer: Evaluating Intrinsic and Extrinsic Hallucinations in Large Video-Language Models</a></td>
+<td data-label="原表分类">视频侧评测基准</td>
+<td data-label="与研究计划书的关联（原表）">把幻觉拆为内在（与视频内容矛盾）与外在（与常识矛盾），是视频方向研究问题设计的直接依据。</td>
+</tr>
+<tr>
+<td data-label="原表序号">11</td>
+<td data-label="论文或资源"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-56">VidHalluc: Evaluating Temporal Hallucinations in Multimodal Large Language Models for Video Understanding</a></td>
+<td data-label="原表分类">视频侧评测基准</td>
+<td data-label="与研究计划书的关联（原表）">聚焦时序幻觉（动作顺序、事件因果、时间定位），是计划书“从空间幻觉走向时空幻觉”论证的核心引用。</td>
+</tr>
+<tr>
+<td data-label="原表序号">12</td>
+<td data-label="论文或资源"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-55">VidHal: Benchmarking Temporal Hallucinations in Vision LLMs</a></td>
+<td data-label="原表分类">视频侧评测基准</td>
+<td data-label="与研究计划书的关联（原表）">面向时序幻觉的细粒度基准，可与 VidHalluc 互为参照，说明该方向尚无统一度量、存在明确研究空间。</td>
+</tr>
+<tr>
+<td data-label="原表序号">13</td>
+<td data-label="论文或资源"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-115">INFACT: A Diagnostic Benchmark for Induced Faithfulness and Factuality Hallucinations in Video-LLMs</a></td>
+<td data-label="原表分类">视频侧评测基准</td>
+<td data-label="与研究计划书的关联（原表）">最新诊断式视频幻觉基准，用于体现计划书对 2026 年前沿的掌握程度。</td>
+</tr>
+<tr>
+<td data-label="原表序号">14</td>
+<td data-label="论文或资源"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-116">Video-MME: The First-Ever Comprehensive Evaluation Benchmark of Multi-modal LLMs in Video Analysis</a></td>
+<td data-label="原表分类">视频侧 综合能力基准</td>
+<td data-label="与研究计划书的关联（原表）">长/短视频理解综合基准，用作视频侧“能力不退化”的对照实验。</td>
+</tr>
+<tr>
+<td data-label="原表序号">15</td>
+<td data-label="论文或资源"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-61">MESH - Understanding Videos Like Human: Measuring Hallucinations in Large Video Models</a></td>
+<td data-label="原表分类">视频侧评测基准</td>
+<td data-label="与研究计划书的关联（原表）">以人类标注视角度量视频幻觉，可作为“评测与人类判断对齐”的方法论参考。</td>
+</tr>
+<tr>
+<td data-label="原表序号">16</td>
+<td data-label="论文或资源"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-75">Mitigating Object Hallucinations in Large Vision-Language Models through Visual Contrastive Decoding（VCD）</a></td>
+<td data-label="原表分类">缓解方法 · 解码期</td>
+<td data-label="与研究计划书的关联（原表）">解码期对比的经典范式（对比原始/扰动视觉输入），推理成本低、无需重训，是计划书方法章最易落地的第一条路线。</td>
+</tr>
+<tr>
+<td data-label="原表序号">17</td>
+<td data-label="论文或资源"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-76">OPERA: Alleviating Hallucination in Multi-Modal Large Language Models via Over-Trust Penalty and Retrospection-Allocation</a></td>
+<td data-label="原表分类">缓解方法 · 解码期</td>
+<td data-label="与研究计划书的关联（原表）">揭示“过度信任少数视觉 token”是幻觉的结构性成因，并给出惩罚+回滚机制，是“从注意力信号检测幻觉”的关键依据。</td>
+</tr>
+<tr>
+<td data-label="原表序号">18</td>
+<td data-label="论文或资源"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-117">Mitigating Hallucinations in Large Vision-Language Models with Instruction Contrastive Decoding（ICD）</a></td>
+<td data-label="原表分类">缓解方法 · 解码期</td>
+<td data-label="与研究计划书的关联（原表）">从指令扰动角度做对比解码，说明幻觉同时受视觉与指令先验驱动，可用于设计多扰动源的对比方案。</td>
+</tr>
+<tr>
+<td data-label="原表序号">19</td>
+<td data-label="论文或资源"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-37">Analyzing and Mitigating Object Hallucination in Large Vision-Language Models（LURE）</a></td>
+<td data-label="原表分类">缓解方法 · 训练期</td>
+<td data-label="与研究计划书的关联（原表）">从统计角度定位幻觉成因（共现、位置、不确定性）并做后处理纠正，示范“先归因、后干预”的研究范式。</td>
+</tr>
+<tr>
+<td data-label="原表序号">20</td>
+<td data-label="论文或资源"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-74">Woodpecker: Hallucination Correction for Multimodal Large Language Models</a></td>
+<td data-label="原表分类">缓解方法 · 免训练流水线</td>
+<td data-label="与研究计划书的关联（原表）">免训练的多阶段纠正流水线（生成—验证—修正），为“推理期证据接地”路线提供可直接对比的基线。</td>
+</tr>
+<tr>
+<td data-label="原表序号">21</td>
+<td data-label="论文或资源"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-66">RLHF-V: Towards Trustworthy MLLMs via Behavior Alignment from Fine-grained Correctional Human Feedback</a></td>
+<td data-label="原表分类">缓解方法 · 偏好对齐</td>
+<td data-label="与研究计划书的关联（原表）">细粒度纠正式人类反馈做行为对齐，是计划书“训练期偏好优化”路线的代表性工作。</td>
+</tr>
+<tr>
+<td data-label="原表序号">22</td>
+<td data-label="论文或资源"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-118">Aligning Large Multimodal Models with Factually Augmented RLHF（提出 MMHal-Bench）</a></td>
+<td data-label="原表分类">缓解方法 · 偏好对齐 + 基准</td>
+<td data-label="与研究计划书的关联（原表）">事实增强的 RLHF 与 MMHal-Bench 评测同时给出，适合作为“对齐即评测”的联合设计参考。</td>
+</tr>
+<tr>
+<td data-label="原表序号">23</td>
+<td data-label="论文或资源"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-119">GEM-MM: Reducing VLM Hallucination with Entropy-Guided Preference Alignment</a></td>
+<td data-label="原表分类">缓解方法 · 偏好对齐</td>
+<td data-label="与研究计划书的关联（原表）">用不确定性/熵信号引导偏好对齐，代表最新的“不确定性驱动”思路，可作为计划书创新点的对话对象。</td>
+</tr>
+<tr>
+<td data-label="原表序号">24</td>
+<td data-label="论文或资源"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-120">Mitigating Object and Action Hallucinations in Multimodal LLMs via Self-Augmented Contrastive Alignment</a></td>
+<td data-label="原表分类">缓解方法 · 图像+动作</td>
+<td data-label="与研究计划书的关联（原表）">同时处理对象与动作幻觉，桥接图像与视频两类任务，适合支撑“统一框架”式选题。</td>
+</tr>
+<tr>
+<td data-label="原表序号">25</td>
+<td data-label="论文或资源"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-121">EchoBat: Echo-Vision Enhancement and Echo-Layered Sampling for Video LLMs Hallucination Mitigation</a></td>
+<td data-label="原表分类">缓解方法 · 视频</td>
+<td data-label="与研究计划书的关联（原表）">面向视频 LLM 的采样与视觉增强缓解方案，是视频侧方法基线中较新且可复现的一条。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3">3. 研究计划书写作指南</h2>
+<p>这些链接作为原表的写作参考资料收录，不计入论文数量。来源类型保留原表标注；具体申请材料要求请以目标院校的正式说明为准。</p>
+<table>
+<thead>
+<tr>
+<th>指南与原链接</th>
+<th>来源类型（原表）</th>
+<th>参考要点（原表）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="指南与原链接"><a href="https://www.stir.ac.uk/research/research-degrees/how-to-apply-for-our-research-degrees/guidance-on-how-to-write-a-research-proposal/" rel="noopener noreferrer" target="_blank">Guidance on how to write a research proposal (University of Stirling)</a></td>
+<td data-label="来源类型（原表）">英国高校官方指引</td>
+<td data-label="参考要点（原表）">给出 RP 的标准结构（题目、背景、研究问题、方法、时间表、参考文献）与评分关注点，适合作模板骨架。</td>
+</tr>
+<tr>
+<td data-label="指南与原链接"><a href="https://staff-lb.shef.ac.uk/postgraduate/phd/apply/proposal" rel="noopener noreferrer" target="_blank">Writing a proposal (University of Sheffield, PhD application)</a></td>
+<td data-label="来源类型（原表）">英国高校官方指引</td>
+<td data-label="参考要点（原表）">侧重“如何论证选题的必要性与可行性”，对计划书的 research gap 与风险管理段落很有参考价值。</td>
+</tr>
+<tr>
+<td data-label="指南与原链接"><a href="https://vinuni.edu.vn/wp-content/uploads/2023/11/2023_PhD_Guideline.pdf" rel="noopener noreferrer" target="_blank">PhD Guideline (VinUniversity) — 官方博士指南 PDF</a></td>
+<td data-label="来源类型（原表）">高校官方文件</td>
+<td data-label="参考要点（原表）">含研究计划评审标准与培养流程，可用来对齐“评审人到底看什么”。</td>
+</tr>
+<tr>
+<td data-label="指南与原链接"><a href="https://sci-draw.com/zh/blog/how-to-write-phd-research-proposal" rel="noopener noreferrer" target="_blank">博士申请研究计划书如何写？附一页范例、结构模板与专业插图</a></td>
+<td data-label="来源类型（原表）">中文实操指引</td>
+<td data-label="参考要点（原表）">中文语境下的逐节写法与一页范例，含技术路线图绘制建议，可直接套用到本选题。</td>
+</tr>
+<tr>
+<td data-label="指南与原链接"><a href="https://zhuanlan.zhihu.com/p/1906795419352170716" rel="noopener noreferrer" target="_blank">一文掌握申博流程里研究计划(RP)的要义！附顶尖院校写作指引 + RP 实战剖析</a></td>
+<td data-label="来源类型（原表）">中文经验帖</td>
+<td data-label="参考要点（原表）">汇总多所院校要求并给出实战剖析，用于校准篇幅、语气与导师匹配度写法。</td>
+</tr>
+<tr>
+<td data-label="指南与原链接"><a href="https://www.zhihu.com/question/1985700000550896575/answer/2083874692113483573" rel="noopener noreferrer" target="_blank">申博时的研究计划书该怎么写？（知乎问答）</a></td>
+<td data-label="来源类型（原表）">中文经验帖</td>
+<td data-label="参考要点（原表）">从评审与导师视角讨论常见扣分点，适合作为自检清单。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4">4. 原表写作框架与引用映射</h2>
+<p>以下保留清单中的框架建议。编号引用指向原表Sheet1对应论文卡片，方便从背景、研究问题、方法和实验方案回查文献；它们是规划建议，不是已经完成的研究结果或经本项目确认的新颖性结论。</p>
+<table>
+<thead>
+<tr>
+<th>章节</th>
+<th>写作要点（原表）</th>
+<th>对应清单条目</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="章节">1. 题目与摘要</td>
+<td data-label="写作要点（原表）">题目建议同时点明“切入点 + 目标”，例如：《以幻觉为信号的多模态大模型图像—视频理解可靠性提升研究》。摘要 200–300 字讲清：问题（幻觉削弱可信度）、缺口（评测与缓解脱节、视频时序维度不足）、方案（三条技术路线）、预期贡献。</td>
+<td data-label="对应清单条目">综述：<a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-33">[1]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-35">[2]</a>；基准：<a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-112">[5]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-53">[10]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-56">[11]</a></td>
+</tr>
+<tr>
+<td data-label="章节">2. 研究背景与问题提出</td>
+<td data-label="写作要点（原表）">从落地可靠性切入：MLLM 在视觉问答、图像描述、视频问答中会输出与视觉证据（乃至与视频时序）不符的内容。给出 2–3 个真实错误案例（对象凭空出现、动作顺序颠倒、时间定位错位），把“幻觉”从抽象概念转化为可观测现象。</td>
+<td data-label="对应清单条目"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-33">[1]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-35">[2]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-53">[10]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-56">[11]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-55">[12]</a></td>
+</tr>
+<tr>
+<td data-label="章节">3. 国内外研究现状（三条主线）</td>
+<td data-label="写作要点（原表）">① 成因侧：语言先验过强、视觉 token 利用不足/过度信任少数 token、训练数据共现偏差；② 评测侧：图像 POPE/HallusionBench/AMBER vs 视频 VideoHallucer/VidHalluc/VidHal/INFACT；③ 缓解侧：解码期干预、训练期对齐、推理期纠正流水线。</td>
+<td data-label="对应清单条目"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-33">[1]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-110">[3]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-45">[6]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-53">[10]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-56">[11]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-75">[16]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-76">[17]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-74">[20]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-66">[21]</a></td>
+</tr>
+<tr>
+<td data-label="章节">4. 研究缺口与研究问题（RQ）</td>
+<td data-label="写作要点（原表）">建议提炼 3–4 个 RQ：RQ1 如何统一度量图像与视频（尤其时序/因果）幻觉？RQ2 幻觉信号能否作为“理解能力提升”的训练信号，而不只是被抑制的对象？RQ3 如何在提升可靠性的同时不牺牲 MMMU/Video-MME 等深层理解能力？RQ4 该框架能否泛化到长视频与多轮交互？</td>
+<td data-label="对应清单条目"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-53">[10]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-56">[11]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-55">[12]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-115">[13]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-45">[6]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-113">[8]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-116">[14]</a></td>
+</tr>
+<tr>
+<td data-label="章节">5. 研究内容与技术路线</td>
+<td data-label="写作要点（原表）">路线 A（解码期）：以 VCD/OPERA/ICD 为基线，引入证据接地与不确定性门控的对比解码；路线 B（训练期）：构造细粒度幻觉纠正数据，结合熵/一致性信号做偏好优化；路线 C（推理期）：生成—验证—修正的证据图流水线，并把视觉证据回灌。三条路线需说明如何在一个统一框架内串起来。</td>
+<td data-label="对应清单条目"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-75">[16]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-76">[17]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-117">[18]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-37">[19]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-74">[20]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-66">[21]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-118">[22]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-120">[24]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-121">[25]</a></td>
+</tr>
+<tr>
+<td data-label="章节">6. 实验设计与评测方案</td>
+<td data-label="写作要点（原表）">图像：POPE、HallusionBench、AMBER、MME、MMMU；视频：VideoHallucer、VidHalluc、VidHal、INFACT、Video-MME。固定 prompt 与解码参数，同时报告“幻觉率下降”与“理解能力不退化”两组指标，并给出人类一致性分析与消融实验。</td>
+<td data-label="对应清单条目"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-112">[5]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-45">[6]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-46">[7]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-113">[8]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-114">[9]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-53">[10]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-56">[11]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-55">[12]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-115">[13]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-116">[14]</a></td>
+</tr>
+<tr>
+<td data-label="章节">7. 创新点与预期贡献</td>
+<td data-label="写作要点（原表）">建议表述为三点：① 度量创新（面向时空/因果一致性的幻觉诊断指标）；② 信号创新（把不确定性、注意力过度集中、证据覆盖度转化为可用的干预信号）；③ 方法创新（统一图像与视频的“检测—归因—干预”闭环，实现理解能力净提升）。</td>
+<td data-label="对应清单条目"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-35">[2]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-53">[10]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-61">[15]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-76">[17]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-119">[23]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-121">[25]</a></td>
+</tr>
+<tr>
+<td data-label="章节">8. 研究计划与时间安排</td>
+<td data-label="写作要点（原表）">按学期/年度给出甘特式安排：文献与基线复现 → 度量与诊断（产出论文 1）→ 解码期/训练期方法（论文 2）→ 统一框架与长视频扩展（论文 3）→ 学位论文撰写。每阶段标注可验证里程碑。</td>
+<td data-label="对应清单条目">—</td>
+</tr>
+<tr>
+<td data-label="章节">9. 可行性、资源与风险</td>
+<td data-label="写作要点（原表）">算力：优先 7B 级开源 MLLM + LoRA/轻量全参微调，解码期方法几乎零训练成本；数据：公开基准 + 自建小规模高质量纠正集；风险：过度抑制导致描述变短/漏检 —— 给出“双指标联合筛选”的回退方案。</td>
+<td data-label="对应清单条目"><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-46">[7]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-113">[8]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-114">[9]</a><a href="index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92#paper-116">[14]</a></td>
+</tr>
+<tr>
+<td data-label="章节">10. 参考文献</td>
+<td data-label="写作要点（原表）">按目标院校模板（GB/T 7714 或 APA/IEEE），优先近三年 CVPR/ICCV/NeurIPS/ICML/ACL/AAAI/ACM MM 论文；每条附 DOI 或 arXiv 号，本表 Sheet1 的链接可直接用于核对版本。</td>
+<td data-label="对应清单条目">全部</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5">5. 维护与文件说明</h2>
+<p>四个工作表的单元格值保存在 <code>data/proposal_source.json</code>，文献表导出为 <code>data/proposal_source.csv</code>。<code>python scripts/import_proposal.py</code> 按arXiv ID、来源链接和规范化题名匹配，保留旧编号并补充专题归属，不添加重复论文卡片。</p>
+<p>更新时先导入所需清单，再运行 <code>python scripts/build.py</code>、<code>python scripts/validate.py</code>、<code>python scripts/check_proposal.py</code>。有公开PDF地址的论文继续支持翻译阅读和下载；仅有出版页面的条目显示“出版方页面”，GitHub资料库显示“打开资源仓库”。</p><p><a href="proposal.md" download="proposal.md">下载本页 Markdown 源文</a></p></main></div><a class="back" href="#top" aria-label="返回顶部">↑ 返回顶部</a>
+<script>
+document.body.id='top';
+document.querySelectorAll('.content table').forEach(t=>{const w=document.createElement('div');w.className='table-wrap';t.parentNode.insertBefore(w,t);w.appendChild(t)});
+const tocLinks=[...document.querySelectorAll('.side li')];
+document.querySelector('#toc-search').addEventListener('input',e=>{const q=e.target.value.trim().toLowerCase();tocLinks.forEach(li=>{li.hidden=!!q && !li.textContent.toLowerCase().includes(q)})});
+const anchors=[...document.querySelectorAll('.side a[href^="#"]')];
+const byId=new Map(anchors.map(a=>[a.getAttribute('href').slice(1),a]));
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){anchors.forEach(a=>a.classList.remove('active'));byId.get(e.target.id)?.classList.add('active')}})},{rootMargin:'-10% 0px -75% 0px'});
+document.querySelectorAll('.content h1[id],.content h2[id],.content h3[id]').forEach(h=>obs.observe(h));
+</script>
+</body></html>

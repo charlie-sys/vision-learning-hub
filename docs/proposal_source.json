@@ -1,0 +1,363 @@
+{
+  "imported_on": "2026-11-16",
+  "workbook_filename": "申博研究计划书_多模态大模型幻觉与图像视频理解_检索清单.xlsx",
+  "sheets": {
+    "文献与资源清单": [
+      [
+        "序号",
+        "标题 (Title)",
+        "链接 (Link)",
+        "年份 / 来源",
+        "分类",
+        "与研究计划书的关联"
+      ],
+      [
+        1,
+        "Hallucination of Multimodal Large Language Models: A Survey",
+        "https://arxiv.org/abs/2404.18930",
+        "2024（v2: 2025）· arXiv 2404.18930",
+        "综述 / 问题定义",
+        "MLLM 幻觉的奠基性综述，提出“成因—评测基准—缓解方法”的完整分类，可直接作为研究计划书第一章问题界定与国内外研究现状的骨架。"
+      ],
+      [
+        2,
+        "Hallucination in Multimodal Foundation Models: A Survey on Causes, Corrections, and Evaluations",
+        "https://arxiv.org/abs/2410.15359",
+        "2026 · arXiv 2410.15359",
+        "综述 / 问题定义",
+        "最新综述，按“成因—纠正—评测”组织，适合用来论证当前研究空白（尤其视频侧与因果一致性）。"
+      ],
+      [
+        3,
+        "Understanding Hallucinations in Large Visual and Language Models",
+        "https://dl.acm.org/doi/10.1145/3811409",
+        "ACM Computing Surveys",
+        "综述 / 期刊",
+        "期刊级综述，适合作为计划书文献综述部分的高权重引用，提升选题的学术定位。"
+      ],
+      [
+        4,
+        "Awesome-MLLM-Hallucination（论文与资源仓库）",
+        "https://github.com/showlab/Awesome-MLLM-Hallucination",
+        "持续更新 · GitHub",
+        "资源仓库",
+        "上述综述配套的开源文献库，可在同一入口持续追踪评测基准、数据集与代码，写文献综述时效率最高。"
+      ],
+      [
+        5,
+        "Evaluating Object Hallucination in Large Vision-Language Models（POPE）",
+        "https://arxiv.org/abs/2305.10355",
+        "EMNLP 2023 · arXiv 2305.10355",
+        "图像侧评测基准",
+        "图像对象幻觉评测的事实标准（polling-based query），计划书里作为“我们如何度量幻觉”的第一个基线指标。"
+      ],
+      [
+        6,
+        "HallusionBench: An Advanced Diagnostic Suite for Entangled Language Hallucination and Visual Illusion in Large Vision-Language Models",
+        "https://arxiv.org/abs/2310.14566",
+        "CVPR 2024 · arXiv 2310.14566",
+        "图像侧评测基准",
+        "区分“语言先验幻觉”与“视觉错觉”的诊断式基准，支撑计划书中“幻觉需要细分归因、不能只用一个分数”的论点。"
+      ],
+      [
+        7,
+        "AMBER: An LLM-free Multi-dimensional Benchmark for MLLMs Hallucination Evaluation",
+        "https://arxiv.org/abs/2311.07397",
+        "2024 · arXiv 2311.07397",
+        "图像侧评测基准",
+        "无需 LLM 裁判的多维幻觉基准，评测成本低、可复现性好，适合作为实验章节的主力评测。"
+      ],
+      [
+        8,
+        "MME: A Comprehensive Evaluation Benchmark for Multimodal Large Language Models",
+        "https://arxiv.org/abs/2306.13394",
+        "2025 · arXiv 2306.13394",
+        "图像侧 综合能力基准",
+        "通用感知/认知能力基准，用于回答“缓解幻觉后理解能力是否下降”这一关键反驳。"
+      ],
+      [
+        9,
+        "MMMU: A Massive Multi-discipline Multimodal Understanding and Reasoning Benchmark for Expert AGI",
+        "https://arxiv.org/abs/2311.16502",
+        "CVPR 2024 · arXiv 2311.16502",
+        "图像侧 综合能力基准",
+        "专家级多学科理解与推理基准，用来证明方法在“深度理解”而非“浅层描述”上同样有效。"
+      ],
+      [
+        10,
+        "VideoHallucer: Evaluating Intrinsic and Extrinsic Hallucinations in Large Video-Language Models",
+        "https://arxiv.org/abs/2406.16338",
+        "2024 · arXiv 2406.16338",
+        "视频侧评测基准",
+        "把幻觉拆为内在（与视频内容矛盾）与外在（与常识矛盾），是视频方向研究问题设计的直接依据。"
+      ],
+      [
+        11,
+        "VidHalluc: Evaluating Temporal Hallucinations in Multimodal Large Language Models for Video Understanding",
+        "https://arxiv.org/abs/2412.03735",
+        "2025 · arXiv 2412.03735",
+        "视频侧评测基准",
+        "聚焦时序幻觉（动作顺序、事件因果、时间定位），是计划书“从空间幻觉走向时空幻觉”论证的核心引用。"
+      ],
+      [
+        12,
+        "VidHal: Benchmarking Temporal Hallucinations in Vision LLMs",
+        "https://arxiv.org/abs/2411.16771",
+        "2026 · arXiv 2411.16771",
+        "视频侧评测基准",
+        "面向时序幻觉的细粒度基准，可与 VidHalluc 互为参照，说明该方向尚无统一度量、存在明确研究空间。"
+      ],
+      [
+        13,
+        "INFACT: A Diagnostic Benchmark for Induced Faithfulness and Factuality Hallucinations in Video-LLMs",
+        "https://aclanthology.org/2026.acl-long.2062/",
+        "ACL 2026 · ACL Anthology",
+        "视频侧评测基准",
+        "最新诊断式视频幻觉基准，用于体现计划书对 2026 年前沿的掌握程度。"
+      ],
+      [
+        14,
+        "Video-MME: The First-Ever Comprehensive Evaluation Benchmark of Multi-modal LLMs in Video Analysis",
+        "https://arxiv.org/abs/2405.21075",
+        "2025 · arXiv 2405.21075",
+        "视频侧 综合能力基准",
+        "长/短视频理解综合基准，用作视频侧“能力不退化”的对照实验。"
+      ],
+      [
+        15,
+        "MESH - Understanding Videos Like Human: Measuring Hallucinations in Large Video Models",
+        "https://dl.acm.org/doi/10.1145/3746027.3755626",
+        "ACM MM 2025",
+        "视频侧评测基准",
+        "以人类标注视角度量视频幻觉，可作为“评测与人类判断对齐”的方法论参考。"
+      ],
+      [
+        16,
+        "Mitigating Object Hallucinations in Large Vision-Language Models through Visual Contrastive Decoding（VCD）",
+        "https://arxiv.org/abs/2311.16922",
+        "CVPR 2024 · arXiv 2311.16922",
+        "缓解方法 · 解码期",
+        "解码期对比的经典范式（对比原始/扰动视觉输入），推理成本低、无需重训，是计划书方法章最易落地的第一条路线。"
+      ],
+      [
+        17,
+        "OPERA: Alleviating Hallucination in Multi-Modal Large Language Models via Over-Trust Penalty and Retrospection-Allocation",
+        "https://arxiv.org/abs/2311.17911",
+        "2024 · arXiv 2311.17911",
+        "缓解方法 · 解码期",
+        "揭示“过度信任少数视觉 token”是幻觉的结构性成因，并给出惩罚+回滚机制，是“从注意力信号检测幻觉”的关键依据。"
+      ],
+      [
+        18,
+        "Mitigating Hallucinations in Large Vision-Language Models with Instruction Contrastive Decoding（ICD）",
+        "https://arxiv.org/abs/2403.18715",
+        "2024 · arXiv 2403.18715",
+        "缓解方法 · 解码期",
+        "从指令扰动角度做对比解码，说明幻觉同时受视觉与指令先验驱动，可用于设计多扰动源的对比方案。"
+      ],
+      [
+        19,
+        "Analyzing and Mitigating Object Hallucination in Large Vision-Language Models（LURE）",
+        "https://arxiv.org/abs/2310.00754",
+        "ICLR 2024 · arXiv 2310.00754",
+        "缓解方法 · 训练期",
+        "从统计角度定位幻觉成因（共现、位置、不确定性）并做后处理纠正，示范“先归因、后干预”的研究范式。"
+      ],
+      [
+        20,
+        "Woodpecker: Hallucination Correction for Multimodal Large Language Models",
+        "https://arxiv.org/abs/2310.16045",
+        "2024 · arXiv 2310.16045",
+        "缓解方法 · 免训练流水线",
+        "免训练的多阶段纠正流水线（生成—验证—修正），为“推理期证据接地”路线提供可直接对比的基线。"
+      ],
+      [
+        21,
+        "RLHF-V: Towards Trustworthy MLLMs via Behavior Alignment from Fine-grained Correctional Human Feedback",
+        "https://arxiv.org/abs/2312.00849",
+        "CVPR 2024 · arXiv 2312.00849",
+        "缓解方法 · 偏好对齐",
+        "细粒度纠正式人类反馈做行为对齐，是计划书“训练期偏好优化”路线的代表性工作。"
+      ],
+      [
+        22,
+        "Aligning Large Multimodal Models with Factually Augmented RLHF（提出 MMHal-Bench）",
+        "https://arxiv.org/abs/2309.14525",
+        "2023 · arXiv 2309.14525",
+        "缓解方法 · 偏好对齐 + 基准",
+        "事实增强的 RLHF 与 MMHal-Bench 评测同时给出，适合作为“对齐即评测”的联合设计参考。"
+      ],
+      [
+        23,
+        "GEM-MM: Reducing VLM Hallucination with Entropy-Guided Preference Alignment",
+        "https://neurips.cc/virtual/2026/loc/paris/165292",
+        "NeurIPS 2026",
+        "缓解方法 · 偏好对齐",
+        "用不确定性/熵信号引导偏好对齐，代表最新的“不确定性驱动”思路，可作为计划书创新点的对话对象。"
+      ],
+      [
+        24,
+        "Mitigating Object and Action Hallucinations in Multimodal LLMs via Self-Augmented Contrastive Alignment",
+        "https://ieeexplore.ieee.org/document/11491962",
+        "IEEE（最新）",
+        "缓解方法 · 图像+动作",
+        "同时处理对象与动作幻觉，桥接图像与视频两类任务，适合支撑“统一框架”式选题。"
+      ],
+      [
+        25,
+        "EchoBat: Echo-Vision Enhancement and Echo-Layered Sampling for Video LLMs Hallucination Mitigation",
+        "https://ojs.aaai.org/index.php/AAAI/article/view/40875",
+        "AAAI",
+        "缓解方法 · 视频",
+        "面向视频 LLM 的采样与视觉增强缓解方案，是视频侧方法基线中较新且可复现的一条。"
+      ]
+    ],
+    "研究计划书写作指南": [
+      [
+        "序号",
+        "标题 (Title)",
+        "链接 (Link)",
+        "来源类型",
+        "参考要点"
+      ],
+      [
+        1,
+        "Guidance on how to write a research proposal (University of Stirling)",
+        "https://www.stir.ac.uk/research/research-degrees/how-to-apply-for-our-research-degrees/guidance-on-how-to-write-a-research-proposal/",
+        "英国高校官方指引",
+        "给出 RP 的标准结构（题目、背景、研究问题、方法、时间表、参考文献）与评分关注点，适合作模板骨架。"
+      ],
+      [
+        2,
+        "Writing a proposal (University of Sheffield, PhD application)",
+        "https://staff-lb.shef.ac.uk/postgraduate/phd/apply/proposal",
+        "英国高校官方指引",
+        "侧重“如何论证选题的必要性与可行性”，对计划书的 research gap 与风险管理段落很有参考价值。"
+      ],
+      [
+        3,
+        "PhD Guideline (VinUniversity) — 官方博士指南 PDF",
+        "https://vinuni.edu.vn/wp-content/uploads/2023/11/2023_PhD_Guideline.pdf",
+        "高校官方文件",
+        "含研究计划评审标准与培养流程，可用来对齐“评审人到底看什么”。"
+      ],
+      [
+        4,
+        "博士申请研究计划书如何写？附一页范例、结构模板与专业插图",
+        "https://sci-draw.com/zh/blog/how-to-write-phd-research-proposal",
+        "中文实操指引",
+        "中文语境下的逐节写法与一页范例，含技术路线图绘制建议，可直接套用到本选题。"
+      ],
+      [
+        5,
+        "一文掌握申博流程里研究计划(RP)的要义！附顶尖院校写作指引 + RP 实战剖析",
+        "https://zhuanlan.zhihu.com/p/1906795419352170716",
+        "中文经验帖",
+        "汇总多所院校要求并给出实战剖析，用于校准篇幅、语气与导师匹配度写法。"
+      ],
+      [
+        6,
+        "申博时的研究计划书该怎么写？（知乎问答）",
+        "https://www.zhihu.com/question/1985700000550896575/answer/2083874692113483573",
+        "中文经验帖",
+        "从评审与导师视角讨论常见扣分点，适合作为自检清单。"
+      ]
+    ],
+    "研究计划书写作框架": [
+      [
+        "章节",
+        "写作要点（可直接改写为正文）",
+        "可引用的条目（见 Sheet1 序号）"
+      ],
+      [
+        "1. 题目与摘要",
+        "题目建议同时点明“切入点 + 目标”，例如：《以幻觉为信号的多模态大模型图像—视频理解可靠性提升研究》。摘要 200–300 字讲清：问题（幻觉削弱可信度）、缺口（评测与缓解脱节、视频时序维度不足）、方案（三条技术路线）、预期贡献。",
+        "综述：[1][2]；基准：[5][10][11]"
+      ],
+      [
+        "2. 研究背景与问题提出",
+        "从落地可靠性切入：MLLM 在视觉问答、图像描述、视频问答中会输出与视觉证据（乃至与视频时序）不符的内容。给出 2–3 个真实错误案例（对象凭空出现、动作顺序颠倒、时间定位错位），把“幻觉”从抽象概念转化为可观测现象。",
+        "[1][2][10][11][12]"
+      ],
+      [
+        "3. 国内外研究现状（三条主线）",
+        "① 成因侧：语言先验过强、视觉 token 利用不足/过度信任少数 token、训练数据共现偏差；② 评测侧：图像 POPE/HallusionBench/AMBER vs 视频 VideoHallucer/VidHalluc/VidHal/INFACT；③ 缓解侧：解码期干预、训练期对齐、推理期纠正流水线。",
+        "[1][3][6][10][11][16][17][20][21]"
+      ],
+      [
+        "4. 研究缺口与研究问题（RQ）",
+        "建议提炼 3–4 个 RQ：RQ1 如何统一度量图像与视频（尤其时序/因果）幻觉？RQ2 幻觉信号能否作为“理解能力提升”的训练信号，而不只是被抑制的对象？RQ3 如何在提升可靠性的同时不牺牲 MMMU/Video-MME 等深层理解能力？RQ4 该框架能否泛化到长视频与多轮交互？",
+        "[10][11][12][13][6][8][14]"
+      ],
+      [
+        "5. 研究内容与技术路线",
+        "路线 A（解码期）：以 VCD/OPERA/ICD 为基线，引入证据接地与不确定性门控的对比解码；路线 B（训练期）：构造细粒度幻觉纠正数据，结合熵/一致性信号做偏好优化；路线 C（推理期）：生成—验证—修正的证据图流水线，并把视觉证据回灌。三条路线需说明如何在一个统一框架内串起来。",
+        "[16][17][18][19][20][21][22][24][25]"
+      ],
+      [
+        "6. 实验设计与评测方案",
+        "图像：POPE、HallusionBench、AMBER、MME、MMMU；视频：VideoHallucer、VidHalluc、VidHal、INFACT、Video-MME。固定 prompt 与解码参数，同时报告“幻觉率下降”与“理解能力不退化”两组指标，并给出人类一致性分析与消融实验。",
+        "[5][6][7][8][9][10][11][12][13][14]"
+      ],
+      [
+        "7. 创新点与预期贡献",
+        "建议表述为三点：① 度量创新（面向时空/因果一致性的幻觉诊断指标）；② 信号创新（把不确定性、注意力过度集中、证据覆盖度转化为可用的干预信号）；③ 方法创新（统一图像与视频的“检测—归因—干预”闭环，实现理解能力净提升）。",
+        "[2][10][15][17][23][25]"
+      ],
+      [
+        "8. 研究计划与时间安排",
+        "按学期/年度给出甘特式安排：文献与基线复现 → 度量与诊断（产出论文 1）→ 解码期/训练期方法（论文 2）→ 统一框架与长视频扩展（论文 3）→ 学位论文撰写。每阶段标注可验证里程碑。",
+        "—"
+      ],
+      [
+        "9. 可行性、资源与风险",
+        "算力：优先 7B 级开源 MLLM + LoRA/轻量全参微调，解码期方法几乎零训练成本；数据：公开基准 + 自建小规模高质量纠正集；风险：过度抑制导致描述变短/漏检 —— 给出“双指标联合筛选”的回退方案。",
+        "[7][8][9][14]"
+      ],
+      [
+        "10. 参考文献",
+        "按目标院校模板（GB/T 7714 或 APA/IEEE），优先近三年 CVPR/ICCV/NeurIPS/ICML/ACL/AAAI/ACM MM 论文；每条附 DOI 或 arXiv 号，本表 Sheet1 的链接可直接用于核对版本。",
+        "全部"
+      ]
+    ],
+    "检索说明": [
+      [
+        "项目",
+        "内容"
+      ],
+      [
+        "检索日期",
+        "2026-11-16"
+      ],
+      [
+        "检索目的",
+        "为“从大模型幻觉角度出发，提升多模态大模型对图像与视频的理解”这一申博研究计划书选题，整理可直接引用的文献、评测基准、方法基线与写作指南。"
+      ],
+      [
+        "检索平台",
+        "arXiv（含官方 bibtex 接口核验）、ACL Anthology、CVF Open Access、IEEE Xplore、ACM Digital Library、AAAI OJS、NeurIPS/ICML 会议页、GitHub、高校官网与中文经验帖。"
+      ],
+      [
+        "中文关键词",
+        "多模态大模型 / 大型视觉语言模型；幻觉；对象幻觉；时序幻觉；视频理解；长视频；评测基准；偏好对齐；对比解码；研究计划书；申博"
+      ],
+      [
+        "英文关键词",
+        "multimodal large language model, large vision-language model, hallucination, object hallucination, temporal hallucination, video LLM, long video understanding, benchmark, contrastive decoding, preference alignment / RLHF, grounding, evaluation"
+      ],
+      [
+        "筛选标准",
+        "① 以 2023 年后为主、保留 2026 年最新工作；② 优先有公开代码/数据或权威会议收录；③ 综述与评测基准优先，保证计划书的“现状 + 缺口”论证链完整；④ 覆盖“图像—视频”双侧与“评测—缓解”两侧。"
+      ],
+      [
+        "准确性说明",
+        "Sheet1 与 Sheet2 中 arXiv 条目的标题均通过 arXiv 官方 bibtex 接口逐条核验；会议/期刊条目按出版方页面记录。部分 2025–2026 年工作仍在演进，正式提交前建议按链接复核最新版本与页码。"
+      ],
+      [
+        "引用建议",
+        "研究计划书的参考文献控制在 25–40 条：综述 2–3 条、评测基准 6–8 条、缓解方法 10–15 条、应用与背景 3–5 条；本表可作为候选池，按院校要求裁剪。"
+      ]
+    ]
+  },
+  "workbook_sha256": "d218854cbb45939b12eda5af737010772ab184d9e7386924ba5260271cb6e0a5"
+}

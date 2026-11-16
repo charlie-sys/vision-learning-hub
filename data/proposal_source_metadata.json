@@ -1,0 +1,147 @@
+{
+  "https://arxiv.org/abs/2305.10355": {
+    "title": "Evaluating Object Hallucination in Large Vision-Language Models",
+    "authors": [
+      "Li, Yifan",
+      "Du, Yifan",
+      "Zhou, Kun",
+      "Wang, Jinpeng",
+      "Zhao, Wayne Xin",
+      "Wen, Ji-Rong"
+    ],
+    "published": "2023/05/17",
+    "pdf_url": "https://arxiv.org/pdf/2305.10355",
+    "verification": "arXiv citation metadata"
+  },
+  "https://arxiv.org/abs/2306.13394": {
+    "title": "MME: A Comprehensive Evaluation Benchmark for Multimodal Large Language Models",
+    "authors": [
+      "Fu, Chaoyou",
+      "Chen, Peixian",
+      "Shen, Yunhang",
+      "Qin, Yulei",
+      "Zhang, Mengdan",
+      "Lin, Xu",
+      "Yang, Jinrui",
+      "Zheng, Xiawu",
+      "Li, Ke",
+      "Sun, Xing",
+      "Wu, Yunsheng",
+      "Ji, Rongrong",
+      "Shan, Caifeng",
+      "He, Ran"
+    ],
+    "published": "2023/06/23",
+    "pdf_url": "https://arxiv.org/pdf/2306.13394",
+    "verification": "arXiv citation metadata"
+  },
+  "https://arxiv.org/abs/2311.16502": {
+    "title": "MMMU: A Massive Multi-discipline Multimodal Understanding and Reasoning Benchmark for Expert AGI",
+    "authors": [
+      "Yue, Xiang",
+      "Ni, Yuansheng",
+      "Zhang, Kai",
+      "Zheng, Tianyu",
+      "Liu, Ruoqi",
+      "Zhang, Ge",
+      "Stevens, Samuel",
+      "Jiang, Dongfu",
+      "Ren, Weiming",
+      "Sun, Yuxuan",
+      "Wei, Cong",
+      "Yu, Botao",
+      "Yuan, Ruibin",
+      "Sun, Renliang",
+      "Yin, Ming",
+      "Zheng, Boyuan",
+      "Yang, Zhenzhu",
+      "Liu, Yibo",
+      "Huang, Wenhao",
+      "Sun, Huan",
+      "Su, Yu",
+      "Chen, Wenhu"
+    ],
+    "published": "2023/11/27",
+    "pdf_url": "https://arxiv.org/pdf/2311.16502",
+    "verification": "arXiv citation metadata"
+  },
+  "https://arxiv.org/abs/2405.21075": {
+    "title": "Video-MME: The First-Ever Comprehensive Evaluation Benchmark of Multi-modal LLMs in Video Analysis",
+    "authors": [
+      "Fu, Chaoyou",
+      "Dai, Yuhan",
+      "Luo, Yongdong",
+      "Li, Lei",
+      "Ren, Shuhuai",
+      "Zhang, Renrui",
+      "Wang, Zihan",
+      "Zhou, Chenyu",
+      "Shen, Yunhang",
+      "Zhang, Mengdan",
+      "Chen, Peixian",
+      "Li, Yanwei",
+      "Lin, Shaohui",
+      "Zhao, Sirui",
+      "Li, Ke",
+      "Xu, Tong",
+      "Zheng, Xiawu",
+      "Chen, Enhong",
+      "Shan, Caifeng",
+      "He, Ran",
+      "Sun, Xing"
+    ],
+    "published": "2024/05/31",
+    "pdf_url": "https://arxiv.org/pdf/2405.21075",
+    "verification": "arXiv citation metadata"
+  },
+  "https://dl.acm.org/doi/10.1145/3746027.3755626": {
+    "verification": "Not retrieved; retain workbook metadata",
+    "error_type": "HTTPError"
+  },
+  "https://arxiv.org/abs/2403.18715": {
+    "title": "Mitigating Hallucinations in Large Vision-Language Models with Instruction Contrastive Decoding",
+    "authors": [
+      "Wang, Xintong",
+      "Pan, Jingheng",
+      "Ding, Liang",
+      "Biemann, Chris"
+    ],
+    "published": "2024/03/27",
+    "pdf_url": "https://arxiv.org/pdf/2403.18715",
+    "verification": "arXiv citation metadata"
+  },
+  "https://arxiv.org/abs/2309.14525": {
+    "title": "Aligning Large Multimodal Models with Factually Augmented RLHF",
+    "authors": [
+      "Sun, Zhiqing",
+      "Shen, Sheng",
+      "Cao, Shengcao",
+      "Liu, Haotian",
+      "Li, Chunyuan",
+      "Shen, Yikang",
+      "Gan, Chuang",
+      "Gui, Liang-Yan",
+      "Wang, Yu-Xiong",
+      "Yang, Yiming",
+      "Keutzer, Kurt",
+      "Darrell, Trevor"
+    ],
+    "published": "2023/09/25",
+    "pdf_url": "https://arxiv.org/pdf/2309.14525",
+    "verification": "arXiv citation metadata"
+  },
+  "https://aclanthology.org/2026.acl-long.2062/": {
+    "title": "INFACT: A Diagnostic Benchmark for Induced Faithfulness and Factuality Hallucinations in Video-LLMs",
+    "authors": [
+      "Yangjunqi",
+      "Yuecong Min",
+      "Jie Zhang",
+      "Shiguang Shan",
+      "Xilin Chen"
+    ],
+    "published": "2026-07",
+    "pdf_url": "https://aclanthology.org/2026.acl-long.2062.pdf",
+    "doi": "10.18653/v1/2026.acl-long.2062",
+    "verification": "ACL Anthology publication page"
+  }
+}

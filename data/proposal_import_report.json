@@ -1,0 +1,239 @@
+{
+  "imported_on": "2026-11-16",
+  "workbook_filename": "申博研究计划书_多模态大模型幻觉与图像视频理解_检索清单.xlsx",
+  "workbook_sha256": "d218854cbb45939b12eda5af737010772ab184d9e7386924ba5260271cb6e0a5",
+  "entry_count": 25,
+  "paper_count": 24,
+  "resource_count": 1,
+  "reused_count": 13,
+  "new_papers": 11,
+  "writing_guide_count": 6,
+  "framework_row_count": 10,
+  "records": [
+    {
+      "row_id": 1,
+      "paper_id": 33,
+      "title": "Hallucination of Multimodal Large Language Models: A Survey",
+      "link": "https://arxiv.org/abs/2404.18930",
+      "category": "综述 / 问题定义",
+      "reused": true,
+      "record_type": "paper"
+    },
+    {
+      "row_id": 2,
+      "paper_id": 35,
+      "title": "Hallucination in Multimodal Foundation Models: A Survey on Causes, Corrections, and Evaluations",
+      "link": "https://arxiv.org/abs/2410.15359",
+      "category": "综述 / 问题定义",
+      "reused": true,
+      "record_type": "paper"
+    },
+    {
+      "row_id": 3,
+      "paper_id": 110,
+      "title": "Understanding Hallucinations in Large Visual and Language Models",
+      "link": "https://dl.acm.org/doi/10.1145/3811409",
+      "category": "综述 / 期刊",
+      "reused": false,
+      "record_type": "paper"
+    },
+    {
+      "row_id": 4,
+      "paper_id": 111,
+      "title": "Awesome-MLLM-Hallucination（论文与资源仓库）",
+      "link": "https://github.com/showlab/Awesome-MLLM-Hallucination",
+      "category": "资源仓库",
+      "reused": false,
+      "record_type": "resource"
+    },
+    {
+      "row_id": 5,
+      "paper_id": 112,
+      "title": "Evaluating Object Hallucination in Large Vision-Language Models（POPE）",
+      "link": "https://arxiv.org/abs/2305.10355",
+      "category": "图像侧评测基准",
+      "reused": false,
+      "record_type": "paper"
+    },
+    {
+      "row_id": 6,
+      "paper_id": 45,
+      "title": "HallusionBench: An Advanced Diagnostic Suite for Entangled Language Hallucination and Visual Illusion in Large Vision-Language Models",
+      "link": "https://arxiv.org/abs/2310.14566",
+      "category": "图像侧评测基准",
+      "reused": true,
+      "record_type": "paper"
+    },
+    {
+      "row_id": 7,
+      "paper_id": 46,
+      "title": "AMBER: An LLM-free Multi-dimensional Benchmark for MLLMs Hallucination Evaluation",
+      "link": "https://arxiv.org/abs/2311.07397",
+      "category": "图像侧评测基准",
+      "reused": true,
+      "record_type": "paper"
+    },
+    {
+      "row_id": 8,
+      "paper_id": 113,
+      "title": "MME: A Comprehensive Evaluation Benchmark for Multimodal Large Language Models",
+      "link": "https://arxiv.org/abs/2306.13394",
+      "category": "图像侧 综合能力基准",
+      "reused": false,
+      "record_type": "paper"
+    },
+    {
+      "row_id": 9,
+      "paper_id": 114,
+      "title": "MMMU: A Massive Multi-discipline Multimodal Understanding and Reasoning Benchmark for Expert AGI",
+      "link": "https://arxiv.org/abs/2311.16502",
+      "category": "图像侧 综合能力基准",
+      "reused": false,
+      "record_type": "paper"
+    },
+    {
+      "row_id": 10,
+      "paper_id": 53,
+      "title": "VideoHallucer: Evaluating Intrinsic and Extrinsic Hallucinations in Large Video-Language Models",
+      "link": "https://arxiv.org/abs/2406.16338",
+      "category": "视频侧评测基准",
+      "reused": true,
+      "record_type": "paper"
+    },
+    {
+      "row_id": 11,
+      "paper_id": 56,
+      "title": "VidHalluc: Evaluating Temporal Hallucinations in Multimodal Large Language Models for Video Understanding",
+      "link": "https://arxiv.org/abs/2412.03735",
+      "category": "视频侧评测基准",
+      "reused": true,
+      "record_type": "paper"
+    },
+    {
+      "row_id": 12,
+      "paper_id": 55,
+      "title": "VidHal: Benchmarking Temporal Hallucinations in Vision LLMs",
+      "link": "https://arxiv.org/abs/2411.16771",
+      "category": "视频侧评测基准",
+      "reused": true,
+      "record_type": "paper"
+    },
+    {
+      "row_id": 13,
+      "paper_id": 115,
+      "title": "INFACT: A Diagnostic Benchmark for Induced Faithfulness and Factuality Hallucinations in Video-LLMs",
+      "link": "https://aclanthology.org/2026.acl-long.2062/",
+      "category": "视频侧评测基准",
+      "reused": false,
+      "record_type": "paper"
+    },
+    {
+      "row_id": 14,
+      "paper_id": 116,
+      "title": "Video-MME: The First-Ever Comprehensive Evaluation Benchmark of Multi-modal LLMs in Video Analysis",
+      "link": "https://arxiv.org/abs/2405.21075",
+      "category": "视频侧 综合能力基准",
+      "reused": false,
+      "record_type": "paper"
+    },
+    {
+      "row_id": 15,
+      "paper_id": 61,
+      "title": "MESH - Understanding Videos Like Human: Measuring Hallucinations in Large Video Models",
+      "link": "https://dl.acm.org/doi/10.1145/3746027.3755626",
+      "category": "视频侧评测基准",
+      "reused": true,
+      "record_type": "paper"
+    },
+    {
+      "row_id": 16,
+      "paper_id": 75,
+      "title": "Mitigating Object Hallucinations in Large Vision-Language Models through Visual Contrastive Decoding（VCD）",
+      "link": "https://arxiv.org/abs/2311.16922",
+      "category": "缓解方法 · 解码期",
+      "reused": true,
+      "record_type": "paper"
+    },
+    {
+      "row_id": 17,
+      "paper_id": 76,
+      "title": "OPERA: Alleviating Hallucination in Multi-Modal Large Language Models via Over-Trust Penalty and Retrospection-Allocation",
+      "link": "https://arxiv.org/abs/2311.17911",
+      "category": "缓解方法 · 解码期",
+      "reused": true,
+      "record_type": "paper"
+    },
+    {
+      "row_id": 18,
+      "paper_id": 117,
+      "title": "Mitigating Hallucinations in Large Vision-Language Models with Instruction Contrastive Decoding（ICD）",
+      "link": "https://arxiv.org/abs/2403.18715",
+      "category": "缓解方法 · 解码期",
+      "reused": false,
+      "record_type": "paper"
+    },
+    {
+      "row_id": 19,
+      "paper_id": 37,
+      "title": "Analyzing and Mitigating Object Hallucination in Large Vision-Language Models（LURE）",
+      "link": "https://arxiv.org/abs/2310.00754",
+      "category": "缓解方法 · 训练期",
+      "reused": true,
+      "record_type": "paper"
+    },
+    {
+      "row_id": 20,
+      "paper_id": 74,
+      "title": "Woodpecker: Hallucination Correction for Multimodal Large Language Models",
+      "link": "https://arxiv.org/abs/2310.16045",
+      "category": "缓解方法 · 免训练流水线",
+      "reused": true,
+      "record_type": "paper"
+    },
+    {
+      "row_id": 21,
+      "paper_id": 66,
+      "title": "RLHF-V: Towards Trustworthy MLLMs via Behavior Alignment from Fine-grained Correctional Human Feedback",
+      "link": "https://arxiv.org/abs/2312.00849",
+      "category": "缓解方法 · 偏好对齐",
+      "reused": true,
+      "record_type": "paper"
+    },
+    {
+      "row_id": 22,
+      "paper_id": 118,
+      "title": "Aligning Large Multimodal Models with Factually Augmented RLHF（提出 MMHal-Bench）",
+      "link": "https://arxiv.org/abs/2309.14525",
+      "category": "缓解方法 · 偏好对齐 + 基准",
+      "reused": false,
+      "record_type": "paper"
+    },
+    {
+      "row_id": 23,
+      "paper_id": 119,
+      "title": "GEM-MM: Reducing VLM Hallucination with Entropy-Guided Preference Alignment",
+      "link": "https://neurips.cc/virtual/2026/loc/paris/165292",
+      "category": "缓解方法 · 偏好对齐",
+      "reused": false,
+      "record_type": "paper"
+    },
+    {
+      "row_id": 24,
+      "paper_id": 120,
+      "title": "Mitigating Object and Action Hallucinations in Multimodal LLMs via Self-Augmented Contrastive Alignment",
+      "link": "https://ieeexplore.ieee.org/document/11491962",
+      "category": "缓解方法 · 图像+动作",
+      "reused": false,
+      "record_type": "paper"
+    },
+    {
+      "row_id": 25,
+      "paper_id": 121,
+      "title": "EchoBat: Echo-Vision Enhancement and Echo-Layered Sampling for Video LLMs Hallucination Mitigation",
+      "link": "https://ojs.aaai.org/index.php/AAAI/article/view/40875",
+      "category": "缓解方法 · 视频",
+      "reused": false,
+      "record_type": "paper"
+    }
+  ]
+}

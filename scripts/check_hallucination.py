@@ -15,7 +15,7 @@ assert len(rows)==len(hallucination)==79
 assert len({p['arxiv'] for p in papers if p.get('arxiv')})==sum(bool(p.get('arxiv')) for p in papers)
 soup = BeautifulSoup((ROOT/'docs/index.html').read_text(encoding='utf-8'),'html.parser')
 assert len(soup.select('article[data-group="06_视觉幻觉"]'))==79
-assert len(soup.select('article'))==109
+assert len(soup.select('article'))==len(papers)
 assert soup.select_one('#g option[value="06_视觉幻觉"]')
 topics = {p['subcategory'] for p in hallucination}
 assert len(topics)==9 and {o['value'] for o in soup.select('#s option') if o['value']}==topics
@@ -41,11 +41,11 @@ for name in ('hallucination.csv','hallucination_import_report.json'):
 exported = list(csv.DictReader((ROOT/'docs/hallucination.csv').open(encoding='utf-8-sig',newline='')))
 assert exported==rows
 combined = list(csv.DictReader((ROOT/'docs/papers.csv').open(encoding='utf-8-sig',newline='')))
-assert len(combined)==109
+assert len(combined)==len(papers)
 report = json.loads((ROOT/'data/hallucination_import_report.json').read_text(encoding='utf-8'))
 assert report['paper_count']==79 and report['pdf_count']==79
 assert report['categories']==dict(Counter(p['subcategory'] for p in hallucination))
 bib=(ROOT/'data/references.bib').read_text(encoding='utf-8')
-assert bib.count('@')==109
+assert bib.count('@')==len(papers)
 for p in hallucination: assert f'eprint = {{{p["arxiv"]}}}' in bib
 print('79/79 spreadsheet rows, 9 filters, abstracts, original PDFs, code links, CSV and BibTeX: OK')

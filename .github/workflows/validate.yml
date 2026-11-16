@@ -14,6 +14,7 @@ jobs:
       - run: python scripts/build.py
       - run: python scripts/validate.py
       - run: python scripts/check_hallucination.py
+      - run: python scripts/check_proposal.py
       - run: node --check assets/catalog.js
       - run: node scripts/check_math.cjs
       - run: python scripts/check_notebooks.py

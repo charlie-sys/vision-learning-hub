@@ -1,12 +1,14 @@
 # Vision Learning Hub · 视觉论文学习库
 
-面向扩散模型、视觉 Transformer、VAE、DINO与多模态视觉幻觉的中文学习项目：30篇视觉基础论文＋79篇视觉幻觉论文，共109篇；包含数学/PyTorch/视觉前置教程、逐步推导与数值例题、四项完整训练/评价实验、练习答案与公开考核量表。提供网页Python数学运行器和7份可在Colab运行的教学Notebook。
+面向扩散模型、视觉 Transformer、VAE、DINO与多模态视觉幻觉的中文学习项目：共120篇不同论文和1个资源仓库，包含30篇视觉基础论文、79篇视觉幻觉论文及申博专题新增的11篇论文。包含数学/PyTorch/视觉前置教程、逐步推导与数值例题、四项完整训练/评价实验、练习答案与公开考核量表。提供网页Python数学运行器和7份可在Colab运行的教学Notebook。
 
 在线阅读：**[https://charlie-sys.github.io/vision-learning-hub/](https://charlie-sys.github.io/vision-learning-hub/)** · [Fork 仓库](https://github.com/charlie-sys/vision-learning-hub/fork)
 
 ## 阅读入口
 
 - [可搜索论文目录](docs/index.html)
+- [申博研究计划书专题](https://charlie-sys.github.io/vision-learning-hub/index.html?group=07_%E7%94%B3%E5%8D%9A%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92)：24篇论文和1个资源仓库，13篇复用已有记录，支持原表分类筛选和研究关联搜索
+- [申博专题说明与写作资料](docs/proposal.html) · [原表文献CSV](docs/proposal_source.csv) · [完整四工作表JSON](docs/proposal_source.json) · [逐项导入映射](data/proposal_import_report.json)
 - [视觉幻觉专题](https://charlie-sys.github.io/vision-learning-hub/index.html?group=06_%E8%A7%86%E8%A7%89%E5%B9%BB%E8%A7%89)：按用户Excel导入79篇，支持9个研究方向筛选、中英文摘要、关键词、发表信息和代码/项目入口
 - [专题说明](docs/hallucination.html) · [完整21字段表格CSV](docs/hallucination.csv) · [PDF核对记录](data/hallucination_import_report.json)
 - [在线代码实验室](https://charlie-sys.github.io/vision-learning-hub/playground.html)：直接运行NumPy/SciPy/SymPy/Matplotlib，或打开PyTorch/TensorFlow的Colab实验
@@ -64,7 +66,7 @@ python examples/course_labs.py probe --train-size 1024 --val-size 256 --epochs 2
 
 ## 获取论文全文与离线阅读
 
-目录的PDF按钮可直接打开原始公开全文，也可下载到本地。目前共109篇，全部下载可能需要较长时间和较多磁盘空间；可以先按网站编号选择：
+目录收录120篇论文和1个资源仓库。其中116篇记录提供公开PDF地址；另外4篇提供出版方页面，资源仓库提供GitHub入口。下载脚本跳过没有PDF地址的记录，显示其来源；可以先按网站编号选择：
 
 ```bash
 python scripts/download_papers.py --list

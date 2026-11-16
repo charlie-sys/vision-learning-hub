@@ -999,7 +999,15 @@
     "publication_notes": "预印本无期刊分区；已见刊情况建议以 DBLP／官网复核",
     "arxiv_acceptance_note": "228 references",
     "arxiv_category": "cs.CV",
-    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14"
+    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14",
+    "proposal_entry": {
+      "row_id": 1,
+      "title": "Hallucination of Multimodal Large Language Models: A Survey",
+      "link": "https://arxiv.org/abs/2404.18930",
+      "year_source": "2024（v2: 2025）· arXiv 2404.18930",
+      "category": "综述 / 问题定义",
+      "relevance": "MLLM 幻觉的奠基性综述，提出“成因—评测基准—缓解方法”的完整分类，可直接作为研究计划书第一章问题界定与国内外研究现状的骨架。"
+    }
   },
   {
     "id": 34,
@@ -1093,7 +1101,15 @@
     "publication_notes": "预印本无期刊分区；已见刊情况建议以 DBLP／官网复核",
     "arxiv_acceptance_note": "",
     "arxiv_category": "cs.AI",
-    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14"
+    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14",
+    "proposal_entry": {
+      "row_id": 2,
+      "title": "Hallucination in Multimodal Foundation Models: A Survey on Causes, Corrections, and Evaluations",
+      "link": "https://arxiv.org/abs/2410.15359",
+      "year_source": "2026 · arXiv 2410.15359",
+      "category": "综述 / 问题定义",
+      "relevance": "最新综述，按“成因—纠正—评测”组织，适合用来论证当前研究空白（尤其视频侧与因果一致性）。"
+    }
   },
   {
     "id": 36,
@@ -1188,7 +1204,15 @@
     "publication_notes": "会议论文不参与中科院/JCR 期刊分区，国内多以 CCF 推荐等级衡量",
     "arxiv_acceptance_note": "Accepted by ICLR 2024",
     "arxiv_category": "cs.LG",
-    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14"
+    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14",
+    "proposal_entry": {
+      "row_id": 19,
+      "title": "Analyzing and Mitigating Object Hallucination in Large Vision-Language Models（LURE）",
+      "link": "https://arxiv.org/abs/2310.00754",
+      "year_source": "ICLR 2024 · arXiv 2310.00754",
+      "category": "缓解方法 · 训练期",
+      "relevance": "从统计角度定位幻觉成因（共现、位置、不确定性）并做后处理纠正，示范“先归因、后干预”的研究范式。"
+    }
   },
   {
     "id": 38,
@@ -1557,7 +1581,15 @@
     "publication_notes": "会议论文不参与中科院/JCR 期刊分区，国内多以 CCF 推荐等级衡量",
     "arxiv_acceptance_note": "Accepted to CVPR 2024",
     "arxiv_category": "cs.CV",
-    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14"
+    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14",
+    "proposal_entry": {
+      "row_id": 6,
+      "title": "HallusionBench: An Advanced Diagnostic Suite for Entangled Language Hallucination and Visual Illusion in Large Vision-Language Models",
+      "link": "https://arxiv.org/abs/2310.14566",
+      "year_source": "CVPR 2024 · arXiv 2310.14566",
+      "category": "图像侧评测基准",
+      "relevance": "区分“语言先验幻觉”与“视觉错觉”的诊断式基准，支撑计划书中“幻觉需要细分归因、不能只用一个分数”的论点。"
+    }
   },
   {
     "id": 46,
@@ -1608,7 +1640,15 @@
     "publication_notes": "预印本无期刊分区；已见刊情况建议以 DBLP／官网复核",
     "arxiv_acceptance_note": "14 pages, 9 figures",
     "arxiv_category": "cs.CL",
-    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14"
+    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14",
+    "proposal_entry": {
+      "row_id": 7,
+      "title": "AMBER: An LLM-free Multi-dimensional Benchmark for MLLMs Hallucination Evaluation",
+      "link": "https://arxiv.org/abs/2311.07397",
+      "year_source": "2024 · arXiv 2311.07397",
+      "category": "图像侧评测基准",
+      "relevance": "无需 LLM 裁判的多维幻觉基准，评测成本低、可复现性好，适合作为实验章节的主力评测。"
+    }
   },
   {
     "id": 47,
@@ -1938,7 +1978,15 @@
     "publication_notes": "预印本无期刊分区；已见刊情况建议以 DBLP／官网复核",
     "arxiv_acceptance_note": "",
     "arxiv_category": "cs.CV",
-    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14"
+    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14",
+    "proposal_entry": {
+      "row_id": 10,
+      "title": "VideoHallucer: Evaluating Intrinsic and Extrinsic Hallucinations in Large Video-Language Models",
+      "link": "https://arxiv.org/abs/2406.16338",
+      "year_source": "2024 · arXiv 2406.16338",
+      "category": "视频侧评测基准",
+      "relevance": "把幻觉拆为内在（与视频内容矛盾）与外在（与常识矛盾），是视频方向研究问题设计的直接依据。"
+    }
   },
   {
     "id": 54,
@@ -2031,7 +2079,15 @@
     "publication_notes": "TMLR 为开放获取期刊，未被 SCIE 收录，故无中科院分区与 JCR 分区",
     "arxiv_acceptance_note": "To appear in TMLR 2026. Code available at https://github.com/Lookuz/VidHal",
     "arxiv_category": "cs.CV",
-    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14"
+    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14",
+    "proposal_entry": {
+      "row_id": 12,
+      "title": "VidHal: Benchmarking Temporal Hallucinations in Vision LLMs",
+      "link": "https://arxiv.org/abs/2411.16771",
+      "year_source": "2026 · arXiv 2411.16771",
+      "category": "视频侧评测基准",
+      "relevance": "面向时序幻觉的细粒度基准，可与 VidHalluc 互为参照，说明该方向尚无统一度量、存在明确研究空间。"
+    }
   },
   {
     "id": 56,
@@ -2074,7 +2130,15 @@
     "publication_notes": "会议论文不参与中科院/JCR 期刊分区，国内多以 CCF 推荐等级衡量",
     "arxiv_acceptance_note": "CVPR 2025",
     "arxiv_category": "cs.CV",
-    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14"
+    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14",
+    "proposal_entry": {
+      "row_id": 11,
+      "title": "VidHalluc: Evaluating Temporal Hallucinations in Multimodal Large Language Models for Video Understanding",
+      "link": "https://arxiv.org/abs/2412.03735",
+      "year_source": "2025 · arXiv 2412.03735",
+      "category": "视频侧评测基准",
+      "relevance": "聚焦时序幻觉（动作顺序、事件因果、时间定位），是计划书“从空间幻觉走向时空幻觉”论证的核心引用。"
+    }
   },
   {
     "id": 57,
@@ -2315,7 +2379,15 @@
     "publication_notes": "预印本无期刊分区；已见刊情况建议以 DBLP／官网复核",
     "arxiv_acceptance_note": "",
     "arxiv_category": "cs.CV",
-    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14"
+    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14",
+    "proposal_entry": {
+      "row_id": 15,
+      "title": "MESH - Understanding Videos Like Human: Measuring Hallucinations in Large Video Models",
+      "link": "https://dl.acm.org/doi/10.1145/3746027.3755626",
+      "year_source": "ACM MM 2025",
+      "category": "视频侧评测基准",
+      "relevance": "以人类标注视角度量视频幻觉，可作为“评测与人类判断对齐”的方法论参考。"
+    }
   },
   {
     "id": 62,
@@ -2554,7 +2626,15 @@
     "publication_notes": "会议论文不参与中科院/JCR 期刊分区，国内多以 CCF 推荐等级衡量",
     "arxiv_acceptance_note": "Accepted by CVPR 2024",
     "arxiv_category": "cs.CL",
-    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14"
+    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14",
+    "proposal_entry": {
+      "row_id": 21,
+      "title": "RLHF-V: Towards Trustworthy MLLMs via Behavior Alignment from Fine-grained Correctional Human Feedback",
+      "link": "https://arxiv.org/abs/2312.00849",
+      "year_source": "CVPR 2024 · arXiv 2312.00849",
+      "category": "缓解方法 · 偏好对齐",
+      "relevance": "细粒度纠正式人类反馈做行为对齐，是计划书“训练期偏好优化”路线的代表性工作。"
+    }
   },
   {
     "id": 67,
@@ -2925,7 +3005,15 @@
     "publication_notes": "SCIE 收录；JCR 学科排名 18/266；中科院新锐版 1 区；DOI 10.1007/s11432-024-4251-x",
     "arxiv_acceptance_note": "Accepted by Science China Information Sciences (SCIS)",
     "arxiv_category": "cs.CV",
-    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14"
+    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14",
+    "proposal_entry": {
+      "row_id": 20,
+      "title": "Woodpecker: Hallucination Correction for Multimodal Large Language Models",
+      "link": "https://arxiv.org/abs/2310.16045",
+      "year_source": "2024 · arXiv 2310.16045",
+      "category": "缓解方法 · 免训练流水线",
+      "relevance": "免训练的多阶段纠正流水线（生成—验证—修正），为“推理期证据接地”路线提供可直接对比的基线。"
+    }
   },
   {
     "id": 75,
@@ -2972,7 +3060,15 @@
     "publication_notes": "会议论文不参与中科院/JCR 期刊分区，国内多以 CCF 推荐等级衡量",
     "arxiv_acceptance_note": "",
     "arxiv_category": "cs.CV",
-    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14"
+    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14",
+    "proposal_entry": {
+      "row_id": 16,
+      "title": "Mitigating Object Hallucinations in Large Vision-Language Models through Visual Contrastive Decoding（VCD）",
+      "link": "https://arxiv.org/abs/2311.16922",
+      "year_source": "CVPR 2024 · arXiv 2311.16922",
+      "category": "缓解方法 · 解码期",
+      "relevance": "解码期对比的经典范式（对比原始/扰动视觉输入），推理成本低、无需重训，是计划书方法章最易落地的第一条路线。"
+    }
   },
   {
     "id": 76,
@@ -3023,7 +3119,15 @@
     "publication_notes": "会议论文不参与中科院/JCR 期刊分区，国内多以 CCF 推荐等级衡量",
     "arxiv_acceptance_note": "CVPR 2024, code is available at https://github.com/shikiw/OPERA",
     "arxiv_category": "cs.CV",
-    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14"
+    "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14",
+    "proposal_entry": {
+      "row_id": 17,
+      "title": "OPERA: Alleviating Hallucination in Multi-Modal Large Language Models via Over-Trust Penalty and Retrospection-Allocation",
+      "link": "https://arxiv.org/abs/2311.17911",
+      "year_source": "2024 · arXiv 2311.17911",
+      "category": "缓解方法 · 解码期",
+      "relevance": "揭示“过度信任少数视觉 token”是幻觉的结构性成因，并给出惩罚+回滚机制，是“从注意力信号检测幻觉”的关键依据。"
+    }
   },
   {
     "id": 77,
@@ -4559,5 +4663,446 @@
     "arxiv_acceptance_note": "",
     "arxiv_category": "cs.CV",
     "metadata_provenance": "用户提供的视觉幻觉论文清单（Excel）；导入日期2026-11-14"
+  },
+  {
+    "id": 110,
+    "collection": "proposal",
+    "group": "07_申博研究计划",
+    "record_type": "paper",
+    "short": "Understanding Hallucinations in Large Visual and Language Models",
+    "title": "Understanding Hallucinations in Large Visual and Language Models",
+    "title_zh": "",
+    "authors": [],
+    "year": null,
+    "venue": "ACM Computing Surveys",
+    "level": "未分级",
+    "note": "原表研究关联：期刊级综述，适合作为计划书文献综述部分的高权重引用，提升选题的学术定位。",
+    "arxiv": "",
+    "doi": "",
+    "source": "https://dl.acm.org/doi/10.1145/3811409",
+    "pdf_urls": [],
+    "filename": "",
+    "metadata_provenance": "用户提供的申博检索清单；未补写作者及PDF地址",
+    "proposal_entry": {
+      "row_id": 3,
+      "title": "Understanding Hallucinations in Large Visual and Language Models",
+      "link": "https://dl.acm.org/doi/10.1145/3811409",
+      "year_source": "ACM Computing Surveys",
+      "category": "综述 / 期刊",
+      "relevance": "期刊级综述，适合作为计划书文献综述部分的高权重引用，提升选题的学术定位。"
+    }
+  },
+  {
+    "id": 111,
+    "collection": "proposal",
+    "group": "07_申博研究计划",
+    "record_type": "resource",
+    "short": "Awesome-MLLM-Hallucination",
+    "title": "Awesome-MLLM-Hallucination",
+    "title_zh": "",
+    "authors": [],
+    "year": null,
+    "venue": "持续更新 · GitHub",
+    "level": "未分级",
+    "note": "原表研究关联：上述综述配套的开源文献库，可在同一入口持续追踪评测基准、数据集与代码，写文献综述时效率最高。",
+    "arxiv": "",
+    "doi": "",
+    "source": "https://github.com/showlab/Awesome-MLLM-Hallucination",
+    "pdf_urls": [],
+    "filename": "",
+    "metadata_provenance": "用户提供的申博检索清单；未补写作者及PDF地址",
+    "proposal_entry": {
+      "row_id": 4,
+      "title": "Awesome-MLLM-Hallucination（论文与资源仓库）",
+      "link": "https://github.com/showlab/Awesome-MLLM-Hallucination",
+      "year_source": "持续更新 · GitHub",
+      "category": "资源仓库",
+      "relevance": "上述综述配套的开源文献库，可在同一入口持续追踪评测基准、数据集与代码，写文献综述时效率最高。"
+    }
+  },
+  {
+    "id": 112,
+    "collection": "proposal",
+    "group": "07_申博研究计划",
+    "record_type": "paper",
+    "short": "POPE",
+    "title": "Evaluating Object Hallucination in Large Vision-Language Models",
+    "title_zh": "",
+    "authors": [
+      "Li, Yifan",
+      "Du, Yifan",
+      "Zhou, Kun",
+      "Wang, Jinpeng",
+      "Zhao, Wayne Xin",
+      "Wen, Ji-Rong"
+    ],
+    "year": 2023,
+    "venue": "EMNLP 2023 · arXiv 2305.10355",
+    "level": "未分级",
+    "note": "原表研究关联：图像对象幻觉评测的事实标准（polling-based query），计划书里作为“我们如何度量幻觉”的第一个基线指标。",
+    "arxiv": "2305.10355",
+    "doi": "",
+    "source": "https://arxiv.org/abs/2305.10355",
+    "pdf_urls": [
+      "https://arxiv.org/pdf/2305.10355"
+    ],
+    "filename": "Proposal_2305.10355.pdf",
+    "metadata_provenance": "arXiv citation metadata",
+    "proposal_entry": {
+      "row_id": 5,
+      "title": "Evaluating Object Hallucination in Large Vision-Language Models（POPE）",
+      "link": "https://arxiv.org/abs/2305.10355",
+      "year_source": "EMNLP 2023 · arXiv 2305.10355",
+      "category": "图像侧评测基准",
+      "relevance": "图像对象幻觉评测的事实标准（polling-based query），计划书里作为“我们如何度量幻觉”的第一个基线指标。"
+    }
+  },
+  {
+    "id": 113,
+    "collection": "proposal",
+    "group": "07_申博研究计划",
+    "record_type": "paper",
+    "short": "MME",
+    "title": "MME: A Comprehensive Evaluation Benchmark for Multimodal Large Language Models",
+    "title_zh": "",
+    "authors": [
+      "Fu, Chaoyou",
+      "Chen, Peixian",
+      "Shen, Yunhang",
+      "Qin, Yulei",
+      "Zhang, Mengdan",
+      "Lin, Xu",
+      "Yang, Jinrui",
+      "Zheng, Xiawu",
+      "Li, Ke",
+      "Sun, Xing",
+      "Wu, Yunsheng",
+      "Ji, Rongrong",
+      "Shan, Caifeng",
+      "He, Ran"
+    ],
+    "year": 2023,
+    "venue": "2025 · arXiv 2306.13394",
+    "level": "未分级",
+    "note": "原表研究关联：通用感知/认知能力基准，用于回答“缓解幻觉后理解能力是否下降”这一关键反驳。",
+    "arxiv": "2306.13394",
+    "doi": "",
+    "source": "https://arxiv.org/abs/2306.13394",
+    "pdf_urls": [
+      "https://arxiv.org/pdf/2306.13394"
+    ],
+    "filename": "Proposal_2306.13394.pdf",
+    "metadata_provenance": "arXiv citation metadata",
+    "proposal_entry": {
+      "row_id": 8,
+      "title": "MME: A Comprehensive Evaluation Benchmark for Multimodal Large Language Models",
+      "link": "https://arxiv.org/abs/2306.13394",
+      "year_source": "2025 · arXiv 2306.13394",
+      "category": "图像侧 综合能力基准",
+      "relevance": "通用感知/认知能力基准，用于回答“缓解幻觉后理解能力是否下降”这一关键反驳。"
+    }
+  },
+  {
+    "id": 114,
+    "collection": "proposal",
+    "group": "07_申博研究计划",
+    "record_type": "paper",
+    "short": "MMMU",
+    "title": "MMMU: A Massive Multi-discipline Multimodal Understanding and Reasoning Benchmark for Expert AGI",
+    "title_zh": "",
+    "authors": [
+      "Yue, Xiang",
+      "Ni, Yuansheng",
+      "Zhang, Kai",
+      "Zheng, Tianyu",
+      "Liu, Ruoqi",
+      "Zhang, Ge",
+      "Stevens, Samuel",
+      "Jiang, Dongfu",
+      "Ren, Weiming",
+      "Sun, Yuxuan",
+      "Wei, Cong",
+      "Yu, Botao",
+      "Yuan, Ruibin",
+      "Sun, Renliang",
+      "Yin, Ming",
+      "Zheng, Boyuan",
+      "Yang, Zhenzhu",
+      "Liu, Yibo",
+      "Huang, Wenhao",
+      "Sun, Huan",
+      "Su, Yu",
+      "Chen, Wenhu"
+    ],
+    "year": 2023,
+    "venue": "CVPR 2024 · arXiv 2311.16502",
+    "level": "未分级",
+    "note": "原表研究关联：专家级多学科理解与推理基准，用来证明方法在“深度理解”而非“浅层描述”上同样有效。",
+    "arxiv": "2311.16502",
+    "doi": "",
+    "source": "https://arxiv.org/abs/2311.16502",
+    "pdf_urls": [
+      "https://arxiv.org/pdf/2311.16502"
+    ],
+    "filename": "Proposal_2311.16502.pdf",
+    "metadata_provenance": "arXiv citation metadata",
+    "proposal_entry": {
+      "row_id": 9,
+      "title": "MMMU: A Massive Multi-discipline Multimodal Understanding and Reasoning Benchmark for Expert AGI",
+      "link": "https://arxiv.org/abs/2311.16502",
+      "year_source": "CVPR 2024 · arXiv 2311.16502",
+      "category": "图像侧 综合能力基准",
+      "relevance": "专家级多学科理解与推理基准，用来证明方法在“深度理解”而非“浅层描述”上同样有效。"
+    }
+  },
+  {
+    "id": 115,
+    "collection": "proposal",
+    "group": "07_申博研究计划",
+    "record_type": "paper",
+    "short": "INFACT",
+    "title": "INFACT: A Diagnostic Benchmark for Induced Faithfulness and Factuality Hallucinations in Video-LLMs",
+    "title_zh": "",
+    "authors": [
+      "Yangjunqi",
+      "Yuecong Min",
+      "Jie Zhang",
+      "Shiguang Shan",
+      "Xilin Chen"
+    ],
+    "year": 2026,
+    "venue": "ACL 2026 · ACL Anthology",
+    "level": "未分级",
+    "note": "原表研究关联：最新诊断式视频幻觉基准，用于体现计划书对 2026 年前沿的掌握程度。",
+    "arxiv": "",
+    "doi": "10.18653/v1/2026.acl-long.2062",
+    "source": "https://aclanthology.org/2026.acl-long.2062/",
+    "pdf_urls": [
+      "https://aclanthology.org/2026.acl-long.2062.pdf"
+    ],
+    "filename": "Proposal_13.pdf",
+    "metadata_provenance": "ACL Anthology publication page",
+    "proposal_entry": {
+      "row_id": 13,
+      "title": "INFACT: A Diagnostic Benchmark for Induced Faithfulness and Factuality Hallucinations in Video-LLMs",
+      "link": "https://aclanthology.org/2026.acl-long.2062/",
+      "year_source": "ACL 2026 · ACL Anthology",
+      "category": "视频侧评测基准",
+      "relevance": "最新诊断式视频幻觉基准，用于体现计划书对 2026 年前沿的掌握程度。"
+    }
+  },
+  {
+    "id": 116,
+    "collection": "proposal",
+    "group": "07_申博研究计划",
+    "record_type": "paper",
+    "short": "Video-MME",
+    "title": "Video-MME: The First-Ever Comprehensive Evaluation Benchmark of Multi-modal LLMs in Video Analysis",
+    "title_zh": "",
+    "authors": [
+      "Fu, Chaoyou",
+      "Dai, Yuhan",
+      "Luo, Yongdong",
+      "Li, Lei",
+      "Ren, Shuhuai",
+      "Zhang, Renrui",
+      "Wang, Zihan",
+      "Zhou, Chenyu",
+      "Shen, Yunhang",
+      "Zhang, Mengdan",
+      "Chen, Peixian",
+      "Li, Yanwei",
+      "Lin, Shaohui",
+      "Zhao, Sirui",
+      "Li, Ke",
+      "Xu, Tong",
+      "Zheng, Xiawu",
+      "Chen, Enhong",
+      "Shan, Caifeng",
+      "He, Ran",
+      "Sun, Xing"
+    ],
+    "year": 2024,
+    "venue": "2025 · arXiv 2405.21075",
+    "level": "未分级",
+    "note": "原表研究关联：长/短视频理解综合基准，用作视频侧“能力不退化”的对照实验。",
+    "arxiv": "2405.21075",
+    "doi": "",
+    "source": "https://arxiv.org/abs/2405.21075",
+    "pdf_urls": [
+      "https://arxiv.org/pdf/2405.21075"
+    ],
+    "filename": "Proposal_2405.21075.pdf",
+    "metadata_provenance": "arXiv citation metadata",
+    "proposal_entry": {
+      "row_id": 14,
+      "title": "Video-MME: The First-Ever Comprehensive Evaluation Benchmark of Multi-modal LLMs in Video Analysis",
+      "link": "https://arxiv.org/abs/2405.21075",
+      "year_source": "2025 · arXiv 2405.21075",
+      "category": "视频侧 综合能力基准",
+      "relevance": "长/短视频理解综合基准，用作视频侧“能力不退化”的对照实验。"
+    }
+  },
+  {
+    "id": 117,
+    "collection": "proposal",
+    "group": "07_申博研究计划",
+    "record_type": "paper",
+    "short": "ICD",
+    "title": "Mitigating Hallucinations in Large Vision-Language Models with Instruction Contrastive Decoding",
+    "title_zh": "",
+    "authors": [
+      "Wang, Xintong",
+      "Pan, Jingheng",
+      "Ding, Liang",
+      "Biemann, Chris"
+    ],
+    "year": 2024,
+    "venue": "2024 · arXiv 2403.18715",
+    "level": "未分级",
+    "note": "原表研究关联：从指令扰动角度做对比解码，说明幻觉同时受视觉与指令先验驱动，可用于设计多扰动源的对比方案。",
+    "arxiv": "2403.18715",
+    "doi": "",
+    "source": "https://arxiv.org/abs/2403.18715",
+    "pdf_urls": [
+      "https://arxiv.org/pdf/2403.18715"
+    ],
+    "filename": "Proposal_2403.18715.pdf",
+    "metadata_provenance": "arXiv citation metadata",
+    "proposal_entry": {
+      "row_id": 18,
+      "title": "Mitigating Hallucinations in Large Vision-Language Models with Instruction Contrastive Decoding（ICD）",
+      "link": "https://arxiv.org/abs/2403.18715",
+      "year_source": "2024 · arXiv 2403.18715",
+      "category": "缓解方法 · 解码期",
+      "relevance": "从指令扰动角度做对比解码，说明幻觉同时受视觉与指令先验驱动，可用于设计多扰动源的对比方案。"
+    }
+  },
+  {
+    "id": 118,
+    "collection": "proposal",
+    "group": "07_申博研究计划",
+    "record_type": "paper",
+    "short": "MMHal-Bench",
+    "title": "Aligning Large Multimodal Models with Factually Augmented RLHF",
+    "title_zh": "",
+    "authors": [
+      "Sun, Zhiqing",
+      "Shen, Sheng",
+      "Cao, Shengcao",
+      "Liu, Haotian",
+      "Li, Chunyuan",
+      "Shen, Yikang",
+      "Gan, Chuang",
+      "Gui, Liang-Yan",
+      "Wang, Yu-Xiong",
+      "Yang, Yiming",
+      "Keutzer, Kurt",
+      "Darrell, Trevor"
+    ],
+    "year": 2023,
+    "venue": "2023 · arXiv 2309.14525",
+    "level": "未分级",
+    "note": "原表研究关联：事实增强的 RLHF 与 MMHal-Bench 评测同时给出，适合作为“对齐即评测”的联合设计参考。",
+    "arxiv": "2309.14525",
+    "doi": "",
+    "source": "https://arxiv.org/abs/2309.14525",
+    "pdf_urls": [
+      "https://arxiv.org/pdf/2309.14525"
+    ],
+    "filename": "Proposal_2309.14525.pdf",
+    "metadata_provenance": "arXiv citation metadata",
+    "proposal_entry": {
+      "row_id": 22,
+      "title": "Aligning Large Multimodal Models with Factually Augmented RLHF（提出 MMHal-Bench）",
+      "link": "https://arxiv.org/abs/2309.14525",
+      "year_source": "2023 · arXiv 2309.14525",
+      "category": "缓解方法 · 偏好对齐 + 基准",
+      "relevance": "事实增强的 RLHF 与 MMHal-Bench 评测同时给出，适合作为“对齐即评测”的联合设计参考。"
+    }
+  },
+  {
+    "id": 119,
+    "collection": "proposal",
+    "group": "07_申博研究计划",
+    "record_type": "paper",
+    "short": "GEM-MM",
+    "title": "GEM-MM: Reducing VLM Hallucination with Entropy-Guided Preference Alignment",
+    "title_zh": "",
+    "authors": [],
+    "year": 2026,
+    "venue": "NeurIPS 2026",
+    "level": "未分级",
+    "note": "原表研究关联：用不确定性/熵信号引导偏好对齐，代表最新的“不确定性驱动”思路，可作为计划书创新点的对话对象。",
+    "arxiv": "",
+    "doi": "",
+    "source": "https://neurips.cc/virtual/2026/loc/paris/165292",
+    "pdf_urls": [],
+    "filename": "",
+    "metadata_provenance": "用户提供的申博检索清单；未补写作者及PDF地址",
+    "proposal_entry": {
+      "row_id": 23,
+      "title": "GEM-MM: Reducing VLM Hallucination with Entropy-Guided Preference Alignment",
+      "link": "https://neurips.cc/virtual/2026/loc/paris/165292",
+      "year_source": "NeurIPS 2026",
+      "category": "缓解方法 · 偏好对齐",
+      "relevance": "用不确定性/熵信号引导偏好对齐，代表最新的“不确定性驱动”思路，可作为计划书创新点的对话对象。"
+    }
+  },
+  {
+    "id": 120,
+    "collection": "proposal",
+    "group": "07_申博研究计划",
+    "record_type": "paper",
+    "short": "Mitigating Object and Action Hallucinations in Multimodal LLMs via Self-Augmented Contrastive Alignment",
+    "title": "Mitigating Object and Action Hallucinations in Multimodal LLMs via Self-Augmented Contrastive Alignment",
+    "title_zh": "",
+    "authors": [],
+    "year": null,
+    "venue": "IEEE（最新）",
+    "level": "未分级",
+    "note": "原表研究关联：同时处理对象与动作幻觉，桥接图像与视频两类任务，适合支撑“统一框架”式选题。",
+    "arxiv": "",
+    "doi": "",
+    "source": "https://ieeexplore.ieee.org/document/11491962",
+    "pdf_urls": [],
+    "filename": "",
+    "metadata_provenance": "用户提供的申博检索清单；未补写作者及PDF地址",
+    "proposal_entry": {
+      "row_id": 24,
+      "title": "Mitigating Object and Action Hallucinations in Multimodal LLMs via Self-Augmented Contrastive Alignment",
+      "link": "https://ieeexplore.ieee.org/document/11491962",
+      "year_source": "IEEE（最新）",
+      "category": "缓解方法 · 图像+动作",
+      "relevance": "同时处理对象与动作幻觉，桥接图像与视频两类任务，适合支撑“统一框架”式选题。"
+    }
+  },
+  {
+    "id": 121,
+    "collection": "proposal",
+    "group": "07_申博研究计划",
+    "record_type": "paper",
+    "short": "EchoBat",
+    "title": "EchoBat: Echo-Vision Enhancement and Echo-Layered Sampling for Video LLMs Hallucination Mitigation",
+    "title_zh": "",
+    "authors": [],
+    "year": null,
+    "venue": "AAAI",
+    "level": "未分级",
+    "note": "原表研究关联：面向视频 LLM 的采样与视觉增强缓解方案，是视频侧方法基线中较新且可复现的一条。",
+    "arxiv": "",
+    "doi": "",
+    "source": "https://ojs.aaai.org/index.php/AAAI/article/view/40875",
+    "pdf_urls": [],
+    "filename": "",
+    "metadata_provenance": "用户提供的申博检索清单；未补写作者及PDF地址",
+    "proposal_entry": {
+      "row_id": 25,
+      "title": "EchoBat: Echo-Vision Enhancement and Echo-Layered Sampling for Video LLMs Hallucination Mitigation",
+      "link": "https://ojs.aaai.org/index.php/AAAI/article/view/40875",
+      "year_source": "AAAI",
+      "category": "缓解方法 · 视频",
+      "relevance": "面向视频 LLM 的采样与视觉增强缓解方案，是视频侧方法基线中较新且可复现的一条。"
+    }
   }
 ]
